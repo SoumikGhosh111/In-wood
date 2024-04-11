@@ -1,13 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap');
+
+*{ 
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html{ 
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Cabin", sans-serif; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root{ 
+  --home-order-button:  #FFD029; 
+  --menu-order-button: rgba(255, 223, 123, 1);
+  --menu-card-hor-line: rgba(136, 136, 136, 1); 
+  --menu-page-color: rgba(231, 231, 231, 0.251); 
+  --white: #ffffff; 
+  --blur-strength: 10px; 
 }
