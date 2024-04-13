@@ -13,13 +13,17 @@ body {
   font-family: "Cabin", sans-serif; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 :root{ 
   --home-order-button:  #FFD029; 
   --menu-order-button: rgba(255, 223, 123, 1);
+  --menu-order-button-plus-minus:rgba(65, 65, 65, 1);
   --menu-card-hor-line: rgba(136, 136, 136, 1); 
-  --menu-page-color: rgba(231, 231, 231, 0.251); 
+  --menu-page-color: rgba(231, 231, 231, 1);
+  --add-to-cart-bg-color: rgba(255, 255, 255, 1); 
   --white: #ffffff; 
   --blur-strength: 10px; 
+  --add-to-cart-btn-clr: rgba(38, 38, 38, 1) ;
 }

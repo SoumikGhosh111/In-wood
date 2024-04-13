@@ -1,9 +1,9 @@
 
 .homeBox{
+    width: 100vw;
     height: 100vh;
-    width: 100%;
-    /* background-color: rgb(0, 0, 0); */
-    position: relative;
+    /* position: relative; */
+    /* background-color:  */
 }
 
 
@@ -11,13 +11,13 @@
 
 /* bg image */
 .homeBg{
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     object-fit: cover;
     /* opacity: 0.1; */
     position: absolute;
-
-    transition: all 0.3s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    /* display: none; */
 }
 
 
@@ -27,21 +27,22 @@
 
 
 
-.contentBox{
+/* .contentBox{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
+    background-color: red;
     height: 100%;
-    position: absolute;
-    z-index: 10;
+    /* position: absolute; */
+    /* z-index: 10; */
     /* transition: all 0.3s ease-in-out; */
-}
+/* } */ 
 
 
 .menu-section{ 
-    position: absolute;
-    transition: all 0.3s ease-in-out;
+    background-color: var(--menu-page-color);
+    transition: all 0.4s ease-in-out;
 }
 
 
@@ -53,8 +54,14 @@
 
 
 /* left side of the page */
+/* .left-box-wraapper{ 
+    height: 100vh;
+    width: 50vw;
+    display: flex;
+    align-items: center;
+    
+} */
 .leftBox{
-    position: relative;
     height: 55%;
     width: 45%;
     margin-top: 5rem;
@@ -62,7 +69,13 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: start;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.4s ease-in-out;
+    padding: 0rem 2rem;
+    z-index: 10;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
 }
 
 .leftBox span{
@@ -94,18 +107,19 @@
 
 
 
-
-
-
 /* right side pizza image */
 .rightBox{
-    position: relative;
+    position: fixed;
     height: 100vh;
-    width: 45%; 
+    width: 50vw; 
+    right: 0;
+    top: 0;
+    transform: translateY(10%);
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    
+    /* z-index: 10; */
+    padding: 0rem 3rem;
     /* margin-right: 5vw; */
     /* border: 1px solid blue;  */
 }
@@ -122,8 +136,9 @@
     height: 210px;
     width: 230px;
     object-fit: cover;
-    position: absolute;
+    /* position: absolute; */
     /* z-index: 1; */
+    transform: translate(140%, -50%) rotate(0deg);
     right: 17vw;
     bottom: 49vh;
     
@@ -133,8 +148,9 @@
     height: 210px;
     width: 230px;
     object-fit: cover;
-    position: absolute;
+    /* position: absolute; */
     /* z-index: 1; */
+    transform: translate(30%, 45%) rotate(0deg);
     right: 18vw;
     bottom: 21vh;
     
@@ -160,6 +176,10 @@
 /* media queries */
 @media (max-width: 768px){
 
+    .homeBox{ 
+        width: 100%;
+        height: 100%;
+    }
     .contentBox{
         display: flex;
         flex-direction: column;

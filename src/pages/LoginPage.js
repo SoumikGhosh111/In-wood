@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react'; 
+import UserRegister from '../LoginComponent/UserRegister/UserRegister';
 
 function LoginPage() {
   return (
-    <div>LoginPage</div>
+    <div>
+      <UserRegister />
+    </div>
   )
 }
 

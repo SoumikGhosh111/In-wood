@@ -2,12 +2,12 @@
     position: fixed;
     top: 0;
     width: 100%;
-    /* border: 1px solid red; */
     display: flex;
     justify-content: flex-end;
     align-items: center;
     z-index: 100;
     color: white;
+    transition: all 0.3s ease-in-out;
 }
 .nav-bar{ 
     width: 90%;
@@ -35,6 +35,10 @@
 .nav-bar-inner ul li{ 
     margin: 1rem 2.5rem;
     /* padding: 0.5rem 0.5rem; */
+
+}
+.nav-bar-login-area{ 
+    margin  : 2rem;
 }
 .nav-bar-login-area span{ 
     margin: 2.5rem;
@@ -43,3 +47,48 @@
     text-decoration: none;
     color: inherit;
 }
+
+.cart-icon{ 
+   border: none;
+   background-color: transparent;
+   color: white;
+   cursor: pointer;
+}   
+
+.scroll-down .nav-bar-wrapper {
+    transform: translate3d(0, -100%, 0);
+}
+
+.scroll-up .nav-bar-wrapper {
+    /* filter: drop-shadow(0 -10px 20px rgb(170, 170, 170)); */
+}
+
+.menu-is-open .nav-bar-wrapper {
+    filter: none;
+}
+
+.menu-is-open {
+    overflow: hidden;
+}
+
+.mob-view-nav{ 
+    display: none;
+}
+
+
+.scroll-down .mob-view-nav {
+    transform: translate3d(0, -100%, 0);
+}
+
+.scroll-up .mob-view-nav {
+    /* filter: drop-shadow(0 -10px 20px rgb(170, 170, 170)); */
+}
+
+.menu-is-open .mob-view-nav {
+    filter: none;
+}
+
+.menu-is-open {
+    overflow: hidden;
+}
+

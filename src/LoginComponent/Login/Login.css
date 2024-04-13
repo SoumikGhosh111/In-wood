@@ -1,0 +1,219 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Pacifico&display=swap');
+
+/* *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+} */
+
+/* body{
+    height: 100%;
+    width: 100%;
+}
+
+.loginBody{
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    background-color: white;
+    display: flex;
+    
+}
+
+.bgPizza{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.rightPart{
+    width: 50%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.leftPart{
+    width: 50%;
+    height: 100%;
+}
+
+.bgVideo {
+    width: 100%;
+    height: 99.40%; 
+    z-index: 1; 
+    position: relative;
+    object-fit: cover;
+    border-radius: 10px;
+    opacity: 0.9;
+  } */
+
+
+.formBody{
+    border-radius: 25px;
+    background-color: rgba(253, 253, 253, 0.199); 
+    backdrop-filter: blur(10px); 
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* padding: 2rem 2rem; */
+    padding-right: 0rem;
+    
+}
+
+form{ 
+
+   width: 400px;
+   margin-bottom: 2rem;
+
+}
+.form-title{ 
+    width: 100%;
+}
+.formBody h1{
+    font-family: "Kaushan Script", cursive;
+    font-weight: 400;
+    font-style: normal;
+    color: white;
+   
+    font-size: 12vh;
+    margin-left: 10%;
+    margin-top: 15px;
+}
+
+.emailTxt{
+    margin-left: 39px; 
+    margin-top: 8vh;
+}
+
+.form__group h5{
+    color: white;
+    font-weight: 400;
+    margin-bottom: 5px;
+    margin-left: 2vh;
+}
+
+.form__group2 h5{
+    color: white;
+    font-weight: 400;
+    margin-bottom: 5px;
+    margin-left: 2vh;
+}
+
+.form__group {
+    margin-bottom: 20px;
+  }
+  
+  .form__group input[type="email"] {
+    width: 90%;
+    padding: 10px;
+    border: none;
+    background-color: rgba(176, 175, 175, 0.562); 
+    backdrop-filter: blur(15px);
+    font-size: 16px;
+    outline: none;
+    border-radius: 20px;
+    color: white;
+    backdrop-filter: blur(19px); 
+
+    
+  }
+
+  .form__group input[type="text"] {
+    width: 90%;
+    padding: 10px;
+    border: none;
+    background-color: rgba(176, 175, 175, 0.562); 
+    backdrop-filter: blur(15px);
+    font-size: 16px;
+    outline: none;
+    border-radius: 20px;
+    color: white;
+    backdrop-filter: blur(19px); 
+    
+  }
+
+.form__group2{
+    margin-bottom: 20px;
+}
+
+.form__group2 input[type="password"] {
+  width: 90%;
+  padding: 10px;
+  border: none;
+  background-color: rgba(176, 175, 175, 0.562); 
+  backdrop-filter: blur(15px);
+  font-size: 16px;
+  outline: none;
+  border-radius: 20px;
+  color: white;
+  backdrop-filter: blur(19px); 
+}
+
+  
+
+.frTxt{
+    display: flex;
+    font-size: 9px;
+    font-weight: 900;
+    justify-content: space-between;
+    margin-right: 4vw;
+    margin-left: 12px;
+}
+
+.loginbtn{
+    display: flex;
+    justify-content: center;
+    margin-top: 8vh;
+    margin-right: 3vw;
+}
+
+.loginTxtbtn{
+    padding: 12px;
+    border-radius: 15px;
+    width: 22vh;
+    background-color: #de4141;
+    border: none;
+    color: white;
+}
+  
+
+
+
+
+
+/* media queries */
+@media (max-width: 768px){
+    .formBody{
+        width: 100%;
+        height: 65vh;
+        border-radius: 22px;
+        background-color: rgba(253, 253, 253, 0.199); 
+        backdrop-filter: blur(10px); 
+        flex-direction: column;
+    }
+
+    .leftPart{
+        display: none;
+    }
+
+    .rightPart{
+        width: 100%;
+        margin: 3vh;
+        height: 80vh;
+        margin-top: 10vh;
+    }
+
+    .loginbtn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+}
