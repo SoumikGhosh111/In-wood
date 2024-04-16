@@ -4,10 +4,12 @@ import { useLocation } from "react-router-dom"
 
 import { Link } from 'react-router-dom';
 import BusinessCenterRoundedIcon from '@mui/icons-material/BusinessCenterRounded';
+import TemporaryDrawer from './Drawer';
 
 function Navbar() {
     const location = useLocation();
     const [scroll, setScroll] = useState(0);
+    const [isMenuActive, setMenuIsActive] = useState(false); 
 
     // scroll up-down animations
     useEffect(() => {
@@ -49,6 +51,10 @@ function Navbar() {
         }
     }, []);
 
+    useEffect(() => { 
+        setMenuIsActive(scroll > window.innerHeight); 
+    }, [scroll]);
+
 
     
    const handleMenu = () => { 
@@ -60,7 +66,12 @@ function Navbar() {
             behavior: 'smooth' 
         }); 
    }
-
+   const handleHomeClick = () => { 
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' 
+    }); 
+   }
     if (location.pathname === '/login') {
         return null;
     }
@@ -72,9 +83,9 @@ function Navbar() {
             <div className='nav-bar'>
                 <div className='nav-bar-inner'>
                     <ul>
-                        <li><Link to={"/"} className='nav-links'>Home</Link></li>
-                        <li><Link onClick={handleMenu} className='nav-links'>Menu</Link></li>
-                        <li><Link className='nav-links'>Pages</Link></li>
+                        <li><Link onClick={handleHomeClick} className={`nav-links ${isMenuActive ? '' : 'active'}`} id='home'>Home</Link></li>
+                        <li><Link onClick={handleMenu} className={`nav-links ${isMenuActive ? 'active' : ''}`} id='menu'>Menu</Link></li>
+                        <li><Link className='nav-links' id='pages'>Pages</Link></li>
                     </ul>
 
                     <div className='nav-bar-login-area'>
@@ -83,6 +94,7 @@ function Navbar() {
                     </div>
                 </div>
             </div>
+            <div className='mob-view-nav'><TemporaryDrawer /></div>
         </div>
     )
 }

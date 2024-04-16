@@ -71,6 +71,7 @@ function HomePageHeroSection() {
         }
     }, [homePageinView]);
 
+
     return (
         <div>
             <div className='homeBox' ref={ref1}
@@ -80,7 +81,7 @@ function HomePageHeroSection() {
                     <div className='leftBox'>
                         <span>Enjoy Your Pizza</span>
                         <button className='home-hero-order-button' onClick={handleClick}>
-                            <ShoppingCartOutlinedIcon sx={{fontSize: "25px", transform: "translateY(15%)", marginRight: "1rem"}}/>
+                            <ShoppingCartOutlinedIcon sx={{fontSize: window.innerWidth > 768 ? "25px" : "16px", transform: "translateY(15%)", marginRight: "1rem"}}/>
                             Order Now
                         </button>
                     </div>
