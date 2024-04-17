@@ -7,6 +7,7 @@ import "./Navbar.css"
 import zIndex from '@mui/material/styles/zIndex';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import EastRoundedIcon from '@mui/icons-material/EastRounded';
+import SwitchTheme from '../SwitchTheme/SwitchTheme';
 
 export default function TemporaryDrawer() {
     let [isOpen, setOpen] = useState(false);
@@ -61,7 +62,10 @@ export default function TemporaryDrawer() {
                         </div>
                         {/* <div className='hor-line'></div> */}
                     </div>
-                    {/* <SwitchModes /> */}
+                    <div className='theme-switcher'>
+                        Dark Theme
+                        <SwitchTheme />
+                    </div>
                 </div>
             </Drawer>
         </div>

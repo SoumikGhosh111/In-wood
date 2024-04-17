@@ -1,22 +1,63 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import background from "../../assets/abc.jpg"; 
 import "./Login.css"
 
 
 function Login({ onButtonClick }) {
+
+    const navigate = useNavigate()
+
+    const handleOnSubmit = async (e) => {
+        e.preventDefault();
+        const from = e.target
+        const email = from.email.value
+        const password = from.password.value
+        const userData = { email, password }
+
+        fetch('http://localhost:8000/api/users/login', {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(userData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    localStorage.setItem("token", data.data.token);
+                    // toast.success(data.message)
+                    alert(data.message)
+                    from.reset()
+                    navigate('/')
+                }
+                else {
+                    // toast.error(data.message)
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error here
+            });
+    }
+
+
+
+
     return (
         <div >
             <div className='formBody'>
                 <div className='form-title'><h1>log in</h1></div>
                 <div className='emailTxt'>
-                    <form className="form" >
+                    <form className="form" onSubmit={handleOnSubmit}>
                         <div className="form__group">
                             <h5>Phone/e-mail</h5>
                             <input
                                 type="email"
                                 placeholder=""
                                 required
+                                name='email'
                             // ref={loginNameRef}
                             />
                         </div>
@@ -26,6 +67,7 @@ function Login({ onButtonClick }) {
                                 type="password"
                                 placeholder=""
                                 required
+                                name='password'
                             // ref={loginPasswordRef}
                             />
                         </div>
@@ -47,4 +89,4 @@ function Login({ onButtonClick }) {
     )
 }
 
-export default Login
+export default Login; 

@@ -139,7 +139,7 @@
     align-items: center;
     flex-direction: column;
     /* transform: translateY(100%); */
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
 
     
 }
@@ -169,11 +169,14 @@
 
 /* media queries */
 @media screen and (max-width: 768px){ 
+    .menu-section-wrapper{ 
+        min-height: 100vh;
+    }
     .title{ 
         font-size: 36px;
     }
     .menu-cart{ 
-        margin-bottom: 3rem;
+        /* margin-bottom: 3rem; */
        
     }
     .menu-section-cards{ 
@@ -225,6 +228,7 @@
     .mob-view-cart{ 
         display: block;
         opacity: 0;
+        pointer-events: none; 
     }
 
 }

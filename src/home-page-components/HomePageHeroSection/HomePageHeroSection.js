@@ -5,7 +5,7 @@ import topSlice from "../../assets/top_left_slice_1.png";
 import bottomSlice from "../../assets/bottom_left_slice_1.png";
 import background from "../../assets/hero_background.png"
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { useAnimate,  useInView  } from "framer-motion"
+import { useAnimate,  useInView  } from "framer-motion"; 
 
 
 
@@ -74,8 +74,8 @@ function HomePageHeroSection() {
 
     return (
         <div>
-            <div className='homeBox' ref={ref1}
-            >
+            <div className='homeBox' ref={ref1}>
+                <span className='yumm'>Yumm</span>
                 <img className="homeBg" src={background} alt="background image" />
                 <div className='left-box-wraapper'>
                     <div className='leftBox'>

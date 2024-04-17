@@ -35,11 +35,11 @@ function MobAddToCart({isClicked}) {
         <div className='mob-view-add-to-cart-div'>
           <div className='mob-view-add-to-cart-items-wrapper'>
             <div className='mob-view-add-to-cart-items'>
-              <span>Total</span>
-              <span>$12.67</span>
+              <span className='total'>Total</span>
+              <span className='amnt'>$12.67</span>
             </div>
             <div className='mob-view-add-to-cart-items'>
-              <span>Pepparoni Pizza </span>
+              <span className = 'pizza-name'>Pepparoni Pizza </span>
               <div></div>
             </div>
             <button className='mob-view-pay-button' onClick={() => setOpen(false)}>Pay</button>

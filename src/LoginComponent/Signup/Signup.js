@@ -9,46 +9,46 @@ import axios from "axios"
 
 function Signup({onButtonClick, onFormSubmisson}) {
 
-    // const navigate = useNavigate()
-    // const handleOnSubmit = async (e) => {
-    //     e.preventDefault();
-    //     const from = e.target
-    //     const name = from.name.value
-    //     const email = from.email.value
-    //     const password = from.password.value
-    //     const passwordConfirm = from.confirmPassword.value
-    //     const userData = { name, email, password, passwordConfirm }
-
-    //     fetch('http://localhost:8000/api/users/register', {
-    //         method: "POST",
-    //         headers: {
-    //             "content-type": "application/json"
-    //         },
-    //         body: JSON.stringify(userData)
-    //     })
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             if (data.success) {
-    //                 localStorage.setItem("token", data.data.token);
-    //                 toast.success(data.message)
-    //                 from.reset()
-    //                 navigate('/')
-    //             }
-    //             else {
-    //                 toast.error(data.message)
-    //             }
-    //         })
-    //         .catch(error => {
-    //             console.error('Error:', error);
-    //             // Handle error here
-    //         });
-    // }
+    const navigate = useNavigate()
+    const handleOnSubmit = async (e) => {
+        e.preventDefault();
+        const from = e.target
+        const name = from.name.value
+        const email = from.email.value
+        const password = from.password.value
+        const passwordConfirm = from.confirmPassword.value
+        const userData = { name, email, password, passwordConfirm }
+        console.log(userData)
+        fetch('http://localhost:8000/api/users/register', {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(userData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    localStorage.setItem("token", data.data.token);
+                    toast.success(data.message)
+                    from.reset()
+                    navigate('/')
+                }
+                else {
+                    toast.error(data.message)
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error here
+            });
+    }
     return (
         <div>
             <div className='formBody'>
                 <div className='form-title'><h1 style={{ fontSize: "9vh" }}>Sign up</h1></div>
                 <div className='emailTxt' style={{ marginTop: "22px" }}>
-                    <form className="form mb-5" >
+                    <form className="form mb-5" onSubmit={handleOnSubmit}>
                         <div className="form__group">
                             <h5>Name</h5>
                             <input
@@ -96,7 +96,7 @@ function Signup({onButtonClick, onFormSubmisson}) {
 
                         </div>
                         <div className="loginbtn" style={{ marginTop: "7vh" }}>
-                            <button type="submit" className='loginTxtbtn' style={{ fontWeight: "bold" }} onClick={onFormSubmisson}>
+                            <button type="submit" onClick={onFormSubmisson} className='loginTxtbtn' style={{ fontWeight: "bold" }} >
                                 Sign up
                             </button>
                         </div>
@@ -109,4 +109,8 @@ function Signup({onButtonClick, onFormSubmisson}) {
     )
 }
 
-export default Signup
+export default Signup; 
+
+
+
+// 

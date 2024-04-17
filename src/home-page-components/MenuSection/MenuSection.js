@@ -10,7 +10,7 @@ import pizza3 from "../../assets/pizza_3.png";
 
 function MenuSection() {
     const [counts, setCounts] = useState({
-        " pizza1": 0,
+        "pizza1": 0,
         "pizza2": 0,
         "pizza3": 0,
         "pizza4": 0
@@ -27,7 +27,7 @@ function MenuSection() {
             animate1("#cards", { width: "60%" }, { duration: 0.5 });
         }
         if (window.innerWidth < 768) {
-            animate1("#order-cart-mob", {opacity: 1}, {duration: 1})
+            animate1("#order-cart-mob", {pointerEvents: "all", opacity: 1}, {duration: 1})
         }
     }
 

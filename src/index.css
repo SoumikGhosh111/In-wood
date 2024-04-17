@@ -27,4 +27,5 @@ body {
   --blur-strength: 10px; 
   --add-to-cart-btn-clr: rgba(38, 38, 38, 1) ;
   --mob-view-pay-button: rgba(38, 38, 38, 1); 
+  --yumm-color-home-hero: rgba(255, 255, 255, 0.49); 
 }
