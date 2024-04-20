@@ -25,7 +25,7 @@ export default function TemporaryDrawer() {
     }, []);
     return (
         <div className='drawer-wrapper'>
-            <input placeholder='Search' style={{ opacity: scroll > window.innerHeight * 0.5 ? "1" : "0" }} />
+            {/* <input placeholder='Search' style={{ opacity: scroll > window.innerHeight * 0.5 ? "1" : "0" }} /> */}
             <IconButton onClick={() => setOpen(true)}><MenuRoundedIcon sx={{ color: scroll > window.innerHeight ? "black" : "var(--white)" }} /></IconButton>
             <Drawer
                 anchor={"top"}

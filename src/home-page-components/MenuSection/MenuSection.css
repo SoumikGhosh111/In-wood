@@ -1,14 +1,17 @@
 .menu-section-wrapper{ 
     width: 100vw;
-    /* min-height: 130vh; */
-    /* ;
-    align-items: center; */
+    height: 130vh;
+   
+    /* align-items: center; */
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     padding: 1rem 1.5rem;
     transition: all 0.3s ease-in-out;
-    padding-top: 4rem;
+    padding-top: 3.5rem;
     /* overflow-y: hidden; */
+    display: flex;
+    justify-content: space-between;
+
 }
 .title{ 
     font-size: 96px;
@@ -17,12 +20,17 @@
 .menu-cart{ 
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    height: 100%;
+    
     /* justify-content:;  */
     /* position: relative; */
-    
+}
+.menu-cart::-webkit-scrollbar{ 
+    display: none;
 }
 .menu-section-cards{ 
-    width: 80%;
+    width: 100%;
     /* display: grid;
     grid-template-columns: repeat(auto-fill, minmax()); 
     gap: 1rem;
@@ -33,6 +41,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1rem;
+
 }
 .menu-section-card-item{ 
     width: 343px;
@@ -48,6 +57,7 @@
     flex-direction: column;
     margin: 1rem 0rem;
     padding: 2rem 2rem;
+    cursor: pointer;
 
 }
 
@@ -73,6 +83,25 @@
     padding: 0;
     margin: 0;
 }
+.size{ 
+    width: 100%;
+    display: flex;
+    padding: 1rem 0rem;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+}
+.size-param{
+    width: 156px;
+    height: 50px;
+    border-radius: 18px;
+    background-color: rgba(217, 217, 217, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .quantity-buttons-wrapper{ 
     width: 100%;
@@ -170,7 +199,8 @@
 /* media queries */
 @media screen and (max-width: 768px){ 
     .menu-section-wrapper{ 
-        min-height: 100vh;
+        height: 100vh;
+        flex-direction: column;
     }
     .title{ 
         font-size: 36px;
@@ -189,7 +219,7 @@
     }
     
     .menu-section-card-item{ 
-        width: 343px;
+        width: 543px;
         padding: 1rem 1rem;
         border-radius: 24px;
     }
@@ -197,9 +227,18 @@
         display: none;
     }
     .item-desc{ 
-        font-size: 5px ;
-        /* line-height: 10px; */
+        /* font-size: 5px ; */
+        line-height: 10px;
+        display: none;
         
+    }
+
+    .size-param{ 
+        width: 76px;
+        height: 20px;
+    }
+    .toppings, .size{ 
+        font-size: 10px;
     }
     .item-name{ 
         font-size: 11px;

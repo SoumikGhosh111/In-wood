@@ -13,19 +13,19 @@ function UserRegister() {
     const [scope, animate] = useAnimate();
 
     const handleLoginClicked = () => {
-        animate("#login", { x: "10vw", opacity: 0 }, { duration: 0.5 });
-        animate("#video", { x: "-50vw" }, { duration: 0.5 });
+        animate("#login", { x: "10vw", opacity: 0,pointerEvent: "none" }, { duration: 0.5 });
+        // animate("#video", { x: "-50vw" }, { duration: 0.5 });
         animate("#signup", { x: 0, opacity: 1 }, { duration: 0.5 });
     }
 
     const handSignupClicked = () => {
-        animate("#signup", { x: "-10vw", opacity: 0 }, { duration: 0.5 });
-        animate("#video", { x: "0" }, { duration: 0.5 });
+        animate("#signup", { x: "-10vw", opacity: 0, pointerEvent: "none" }, { duration: 0.5 });
+        // animate("#video", { x: "0" }, { duration: 0.5 });
         animate("#login", { x: "0", opacity: 1 }, { duration: 0.5 });
     }
 
     const signUpFormSubmisson = () => { 
-        animate("#sign-up-form-inner", { y: "-90vh", opacity: 0 }, { duration: 0.5 });
+        animate("#sign-up-form-inner", { y: "-90vh", opacity: 0, pointerEvent: "none" }, { duration: 0.5 });
         animate("#verify", { y: "0", opacity: 1 }, { duration: 0.5 });
     }
     return (
@@ -44,12 +44,12 @@ function UserRegister() {
                     </div>
                 </div>
 
-                <div className='video-bg' id='video'>
+                {/* <div className='video-bg' id='video'>
                     <video playsInline="playsIvideo-bgnline" autoPlay="autoPlay" muted="muted" loop="loop">
                         <source src={videoBG} type='video/mp4' />
                         Browser not supported
                     </video>
-                </div>
+                </div> */}
             </div>
         </div>
     )

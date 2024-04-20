@@ -22,6 +22,8 @@
 .yumm{ 
     z-index: 1;
     position: absolute;
+    top: 50%;
+    left: 50%;
     font-size: 132px; 
     font-weight: 400;
     font-family: "Kaushan Script", cursive;
@@ -183,6 +185,10 @@
 
 /* media queries */
 @media (max-width: 768px){
+    .yumm{ 
+        top: 0;
+        left: 0;
+    }
     .leftBox{ 
         justify-content: center;
         gap: 1rem;

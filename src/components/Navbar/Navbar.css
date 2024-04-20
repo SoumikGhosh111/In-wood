@@ -166,7 +166,7 @@
 @media screen and (max-width: 768px){ 
     .drawer-wrapper{ 
         display: flex;
-        justify-content: space-around;
+        justify-content: flex-end;
         align-items: center;
         width: 100%;
         margin-top: 1rem;
