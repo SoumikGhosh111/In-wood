@@ -6,8 +6,8 @@ import "./MobAddToCart.css";
 
 function MobAddToCart({ isClicked }) {
   const cartItems = useSelector((state) => state.cart.cart);
-  const totalPrice = cartItems.reduce((total, item) => total + item.qty * item.price, 0); 
-  const dispatch = useDispatch(); 
+  const totalPrice = cartItems.reduce((total, item) => total + item.qty * item.price, 0);
+  const dispatch = useDispatch();
   console.log(cartItems)
   let [isOpen, setOpen] = useState(isClicked);
   const [scroll, setScroll] = useState(0);
@@ -25,7 +25,7 @@ function MobAddToCart({ isClicked }) {
   return (
     <div className='mob-view-add-to-cart-wrapper'>
       {/* <input placeholder='Search' style={{ opacity: scroll > window.innerHeight * 0.5 ? "1" : "0" }} /> */}
-      <div onClick={() => setOpen(true)} className='mob-view-cart-button-wrapper'><div className='mob-view-cart-button'>Total ${totalPrice}</div></div>
+      <div onClick={() => setOpen(true)} className='mob-view-cart-button-wrapper'><div className='mob-view-cart-button'>Total ${(totalPrice).toFixed(2)}</div></div>
       <Drawer
         anchor={"bottom"}
         open={isOpen}
@@ -36,15 +36,23 @@ function MobAddToCart({ isClicked }) {
           <div className='mob-view-add-to-cart-items-wrapper'>
             <div className='mob-view-add-to-cart-items'>
               <span className='total'>Total</span>
-              <span className='amnt'>${totalPrice}</span>
+              <span className='amnt'>${(totalPrice).toFixed(2)}</span>
             </div>
             {cartItems.map((item) => (
               <div className='mob-view-add-to-cart-items'>
-                <span className='pizza-name'>{item.name}</span>
+                <span className='pizza-name'>
+                  {item.name} <br />
+                  {item.size &&
+                    <>Size: {item.size}</>
+                  }<br />
+                  {item.toppings &&
+                    <>Toppings: {item.toppings.map((topping) => topping.text).join(', ')}</>
+                  }
+                </span>
                 <div className='quantiy-button'>
-                  <button className='quantiy-button-inner-items quantiy-button-inner-items-button plus' onClick={() => dispatch(incrementQty({id: item.id}))}>+</button>
+                  <button className='quantiy-button-inner-items quantiy-button-inner-items-button plus' onClick={() => dispatch(incrementQty({ id: item.id }))}>+</button>
                   <div className='quantiy-button-inner-items'>{item.qty}</div>
-                  <button className='quantiy-button-inner-items quantiy-button-inner-items-button minus' onClick={() => dispatch(decrementQty({id: item.id}))}>-</button>
+                  <button className='quantiy-button-inner-items quantiy-button-inner-items-button minus' onClick={() => dispatch(decrementQty({ id: item.id }))}>-</button>
                 </div>
               </div>
             ))}
