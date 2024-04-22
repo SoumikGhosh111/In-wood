@@ -6,46 +6,41 @@ import MobAddToCart from '../MobAddToCart/MobAddToCart';
 import Backdrop from '@mui/material/Backdrop';
 import SelectedCard from '../SelectedCard/SelectedCard';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { addToCart, decrementQty } from '../../redux/slices/cartSlice';
 
 import pizza1 from "../../assets/pizza_1.png";
 import pizza2 from "../../assets/pizza_2.png";
 import pizza3 from "../../assets/pizza_3.png";
 
 function MenuSection() {
-    const [counts, setCounts] = useState({
-        "pizza1": 0,
-        "pizza2": 0,
-        "pizza3": 0,
-        "pizza4": 0
-    });
+
+    const dispatch = useDispatch();
+    const cartItems = useSelector((state) => state.cart.cart);
+    // console.log(cartItems, "this is form menu ")
     const [menu, setMenu] = useState(null);
-    const [isOpen, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(false);
     const [scope, animate1] = useAnimate();
     const [open, setOpen] = useState(false);
     const [itemData, setItemData] = useState(null);
     console.log(window.innerWidth);
 
     const increment = (item) => {
-        setCounts(prevCnt => ({ ...prevCnt, [item]: prevCnt[item] + 1 }));
+        // setCounts(prevCnt => ({ ...prevCnt, [item]: prevCnt[item] + 1 }));
         // setCounts(counts.find(item => (item + 1))); 
         if (window.innerWidth > 768) {
-            animate1("#order-cart", { x: "7vw" }, { duration: 0.5 });
-            animate1("#cards", { width: "80%" }, { duration: 0.5 });
+            // animate1("#order-cart", { x: "7vw" }, { duration: 0.5 });
+            // animate1("#cards", { width: "80%" }, { duration: 0.5 });
         }
         if (window.innerWidth < 768) {
             animate1("#order-cart-mob", { pointerEvents: "all", opacity: 1 }, { duration: 1 })
         }
     }
 
-    const decrement = (item) => {
-        setCounts(prevCnt => ({ ...prevCnt, [item]: prevCnt[item] > 0 ? prevCnt[item] - 1 : 0 }));
-    }
 
 
-    const handleOrder = () => {
-        animate1("#order-cart", { x: "100vw" }, { duration: 0.5 });
-        animate1("#cards", { width: "100%" }, { duration: 0.5 });
-    }
+
+  
 
     const handleMobClick = () => {
         console.log("I am Clicked")
@@ -68,6 +63,25 @@ function MenuSection() {
     const handleClose = () => {
         setOpen(false);
     };
+    const goTocart = () => { 
+        setOpen(false);
+        if (window.innerWidth < 768) {
+            animate1("#order-cart-mob", {pointerEvents: "all", opacity: 1 }, { duration: 1 });
+        }
+        console.log("I am Goto Cart"); 
+    }
+
+    // const directOrder = (item) => { 
+    //     dispatch(
+    //         addToCart({
+    //             id: item._id, 
+    //             name: item.title, 
+    //             price: item.prices[item.prices.length - 1],  
+    //             qty: 1
+    //         })
+    //     )
+    //     goTocart(); 
+    // }
     const handleOpen = (id) => {
         fetch(`http://localhost:8000/api/product/getFood/${id}`)
             .then(res => res.json())
@@ -86,29 +100,29 @@ function MenuSection() {
                     <div className='menu-section-cards' id='cards' >
                         {menu.map((item, indx) => (
                             <>
-                                <div className='menu-section-card-item' onClick={() => handleOpen(item._id)}>
-                                    <div className='item-img'>
-                                        <img src={pizza1} />
-                                    </div>
-
-                                    <span className='item-name'>{item.title}</span>
-                                    <p className='item-desc'>{item.desc}</p>
-                                    <div className='size'>
-                                        <div className='price'>
-                                            ${item.prices[item.prices.length - 1]}
+                                <div className='menu-section-card-item' >
+                                    <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
+                                        <div className='item-img'>
+                                            <img src={pizza1} />
                                         </div>
-                                        <div className='size-param'>
-                                            {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"}
+
+                                        <span className='item-name'>{item.title}</span>
+                                        <p className='item-desc'>{item.desc}</p>
+                                        <div className='size'>
+                                            <div className='price'>
+                                                ${item.prices[item.prices.length - 1]}
+                                            </div>
+                                            <div className='size-param'>
+                                                {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"}
+                                            </div>
                                         </div>
                                     </div>
                                     <div className='quantity-buttons-wrapper'>
-                                        <div className='quantity-buttons'>
-                                            <button className='quantity-buttons-minus quantity-buttons-item' onClick={() => decrement(pizza1)}>-</button>
-                                            <div className='hor-line'></div>
-                                            <span className='quantity-buttons-item quantity'></span>
-                                            <div className='hor-line'></div>
-                                            <button className='quantity-buttons-plus quantity-buttons-item' onClick={() => increment(pizza1)}>+</button>
-                                        </div>
+                                        <button className='quantity-buttons'
+                                            onClick={() => handleOpen(item._id)}
+                                        >
+                                            Add To Cart
+                                        </button>
                                     </div>
                                 </div>
                             </>
@@ -121,12 +135,12 @@ function MenuSection() {
                     sx={{ color: '#000', zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: "rgba(0, 0, 0, 0.238)" }}
                     open={open}
                 >
-                    <SelectedCard data={itemData} onCancelButtonClick = {handleClose} />
+                    <SelectedCard data={itemData} onCancelButtonClick={handleClose} onOrderButtonClick={goTocart} />
                 </Backdrop>
 
             </div>
             <div className='cart' id='order-cart'>
-                <AddToCart onOrderClick={handleOrder}  />
+                <AddToCart />
             </div>
 
 
@@ -143,6 +157,13 @@ function MenuSection() {
 export default MenuSection;
 
 
+{/* <button className='quantity-buttons-minus quantity-buttons-item' onClick={() => dispatch(decrementQty({id: item._id}))}>-</button>
+                                            <div className='hor-line'></div>
+                                            <span className='quantity-buttons-item quantity'>
+                                               {cartItems.filter((cartItem) => item._id === cartItem.id).qty}
+                                            </span>
+                                            <div className='hor-line'></div>
+                                            <button className='quantity-buttons-plus quantity-buttons-item' onClick={() => dispatch(addToCart({id: item._id, name: item.title, price: item.prices[item.prices.length - 1],  qty: 1}))}>+</button> */}
 
 
 {/* <div className='menu-section-card-item'>

@@ -12,10 +12,14 @@
     margin-top: 1rem;
 }
 
-.order-cart-cards{ 
+
+.order-items{ 
     overflow-y: scroll;
     width: 100%;
     height: 80%;
+}
+.order-cart-cards{ 
+   
 }
 .order-cart-cards::-webkit-scrollbar{ 
     display: none;

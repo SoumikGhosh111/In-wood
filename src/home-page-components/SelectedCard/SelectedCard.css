@@ -61,3 +61,13 @@
     color: var(--white);
     cursor: pointer;
 }
+
+
+
+/* media queries */
+@media screen and (max-width: 768px){ 
+    .selected-card-wrapper{ 
+        width: 100%; 
+        height: 50%;
+    }
+}

@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import Drawer from '@mui/material/Drawer';
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import { IconButton } from '@mui/material';
-import { Switch } from '@mui/material';
-import zIndex from '@mui/material/styles/zIndex';
-import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import EastRoundedIcon from '@mui/icons-material/EastRounded';
+import { useSelector, useDispatch } from 'react-redux';
+import { incrementQty, decrementQty } from '../../redux/slices/cartSlice';
 import "./MobAddToCart.css";
 
-function MobAddToCart({isClicked}) {
+function MobAddToCart({ isClicked }) {
+  const cartItems = useSelector((state) => state.cart.cart);
+  const totalPrice = cartItems.reduce((total, item) => total + item.qty * item.price, 0); 
+  const dispatch = useDispatch(); 
+  console.log(cartItems)
   let [isOpen, setOpen] = useState(isClicked);
   const [scroll, setScroll] = useState(0);
 
@@ -25,7 +25,7 @@ function MobAddToCart({isClicked}) {
   return (
     <div className='mob-view-add-to-cart-wrapper'>
       {/* <input placeholder='Search' style={{ opacity: scroll > window.innerHeight * 0.5 ? "1" : "0" }} /> */}
-      <IconButton onClick={() => setOpen(true)} sx={{width: "100%"}}><div className='mob-view-cart-button'>Total $12.67</div></IconButton>
+      <div onClick={() => setOpen(true)} className='mob-view-cart-button-wrapper'><div className='mob-view-cart-button'>Total ${totalPrice}</div></div>
       <Drawer
         anchor={"bottom"}
         open={isOpen}
@@ -36,12 +36,18 @@ function MobAddToCart({isClicked}) {
           <div className='mob-view-add-to-cart-items-wrapper'>
             <div className='mob-view-add-to-cart-items'>
               <span className='total'>Total</span>
-              <span className='amnt'>$12.67</span>
+              <span className='amnt'>${totalPrice}</span>
             </div>
-            <div className='mob-view-add-to-cart-items'>
-              <span className = 'pizza-name'>Pepparoni Pizza </span>
-              <div></div>
-            </div>
+            {cartItems.map((item) => (
+              <div className='mob-view-add-to-cart-items'>
+                <span className='pizza-name'>{item.name}</span>
+                <div className='quantiy-button'>
+                  <button className='quantiy-button-inner-items quantiy-button-inner-items-button plus' onClick={() => dispatch(incrementQty({id: item.id}))}>+</button>
+                  <div className='quantiy-button-inner-items'>{item.qty}</div>
+                  <button className='quantiy-button-inner-items quantiy-button-inner-items-button minus' onClick={() => dispatch(decrementQty({id: item.id}))}>-</button>
+                </div>
+              </div>
+            ))}
             <button className='mob-view-pay-button' onClick={() => setOpen(false)}>Pay</button>
           </div>
           {/* <SwitchModes /> */}
@@ -51,4 +57,8 @@ function MobAddToCart({isClicked}) {
   );
 }
 
-export default MobAddToCart
+export default MobAddToCart;
+
+
+
+{/* */ }
