@@ -89,7 +89,7 @@ function Navbar() {
                     </ul>
 
                     <div className='nav-bar-login-area'>
-                        <span><Link to={"/login"} className='nav-links'>Login</Link></span>
+                        <span><Link to={"/login"} className='nav-links'>Login Sign up</Link></span>
                         <span className='cart-icon'><BusinessCenterRoundedIcon sx={{ transform: "translateY(15%)", color: scroll > window.innerHeight ? "black" : "" }} /></span>
                     </div>
                 </div>

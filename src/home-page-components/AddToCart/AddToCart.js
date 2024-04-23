@@ -2,10 +2,13 @@ import React from 'react';
 import "./AddToCart.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, incrementQty, decrementQty } from '../../redux/slices/cartSlice';
+import { useNavigate } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
-import Delete from '@mui/icons-material/Delete';
+
+import { getUser } from '../../functions/veifyUser';
 
 function AddToCart({ onOrderClick }) {
+  const Navigate = useNavigate(); 
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cart);
   const totalAmnt = cartItems.reduce((total, item) => 
@@ -13,6 +16,17 @@ function AddToCart({ onOrderClick }) {
     0
   )
   console.log(cartItems);
+
+  const handleOrderClick = async () => { 
+    const isValid = await getUser(); 
+
+    if(!isValid){ 
+      alert("Not logged in, Need to Login")
+      Navigate("/login")
+    }else if(isValid) { 
+      alert("logged in"); 
+    }
+  }
   return (
     <div className='add-to-cart-wrapper'>
       <div className='order-items'>
@@ -46,7 +60,7 @@ function AddToCart({ onOrderClick }) {
       </div>  
       <div>Total Amount: ${(totalAmnt).toFixed(2)}</div>
 
-      <button className='add-to-cart-button' onClick={onOrderClick}>PROCEED TO ORDER</button>
+      <button className='add-to-cart-button' onClick={handleOrderClick}>PROCEED TO ORDER</button>
     </div>
   )
 }

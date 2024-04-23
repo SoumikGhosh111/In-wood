@@ -40,7 +40,7 @@ function MenuSection() {
 
 
 
-  
+
 
     const handleMobClick = () => {
         console.log("I am Clicked")
@@ -63,12 +63,12 @@ function MenuSection() {
     const handleClose = () => {
         setOpen(false);
     };
-    const goTocart = () => { 
+    const goTocart = () => {
         setOpen(false);
         if (window.innerWidth < 768) {
-            animate1("#order-cart-mob", {pointerEvents: "all", opacity: 1 }, { duration: 1 });
+            animate1("#order-cart-mob", { pointerEvents: "all", opacity: 1 }, { duration: 1 });
         }
-        console.log("I am Goto Cart"); 
+        console.log("I am Goto Cart");
     }
 
     // const directOrder = (item) => { 
@@ -96,10 +96,12 @@ function MenuSection() {
                 <span className='title'>Menu</span>
 
                 {menu !== null ? (
+                    // menu.map((item) => item.filter(()))
 
                     <div className='menu-section-cards' id='cards' >
                         {menu.map((item, indx) => (
-                            <>
+                            <>  
+
                                 <div className='menu-section-card-item' >
                                     <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
                                         <div className='item-img'>
@@ -125,6 +127,8 @@ function MenuSection() {
                                         </button>
                                     </div>
                                 </div>
+  
+                                
                             </>
 
                         ))}
@@ -151,13 +155,13 @@ function MenuSection() {
                 </div>
             </div>
         </div>
-    )
+            )
 }
 
-export default MenuSection;
+            export default MenuSection;
 
 
-{/* <button className='quantity-buttons-minus quantity-buttons-item' onClick={() => dispatch(decrementQty({id: item._id}))}>-</button>
+            {/* <button className='quantity-buttons-minus quantity-buttons-item' onClick={() => dispatch(decrementQty({id: item._id}))}>-</button>
                                             <div className='hor-line'></div>
                                             <span className='quantity-buttons-item quantity'>
                                                {cartItems.filter((cartItem) => item._id === cartItem.id).qty}
@@ -166,7 +170,7 @@ export default MenuSection;
                                             <button className='quantity-buttons-plus quantity-buttons-item' onClick={() => dispatch(addToCart({id: item._id, name: item.title, price: item.prices[item.prices.length - 1],  qty: 1}))}>+</button> */}
 
 
-{/* <div className='menu-section-card-item'>
+            {/* <div className='menu-section-card-item'>
                         <div className='item-img'>
                             <img src={pizza3} />
                         </div>

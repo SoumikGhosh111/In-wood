@@ -213,7 +213,7 @@
     }
     .menu-section-cards{ 
         width: 100% !important;
-        flex-wrap: nowrap;
+        /* flex-wrap: nowrap; */
         overflow-x: scroll;
         justify-content: flex-start;
        
@@ -221,7 +221,7 @@
     }
     
     .menu-section-card-item{ 
-        width: 543px;
+        width: 160px;
         min-height: 250px;
         padding: 0.5rem 0.5rem;
         border-radius: 10px;

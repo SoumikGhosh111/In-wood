@@ -35,12 +35,12 @@ function UserRegister() {
         <Signup /> */}
             <div className='form-container' ref={scope}>
                 <div className='login-form' id='login'>
-                    <Login onButtonClick={handleLoginClicked} />
+                    {/* <Login onButtonClick={handleLoginClicked} /> */}
                 </div>
                 <div className='signup-form' id='signup'>
-                    <div id='sign-up-form-inner'><Signup onButtonClick={handSignupClicked} onFormSubmisson = {signUpFormSubmisson}/></div>
+                    {/* <div id='sign-up-form-inner'><Signup onButtonClick={handSignupClicked} onFormSubmisson = {signUpFormSubmisson}/></div> */}
                     <div className='verify-form-wrapper' id='verify'>
-                        <Verify />
+                        {/* <Verify /> */}
                     </div>
                 </div>
 

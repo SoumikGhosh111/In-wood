@@ -5,13 +5,7 @@
 
 
 
-.bgPizza{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    /* display: none; */
-}
+
 
 .form-container{
     width: 100%;

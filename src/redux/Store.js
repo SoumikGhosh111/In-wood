@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { persistStore } from "redux-persist";
 
 import cartSlice from "./slices/cartSlice";
 
@@ -9,4 +10,6 @@ const Store = configureStore({
     }
 }); 
 
-export default Store; 
+// creating a persistedStore
+const persistor = persistStore(Store)
+export {Store, persistor}; 

@@ -1,4 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createReducer } from "@reduxjs/toolkit";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
 
 const cartSlice = createSlice({
     name: "cart",
@@ -41,8 +44,20 @@ const cartSlice = createSlice({
     }
 });
 
+
+// creating a persisting reducer 
+const presistConfig = { 
+    key: 'cart', 
+    storage: storage,
+}
+
+
+const persistedReducer = persistReducer(presistConfig, cartSlice.reducer)
 // actions
 export const { addToCart, removeFromCart, addToppingsToOrder, incrementQty, decrementQty } = cartSlice.actions;
 
 // reducer
-export default cartSlice.reducer; 
+// export default cartSlice.reducer; 
+
+// exporting the persistReducer
+export default persistedReducer; 

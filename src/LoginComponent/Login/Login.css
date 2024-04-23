@@ -51,8 +51,19 @@
     border-radius: 10px;
     opacity: 0.9;
   } */
-
-
+  .bgPizza{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    /* display: none; */
+}
+.form-body-wrapper{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 .formBody{
     border-radius: 25px;
     background-color: rgba(253, 253, 253, 0.199); 
