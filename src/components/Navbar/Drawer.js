@@ -8,8 +8,17 @@ import zIndex from '@mui/material/styles/zIndex';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import EastRoundedIcon from '@mui/icons-material/EastRounded';
 import SwitchTheme from '../SwitchTheme/SwitchTheme';
+ 
+import {useDispatch } from 'react-redux';
+import { toggle } from '../../redux/slices/cartShow';
 
-export default function TemporaryDrawer() {
+
+
+export default function TemporaryDrawer() { 
+    const dispatch = useDispatch(); 
+
+
+
     let [isOpen, setOpen] = useState(false);
     const [scroll, setScroll] = useState(0);
 
@@ -23,6 +32,11 @@ export default function TemporaryDrawer() {
             window.removeEventListener("scroll", handleScroll);
         }
     }, []);
+
+
+    const handleCartClick = () => { 
+        dispatch(toggle())
+    }
     return (
         <div className='drawer-wrapper'>
             {/* <input placeholder='Search' style={{ opacity: scroll > window.innerHeight * 0.5 ? "1" : "0" }} /> */}
@@ -42,8 +56,8 @@ export default function TemporaryDrawer() {
                         {/* <div className='hor-line'>Hello !</div> */}
 
 
-                        <div className='drawer-items'>
-                            <a>Cart</a>
+                        <div className='drawer-items' onClick={handleCartClick}> 
+                            <a >Cart</a>
                             <EastRoundedIcon />
                         </div>
                         {/* <div className='hor-line'></div> */}
@@ -56,10 +70,10 @@ export default function TemporaryDrawer() {
                         {/* <div className='hor-line'></div> */}
 
 
-                        <div className='drawer-items'>
+                        {/* <div className='drawer-items'>
                             <a>Settings</a>
                             <EastRoundedIcon />
-                        </div>
+                        </div> */}
                         {/* <div className='hor-line'></div> */}
                     </div>
                     <div className='theme-switcher'>

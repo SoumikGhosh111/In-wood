@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistStore } from "redux-persist";
 
 import cartSlice from "./slices/cartSlice";
+import cartShow from "./slices/cartShow";
 
 
 const Store = configureStore({ 
     reducer: { 
-        cart: cartSlice
+        cart: cartSlice,
+        show: cartShow
     }
 }); 
 

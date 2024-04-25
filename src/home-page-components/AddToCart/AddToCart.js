@@ -25,6 +25,7 @@ function AddToCart({ onOrderClick }) {
       Navigate("/login")
     }else if(isValid) { 
       alert("logged in"); 
+      Navigate("/checkout")
     }
   }
   return (

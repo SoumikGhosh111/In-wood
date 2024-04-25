@@ -5,11 +5,17 @@ import { useLocation } from "react-router-dom"
 import { Link } from 'react-router-dom';
 import BusinessCenterRoundedIcon from '@mui/icons-material/BusinessCenterRounded';
 import TemporaryDrawer from './Drawer';
+import { getUser } from '../../functions/veifyUser';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 function Navbar() {
     const location = useLocation();
     const [scroll, setScroll] = useState(0);
-    const [isMenuActive, setMenuIsActive] = useState(false); 
+    const [isMenuActive, setMenuIsActive] = useState(false);
+    const [showAvater, setShowAvater] = useState(false);
+    const [showDropdown, setShowDropDown] = useState(false); 
+
+
 
     // scroll up-down animations
     useEffect(() => {
@@ -51,35 +57,64 @@ function Navbar() {
         }
     }, []);
 
-    useEffect(() => { 
-        setMenuIsActive(scroll > window.innerHeight); 
+    useEffect(() => {
+        setMenuIsActive(scroll > 300);
     }, [scroll]);
 
 
-    
-   const handleMenu = () => { 
-    const scrollPosition = window.innerHeight * 1.1; // 110% of the viewport height
+
+    const handleMenu = () => {
+        const scrollPosition = window.innerHeight * 1.1; // 110% of the viewport height
 
         // Scroll to the calculated position
         window.scrollTo({
             top: scrollPosition,
-            behavior: 'smooth' 
-        }); 
-   }
-   const handleHomeClick = () => { 
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth' 
-    }); 
-   }
-    if (location.pathname === '/login') {
-        return null;
+            behavior: 'smooth'
+        });
     }
+    const handleHomeClick = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // const verifyUser = async () => {
+    //     const isValid = await getUser();
+    //     setShowAvater(isValid);
+    // }
+    // useEffect(() => {
+    //     verifyUser();
+    // }, []); 
+
+    useEffect(() => {
+        const checkUser = async () => {
+            const isValid = await getUser();
+            setShowAvater(isValid);
+
+        };
+        checkUser();
+    }, [localStorage.getItem("token")]);
+
+
+
+    const toggleDropDownMenu = () =>{ 
+        setShowDropDown(!showDropdown); 
+    }
+
+    const handleLogout = () => { 
+        setShowAvater(false);  
+        localStorage.removeItem("token");
+    }
+
+    if (location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/otppage' || location.pathname === '/checkout') {
+        return null;
+    }; 
 
 
 
     return (
-        <div className='nav-bar-wrapper' style={{WebkitBackdropFilter: scroll > 200 ?"blur(10px)" : "", backdropFilter : scroll > 200 ? "blur(10px)" : "", color: scroll > window.innerHeight ? "black" : ""}}>
+        <div className='nav-bar-wrapper' style={{ WebkitBackdropFilter: scroll > 200 ? "blur(10px)" : "", backdropFilter: scroll > 200 ? "blur(10px)" : "", color: scroll > window.innerHeight ? "black" : "" }}>
             <div className='nav-bar'>
                 <div className='nav-bar-inner'>
                     <ul>
@@ -89,8 +124,26 @@ function Navbar() {
                     </ul>
 
                     <div className='nav-bar-login-area'>
-                        <span><Link to={"/login"} className='nav-links'>Login Sign up</Link></span>
-                        <span className='cart-icon'><BusinessCenterRoundedIcon sx={{ transform: "translateY(15%)", color: scroll > window.innerHeight ? "black" : "" }} /></span>
+                        {showAvater ? 
+                            <span className='avater'>
+                                <AccountCircleIcon sx={{transform: 'translateY(25%)', cursor: "pointer"}}  onClick = {toggleDropDownMenu}/>
+                                {showDropdown && (
+                                    <div className="dropdown-content">
+                                        <div className='nav-ver-line'></div>
+                                        <Link to="/profile" className='nav-links'>Profile</Link>
+                                        <div className='nav-ver-line'></div>
+                                        <Link onClick={handleLogout} className='nav-links'>Logout</Link>
+                                        <div className='nav-ver-line'></div>
+                                    </div>
+                                )}
+                            </span> 
+                            : 
+                            <><span>
+                                <Link to={"/login"} className='nav-links'>Login</Link>/<Link to={"/register"} className='nav-links'>Sign up</Link>
+                            </span></>
+                        }
+
+                        <span className='cart-icon' onClick={handleMenu}><BusinessCenterRoundedIcon sx={{ transform: "translateY(15%)", color: scroll > window.innerHeight ? "black" : "" }} /></span>
                     </div>
                 </div>
             </div>

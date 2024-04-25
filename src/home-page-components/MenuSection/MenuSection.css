@@ -263,6 +263,7 @@
     .quantity-buttons{ 
         width: 91.89px;
         border-radius: 14px;
+        font-size: 13px;
     }
 
 
@@ -273,4 +274,5 @@
         pointer-events: none; 
     }
 
+   
 }

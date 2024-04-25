@@ -14,6 +14,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+
 }
 
 :root{ 
@@ -27,5 +28,10 @@ body {
   --blur-strength: 10px; 
   --add-to-cart-btn-clr: rgba(38, 38, 38, 1) ;
   --mob-view-pay-button: rgba(38, 38, 38, 1); 
-  --yumm-color-home-hero: rgba(255, 255, 255, 0.49); 
+  --yumm-color-home-hero: rgba(255, 255, 255, 0.49);
+  --check-out-page-left: #FAF9F8 ; 
+  --check-out-page-right: #F6F5F4; 
+  --check-out-page-left-vertical-line: #F5F3F0;
+  --worker-tip-amnt-btn: #E6E4E3;  
+  --pick-up-insc: rgba(56, 56, 56, 0.49); 
 }
