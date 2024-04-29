@@ -8,6 +8,7 @@ import SignupPage from './pages/SignupPage';
 import CheckOutPage from './pages/CheckOutPage';
 import ForgetPasswordPage from './pages/ForgetPasswordPage';
 import ProfilePage from './pages/ProfilePage';
+import DashboardPage from './pages/DashboardPage';
 
 // importing react router dom
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
@@ -27,6 +28,7 @@ function App() {
           <Route path='/checkout' element ={<CheckOutPage />}/>
           <Route path='/profile' element ={<ProfilePage />}/>
           <Route path='/forgetpassword' element ={<ForgetPasswordPage />}/>
+          <Route path='/dashboard' element ={<DashboardPage />}/>
         </Routes>
       </Router>
     </div>

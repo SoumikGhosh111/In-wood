@@ -35,3 +35,14 @@ body {
   --worker-tip-amnt-btn: #E6E4E3;  
   --pick-up-insc: rgba(56, 56, 56, 0.49); 
 }
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 260px 1fr 1fr 1fr;
+  grid-template-rows: 0.2fr 3fr;
+  grid-template-areas:
+    'sidebar header header header'
+    'sidebar main main main';
+  height: 100vh;
+}

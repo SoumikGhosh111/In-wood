@@ -107,7 +107,7 @@ function Navbar() {
         localStorage.removeItem("token");
     }
 
-    if (location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/otppage' || location.pathname === '/checkout' || location.pathname === '/forgetpassword' || location.pathname === '/checkout' || location.pathname === '/profile') {
+    if (location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/otppage' || location.pathname === '/checkout' || location.pathname === '/forgetpassword' || location.pathname === '/checkout' || location.pathname === '/profile' || location.pathname === '/dashboard') {
         return null;
     }; 
 
