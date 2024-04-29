@@ -3,4 +3,26 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
+}
+
+
+.passBox{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+/* media queries */
+@media screen and (max-width: 768px){ 
+    .sign-up-body-wrapper{ 
+        padding: 0rem 1rem;
+    }
+    .pass-cnfm-pass{ 
+       padding: 0;
+        margin: 0;
+        
+    }
 }

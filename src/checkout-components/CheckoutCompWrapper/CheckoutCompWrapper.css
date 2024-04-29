@@ -40,3 +40,21 @@
     flex-direction: row-reverse;
     padding: 1rem 1rem;
 }
+
+
+
+
+
+
+
+
+
+/* media queries */
+@media screen and (max-width: 768px){ 
+    .check-out-comp-wrapper{ 
+        flex-direction: column;
+    }
+    .check-out-page-left{
+        flex: 1;
+    }
+}

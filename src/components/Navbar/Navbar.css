@@ -58,8 +58,8 @@
    position: relative;
 }
 .dropdown-content{ 
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    /* height: 100px; */
     border: 1px solid white; 
     background-color: white;
     color: black;
@@ -71,6 +71,7 @@
     gap: 0.4rem;
     align-items: center;
     flex-direction: column;
+    top: 120%;
     left: 50%;
     transform: translate(-50%);
 }

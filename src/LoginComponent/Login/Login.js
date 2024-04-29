@@ -30,7 +30,8 @@ function Login({ onButtonClick }) {
                     // toast.success(data.message)
                     alert(data.message)
                     from.reset()
-                    navigate('/')
+                    navigate('/');
+                    localStorage.setItem('userEmail', email); 
                 }
                 else {
                     // toast.error(data.message)

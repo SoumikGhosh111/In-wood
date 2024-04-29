@@ -107,7 +107,7 @@ function Navbar() {
         localStorage.removeItem("token");
     }
 
-    if (location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/otppage' || location.pathname === '/checkout') {
+    if (location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/otppage' || location.pathname === '/checkout' || location.pathname === '/forgetpassword' || location.pathname === '/checkout' || location.pathname === '/profile') {
         return null;
     }; 
 
@@ -129,11 +129,12 @@ function Navbar() {
                                 <AccountCircleIcon sx={{transform: 'translateY(25%)', cursor: "pointer"}}  onClick = {toggleDropDownMenu}/>
                                 {showDropdown && (
                                     <div className="dropdown-content">
-                                        <div className='nav-ver-line'></div>
-                                        <Link to="/profile" className='nav-links'>Profile</Link>
-                                        <div className='nav-ver-line'></div>
+                                        {/* <div className='nav-ver-line'></div> */}
+                                        <Link to="/profile" className='nav-links'>My profile</Link>
+                                        {/* <div className='nav-ver-line'></div> */}
+                                        <Link to={"/checkout"} className='nav-links'>My orders</Link>
+                                        {/* <div className='nav-ver-line'></div> */}
                                         <Link onClick={handleLogout} className='nav-links'>Logout</Link>
-                                        <div className='nav-ver-line'></div>
                                     </div>
                                 )}
                             </span> 

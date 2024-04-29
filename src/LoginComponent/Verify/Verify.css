@@ -6,4 +6,16 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
+}
+
+
+
+
+
+/* media queries */
+@media  screen and (max-width: 768px) {
+    .verify-body-wrapper{ 
+        padding: 0rem 1rem;
+    }
 }

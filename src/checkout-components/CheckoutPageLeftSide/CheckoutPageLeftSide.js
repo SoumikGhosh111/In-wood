@@ -12,6 +12,10 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
   const cartItems = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
 
+
+  const handleBackEvent = () => { 
+    window.history.back(); 
+  }
   return (
     <div className='check-out-left-side'>
       <h4>CHECKOUT</h4>
@@ -83,6 +87,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
                 Your cart is empty. <br />
                 Select from the menu to start an order.
               </span>
+              <button onClick={handleBackEvent} className='back-tio-menu-btn'>Go to Menu</button>
             </>)}
 
         </div>
@@ -115,6 +120,14 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
               <label htmlFor='mob-num'>Mobile phone number</label><br />
               <input name='mob-num' placeholder='Mobile phone number' required />
             </div>
+          </div>
+          <div className='first-last-name'>
+            <div className='first-name'>
+              <label htmlFor='address'>Address</label><br />
+              <input name='address' placeholder='Address' required />
+            </div>
+
+            
           </div>
           {/* <BasicSwitches />
           <span>By checking the box, you agree to receive occasional automated promotional text messages from Slice at the cell number used when signing up. Consent is not a condition of any purchase. Reply HELP for help and STOP to cancel. Msg frequency varies. Msg & data rates may apply. Privacy & SMS Terms</span> */}

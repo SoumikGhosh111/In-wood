@@ -8,19 +8,24 @@ import zIndex from '@mui/material/styles/zIndex';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import EastRoundedIcon from '@mui/icons-material/EastRounded';
 import SwitchTheme from '../SwitchTheme/SwitchTheme';
- 
-import {useDispatch } from 'react-redux';
+
+import { useDispatch } from 'react-redux';
 import { toggle } from '../../redux/slices/cartShow';
+import { useNavigate } from 'react-router-dom';
+import { getUser } from '../../functions/veifyUser';
 
 
 
-export default function TemporaryDrawer() { 
-    const dispatch = useDispatch(); 
+export default function TemporaryDrawer() {
+    const dispatch = useDispatch();
 
 
 
-    let [isOpen, setOpen] = useState(false);
+    const [isOpen, setOpen] = useState(false);
     const [scroll, setScroll] = useState(0);
+    const [isLogin, setIsLogin] = useState(false);
+
+    const Navigate = useNavigate(); 
 
     useEffect(() => {
         const handleScroll = () => {
@@ -34,9 +39,30 @@ export default function TemporaryDrawer() {
     }, []);
 
 
-    const handleCartClick = () => { 
+    const handleCartClick = () => {
         dispatch(toggle())
     }
+
+    const handleLogout = () => {
+        setIsLogin(false); 
+        localStorage.removeItem("token");
+    }
+
+    const handleLogin = () => { 
+        Navigate("/login")
+    }
+
+    useEffect(() => {
+        const checkUser = async () => {
+            const isValid = await getUser();
+            setIsLogin(isValid);
+
+        };
+        checkUser();
+    }, [localStorage.getItem("token")]);
+
+
+   
     return (
         <div className='drawer-wrapper'>
             {/* <input placeholder='Search' style={{ opacity: scroll > window.innerHeight * 0.5 ? "1" : "0" }} /> */}
@@ -56,7 +82,7 @@ export default function TemporaryDrawer() {
                         {/* <div className='hor-line'>Hello !</div> */}
 
 
-                        <div className='drawer-items' onClick={handleCartClick}> 
+                        <div className='drawer-items' onClick={handleCartClick}>
                             <a >Cart</a>
                             <EastRoundedIcon />
                         </div>
@@ -69,11 +95,18 @@ export default function TemporaryDrawer() {
                         </div>
                         {/* <div className='hor-line'></div> */}
 
+                        {isLogin ?
+                            <div className='drawer-items' onClick={handleLogout}>
+                                <a>Logout</a>
+                                <EastRoundedIcon />
+                            </div>
+                            :
+                            <div className='drawer-items' onClick={handleLogin}>
+                                <a>Login</a>
+                                <EastRoundedIcon />
+                            </div>
+                        }
 
-                        {/* <div className='drawer-items'>
-                            <a>Settings</a>
-                            <EastRoundedIcon />
-                        </div> */}
                         {/* <div className='hor-line'></div> */}
                     </div>
                     <div className='theme-switcher'>

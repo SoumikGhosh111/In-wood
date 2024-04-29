@@ -137,6 +137,19 @@ form{
     
   }
 
+  .forget-page-inputs input { 
+    width: 90%;
+    padding: 10px;
+    border: none;
+    background-color: rgba(176, 175, 175, 0.562); 
+    backdrop-filter: blur(15px);
+    font-size: 16px;
+    outline: none;
+    border-radius: 20px;
+    color: white;
+    backdrop-filter: blur(19px); 
+  }
+
   .form__group input[type="text"] {
     width: 90%;
     padding: 10px;
@@ -193,6 +206,16 @@ form{
     background-color: #de4141;
     border: none;
     color: white;
+}
+
+
+
+.custom-message{ 
+    width: 100%;
+    text-align: center;
+    margin-top: 2rem;
+    color: white;
+    transform: translateX(-2%);
 }
   
 

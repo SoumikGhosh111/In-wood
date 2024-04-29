@@ -58,7 +58,7 @@ function CheckoutPageRightSide() {
       <div className='tax-tip-local'>
       <div className='tax'>
           <span>Sub-total</span>
-          <span>${totalAmnt}</span>
+          <span>${(totalAmnt).toFixed(2)}</span>
         </div>
         <div className='tax'>
           <span>Estimated Tax</span>
@@ -77,19 +77,19 @@ function CheckoutPageRightSide() {
           <span>${tipAmnt}</span>
         </div> */}
         {/* <ul className='worker-tip-amnt-btn'>
-          <li className={active === 0 ? 'active' : ''} onClick={ () => handleActiveClassClick(0)}>
+          <li className={active === 0 ? 'active-tip' : ''} onClick={ () => handleActiveClassClick(0)}>
             None
           </li>
-          <li className={active === 5 ? 'active' : ''} onClick={ () => handleActiveClassClick(5)}> 
+          <li className={active === 5 ? 'active-tip' : ''} onClick={ () => handleActiveClassClick(5)}> 
             5%
           </li >
-          <li className={active === 10 ? 'active' : ''} onClick={ () => handleActiveClassClick(10)}>
+          <li className={active === 10 ? 'active-tip' : ''} onClick={ () => handleActiveClassClick(10)}>
             10%
           </li>
-          <li className={active === 15 ? 'active' : ''} onClick={ () => handleActiveClassClick(15)}>
+          <li className={active === 15 ? 'active-tip' : ''} onClick={ () => handleActiveClassClick(15)}>
             15%
           </li>
-          <li className={active === 4 ? 'active' : ''} onClick={ () => handleActiveClassClick(4)}>
+          <li className={active === 4 ? 'active-tip' : ''} onClick={ () => handleActiveClassClick(4)}>
             Other
           </li>
         </ul> */}

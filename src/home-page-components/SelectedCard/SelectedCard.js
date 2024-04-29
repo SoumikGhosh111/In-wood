@@ -71,13 +71,17 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
             size: sizeChange !== null ? sizeChange : null
         }))
 
-        orderReset()
+        orderReset(); 
 
 
 
         onOrderButtonClick();
     }
 
+    const handleCancelButtonClick = () => { 
+        onCancelButtonClick(); 
+        orderReset(); 
+    }
 
     // resetting the order card
     const orderReset = () => {
@@ -101,7 +105,7 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
                 <div className='selected-card-item'>
                     <div className='selected-card-title'>
                         <h1>{itemData.title}</h1>
-                        <CancelRoundedIcon sx={{ fontSize: "40px", cursor: "pointer" }} onClick={onCancelButtonClick} />
+                        <CancelRoundedIcon sx={{ fontSize: "40px", cursor: "pointer" }} onClick={handleCancelButtonClick} />
                     </div>
                     <div className='selected-card-item-img'>
                         <img src={pizzaImg} />
@@ -160,14 +164,14 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
                     <div className='selected-card-item-place-order'>
 
                         <div className='selected-card-item-place-order-quantity'>
-                            <button onClick={ handleIncrement} className='quantity-part inc-dec-button inc'>+</button>
+                            <button onClick={ handleDecrement} className='quantity-part inc-dec-button inc'>-</button>
                             <span className='quantity-part'>{quantity}</span>
-                            <button onClick={handleDecrement} className='quantity-part inc-dec-button dec'>-</button>
+                            <button onClick={handleIncrement} className='quantity-part inc-dec-button dec'>+</button>
                         </div>
                         <button className='selected-card-item-place-order-button'
                             onClick={() => handleOrderClick()}
                             disabled={calculateTotalAmount() <= 0}
-                        >Add To Order ${calculateTotalAmount()}</button>
+                        >Add To Order ${calculateTotalAmount() * quantity}</button>
                     </div>
                 </div>
             ) : (<>Loading . . .</>)}

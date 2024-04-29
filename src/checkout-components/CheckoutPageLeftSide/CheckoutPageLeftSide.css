@@ -102,3 +102,40 @@
 .your-item-card{ 
     width: 100%;
 }
+
+
+
+
+.back-tio-menu-btn{ 
+    border: none;
+    color: var(--white);
+    background-color: var( --mob-view-pay-button);
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+/* media queries */
+@media screen and (max-width: 768px){
+    .your-items{ 
+        flex-direction: column;
+    }
+    .contact-info-wrapper{ 
+        flex-direction: column;
+    } 
+    .first-last-name{ 
+        flex-direction: column;
+    }
+    .vertical-line{ 
+        width: 100%;
+    }
+
+}

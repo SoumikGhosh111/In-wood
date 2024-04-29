@@ -70,6 +70,7 @@ function Signup() {
                     alert(data.message);
                     from.reset();
                     navigate('/otppage', { state: { email } }); // Pass email as state
+
                 } else {
                     //   toast.error(data.message);
                     alert(data.message)
@@ -82,6 +83,7 @@ function Signup() {
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
+        localStorage.setItem('userEmail', email); 
     };
 
 
@@ -92,7 +94,8 @@ function Signup() {
             <div className='sign-up-body-wrapper'>
                 <div className='formBody'>
                     <div className='form-title'><h1 style={{ fontSize: "9vh" }}>Sign up</h1></div>
-                    <div className='emailTxt' style={{ marginTop: "22px" }}>
+                    <div className='emailTxt' > {/* //style={{ marginTop: "22px" }} */}
+
                         <form className="form mb-5" onSubmit={handleOnSubmit}>
                             <div className="form__group">
                                 <h5>Name</h5>
@@ -116,8 +119,8 @@ function Signup() {
                                 // ref={loginNameRef}
                                 />
                             </div>
-                            <div className='passBox' style={{ display: 'flex', marginTop: "4.5vh" }}>
-                                <div className="form__group2">
+                            <div className='passBox' > {/* style={{ display: 'flex', marginTop: "4.5vh" }} */}
+                                <div className="form__group2 pass-cnfm-pass">
                                     <h5>Password</h5>
                                     <input
                                         type="password"
@@ -127,7 +130,7 @@ function Signup() {
                                     // ref={loginPasswordRef}
                                     />
                                 </div>
-                                <div className="form__group2">
+                                <div className="form__group2 pass-cnfm-pass">
                                     <h5>Confirm Password</h5>
                                     <input
                                         type="password"
