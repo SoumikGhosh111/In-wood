@@ -7,6 +7,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import { getUser } from '../../functions/veifyUser';
 
+import background from "../../assets/abc.jpg";
+import { ToastContainer, toast } from 'react-toastify';
+
 function AddToCart({ onOrderClick }) {
   const Navigate = useNavigate(); 
   const dispatch = useDispatch();
@@ -21,10 +24,14 @@ function AddToCart({ onOrderClick }) {
     const isValid = await getUser(); 
 
     if(!isValid){ 
-      alert("Not logged in, Need to Login")
-      Navigate("/login")
+      // alert("Not logged in, Need to Login"); 
+      toast.error("Not a user need to login"); 
+
+      setTimeout(() => { 
+        Navigate("/login")
+      }, 2000)
     }else if(isValid) { 
-      alert("logged in"); 
+      // alert("logged in"); 
       Navigate("/checkout")
     }
   }
@@ -62,6 +69,7 @@ function AddToCart({ onOrderClick }) {
       <div>Total Amount: ${(totalAmnt).toFixed(2)}</div>
 
       <button className='add-to-cart-button' onClick={handleOrderClick}>PROCEED TO ORDER</button>
+      <ToastContainer />
     </div>
   )
 }

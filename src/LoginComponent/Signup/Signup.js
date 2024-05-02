@@ -66,14 +66,14 @@ function Signup() {
             .then((data) => {
                 if (data.success) {
                     localStorage.setItem('token', data.data.token);
-                    //   toast.success(data.message); // Display toast message
-                    alert(data.message);
+                      toast.success(data.message); // Display toast message
+                    // alert(data.message);
                     from.reset();
                     navigate('/otppage', { state: { email } }); // Pass email as state
 
                 } else {
-                    //   toast.error(data.message);
-                    alert(data.message)
+                      toast.error(data.message);
+                    // alert(data.message)
                 }
             })
             .catch((error) => {
@@ -82,8 +82,11 @@ function Signup() {
     };
 
     const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-        localStorage.setItem('userEmail', email); 
+        const newEmail = e.target.value; 
+
+        setEmail(newEmail);
+        console.log(newEmail); 
+        localStorage.setItem('userEmail', newEmail); 
     };
 
 
@@ -108,14 +111,14 @@ function Signup() {
                             </div>
 
                             <div className="form__group">
-                                <h5>Phone/e-mail</h5>
+                                <h5>E-mail</h5>
                                 <input
                                     type="email"
                                     placeholder=""
                                     required
                                     name="email"
                                     value={email}
-                                    onChange={handleEmailChange}
+                                    onChange={(e) => handleEmailChange(e)}
                                 // ref={loginNameRef}
                                 />
                             </div>

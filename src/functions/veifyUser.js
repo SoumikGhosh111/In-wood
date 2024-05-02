@@ -15,7 +15,7 @@ export const getUser = async () => {
             }
         );
         if (res.data.success) {
-            alert("success"); 
+            // alert("success"); 
             return true;  
         } else {
             localStorage.removeItem('token');

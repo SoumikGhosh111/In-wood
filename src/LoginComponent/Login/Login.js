@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import background from "../../assets/abc.jpg";
 import "./Login.css";
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Login({ onButtonClick }) {
@@ -26,16 +28,16 @@ function Login({ onButtonClick }) {
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
+                    toast.success(data.message)
                     localStorage.setItem("token", data.data.token);
-                    // toast.success(data.message)
-                    alert(data.message)
+                    // alert(data.message)
                     from.reset()
                     navigate('/');
-                    localStorage.setItem('userEmail', email); 
+                    localStorage.setItem('userEmail', email);
                 }
                 else {
-                    // toast.error(data.message)
-                    alert(data.message);
+                    toast.error(data.message)
+                    // alert(data.message);
                 }
             })
             .catch(error => {
@@ -46,6 +48,13 @@ function Login({ onButtonClick }) {
 
     }
 
+    const handleBackToHome = () => {
+
+        window.location.href = '/';
+
+        // Clearing the browser's history
+        window.history.replaceState(null, '', '/');
+    }
 
 
 
@@ -58,7 +67,7 @@ function Login({ onButtonClick }) {
                     <div className='emailTxt'>
                         <form className="form" onSubmit={handleOnSubmit}>
                             <div className="form__group">
-                                <h5>Phone/e-mail</h5>
+                                <h5>E-mail</h5>
                                 <input
                                     type="email"
                                     placeholder=""
@@ -76,10 +85,16 @@ function Login({ onButtonClick }) {
                                     name='password'
                                 // ref={loginPasswordRef}
                                 />
+
                             </div>
                             <div className='frTxt'>
                                 <Link className="small text-muted" to="/forgetpassword" style={{ color: 'white' }}>Forgot password?</Link>
                                 <p className="mb-5 pb-lg-2" style={{ color: 'white' }}>Don't have an account? <Link to={'/register'} style={{ color: '#e60909' }}>Register here</Link></p>
+
+                            </div>
+                            <div className='frTxt' style={{marginTop: "1rem"}}>
+
+                            <Link className="small text-muted" onClick={handleBackToHome} style={{ color: 'white' }}>Back to Home</Link>
 
                             </div>
                             <div className="loginbtn">
@@ -88,7 +103,7 @@ function Login({ onButtonClick }) {
                                 </button>
                             </div>
                         </form>
-
+                        <ToastContainer />
                     </div>
                 </div>
             </div>

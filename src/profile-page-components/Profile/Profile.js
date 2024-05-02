@@ -4,6 +4,9 @@ import background from "../../assets/abc.jpg";
 import { getUser } from '../../functions/veifyUser';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
+import DoneIcon from '@mui/icons-material/Done';
+import PersonIcon from '@mui/icons-material/Person';
 
 
 function Profile() {
@@ -139,38 +142,48 @@ function Profile() {
                     <div className='profile-img'>
                         <img src={profileImg ? profileImg : background} alt="Profile Background" accept='.jpeg, .png, .jpg' />
                     </div>
+                    <button onClick={() => setImageChange(true)} style={{ display: imageChange ? 'none' : 'block' }}>{window.innerWidth > 768 ? "Upload Image" : <><CameraAltOutlinedIcon sx={{ transform: "translate(-50%, -10%)" }} /></>}</button>
+                    <button onClick={() => { setImageChange(false); updateProfilePicture() }} style={{ display: imageChange ? 'block' : 'none' }}>{window.innerWidth > 768 ? "Save Image" : <><DoneIcon sx={{ transform: "translate(-50%, -10%)" }} /></>}</button>
                     {imageChange && (
-                        <input type="file" onChange={(e) => handleImageChange(e)} accept="image/" />
+                        <input className='input-image' type="file" onChange={(e) => handleImageChange(e)} accept="image/" />
                     )}
-                    <button onClick={() => setImageChange(true)} style={{ display: imageChange ? 'none' : 'block' }}>Upload Image</button>
-                    <button onClick={() => { setImageChange(false); updateProfilePicture() }} style={{ display: imageChange ? 'block' : 'none' }}>Save Image</button>
 
                 </div>
                 <div className='profile-page-right'>
                     <div className='profile-page-right-input'>
-                        <span>Name</span>
-                        <input value={userName} onChange={(e) => setUserName(e.target.value)} disabled={!editMode} />
+                        <PersonIcon sx={{transform: "translateY(40%)", fontSize: "30px"}}/>
+                        <div>
+                            <span>Name</span>
+                            <input value={userName} onChange={(e) => setUserName(e.target.value)} disabled={!editMode} />
+                        </div>
+
                     </div>
+                    <div className='profile-page-right-ver-line'></div>
                     <div className='profile-page-right-input'>
                         <span>City</span>
                         <input value={city} onChange={(e) => setCity(e.target.value)} disabled={!editMode} />
                     </div>
+                    <div className='profile-page-right-ver-line'></div>
                     <div className='profile-page-right-input'>
                         <span>State</span>
                         <input value={state} onChange={(e) => setState(e.target.value)} disabled={!editMode} />
                     </div>
+                    <div className='profile-page-right-ver-line'></div>
                     <div className='profile-page-right-input'>
                         <span>Address</span>
                         <input value={street} onChange={(e) => setStreet(e.target.value)} disabled={!editMode} />
                     </div>
+                    <div className='profile-page-right-ver-line'></div>
                     <div className='profile-page-right-input'>
                         <span>Country</span>
                         <input value={country} onChange={(e) => setCountry(e.target.value)} disabled={!editMode} />
                     </div>
+                    <div className='profile-page-right-ver-line'></div>
                     <div className='profile-page-right-input'>
                         <span>Zip Code</span>
                         <input value={zipCode} onChange={(e) => setZipCode(e.target.value)} disabled={!editMode} />
                     </div>
+                    <div className='profile-page-right-ver-line'></div>
 
                     <button onClick={() => setEditMode(true)} style={{ display: editMode ? 'none' : 'block' }}>Edit</button>
                     <button onClick={() => { setEditMode(false); updateUserDetails(); }} style={{ display: editMode ? 'block' : 'none' }}>Save</button>

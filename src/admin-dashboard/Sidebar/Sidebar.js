@@ -18,25 +18,25 @@ function Sidebar({onSideBarItemClicked}) {
           <ul className='sidebar-list'>
               <li className='sidebar-list-item' onClick={() => handleIconCLick(1)}>
                   <a>
-                       Dashboard
+                       Users
                   </a>
               </li>
               <li className='sidebar-list-item' onClick={() => handleIconCLick(2)}>
                   <a>
-                       Products
+                       Orders
                   </a>
               </li>
-              <li className='sidebar-list-item'>
-                  <a href="">
-                      Categories
+              <li className='sidebar-list-item' onClick={() => handleIconCLick(3)}>
+                  <a >
+                      Menu
                   </a>
               </li>
-              <li className='sidebar-list-item'>
-                  <a href="">
-                      Customers
+               <li className='sidebar-list-item' onClick={() => handleIconCLick(4)}>
+                  <a >
+                      Add to Menu
                   </a>
               </li>
-              <li className='sidebar-list-item'>
+              {/*<li className='sidebar-list-item'>
                   <a href="">
                        Inventory
                   </a>
@@ -50,7 +50,7 @@ function Sidebar({onSideBarItemClicked}) {
                   <a href="">
                        Setting
                   </a>
-              </li>
+              </li> */}
           </ul>
       </aside>
     )

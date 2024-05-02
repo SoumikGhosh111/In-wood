@@ -8,6 +8,9 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { getUser } from '../../functions/veifyUser';
 import "./MobAddToCart.css";
 
+import background from "../../assets/abc.jpg";
+import { ToastContainer, toast } from 'react-toastify';
+
 function MobAddToCart({ isClicked }) {
   const cartItems = useSelector((state) => state.cart.cart);
   const totalPrice = cartItems.reduce((total, item) => total + item.qty * item.price, 0);
@@ -47,7 +50,11 @@ function MobAddToCart({ isClicked }) {
     if (isUser) {
       Navigate("/checkout");
     } else {
-      Navigate("/login");
+      toast.error("Not a user need to login"); 
+
+      setTimeout(() => { 
+        Navigate("/login");
+      }, 2000)
     }
   }
   return (
@@ -90,6 +97,7 @@ function MobAddToCart({ isClicked }) {
           </div>
           {/* <SwitchModes /> */}
         </div>
+      <ToastContainer />
       </Drawer>
     </div>
   );

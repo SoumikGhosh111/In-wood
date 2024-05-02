@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "./CheckoutPageLeftSide.css";
 import HomeIcon from '@mui/icons-material/Home';
 import EmojiPeopleRoundedIcon from '@mui/icons-material/EmojiPeopleRounded';
@@ -7,14 +7,88 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { removeFromCart, incrementQty, decrementQty } from '../../redux/slices/cartSlice';
+import { setUserData } from '../../redux/slices/userDataSlice';
+
+
 
 function CheckoutPageLeftSide({ onEdtBtnClick }) {
   const cartItems = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
+  const [userName, setUserName] = useState('');
+  const [userId, setUserId] = useState(''); 
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [country, setCountry] = useState('')
+  const [street, setStreet] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [email, setEmail] = useState(localStorage.getItem("userEmail") || '')
+  const useremail = localStorage.getItem("userEmail");
 
 
-  const handleBackEvent = () => { 
-    window.history.back(); 
+  const handleBackEvent = () => {
+    window.history.back();
+  }
+
+
+  useEffect(() => {
+    getUserDetails();
+  }, [])
+
+  const getUserDetails = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/api/users/userDetails/${useremail}`);
+      const result = await response.json();
+      console.log(result);
+      if (result && result.data && result.data.user) {
+        setUserName(result.data.user.name); 
+        setUserId(result.data.user._id);
+        if (result.data.user.hasOwnProperty("city")) {
+          setCity(result.data.user.city);
+        }
+        if (result.data.user.hasOwnProperty("country")) {
+          setCountry(result.data.user.country);
+        }
+        if (result.data.user.hasOwnProperty("state")) {
+          setState(result.data.user.state);
+        }
+        if (result.data.user.hasOwnProperty("street")) {
+          setStreet(result.data.user.street);
+        }
+        if (result.data.user.hasOwnProperty("zipCode")) {
+          setZipCode(result.data.user.zipCode);
+        }
+      }
+      const userDataObj = { 
+        userId: userId,
+      name: userName, 
+      email: email, 
+      city: city, 
+      stateLocation: state, 
+      country: country, 
+      street: street
+    }
+    dispatch(setUserData(userDataObj));
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+  const handleSaveInfo = () => { 
+    const userDataObj = { 
+      userId: userId,
+      name: userName, 
+      email: email, 
+      city: city, 
+      stateLocation: state, 
+      country: country, 
+      street: street
+    }
+
+    dispatch(setUserData(userDataObj)); 
+
+    console.log("This is checkout user Info", userDataObj); 
   }
   return (
     <div className='check-out-left-side'>
@@ -87,7 +161,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
                 Your cart is empty. <br />
                 Select from the menu to start an order.
               </span>
-              <button onClick={handleBackEvent} className='back-tio-menu-btn'>Go to Menu</button>
+              <button onClick={handleBackEvent} className='back-tio-menu-btn'>Go to Home</button>
             </>)}
 
         </div>
@@ -101,34 +175,38 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
         <div className='contact-input-filed'>
           <div className='first-last-name'>
             <div className='first-name'>
-              <label htmlFor='first-name'>First name</label><br />
-              <input name='first-name' placeholder='First name' required />
+              <label htmlFor='first-name'>Name</label><br />
+              <input name='first-name' value={userName} placeholder='First name' required onChange={(e) => setUserName(e.target.value)} />
             </div>
 
             <div className='last-name'>
-              <label htmlFor='last-name'>Last name</label><br />
-              <input name='last-name' placeholder='Last name' required />
+              <label htmlFor='last-name'>Email Address</label><br />
+              <input name='last-name' value={email} placeholder='Last name' required onChange={(e) => setEmail(e.target.value)} />
             </div>
           </div>
           <div className='first-last-name'>
             <div className='first-name'>
-              <label htmlFor='email-address'>Email address</label><br />
-              <input name='email-address' placeholder='Email address' required />
+              <label htmlFor='email-address'>City</label><br />
+              <input name='email-address' value={city} placeholder='Email address' required onChange={(e) => setCity(e.target.value)} />
             </div>
 
             <div className='last-name'>
-              <label htmlFor='mob-num'>Mobile phone number</label><br />
-              <input name='mob-num' placeholder='Mobile phone number' required />
+              <label htmlFor='mob-num'>State</label><br />
+              <input name='mob-num' value={state} placeholder='Mobile phone number' required onChange={(e) => setState(e.target.value)} />
             </div>
           </div>
           <div className='first-last-name'>
             <div className='first-name'>
-              <label htmlFor='address'>Address</label><br />
-              <input name='address' placeholder='Address' required />
+              <label htmlFor='address'>Country</label><br />
+              <input name='address' value={country} placeholder='Address' required onChange={(e) => setCountry(e.target.value)} />
             </div>
 
-            
+            <div className='last-name'>
+              <label htmlFor='mob-num'>Address</label><br />
+              <input name='mob-num' value={street} placeholder='Mobile phone number' required onChange={(e) => setStreet(e.target.value)} />
+            </div>
           </div>
+          <button className='check-out-page-save-info' onClick={handleSaveInfo}>Save Info</button>
           {/* <BasicSwitches />
           <span>By checking the box, you agree to receive occasional automated promotional text messages from Slice at the cell number used when signing up. Consent is not a condition of any purchase. Reply HELP for help and STOP to cancel. Msg frequency varies. Msg & data rates may apply. Privacy & SMS Terms</span> */}
         </div>
@@ -136,12 +214,12 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
 
       <div className='vertical-line'></div>
 
-      <div className='payment-info'>
+      {/* <div className='payment-info'>
         <h4>PAYMENT</h4>
-      </div>
+      </div> */}
 
 
-      <div className='vertical-line'></div>
+      {/* <div className='vertical-line'></div> */}
 
       {/* <div className='your-items'>
         <h4 className='your-items-title'>YOUR ITEMS</h4>

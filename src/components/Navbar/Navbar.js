@@ -6,15 +6,16 @@ import { Link } from 'react-router-dom';
 import BusinessCenterRoundedIcon from '@mui/icons-material/BusinessCenterRounded';
 import TemporaryDrawer from './Drawer';
 import { getUser } from '../../functions/veifyUser';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'; 
 
 function Navbar() {
     const location = useLocation();
     const [scroll, setScroll] = useState(0);
     const [isMenuActive, setMenuIsActive] = useState(false);
     const [showAvater, setShowAvater] = useState(false);
-    const [showDropdown, setShowDropDown] = useState(false); 
-
+    const [showDropdown, setShowDropDown] = useState(false);
+    const [profilePic, setProfilePic] = useState(null);  
+    const useremail = localStorage.getItem("userEmail");
 
 
     // scroll up-down animations
@@ -91,23 +92,51 @@ function Navbar() {
         const checkUser = async () => {
             const isValid = await getUser();
             setShowAvater(isValid);
-
         };
         checkUser();
-    }, [localStorage.getItem("token")]);
+        fetchUserDetails(); 
+    }, [localStorage.getItem("token"), localStorage.getItem("userEmail")]);
 
 
+
+    const fetchUserDetails = async() => { 
+        try {
+            const response = await fetch(`http://localhost:8000/api/users/userDetails/${useremail}`);
+            const result = await response.json();
+            // console.log(result);
+            // if (result && result.data && result.data.user) {
+                 
+            // }
+            if(result.data.user.profileImg){ 
+                setProfilePic(result.data.user.profileImg); 
+            } 
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     const toggleDropDownMenu = () =>{ 
         setShowDropDown(!showDropdown); 
     }
 
     const handleLogout = () => { 
-        setShowAvater(false);  
+        setShowAvater(false);
+        setShowDropDown(false);   
+        setProfilePic(null)
         localStorage.removeItem("token");
+        localStorage.removeItem("userEmail"); 
     }
 
-    if (location.pathname === '/login' || location.pathname === '/register' || location.pathname === '/otppage' || location.pathname === '/checkout' || location.pathname === '/forgetpassword' || location.pathname === '/checkout' || location.pathname === '/profile' || location.pathname === '/dashboard') {
+    if (location.pathname === '/login' || 
+    location.pathname === '/register' || 
+    location.pathname === '/otppage' || 
+    location.pathname === '/checkout' || 
+    location.pathname === '/forgetpassword' || 
+    location.pathname === '/checkout' || 
+    location.pathname === '/profile' || 
+    location.pathname === '/dashboard' || 
+     location.pathname === '/checkout-success') 
+    {
         return null;
     }; 
 
@@ -126,13 +155,18 @@ function Navbar() {
                     <div className='nav-bar-login-area'>
                         {showAvater ? 
                             <span className='avater'>
+                                {profilePic !== null ? (
+                                    <div className='profile-image-nav-bar' onClick = {toggleDropDownMenu}><img src={profilePic}/></div>
+                                    // <></>
+                                ):(
                                 <AccountCircleIcon sx={{transform: 'translateY(25%)', cursor: "pointer"}}  onClick = {toggleDropDownMenu}/>
+                                )}
                                 {showDropdown && (
                                     <div className="dropdown-content">
                                         {/* <div className='nav-ver-line'></div> */}
-                                        <Link to="/profile" className='nav-links'>My profile</Link>
+                                        <Link to="/profile" className='nav-links' onClick={() => setShowDropDown(false)}>My profile</Link>
                                         {/* <div className='nav-ver-line'></div> */}
-                                        <Link to={"/checkout"} className='nav-links'>My orders</Link>
+                                        <Link to={"/checkout"} className='nav-links' onClick={() => setShowDropDown(false)}>My orders</Link>
                                         {/* <div className='nav-ver-line'></div> */}
                                         <Link onClick={handleLogout} className='nav-links'>Logout</Link>
                                     </div>

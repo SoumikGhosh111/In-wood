@@ -26,16 +26,34 @@
    display: flex;
    justify-content: flex-start;
    align-items: flex-start;
-   flex-direction: column;
-   gap: 0.5rem;
+   /* flex-direction: column; */
+   
+   /* gap: 0.5rem; */
+   /* border: 1px solid transparent;
+   border-bottom-color: black; */
+}
+.profile-page-right-ver-line{ 
+    width: 100%;
+    height: 1px;
+    border: 1px solid transparent;
+    border-bottom-color: black;
+    margin-left: 2.5rem;
+}
+.profile-page-right-input span{ 
+    padding: 0rem 1.5rem;
+    font-size: 15px; 
 }
 .profile-page-right-input input{ 
-    padding: 1rem 1.5rem; 
+    padding: 0.3rem 1.5rem; 
     width: 100%;
     /* text-align: center; */
     border-radius: 10px; 
+    font-size: 18px;
     background-color: transparent;
+    border: none;
 }
+
+
 .profile-page-right button{  
     border: none;
     padding: 1rem 1.5rem;
@@ -95,5 +113,15 @@
     .profile-page-right-input{ 
         width: 100%;
     }
+    .profile-page-left button{ 
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        transform: translate(-150%,-150%);
+    }
+    .input-image{ 
+        transform: translate(10%, -200%);
+    }
+    
     
 }

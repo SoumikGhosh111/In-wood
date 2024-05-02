@@ -13,6 +13,8 @@ import { useDispatch } from 'react-redux';
 import { toggle } from '../../redux/slices/cartShow';
 import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../functions/veifyUser';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -46,12 +48,16 @@ export default function TemporaryDrawer() {
     const handleLogout = () => {
         setIsLogin(false); 
         localStorage.removeItem("token");
+        toast.success("Logged out"); 
     }
 
     const handleLogin = () => { 
         Navigate("/login")
     }
 
+    const handleProfileClick = () => { 
+        Navigate("/profile")
+    }
     useEffect(() => {
         const checkUser = async () => {
             const isValid = await getUser();
@@ -89,7 +95,7 @@ export default function TemporaryDrawer() {
                         {/* <div className='hor-line'></div> */}
 
 
-                        <div className='drawer-items'>
+                        <div className='drawer-items' onClick={handleProfileClick}>
                             <a>Profile</a>
                             <EastRoundedIcon />
                         </div>
@@ -114,6 +120,7 @@ export default function TemporaryDrawer() {
                         <SwitchTheme />
                     </div>
                 </div>
+                <ToastContainer />
             </Drawer>
         </div>
     );

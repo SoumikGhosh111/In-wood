@@ -114,6 +114,15 @@
     border-radius: 5px;
     cursor: pointer;
 }
+.check-out-page-save-info{ 
+    padding: 1rem 0rem;
+    border: none;
+    color: var(--white);
+    background-color: var(--mob-view-pay-button);
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+}
 
 
 
