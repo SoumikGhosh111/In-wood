@@ -13,6 +13,11 @@ import FlagIcon from '@mui/icons-material/Flag';
 import QrCodeIcon from '@mui/icons-material/QrCode';
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 
+// pizza images
+import bottomLeftSlice from "../../assets/bottom_left_slice_1.png";
+import topLeftSlice from "../../assets/top_left_slice_1.png";
+import mainSlice from "../../assets/main_slice_1.png"
+
 function Profile() {
     const [image, setImage] = useState(null);
 
@@ -51,6 +56,7 @@ function Profile() {
         }
 
     };
+    // function to fetch user details
     const getUserDetails = async () => {
         try {
             const response = await fetch(`http://localhost:8000/api/users/userDetails/${useremail}`);
@@ -83,7 +89,7 @@ function Profile() {
             console.log(err);
         }
     };
-
+    // funtion to update profile picture
     const updateProfilePicture = async () => {
         try {
             const imageData = {
@@ -105,6 +111,7 @@ function Profile() {
             console.log(err);
         }
     }
+    // function to update user details
     const updateUserDetails = async () => {
         try {
             const updatedUser = {
@@ -133,9 +140,11 @@ function Profile() {
         }
     };
 
+
     useEffect(() => {
         getUserDetails();
     }, []);
+
     const handleBackToHome = () => {
 
         window.location.href = '/';
@@ -147,75 +156,90 @@ function Profile() {
     return (
         <>
             {/* <h1 className='profile-page-title'>EDIT PROFILE</h1> */}
-                    <button className='go-back-home' onClick={handleBackToHome}><ArrowBackIosRoundedIcon sx={{transform: "translateY(10%)"}}/></button>
-            <div className='profile-page-wrapper'>
-                
+            <div className='profile-pizza-bottom-left  pizza-imgs'>
+                <img src= {bottomLeftSlice}/>
+            </div>
 
-                <div className='profile-page-left'>
-                    <div className='profile-img'>
-                        <img src={profileImg ? profileImg : background} alt="Profile Background" accept='.jpeg, .png, .jpg' />
-                    </div>
-                    <button onClick={() => setImageChange(true)} style={{ display: imageChange ? 'none' : 'block' }}><CameraAltOutlinedIcon sx={{transform: "translateY(10%)"}}/></button>
-                    <button onClick={() => { setImageChange(false); updateProfilePicture() }} style={{ display: imageChange ? 'block' : 'none' }}><DoneIcon sx={{transform: "translateY(10%)"}} /></button>
-                    {imageChange && (
-                        <input className='input-image' type="file" onChange={(e) => handleImageChange(e)} accept="image/" />
-                    )}
-                </div>
-                <div className='profile-page-right'>
-                    <div className='profile-page-right-input'>
-                        <PersonIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem"  }} />
-                        <div>
-                            <span>Name</span>
-                            <input value={userName} onChange={(e) => setUserName(e.target.value)} disabled={!editMode}style={{outline: editMode ? "1px solid black" : "none"}} />
-                        </div>
+            <div className='profile-pizza-top-left  pizza-imgs'>
+                <img src= {topLeftSlice}/>
+            </div>
 
-                    </div>
-                    <div className='profile-page-right-ver-line'></div>
-                    <div className='profile-page-right-input'>
-                        <ApartmentIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem"  }} />
-                        <div>
-                            <span>City</span>
-                            <input value={city} onChange={(e) => setCity(e.target.value)} disabled={!editMode}style={{outline: editMode ? "1px solid black" : "none"}} />
-                        </div>
-                    </div>
-                    <div className='profile-page-right-ver-line'></div>
-                    <div className='profile-page-right-input'>
-                    <ApartmentIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem"  }} />
-                        <div>
-                            <span>State</span>
-                            <input value={state} onChange={(e) => setState(e.target.value)} disabled={!editMode}style={{outline: editMode ? "1px solid black" : "none"}} />
-                        </div>
-                    </div>
-                    <div className='profile-page-right-ver-line'></div>
-                    <div className='profile-page-right-input'>
-                    <RoomIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem"  }} />
-                       <div>
-                       <span>Address</span>
-                        <input value={street} onChange={(e) => setStreet(e.target.value)} disabled={!editMode}style={{outline: editMode ? "1px solid black" : "none"}} />
-                       </div>
-                    </div>
-                    <div className='profile-page-right-ver-line'></div>
-                    <div className='profile-page-right-input'>
-                    <FlagIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem"  }} />
-                        <div>
-                        <span>Country</span>
-                        <input value={country} onChange={(e) => setCountry(e.target.value)} disabled={!editMode}style={{outline: editMode ? "1px solid black" : "none"}} />
-                        </div>
-                    </div>
-                    <div className='profile-page-right-ver-line'></div>
-                    <div className='profile-page-right-input'>
-                    <QrCodeIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem" }} />
-                        <div>
-                        <span>Zip Code</span>
-                        <input value={zipCode} onChange={(e) => setZipCode(e.target.value)} disabled={!editMode} style={{outline: editMode ? "1px solid black" : "none"}}/>
-                        </div>
-                    </div>
-                    <div className='profile-page-right-ver-line'></div>
 
-                    <button onClick={() => setEditMode(true)} style={{ display: editMode ? 'none' : 'block' }}>Edit</button>
-                    <button onClick={() => { setEditMode(false); updateUserDetails(); }} style={{ display: editMode ? 'block' : 'none' }}>Save</button>
+            <div className='profile-pizza-main  pizza-imgs'>
+                <img src= {mainSlice}/>
+            </div>
+            <div className='profile-blur-bg'>
+                <button className='go-back-home' onClick={handleBackToHome}><ArrowBackIosRoundedIcon sx={{ transform: "translateY(10%)" }} /></button>
+                <div className='profile-page-wrapper'>
+
+
+                    <div className='profile-page-left'>
+                        <div className='profile-img'>
+                            <img src={profileImg ? profileImg : background} alt="Profile Background" accept='.jpeg, .png, .jpg' />
+                        </div>
+                        <button onClick={() => setImageChange(true)} style={{ display: imageChange ? 'none' : 'block' }}><CameraAltOutlinedIcon sx={{ transform: "translateY(10%)" }} /></button>
+                        <button onClick={() => { setImageChange(false); updateProfilePicture() }} style={{ display: imageChange ? 'block' : 'none' }}><DoneIcon sx={{ transform: "translateY(10%)" }} /></button>
+                        {imageChange && (
+                            <input className='input-image' type="file" onChange={(e) => handleImageChange(e)} accept="image/" />
+                        )}
+                    </div>
+                    <div className='profile-page-right'>
+                        <div className='profile-page-right-input'>
+                            <PersonIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem" }} />
+                            <div>
+                                <span>Name</span>
+                                <input value={userName} onChange={(e) => setUserName(e.target.value)} disabled={!editMode} style={{ outline: editMode ? "1px solid black" : "none" }} />
+                            </div>
+
+                        </div>
+                        <div className='profile-page-right-ver-line'></div>
+                        <div className='profile-page-right-input'>
+                            <ApartmentIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem" }} />
+                            <div>
+                                <span>City</span>
+                                <input value={city} onChange={(e) => setCity(e.target.value)} disabled={!editMode} style={{ outline: editMode ? "1px solid black" : "none" }} />
+                            </div>
+                        </div>
+                        <div className='profile-page-right-ver-line'></div>
+                        <div className='profile-page-right-input'>
+                            <ApartmentIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem" }} />
+                            <div>
+                                <span>State</span>
+                                <input value={state} onChange={(e) => setState(e.target.value)} disabled={!editMode} style={{ outline: editMode ? "1px solid black" : "none" }} />
+                            </div>
+                        </div>
+                        <div className='profile-page-right-ver-line'></div>
+                        <div className='profile-page-right-input'>
+                            <RoomIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem" }} />
+                            <div>
+                                <span>Address</span>
+                                <input value={street} onChange={(e) => setStreet(e.target.value)} disabled={!editMode} style={{ outline: editMode ? "1px solid black" : "none" }} />
+                            </div>
+                        </div>
+                        <div className='profile-page-right-ver-line'></div>
+                        <div className='profile-page-right-input'>
+                            <FlagIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem" }} />
+                            <div>
+                                <span>Country</span>
+                                <input value={country} onChange={(e) => setCountry(e.target.value)} disabled={!editMode} style={{ outline: editMode ? "1px solid black" : "none" }} />
+                            </div>
+                        </div>
+                        <div className='profile-page-right-ver-line'></div>
+                        <div className='profile-page-right-input'>
+                            <QrCodeIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem" }} />
+                            <div>
+                                <span>Zip Code</span>
+                                <input value={zipCode} onChange={(e) => setZipCode(e.target.value)} disabled={!editMode} style={{ outline: editMode ? "1px solid black" : "none" }} />
+                            </div>
+                        </div>
+                        <div className='profile-page-right-ver-line'></div>
+
+                        <button onClick={() => setEditMode(true)} style={{ display: editMode ? 'none' : 'block' }}>Edit</button>
+                        <button onClick={() => { setEditMode(false); updateUserDetails(); }} style={{ display: editMode ? 'block' : 'none' }}>Save</button>
+                    </div>
                 </div>
             </div>
+
         </>
     )
 }
