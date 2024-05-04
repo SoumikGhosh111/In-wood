@@ -20,7 +20,7 @@ function CheckoutPageRightSide() {
   )
 
   useEffect(() => {
-    const EstimatedTax = ((totalAmnt * 2.9) / 100).toFixed(2);
+    const EstimatedTax = ((totalAmnt * 8.75) / 100).toFixed(2);
     setTax(EstimatedTax)
   }, [totalAmnt])
   const SupportFee = 0.95;

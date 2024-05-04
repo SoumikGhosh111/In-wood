@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import BusinessCenterRoundedIcon from '@mui/icons-material/BusinessCenterRounded';
 import TemporaryDrawer from './Drawer';
 import { getUser } from '../../functions/veifyUser';
+import { verifyAdmin } from '../../functions/verifyAdmin';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'; 
 
 function Navbar() {
@@ -15,7 +16,9 @@ function Navbar() {
     const [showAvater, setShowAvater] = useState(false);
     const [showDropdown, setShowDropDown] = useState(false);
     const [profilePic, setProfilePic] = useState(null);  
+    const [isAdmin, setIsadmin] = useState(false); 
     const useremail = localStorage.getItem("userEmail");
+    const token = localStorage.getItem("token"); 
 
 
     // scroll up-down animations
@@ -92,9 +95,14 @@ function Navbar() {
         const checkUser = async () => {
             const isValid = await getUser();
             setShowAvater(isValid);
+            if(isValid){ 
+
+            }
         };
+        
+        // checkAdmin(); 
         checkUser();
-        fetchUserDetails(); 
+        fetchUserDetails();
     }, [localStorage.getItem("token"), localStorage.getItem("userEmail")]);
 
 
@@ -110,10 +118,17 @@ function Navbar() {
             if(result.data.user.profileImg){ 
                 setProfilePic(result.data.user.profileImg); 
             } 
+            setIsadmin(result.data.user.role === "admin"); 
         } catch (err) {
             console.log(err);
         }
     }
+    // const checkAdmin = async() => { 
+    //     const admin  = await verifyAdmin(); 
+    //     setIsadmin(admin); 
+    // }
+    
+   
 
     const toggleDropDownMenu = () =>{ 
         setShowDropDown(!showDropdown); 
@@ -167,6 +182,7 @@ function Navbar() {
                                         <Link to="/profile" className='nav-links' onClick={() => setShowDropDown(false)}>My profile</Link>
                                         {/* <div className='nav-ver-line'></div> */}
                                         <Link to={"/checkout"} className='nav-links' onClick={() => setShowDropDown(false)}>My orders</Link>
+                                        <Link to={"/dashboard"} className='nav-links' onClick={() => setShowDropDown(false)} style={{display: isAdmin ? "block" : "none"}}>Dashboard</Link>
                                         {/* <div className='nav-ver-line'></div> */}
                                         <Link onClick={handleLogout} className='nav-links'>Logout</Link>
                                     </div>

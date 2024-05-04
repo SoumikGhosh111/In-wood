@@ -171,7 +171,7 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
                         <button className='selected-card-item-place-order-button'
                             onClick={() => handleOrderClick()}
                             disabled={calculateTotalAmount() <= 0}
-                        >Add To Order ${calculateTotalAmount() * quantity}</button>
+                        >Add To Order ${(calculateTotalAmount() * quantity).toFixed(2)}</button>
                     </div>
                 </div>
             ) : (<>Loading . . .</>)}

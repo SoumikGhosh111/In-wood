@@ -34,6 +34,10 @@
   .sidebar-list-item {
     padding: 20px 20px 20px 20px;
     font-size: 18px;
+    /* display: flex;
+    align-items: center;
+    justify-content: flex-start; */
+    margin: 0.5rem 0rem;
   }
   
   .sidebar-list-item:hover {

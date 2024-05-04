@@ -26,8 +26,12 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
 
 
   const handleBackEvent = () => {
-    window.history.back();
+    window.location.href = '/';
+
+        // Clearing the browser's history
+        window.history.replaceState(null, '', '/');
   }
+  
 
 
   useEffect(() => {

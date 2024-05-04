@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import HomePage from './pages/HomePage';
@@ -10,11 +10,12 @@ import ForgetPasswordPage from './pages/ForgetPasswordPage';
 import ProfilePage from './pages/ProfilePage';
 import DashboardPage from './pages/DashboardPage';
 import CheckoutSuccess from './checkout-components/CheckoutSuccess/CheckoutSuccess';
-import PrivateRoute from './protected-routes/PrivateRoutes';
+import { UserProvider } from './functions/useUserContext';
 
 // importing react router dom
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import ProtectedRoute from './protected-routes/PrivateRoutes';
+import AdminRoute from './protected-routes/AdminRoute';
 
 function App() {
 
@@ -23,18 +24,20 @@ function App() {
     <div >
       <Router>
         <Navbar />
-        <Routes>
-          <Route  path='/' element={<HomePage />}/>
-          <Route path='/login' element ={<LoginPage />}/>
-          <Route path='/otppage' element ={<OtpPage />}/>
-          <Route path='/register' element ={<SignupPage />}/>
-          <Route path='/checkout' element ={<ProtectedRoute><CheckOutPage /></ProtectedRoute>}/>
-          <Route path='/profile' element ={<ProfilePage />}/>
-          <Route path='/forgetpassword' element ={<ForgetPasswordPage />}/>
-          <Route path='/dashboard' element ={<DashboardPage />}/>
-          <Route path='/checkout-success' element ={<CheckoutSuccess />}/>
-        </Routes>
-          
+        <UserProvider>
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/otppage' element={<ProtectedRoute><OtpPage /></ProtectedRoute>} />
+            <Route path='/register' element={<SignupPage />} />
+            <Route path='/checkout' element={<ProtectedRoute><CheckOutPage /></ProtectedRoute>} />
+            <Route path='/profile' element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+            <Route path='/forgetpassword' element={<ForgetPasswordPage />} />
+            <Route path='/dashboard' element={<AdminRoute><DashboardPage /></AdminRoute>} />
+            <Route path='/checkout-success' element={<ProtectedRoute><CheckoutSuccess /></ProtectedRoute>} />
+            
+          </Routes>
+        </UserProvider>
       </Router>
     </div>
   );
