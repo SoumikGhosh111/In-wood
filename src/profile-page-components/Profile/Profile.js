@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import "./Profile.css";
-import background from "../../assets/abc.jpg";
+// functions
 import { getUser } from '../../functions/veifyUser';
 import { useLocation } from 'react-router-dom';
+
+// axios
 import axios from 'axios';
+
+// incons
 import CameraAltOutlinedIcon from '@mui/icons-material/CameraAltOutlined';
 import DoneIcon from '@mui/icons-material/Done';
 import PersonIcon from '@mui/icons-material/Person';
@@ -17,6 +21,11 @@ import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import bottomLeftSlice from "../../assets/bottom_left_slice_1.png";
 import topLeftSlice from "../../assets/top_left_slice_1.png";
 import mainSlice from "../../assets/main_slice_1.png"
+import background from "../../assets/abc.jpg";
+
+// toast
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Profile() {
     const [image, setImage] = useState(null);
@@ -135,8 +144,10 @@ function Profile() {
             const result = await response.json();
             console.log(result); // Handle response from the server
             getUserDetails();
+            toast.success("Info Saved successfully");
         } catch (err) {
             console.log(err);
+            toast.error("Something went wrong");
         }
     };
 
@@ -154,19 +165,19 @@ function Profile() {
     }
 
     return (
-        <>
+        <div className='profile-page-container'>
             {/* <h1 className='profile-page-title'>EDIT PROFILE</h1> */}
             <div className='profile-pizza-bottom-left  pizza-imgs'>
-                <img src= {bottomLeftSlice}/>
+                <img src={bottomLeftSlice} />
             </div>
 
             <div className='profile-pizza-top-left  pizza-imgs'>
-                <img src= {topLeftSlice}/>
+                <img src={topLeftSlice} />
             </div>
 
 
             <div className='profile-pizza-main  pizza-imgs'>
-                <img src= {mainSlice}/>
+                <img src={mainSlice} />
             </div>
             <div className='profile-blur-bg'>
                 <button className='go-back-home' onClick={handleBackToHome}><ArrowBackIosRoundedIcon sx={{ transform: "translateY(10%)" }} /></button>
@@ -185,7 +196,7 @@ function Profile() {
                     </div>
                     <div className='profile-page-right'>
                         <div className='profile-page-right-input'>
-                            <PersonIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem" }} />
+                            <PersonIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem", color: "var(--profile-page-icons)" }} />
                             <div>
                                 <span>Name</span>
                                 <input value={userName} onChange={(e) => setUserName(e.target.value)} disabled={!editMode} style={{ outline: editMode ? "1px solid black" : "none" }} />
@@ -194,7 +205,7 @@ function Profile() {
                         </div>
                         <div className='profile-page-right-ver-line'></div>
                         <div className='profile-page-right-input'>
-                            <ApartmentIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem" }} />
+                            <ApartmentIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem", color: "var(--profile-page-icons)" }} />
                             <div>
                                 <span>City</span>
                                 <input value={city} onChange={(e) => setCity(e.target.value)} disabled={!editMode} style={{ outline: editMode ? "1px solid black" : "none" }} />
@@ -202,7 +213,7 @@ function Profile() {
                         </div>
                         <div className='profile-page-right-ver-line'></div>
                         <div className='profile-page-right-input'>
-                            <ApartmentIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem" }} />
+                            <ApartmentIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem", color: "var(--profile-page-icons)" }} />
                             <div>
                                 <span>State</span>
                                 <input value={state} onChange={(e) => setState(e.target.value)} disabled={!editMode} style={{ outline: editMode ? "1px solid black" : "none" }} />
@@ -210,7 +221,7 @@ function Profile() {
                         </div>
                         <div className='profile-page-right-ver-line'></div>
                         <div className='profile-page-right-input'>
-                            <RoomIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem" }} />
+                            <RoomIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem", color: "var(--profile-page-icons)" }} />
                             <div>
                                 <span>Address</span>
                                 <input value={street} onChange={(e) => setStreet(e.target.value)} disabled={!editMode} style={{ outline: editMode ? "1px solid black" : "none" }} />
@@ -218,7 +229,7 @@ function Profile() {
                         </div>
                         <div className='profile-page-right-ver-line'></div>
                         <div className='profile-page-right-input'>
-                            <FlagIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem" }} />
+                            <FlagIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem", color: "var(--profile-page-icons)" }} />
                             <div>
                                 <span>Country</span>
                                 <input value={country} onChange={(e) => setCountry(e.target.value)} disabled={!editMode} style={{ outline: editMode ? "1px solid black" : "none" }} />
@@ -226,7 +237,7 @@ function Profile() {
                         </div>
                         <div className='profile-page-right-ver-line'></div>
                         <div className='profile-page-right-input'>
-                            <QrCodeIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem" }} />
+                            <QrCodeIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem", color: "var(--profile-page-icons)" }} />
                             <div>
                                 <span>Zip Code</span>
                                 <input value={zipCode} onChange={(e) => setZipCode(e.target.value)} disabled={!editMode} style={{ outline: editMode ? "1px solid black" : "none" }} />
@@ -234,13 +245,15 @@ function Profile() {
                         </div>
                         <div className='profile-page-right-ver-line'></div>
 
-                        <button onClick={() => setEditMode(true)} style={{ display: editMode ? 'none' : 'block' }}>Edit</button>
-                        <button onClick={() => { setEditMode(false); updateUserDetails(); }} style={{ display: editMode ? 'block' : 'none' }}>Save</button>
+                        <div className='profile-page-button'>
+                            <button onClick={() => setEditMode(true)} style={{ display: editMode ? 'none' : 'block' }}>Edit</button>
+                            <button onClick={() => { setEditMode(false); updateUserDetails(); }} style={{ display: editMode ? 'block' : 'none' }}>Save</button>
+                        </div>
                     </div>
                 </div>
             </div>
-
-        </>
+            <ToastContainer />
+        </div>
     )
 }
 

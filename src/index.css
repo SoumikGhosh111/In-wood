@@ -34,6 +34,10 @@ body {
   --check-out-page-left-vertical-line: #F5F3F0;
   --worker-tip-amnt-btn: #E6E4E3;  
   --pick-up-insc: rgba(56, 56, 56, 0.49); 
+  --profile-page-icons: #444444; 
+  --profile-page-input-label: #7e7d82; 
+  --profile-page-input: #3b3b3b;  
+  --profile-page-ver-line: #c7c7c7;
 }
 
 
