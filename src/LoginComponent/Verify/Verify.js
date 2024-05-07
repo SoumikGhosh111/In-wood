@@ -15,10 +15,16 @@ function Verify() {
     const [combineOtp, setCombineOTP] = useState('');
     const navigate = useNavigate();
 
+    const token = localStorage.getItem("token"); 
+
     const handleVerifyOTP = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/users/otpVerify', { email, combineOtp });
+            const response = await axios.post('http://localhost:8000/api/users/otpVerify', { email, combineOtp, token }, { 
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}` // Correct syntax for setting Authorization header
+                }
+            });
             if (response.data.success) {
                 toast.success(response.data.message); // Use response.data.message
                 // alert(response.data.message);

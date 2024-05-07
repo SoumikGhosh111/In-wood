@@ -142,18 +142,23 @@ function Navbar() {
         localStorage.removeItem("userEmail"); 
     }
 
-    if (location.pathname === '/login' || 
-    location.pathname === '/register' || 
-    location.pathname === '/otppage' || 
-    location.pathname === '/checkout' || 
-    location.pathname === '/forgetpassword' || 
-    location.pathname === '/checkout' || 
-    location.pathname === '/profile' || 
-    location.pathname === '/dashboard' || 
-     location.pathname === '/checkout-success') 
-    {
-        return null;
-    }; 
+    // if (location.pathname === '/login' || 
+    // location.pathname === '/register' || 
+    // location.pathname === '/otppage' || 
+    // location.pathname === '/checkout' || 
+    // location.pathname === '/forgetpassword' || 
+    // location.pathname === '/checkout' || 
+    // location.pathname === '/profile' || 
+    // location.pathname === '/dashboard' || 
+    //  location.pathname === '/checkout-success' ||
+    // location.pathname === '*' ) 
+    // {
+    //     return null;
+    // }; 
+
+    if(location.pathname !== '/'){ 
+        return null; 
+    }
 
 
 

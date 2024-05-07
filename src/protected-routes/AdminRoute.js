@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useUserContext } from '../functions/useUserContext';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import NotFound from '../components/NotFound/NotFound';
 
 const AdminRoute = ({ children }) => {
     const { user, setUser } = useUserContext();
@@ -53,10 +54,11 @@ const AdminRoute = ({ children }) => {
         return children;
     } else {
         return (
-            <>
-                <h1>Not  a Valid Admin</h1>
-                <button onClick={handleHomeButtonClick}>Go Back to Home</button>
-            </>
+            // <>
+            //     <h1>Not  a Valid Admin</h1>
+            //     <button onClick={handleHomeButtonClick}>Go Back to Home</button>
+            // </>
+            <NotFound />
         ); 
     }
 };

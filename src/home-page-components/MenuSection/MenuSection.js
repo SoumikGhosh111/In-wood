@@ -19,11 +19,14 @@ function MenuSection() {
     const cartItems = useSelector((state) => state.cart.cart);
     // console.log(cartItems, "this is form menu ")
     const [menu, setMenu] = useState(null);
+    const [active, setActive] = useState('all');
     // const [isOpen, setIsOpen] = useState(false);
     const [scope, animate1] = useAnimate();
     const [open, setOpen] = useState(false);
     const [itemData, setItemData] = useState(null);
     console.log(window.innerWidth);
+
+    const [catagoryMenu, setCatagoryMenu] = useState([]); 
 
     const increment = (item) => {
         // setCounts(prevCnt => ({ ...prevCnt, [item]: prevCnt[item] + 1 }));
@@ -56,8 +59,18 @@ function MenuSection() {
             .catch(err => console.log(err));
 
         console.log(menu);
-
+        if(menu !== null) { 
+            const uniqueCategories = [
+                ...new Set(menu.map((food) => food.catagory)),
+              ];
+              console.log(catagoryMenu, "This is catagory"); 
+              setCatagoryMenu(uniqueCategories); 
+        }
+    
     }, []);
+
+    
+
 
     // backdrop open close function
     const handleClose = () => {
@@ -90,10 +103,40 @@ function MenuSection() {
         setOpen(true);
     };
     console.log(itemData)
+
+    const handleActiveClassClick = (indx) => {
+        setActive(indx);
+        if (indx === 4) {
+        //   setTipAmnt(0)
+        } else {
+        //   setTipPercent(indx)
+        }
+    
+      }
+
     return (
         <div className='menu-section-wrapper' ref={scope}>
             <div className='menu-cart'>
                 <span className='title'>Menu</span>
+        <div className='filter-buttons'>
+        <ul className='filter-buttons-ul'>
+          <li className={active === 'all' ? 'active-tip' : ''} onClick={ () => handleActiveClassClick('all')}>
+            All
+          </li>
+          <li className={active === 'Pizza' ? 'active-tip' : ''} onClick={ () => handleActiveClassClick('Pizza')}> 
+            Pizza
+          </li >
+          <li className={active === 'Ice Cream' ? 'active-tip' : ''} onClick={ () => handleActiveClassClick('Ice Cream')}>
+            Ice Cream
+          </li>
+          <li className={active === 'Milk Shake' ? 'active-tip' : ''} onClick={ () => handleActiveClassClick('Milk Shake')}>
+            Milk Shake
+          </li>
+          <li className={active === 'Non Veg Pizza' ? 'active-tip' : ''} onClick={ () => handleActiveClassClick('Non Veg Pizza')}>
+            Non Veg Pizza
+          </li>
+        </ul>
+        </div>
 
                 {menu !== null ? (
                     // menu.map((item) => item.filter(()))

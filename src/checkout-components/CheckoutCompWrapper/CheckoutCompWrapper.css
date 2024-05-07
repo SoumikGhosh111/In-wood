@@ -1,7 +1,7 @@
 .check-out-comp-wrapper{ 
     display: flex;
     flex: 1;
-    height: fit-content; 
+    min-height: 100vh; 
 }
 
 .check-out-page-left{ 

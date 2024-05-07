@@ -5,6 +5,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function CheckoutPageRightSide() {
   const [tax, setTax] = useState(0);
   const [active, setActive] = useState(0);
@@ -55,11 +58,13 @@ function CheckoutPageRightSide() {
 
   const handlePlaceOrderClick = () => {
     if (cartItems.length === 0) {
-      alert("No items in the cart");
+      // alert("No items in the cart");
+      toast.error("No items in the cart")
     }
-    else if (userData.userId === '') {
-      alert("Save the address data");
-    } else if (cartItems.length > 0 && userData.userId !== '') {
+    else if (userData.userId === null && userData.zipCode === null) {
+      // alert("Save the address data");
+      toast.error("Save the address data"); 
+    } else if (cartItems.length > 0 && userData.userId !== null && userData.zipCode !== null) {
       const data = {
         cartItems,
         userData,
@@ -68,10 +73,12 @@ function CheckoutPageRightSide() {
           estimatedTax: tax,
           supportLocalfee: SupportFee,
           total: (parseFloat(totalAmnt) + parseFloat(SupportFee) + parseFloat(tax) + parseFloat(tipAmnt)).toFixed(2)
-        }
+        },
+        // toppings: cartItems.map((item) => item.toppings ?  item.toppings.map((topping) => topping.text) : null) 
       }
       console.log(data)
       const id = userData.userId;
+      
       axios
         .post('http://localhost:8000/api/stripe/create-checkout-session', {
           data: data,
@@ -79,10 +86,16 @@ function CheckoutPageRightSide() {
         })
         .then((response) => {
           if (response.data.url) {
-            window.location.href = response.data.url;
+            toast.success("redirecting to Payment page"); 
+            setTimeout(() => { 
+              window.location.href = response.data.url;
+            }, 2000)
           }
         })
-        .catch((err) => console.log(err.message));
+        .catch((err) => { 
+          console.log(err); 
+          toast.error(err); 
+        })
     }
   }
 
@@ -145,6 +158,7 @@ function CheckoutPageRightSide() {
           <span>${(parseFloat(totalAmnt) + parseFloat(SupportFee) + parseFloat(tax) + parseFloat(tipAmnt)).toFixed(2)}</span>
         </div>
       </div>
+      <ToastContainer />
     </div>
   )
 }

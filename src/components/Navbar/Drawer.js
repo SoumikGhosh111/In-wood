@@ -48,6 +48,7 @@ export default function TemporaryDrawer() {
     const handleLogout = () => {
         setIsLogin(false); 
         localStorage.removeItem("token");
+        localStorage.removeItem("userEmail");
         toast.success("Logged out"); 
     }
 

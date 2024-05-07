@@ -186,11 +186,33 @@
 }
 
 
+.filter-buttons{ 
+    display: flex;
+    justify-content: flex-start;
+}
 
 
+.filter-buttons-ul{ 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    gap: 0.5rem;
+}
 
+.filter-buttons-ul li{ 
+    padding: 0.5rem 1.5rem;
+    /* background-color: red; */
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--white);
+    color: black;
+}
 
-
+.active-tip{ 
+    background-color: var(--menu-order-button) !important;
+    color: black;
+}
 
 
 
@@ -210,6 +232,13 @@
     .menu-cart{ 
         /* margin-bottom: 3rem; */
        
+    }
+    .filter-buttons{ 
+        width: 100%;
+        overflow-x: scroll;
+    }
+    .filter-buttons-ul li { 
+        width: fit-content;
     }
     .menu-section-cards{ 
         width: 100% !important;

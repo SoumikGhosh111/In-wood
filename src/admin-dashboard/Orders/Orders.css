@@ -1,3 +1,70 @@
 .orders-wrapper{
-    background-color: rebeccapurple;
+    /* background-color: rebeccapurple; */
+    color: black;
+    height: 80vh;
 }
+.all-orders{ 
+    height: 100%;
+    
+}
+.order-cart{ 
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: fit-content; 
+    padding: 1rem 1rem;
+    
+    
+}
+
+.order-details{ 
+    text-transform: capitalize;
+}
+.order-name-toppings{ 
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+}
+.customer-details{ 
+    display: flex;
+    
+    flex-direction: column;
+}
+
+.order-payment-stts{ 
+    display: flex;
+    flex-direction: column;
+    text-transform: capitalize;
+}
+.product-toppings{ 
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+.all-orders table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%; 
+    /* width: 100vw; */
+  }
+  .all-orders table tbody{ 
+
+  }
+  .all-orders table td, th {
+    border: 1px solid #dddddd;
+    text-align: top;
+    padding: 8px;
+    color: black;
+    /* display: flex; */
+  }
+  
+  .all-orders table tr:nth-child(even) {
+    background-color: #b9b6b6;
+    color: black;
+    
+  }

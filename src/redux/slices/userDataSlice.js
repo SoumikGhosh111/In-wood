@@ -2,12 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     userId: '', 
-    name: '',
-    email: '',
-    city: '',
-    state: '',
-    country: '',
-    street: ''
+    zipCode: ''
 };
 
 const userDataSlice = createSlice({
@@ -15,16 +10,11 @@ const userDataSlice = createSlice({
   initialState,
   reducers: {
    setUserData: (state, action) => { 
-    const { userId, name, email, city, stateLocation, country, street } = action.payload;
+    const { userId,zipCode } = action.payload;
     return { 
         ...state, 
-        userId: userId || '',
-        name: name || '',
-        email: email || '',
-        city: city || '',
-        stateLocation: stateLocation || '',
-        country: country || '',
-        street: street || ''
+        userId: userId || null,
+        zipCode:zipCode || null
     }
    }
   },

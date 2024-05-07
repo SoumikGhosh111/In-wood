@@ -10,6 +10,7 @@ import ForgetPasswordPage from './pages/ForgetPasswordPage';
 import ProfilePage from './pages/ProfilePage';
 import DashboardPage from './pages/DashboardPage';
 import CheckoutSuccess from './checkout-components/CheckoutSuccess/CheckoutSuccess';
+import NotFound from './components/NotFound/NotFound';
 import { UserProvider } from './functions/useUserContext';
 
 // importing react router dom
@@ -35,6 +36,7 @@ function App() {
             <Route path='/forgetpassword' element={<ForgetPasswordPage />} />
             <Route path='/dashboard' element={<AdminRoute><DashboardPage /></AdminRoute>} />
             <Route path='/checkout-success' element={<ProtectedRoute><CheckoutSuccess /></ProtectedRoute>} />
+            <Route path="*"  element={<NotFound />} />
             
           </Routes>
         </UserProvider>
