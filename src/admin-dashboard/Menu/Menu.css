@@ -1,3 +1,22 @@
 .menu-wrapper{ 
-    background-color: black;
+    /* background-color: black; */
+    color: black;
+}
+
+.menu-table table{ 
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.menu-table table td, th{ 
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+    color: black;
+}
+
+.menu-table table tr:nth-child(even){ 
+    background-color: #e1e1e15c;
+    color: black;
 }

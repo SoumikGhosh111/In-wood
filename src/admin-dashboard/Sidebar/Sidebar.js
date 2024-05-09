@@ -11,7 +11,12 @@ function Sidebar({onSideBarItemClicked}) {
         onSideBarItemClicked(indx); 
         setActiveClass(indx)
     }
+    const handleHomeClick = () => { 
+        window.location.href = '/';
 
+        // Clearing the browser's history
+        window.history.replaceState(null, '', '/');
+    }
     return (
       <aside id="sidebar" className=''>
           <div className='sidebar-title'>
@@ -58,6 +63,8 @@ function Sidebar({onSideBarItemClicked}) {
                   </a>
               </li> */}
           </ul>
+
+          <button className='back-to-home-side-bar' onClick={handleHomeClick}>Back to Home</button>
       </aside>
     )
   }

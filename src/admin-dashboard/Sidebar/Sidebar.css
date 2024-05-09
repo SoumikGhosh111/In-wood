@@ -5,6 +5,7 @@
     overflow-y: auto;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
+    position: relative;
   }
   
   .sidebar-title {
@@ -61,4 +62,19 @@
       on small screens
     */
     z-index: 12 !important;
+  }
+
+
+
+  .back-to-home-side-bar{ 
+    position: absolute;
+    bottom: 5%;
+    left: 33%;
+    transform: translate(-50%);
+    border: none;
+    padding: 1rem 1rem;
+    /* box-sizing: border-box; */
+    font-size: 14px;
+    border-radius: 10px;
+    cursor: pointer;
   }

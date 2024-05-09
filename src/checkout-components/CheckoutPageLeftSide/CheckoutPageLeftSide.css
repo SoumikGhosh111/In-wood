@@ -88,6 +88,10 @@
     align-items: flex-start;
     gap: 2rem;
 }
+.items{ 
+    max-height: 300px;
+    overflow-y: scroll;
+}
 .your-items-title{ 
     min-width: 100px;
 }

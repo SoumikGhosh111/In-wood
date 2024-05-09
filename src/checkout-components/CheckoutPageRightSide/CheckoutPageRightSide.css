@@ -74,8 +74,41 @@
     font-weight: bolder;
 }
 
-
-
+.pop-u-checkout{ 
+    width: 100%;
+    height: fit-content;
+    background-color: var(--check-out-page-left); 
+    padding: 1rem 1rem;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.pop-up-buttons{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    margin: 2rem 0rem;
+}
+.pop-up-buttons button{ 
+    padding: 1rem 1rem;
+    background-color: black;
+    color: white;
+    border: none;
+    /* display: flex;
+    justify-content: flex-end;
+    align-items: center; */
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+}
+.pop-up-text{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 2rem 0rem;
+}
 
 
 
