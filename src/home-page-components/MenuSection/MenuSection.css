@@ -236,9 +236,17 @@
     .filter-buttons{ 
         width: 100%;
         overflow-x: scroll;
+        height: 110px; 
+        overflow-y: hidden;
     }
     .filter-buttons-ul li { 
-        width: fit-content;
+        width: 150px;
+        height: 50px;
+        display: flex;
+        border-radius: 10px;
+        justify-content: center;
+        align-items: center;
+
     }
     .menu-section-cards{ 
         width: 100% !important;

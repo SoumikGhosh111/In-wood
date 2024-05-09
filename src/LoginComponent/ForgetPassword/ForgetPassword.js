@@ -135,7 +135,7 @@ const Forgetpassword = () => {
                             </div> */}
                             <div className="loginbtn">
                                 <button className='loginTxtbtn' style={{ fontWeight: "bold", display: isEmailChecked ? 'block' : 'none' }} onClick={(e) => handleForgotPassword(e)}>
-                                    Handle Otp
+                                   Send Otp
                                 </button>
                                 <button className='loginTxtbtn' style={{ fontWeight: "bold", display: isOtpChecked ? 'block' : 'none' }} onClick={(e) => handleVerifyOTP(e)}>
                                     Verify Otp

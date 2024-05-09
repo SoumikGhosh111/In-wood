@@ -5,7 +5,10 @@ import { redableTimeStamp } from '../../functions/readbleTimeFormat';
 
 function Orders() {
 
-  const [allOrders, setAllOrders] = useState(null)
+  const [allOrders, setAllOrders] = useState(null); 
+  const userEmail = localStorage.getItem("userEmail"); 
+  const token = localStorage.getItem("token"); 
+
   const fetchAllOrders = async () => {
     try {
       // Assuming you have a valid JWT token stored in localStorage
@@ -15,12 +18,12 @@ function Orders() {
         throw new Error('Token not found');
       }
 
-      const response = await fetch('http://localhost:8000/api/stripe/allOrder', {
+      const response = await fetch(`http://localhost:8000/api/stripe/allOrder`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}` // Send the JWT token in the Authorization header
-        }
+        }, 
       });
 
       if (!response.ok) {
@@ -42,6 +45,9 @@ function Orders() {
       // Handle error cases here...
     }
   };
+
+
+ 
 
 if(allOrders!== null){ 
   console.log(allOrders.data.order.reverse(), "this is  reversed data")
@@ -87,7 +93,7 @@ if(allOrders!== null){
                             <span> Qty: {product.quantity}</span>
                             <span >Toppings:
                               <div className='product-toppings'>
-                                <span>Extra cheese</span><span>Extra Peparoni</span>
+                                <span>{product.description}</span>
                               </div>
                             </span>
                           </div>

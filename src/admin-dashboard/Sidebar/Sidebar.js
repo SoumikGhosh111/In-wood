@@ -6,8 +6,10 @@ import RestaurantMenuRoundedIcon from '@mui/icons-material/RestaurantMenuRounded
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
 function Sidebar({onSideBarItemClicked}) {
+    const [activeClass, setActiveClass] = useState(1)
     const handleIconCLick = (indx) => { 
         onSideBarItemClicked(indx); 
+        setActiveClass(indx)
     }
 
     return (
@@ -20,22 +22,22 @@ function Sidebar({onSideBarItemClicked}) {
           </div>
   
           <ul className='sidebar-list'>
-              <li className='sidebar-list-item' onClick={() => handleIconCLick(1)}>
+              <li className= {activeClass === 1 ? 'active-sidebar sidebar-list-item' : 'sidebar-list-item'} onClick={() => handleIconCLick(1)}>
                   <a>
                         <SupervisedUserCircleIcon  sx={{transform: "translateY(20%)", marginRight: "1rem"}}/>   Users
                   </a>
               </li>
-              <li className='sidebar-list-item' onClick={() => handleIconCLick(2)}>
+              <li className= {activeClass === 2 ? 'active-sidebar sidebar-list-item' : 'sidebar-list-item'} onClick={() => handleIconCLick(2)}>
                   <a>
                         <BorderColorRoundedIcon  sx={{transform: "translateY(20%)", marginRight: "1rem"}}/>   Orders
                   </a>
               </li>
-              <li className='sidebar-list-item' onClick={() => handleIconCLick(3)}>
+              <li className= {activeClass === 3 ? 'active-sidebar sidebar-list-item' : 'sidebar-list-item'} onClick={() => handleIconCLick(3)}>
                   <a >
                         <RestaurantMenuRoundedIcon  sx={{transform: "translateY(20%)", marginRight: "1rem"}}/>      Menu
                   </a>
               </li>
-               <li className='sidebar-list-item' onClick={() => handleIconCLick(4)}>
+               <li className= {activeClass === 4 ? 'active-sidebar sidebar-list-item' : 'sidebar-list-item'} onClick={() => handleIconCLick(4)}>
                   <a >
                         <AddRoundedIcon  sx={{transform: "translateY(20%)", marginRight: "1rem"}}/>  Add to Menu
                   </a>

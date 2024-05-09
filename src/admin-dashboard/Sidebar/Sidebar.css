@@ -44,7 +44,9 @@
     background-color: rgba(255, 255, 255, 0.2);
     cursor: pointer;
   }
-  
+  .active-sidebar{ 
+    background-color: rgba(255, 255, 255, 0.2);
+  }
   .sidebar-list-item > a {
     text-decoration: none;
     color: #9e9ea4;

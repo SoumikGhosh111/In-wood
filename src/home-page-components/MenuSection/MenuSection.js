@@ -26,7 +26,7 @@ function MenuSection() {
     const [itemData, setItemData] = useState(null);
     console.log(window.innerWidth);
 
-    const [catagoryMenu, setCatagoryMenu] = useState([]); 
+    const [catagoryMenu, setCatagoryMenu] = useState([]);
 
     const increment = (item) => {
         // setCounts(prevCnt => ({ ...prevCnt, [item]: prevCnt[item] + 1 }));
@@ -59,17 +59,17 @@ function MenuSection() {
             .catch(err => console.log(err));
 
         console.log(menu);
-        if(menu !== null) { 
+        if (menu !== null) {
             const uniqueCategories = [
                 ...new Set(menu.map((food) => food.catagory)),
-              ];
-              console.log(catagoryMenu, "This is catagory"); 
-              setCatagoryMenu(uniqueCategories); 
+            ];
+            console.log(catagoryMenu, "This is catagory");
+            setCatagoryMenu(uniqueCategories);
         }
-    
+
     }, []);
 
-    
+
 
 
     // backdrop open close function
@@ -107,43 +107,43 @@ function MenuSection() {
     const handleActiveClassClick = (indx) => {
         setActive(indx);
         if (indx === 4) {
-        //   setTipAmnt(0)
+            //   setTipAmnt(0)
         } else {
-        //   setTipPercent(indx)
+            //   setTipPercent(indx)
         }
-    
-      }
+
+    }
 
     return (
         <div className='menu-section-wrapper' ref={scope}>
             <div className='menu-cart'>
                 <span className='title'>Menu</span>
-        <div className='filter-buttons'>
-        <ul className='filter-buttons-ul'>
-          <li className={active === 'all' ? 'active-tip' : ''} onClick={ () => handleActiveClassClick('all')}>
-            All
-          </li>
-          <li className={active === 'Pizza' ? 'active-tip' : ''} onClick={ () => handleActiveClassClick('Pizza')}> 
-            Pizza
-          </li >
-          <li className={active === 'Ice Cream' ? 'active-tip' : ''} onClick={ () => handleActiveClassClick('Ice Cream')}>
-            Ice Cream
-          </li>
-          <li className={active === 'Milk Shake' ? 'active-tip' : ''} onClick={ () => handleActiveClassClick('Milk Shake')}>
-            Milk Shake
-          </li>
-          <li className={active === 'Non Veg Pizza' ? 'active-tip' : ''} onClick={ () => handleActiveClassClick('Non Veg Pizza')}>
-            Non Veg Pizza
-          </li>
-        </ul>
-        </div>
+                <div className='filter-buttons'>
+                    <ul className='filter-buttons-ul'>
+                        <li className={active === 'all' ? 'active-tip' : ''} onClick={() => handleActiveClassClick('all')}>
+                            All
+                        </li>
+                        <li className={active === 'Pizza' ? 'active-tip' : ''} onClick={() => handleActiveClassClick('Pizza')}>
+                            Pizza
+                        </li >
+                        <li className={active === 'Ice Cream' ? 'active-tip' : ''} onClick={() => handleActiveClassClick('Ice Cream')}>
+                            Ice Cream
+                        </li>
+                        <li className={active === 'Milk Shake' ? 'active-tip' : ''} onClick={() => handleActiveClassClick('Milk Shake')}>
+                            Milk Shake
+                        </li>
+                        <li className={active === 'Non Veg Pizza' ? 'active-tip' : ''} onClick={() => handleActiveClassClick('Non Veg Pizza')}>
+                            Non Veg Pizza
+                        </li>
+                    </ul>
+                </div>
 
                 {menu !== null ? (
                     // menu.map((item) => item.filter(()))
 
                     <div className='menu-section-cards' id='cards' >
                         {menu.map((item, indx) => (
-                            <>  
+                            <>
 
                                 <div className='menu-section-card-item' >
                                     <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
@@ -170,8 +170,8 @@ function MenuSection() {
                                         </button>
                                     </div>
                                 </div>
-  
-                                
+
+
                             </>
 
                         ))}
@@ -198,13 +198,13 @@ function MenuSection() {
                 </div>
             </div>
         </div>
-            )
+    )
 }
 
-            export default MenuSection;
+export default MenuSection;
 
 
-            {/* <button className='quantity-buttons-minus quantity-buttons-item' onClick={() => dispatch(decrementQty({id: item._id}))}>-</button>
+{/* <button className='quantity-buttons-minus quantity-buttons-item' onClick={() => dispatch(decrementQty({id: item._id}))}>-</button>
                                             <div className='hor-line'></div>
                                             <span className='quantity-buttons-item quantity'>
                                                {cartItems.filter((cartItem) => item._id === cartItem.id).qty}
@@ -213,7 +213,7 @@ function MenuSection() {
                                             <button className='quantity-buttons-plus quantity-buttons-item' onClick={() => dispatch(addToCart({id: item._id, name: item.title, price: item.prices[item.prices.length - 1],  qty: 1}))}>+</button> */}
 
 
-            {/* <div className='menu-section-card-item'>
+{/* <div className='menu-section-card-item'>
                         <div className='item-img'>
                             <img src={pizza3} />
                         </div>
