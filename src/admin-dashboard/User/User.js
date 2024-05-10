@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import "./User.css"
+import "./User.css"; 
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 
 function User() {
   const [users, setUsers] = useState(null);
+  
   useEffect(() => {
     fetch("http://localhost:8000/admin/alluser")
       .then(res => res.json())
@@ -31,7 +33,9 @@ function User() {
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>{item.role}</td>
-                <td><button>Delete User</button></td>
+                <td>
+                  <DeleteRoundedIcon sx={{cursor: 'pointer'}} onClick= {() => console.log("hello")}/>
+                </td>
               </tr>
             ))}
           </>) : (<>Loading. . . </>)}

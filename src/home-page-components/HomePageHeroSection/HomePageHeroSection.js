@@ -22,7 +22,7 @@ function HomePageHeroSection() {
     const [scope, animate] = useAnimate();
     const handleClick = () => {
         // window.location.href = '#menu'
-        const scrollPosition = window.innerHeight * 1.1; // 110% of the viewport height
+        const scrollPosition = window.innerHeight * 1; // 100% of the viewport height
 
         // Scroll to the calculated position
         window.scrollTo({

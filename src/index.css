@@ -38,6 +38,7 @@ body {
   --profile-page-input-label: #7e7d82; 
   --profile-page-input: #3b3b3b;  
   --profile-page-ver-line: #c7c7c7;
+  --transparent-bg-color: rgba(253, 253, 253, 0.199); 
 }
 
 

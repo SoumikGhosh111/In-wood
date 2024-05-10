@@ -19,7 +19,7 @@ function MenuSection() {
     const cartItems = useSelector((state) => state.cart.cart);
     // console.log(cartItems, "this is form menu ")
     const [menu, setMenu] = useState(null);
-    const [active, setActive] = useState('all');
+    const [active, setActive] = useState('All');
     // const [isOpen, setIsOpen] = useState(false);
     const [scope, animate1] = useAnimate();
     const [open, setOpen] = useState(false);
@@ -53,7 +53,7 @@ function MenuSection() {
 
     // fetching the data
     useEffect(() => {
-        fetch("http://localhost:8000/api/product/getAllFood")
+        fetch(`http://localhost:8000/api/product/getAllFood/${active}`)
             .then(res => res.json())
             .then(data => setMenu(data.data.food))
             .catch(err => console.log(err));
@@ -67,7 +67,7 @@ function MenuSection() {
             setCatagoryMenu(uniqueCategories);
         }
 
-    }, []);
+    }, [active]);
 
 
 
@@ -78,7 +78,7 @@ function MenuSection() {
     };
     const goTocart = () => {
         setOpen(false);
-        if (window.innerWidth < 768) {
+        if (window.innerWidth < 993) {
             animate1("#order-cart-mob", { pointerEvents: "all", opacity: 1 }, { duration: 1 });
         }
         console.log("I am Goto Cart");
@@ -120,7 +120,7 @@ function MenuSection() {
                 <span className='title'>Menu</span>
                 <div className='filter-buttons'>
                     <ul className='filter-buttons-ul'>
-                        <li className={active === 'all' ? 'active-tip' : ''} onClick={() => handleActiveClassClick('all')}>
+                        <li className={active === 'All' ? 'active-tip' : ''} onClick={() => handleActiveClassClick('All')}>
                             All
                         </li>
                         <li className={active === 'Pizza' ? 'active-tip' : ''} onClick={() => handleActiveClassClick('Pizza')}>

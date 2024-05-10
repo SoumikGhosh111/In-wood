@@ -1,6 +1,7 @@
 .menu-section-wrapper{ 
     width: 100vw;
-    height: 130vh;
+    height: 101vh;
+    /* height: 130vh;  */
    
     /* align-items: center; */
     -webkit-backdrop-filter: blur(10px);
@@ -40,6 +41,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: 1rem;
+    padding: 1rem 0rem;
 
 }
 .menu-section-card-item{ 
@@ -54,7 +56,7 @@
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-    margin: 1rem 0rem;
+    /* margin: 1rem 0rem; */
     padding: 2rem 2rem;
 
 }
@@ -221,6 +223,65 @@
 
 
 /* media queries */
+
+@media screen and (max-width: 1100px){ 
+    .menu-section-card-item{ 
+        width: 160px;
+        min-height: 250px;
+        padding: 0.5rem 0.5rem;
+        border-radius: 10px;
+    }
+    .item-desc{ 
+        /* font-size: 5px ; */
+        line-height: 10px;
+        display: none; 
+    }
+    .size-param{ 
+        width: 76px;
+        height: 20px;
+    }
+    .toppings, .size{ 
+        font-size: 10px;
+    }
+    .item-name{ 
+        font-size: 11px;
+
+    }
+    .quantity-buttons-minus{ 
+        font-size: 16px;
+    }
+    .quantity-buttons-plus{ 
+        font-size: 16px;
+    }
+    .quantity-buttons-item{ 
+        font-size: 20px;
+    }
+    .quantity-buttons-wrapper{ 
+        height: 30.3px;
+        margin-top:0.5rem ;
+    }
+    .quantity-buttons{ 
+        width: 91.89px;
+        border-radius: 14px;
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 993px){ 
+    .cart{ 
+        display: none;
+    }
+    .mob-view-cart{ 
+        display: block;
+        opacity: 0;
+        pointer-events: none; 
+    }
+    .menu-section-wrapper{ 
+        flex-direction: column;
+    }
+}
+
+
 @media screen and (max-width: 768px){ 
     .menu-section-wrapper{ 
         height: 100vh;
@@ -312,4 +373,47 @@
     }
 
    
+}
+
+@media screen and (max-width: 362px){ 
+    .menu-section-card-item{ 
+        width: 130px;
+        min-height: 250px;
+        padding: 0.5rem 0.5rem;
+        border-radius: 10px;
+    }
+    .item-desc{ 
+        /* font-size: 5px ; */
+        line-height: 10px;
+        display: none; 
+    }
+    .size-param{ 
+        width: 66px;
+        height: 20px;
+    }
+    .toppings, .size{ 
+        font-size: 10px;
+    }
+    .item-name{ 
+        font-size: 11px;
+
+    }
+    .quantity-buttons-minus{ 
+        font-size: 16px;
+    }
+    .quantity-buttons-plus{ 
+        font-size: 16px;
+    }
+    .quantity-buttons-item{ 
+        font-size: 20px;
+    }
+    .quantity-buttons-wrapper{ 
+        height: 30.3px;
+        margin-top:0.5rem ;
+    }
+    .quantity-buttons{ 
+        width: 81.89px;
+        border-radius: 14px;
+        font-size: 13px;
+    }
 }

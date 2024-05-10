@@ -6,7 +6,7 @@ function Menu() {
   const [menu, setMenu] = useState(null)
 
   const fetchMenu = async() => { 
-    const res = await fetch("http://localhost:8000/api/product/getAllFood"); 
+    const res = await fetch("http://localhost:8000/api/product/getAllFood/All"); 
     const result = await res.json(); 
     setMenu(result.data.food)
     

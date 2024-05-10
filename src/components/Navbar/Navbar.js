@@ -186,7 +186,7 @@ function Navbar() {
                                         {/* <div className='nav-ver-line'></div> */}
                                         <Link to="/profile" className='nav-links' onClick={() => setShowDropDown(false)}>My profile</Link>
                                         {/* <div className='nav-ver-line'></div> */}
-                                        <Link to={"/checkout"} className='nav-links' onClick={() => setShowDropDown(false)}>My orders</Link>
+                                        <Link to={"/my-order"} className='nav-links' onClick={() => setShowDropDown(false)}>My orders</Link>
                                         <Link to={"/dashboard"} className='nav-links' onClick={() => setShowDropDown(false)} style={{display: isAdmin ? "block" : "none"}}>Dashboard</Link>
                                         {/* <div className='nav-ver-line'></div> */}
                                         <Link onClick={handleLogout} className='nav-links'>Logout</Link>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./Orders.css";
+import axios from "axios"; 
 
 import { redableTimeStamp } from '../../functions/readbleTimeFormat';
 
@@ -8,6 +9,14 @@ function Orders() {
   const [allOrders, setAllOrders] = useState(null);
   const userEmail = localStorage.getItem("userEmail");
   const token = localStorage.getItem("token");
+  const [status, setStatus] = useState([
+    "Pending",
+    "Processing",
+    "Shipped",
+    "deliverd",
+    "cancel",
+  ]);
+  const [changeStatus, setCHangeStatus] = useState("");
 
   const fetchAllOrders = async () => {
     try {
@@ -32,11 +41,6 @@ function Orders() {
       }
 
       const orders = await response.json();
-      // console.log(orders.data.order);
-      // if (allOrders && allOrders.data && allOrders.data.order) {
-      // const reversedOrders = [...orders.data.order].reverse();
-      // setAllOrders({ ...allOrders, data: { ...allOrders.data, order: reversedOrders } });
-      // }
       setAllOrders(orders);
       // Handle the orders data here...
 
@@ -50,18 +54,28 @@ function Orders() {
 
 
   if (allOrders !== null) {
-    console.log(allOrders.data.order.reverse(), "this is  reversed data")
+    console.log(allOrders.data.order, "this is  reversed data")
   }
   useEffect(() => {
     fetchAllOrders();
   }, []);
 
-
-
-
-  const reverseOrders = () => {
-
+  const handleChange = async (orderId, value) => {
+    console.log(orderId); 
+    console.log(value); 
+    try {
+      const { data } = await axios.put(`http://localhost:8000/admin/order-status/${orderId}`, {
+        delivery_status: value,
+      });
+      fetchAllOrders();
+      console.log(data) 
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+
+  
   return (
     <>
       <div className='orders-wrapper'>
@@ -110,6 +124,7 @@ function Orders() {
                                   <td>
                                     {product.description}
                                   </td>
+                                  
                                 </tr>
                               ))}
                             </tbody>
@@ -129,6 +144,8 @@ function Orders() {
                           <span><span className='customer-details-title'>Line1:</span> {item.shipping.address.line1}</span>
                           <span><span className='customer-details-title'>Line2:</span> {item.shipping.address.line2}</span>
                           <span><span className='customer-details-title'>Postal Code:</span> {item.shipping.address.postal_code}</span>
+                          <span><span className='customer-details-title'>Order_Id:</span> {item._id}</span>
+                          <span><span className='customer-details-title'>User_Id:</span> {item.userId}</span>
 
                         </div>
                       </td>
@@ -138,12 +155,21 @@ function Orders() {
                         <div className='order-payment-stts'>
                           <span><span className='customer-details-title'>Payment:</span> {item.payment_status}</span>
                           <span><span className='customer-details-title'>Delivery Status</span></span>
-                          <select>
-                            <option>{item.delivery_status}</option>
+                          <select
+                            bordered={false}
+                            onChange={(e) => handleChange(item._id, e.target.value)}
+                            defaultValue={item?.delivery_status}
+                          >
+                            {/* <option>{item.delivery_status}</option>
                             <option>Order Preparing</option>
                             <option>Order Prepared</option>
                             <option>Out For Delivery</option>
-                            <option>Delivered</option>
+                            <option>Delivered</option> */}
+                            {status.map((s, i) => (
+                            <option key={i} value={s}>
+                              {s}
+                            </option>
+                          ))}
 
                           </select>
                         </div>

@@ -12,6 +12,7 @@ import DashboardPage from './pages/DashboardPage';
 import CheckoutSuccess from './checkout-components/CheckoutSuccess/CheckoutSuccess';
 import NotFound from './components/NotFound/NotFound';
 import { UserProvider } from './functions/useUserContext';
+import MyOrderPage from './pages/MyOrderPage';
 
 // importing react router dom
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
@@ -36,6 +37,7 @@ function App() {
             <Route path='/forgetpassword' element={<ForgetPasswordPage />} />
             <Route path='/dashboard' element={<AdminRoute><DashboardPage /></AdminRoute>} />
             <Route path='/checkout-success' element={<ProtectedRoute><CheckoutSuccess /></ProtectedRoute>} />
+            <Route path='my-order' element={<ProtectedRoute><MyOrderPage /></ProtectedRoute>} />
             <Route path="*"  element={<NotFound />} />
             
           </Routes>

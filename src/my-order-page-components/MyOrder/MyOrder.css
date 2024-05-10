@@ -1,0 +1,120 @@
+.my-order-wrapper{ 
+    width: 100vw; 
+    height: 100vh;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+.my-orders{ 
+    width: 100%;
+    height: 100%;
+    padding: 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: black;
+    overflow-y: scroll;
+}
+.my-order-order{ 
+    width: 28%; 
+    background-color: var(--menu-page-color);
+    padding: 0.3rem 0rem;
+    border-radius: 10px;
+  
+    
+}
+
+.order-items-cont{ 
+    width: 100%;
+    height: fit-content;
+}
+.item-img-my-order { 
+    width: 150px;
+    height: 150px;
+    background-color: var(--check-out-page-right);
+    border-radius: 10px;
+}
+img{ 
+    width: 100%;
+    height: 100%;
+}
+.product-name-my-order{ 
+    /* padding: 1rem 1rem; */
+    
+    width: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    /* background-color: var(--check-out-page-right); */
+    color: black;
+    border-radius: 10px;
+}
+.product-qty{ 
+    /* height: 150px; */
+    width: fit-content;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.product-qty-item-div{ 
+    /* padding: 1rem 1rem; */
+   /* background-color: var(--check-out-page-right); */
+   color: black;
+    border-radius: 10px;
+}
+.order-items-my-order{ 
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 1rem;
+    margin: 0.5rem 0rem;
+    height: fit-content;
+    /* flex-wrap: wrap; */
+}
+.ver-line-my-order{ 
+    width: 100%;
+    height: 1px ;
+    border-bottom: 1px solid var(--profile-page-ver-line);
+}
+.product-name-topping{ 
+    /* width: 50%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    flex-direction: column;
+    gap: 0.5rem;
+    border: 1px solid red;
+}
+.product-name-topping-items{ 
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.delivery_status{ 
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid red; */
+    margin: 0.5rem 0rem;
+}
+
+.status-myorder{ 
+    width: 90%; 
+    padding: 1rem 2rem;
+    background-color: var(--check-out-page-right);
+    color: black;
+    border-radius: 10px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+
+
+
+@media screen and (max-width: 993px){ 
+    .my-order-order{ 
+        width: 100%;
+    }
+}
