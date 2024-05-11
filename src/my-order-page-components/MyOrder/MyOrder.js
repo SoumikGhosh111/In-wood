@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import background from "../../assets/abc.jpg";
 import "./MyOrder.css"
 import staticImg from "../../assets/pizza_1.png";
+import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 
 function MyOrder() {
     // const [userId, setUserId] = useState(null);
@@ -34,9 +35,16 @@ function MyOrder() {
     useEffect(() => {
         getUserDetails();
     }, []);
+    const handleBackToHome = () => {
+
+        window.location.href = '/';
+
+        // Clearing the browser's history
+        window.history.replaceState(null, '', '/');
+    }
     return (
         <div className='my-order-wrapper' >
-
+            <button className='back-to-home-my-order' onClick={handleBackToHome}><ArrowBackIosRoundedIcon sx={{ transform: "translateY(10%)" }} /></button>
             <div className='my-orders'>
                 {orderDetails !== null ?
                     (<>

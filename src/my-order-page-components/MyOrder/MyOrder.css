@@ -109,7 +109,15 @@ img{
     text-align: center;
     text-transform: capitalize;
 }
-
+.back-to-home-my-order{ 
+    margin: 1rem 1rem;
+    padding: 0.3rem 1rem;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+    background-color: var(--menu-page-color);
+    border-radius: 10px;
+}
 
 
 
