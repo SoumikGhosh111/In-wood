@@ -95,6 +95,20 @@
 }
 
 
+/* .input input[type="radio"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #000; 
+    outline: none;
+    margin-right: 10px;
+  }
+  .input input[type="radio"]:checked {
+    background-color: #000; 
+  } */
+  
+
 
 /* media queries */
 @media screen and (max-width: 768px){ 

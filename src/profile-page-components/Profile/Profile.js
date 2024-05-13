@@ -184,7 +184,7 @@ function Profile() {
                 <div className='profile-page-wrapper'>
 
 
-                    <div className='profile-page-left'>
+                    {/* <div className='profile-page-left'>
                         <div className='profile-img'>
                             <img src={profileImg ? profileImg : background} alt="Profile Background" accept='.jpeg, .png, .jpg' />
                         </div>
@@ -193,7 +193,7 @@ function Profile() {
                         {imageChange && (
                             <input className='input-image' type="file" onChange={(e) => handleImageChange(e)} accept="image/" />
                         )}
-                    </div>
+                    </div> */}
                     <div className='profile-page-right'>
                         <div className='profile-page-right-input'>
                             <PersonIcon sx={{ transform: "translateY(40%)", fontSize: "30px", marginLeft: "1rem", color: "var(--profile-page-icons)" }} />

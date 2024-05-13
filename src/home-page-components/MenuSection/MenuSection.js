@@ -235,7 +235,7 @@ function MenuSection() {
                 </Backdrop>
 
             </div> */}
-            
+
 
             <div className='menu-cart'>
                 <span className='title'>Pizza</span>
@@ -245,23 +245,26 @@ function MenuSection() {
                     // menu.map((item) => item.filter(()))
 
                     <div className='menu-section-cards' id='cards' >
-                        {pizza.map((item, indx) => (
+                        {pizza?.map((item, indx) => (
                             <>
 
                                 <div className='menu-section-card-item' >
                                     <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
                                         <div className='item-img'>
-                                            <img src={pizza1} />
+                                            <img src={item.img == '' ? pizza1 : item.img} />
                                         </div>
 
                                         <span className='item-name'>{item.title}</span>
-                                        <p className='item-desc'>{item.desc}</p>
+                                        {/* <div className='item-desc-'> */}
+                                            <p className='item-desc'>{item.desc}</p>
+                                        {/* </div> */}
                                         <div className='size'>
                                             <div className='price'>
                                                 ${item.prices[item.prices.length - 1]}
                                             </div>
                                             <div className='size-param'>
-                                                {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"}
+                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
+                                                {item.productType ? item.productType : "Large"}
                                             </div>
                                         </div>
                                     </div>
@@ -288,7 +291,7 @@ function MenuSection() {
                     // menu.map((item) => item.filter(()))
 
                     <div className='menu-section-cards' id='cards' >
-                        {iceCream.map((item, indx) => (
+                        {iceCream?.map((item, indx) => (
                             <>
 
                                 <div className='menu-section-card-item' >
@@ -304,7 +307,8 @@ function MenuSection() {
                                                 ${item.prices[item.prices.length - 1]}
                                             </div>
                                             <div className='size-param'>
-                                                {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"}
+                                                {item.prices?.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"}
+                                                {/* {item.catagory} */}
                                             </div>
                                         </div>
                                     </div>
@@ -349,6 +353,7 @@ function MenuSection() {
                                             </div>
                                             <div className='size-param'>
                                                 {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"}
+                                                {/* {item.catagory} */}
                                             </div>
                                         </div>
                                     </div>
@@ -393,6 +398,7 @@ function MenuSection() {
                                             </div>
                                             <div className='size-param'>
                                                 {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"}
+                                                {/* {item.catagory} */}
                                             </div>
                                         </div>
                                     </div>

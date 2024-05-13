@@ -108,25 +108,34 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
                         <CancelRoundedIcon sx={{ fontSize: "40px", cursor: "pointer" }} onClick={handleCancelButtonClick} />
                     </div>
                     <div className='selected-card-item-img'>
-                        <img src={pizzaImg} />
+                        <img src={itemData.img === '' ? pizzaImg : itemData.img} />
+                        {/* <img src={itemData.img}/> */}
                     </div>
                     <div className='selected-card-item-body'>
                         <h3>Choose an Option</h3>
                         <div className='size-options'>
                             <div className='input'>
-                                <input type='radio' name='size-options' onChange={() => handleSizeChange("small")} checked={sizeChange === "small"} />
-                                <label htmlFor='size-options'>Small</label>
+                                <input type='radio' name='size-options' onChange={() => handleSizeChange(itemData.productType ? itemData.productType : "large")} checked={sizeChange === "small"} />
+                                &nbsp;<label htmlFor='size-options'>{itemData.productType ? itemData.productType : "Large"}</label>
                             </div>
-                            <span>${itemData.prices[0]}</span>
+                            <span>$ {itemData.prices[0]}</span>
                         </div>
                         <div className='selected-card-item-ver-line'></div>
-                        <div className='size-options'>
-                            <div className='input'>
-                                <input type='radio' name='size-options' onChange={() => handleSizeChange("medium")} checked={sizeChange === "medium"} />
-                                <label htmlFor='size-options'>Meduim</label>
-                            </div>
-                            <span>${itemData.prices[1]}</span>
-                        </div>
+                        {/* 
+                        {itemData.prices.length > 1 ? (
+                            <>
+                                <div className='size-options'>
+                                    <div className='input'>
+                                        <input type='radio' name='size-options' onChange={() => handleSizeChange("medium")} checked={sizeChange === "medium"} />
+                                        &nbsp;<label htmlFor='size-options'>Medium</label>
+                                    </div>
+                                    <span>$ {itemData.prices[2]}</span>
+                                </div>
+                                <div className='selected-card-item-ver-line'></div>
+                            </>
+                        ) : (
+                            <></>
+                        )}
                         <div className='selected-card-item-ver-line'></div>
                         {itemData.prices.length > 2 ? (
                             <>
@@ -135,13 +144,13 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
                                         <input type='radio' name='size-options' onChange={() => handleSizeChange("large")} checked={sizeChange === "large"} />
                                         <label htmlFor='size-options'>Large</label>
                                     </div>
-                                    <span>${itemData.prices[2]}</span>
+                                    &nbsp;<span>$ {itemData.prices[2]}</span>
                                 </div>
                                 <div className='selected-card-item-ver-line'></div>
                             </>
                         ) : (
                             <></>
-                        )}
+                        )} */}
                     </div>
                     <div className='selected-card-item-toppings'>
                         {itemData.extraOptions.length > 0 && <h3>ADD TOPPINGS</h3>}
@@ -150,10 +159,10 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
                                 <div className='toppings-option'>
                                     <div className='input'>
                                         <input type='checkbox' name='size-options' onChange={(e) => handleToppingChange(item, e.target.checked)} disabled={!sizeSelected}  />
-                                        <label htmlFor='size-options'>{item.text}</label>
+                                        &nbsp;<label htmlFor='size-options'>{item.text}</label>
                                         
                                     </div>
-                                    <span>${item.price}</span>
+                                    <span>$ {item.price}</span>
                                 </div>
                                 <div className='selected-card-item-ver-line'></div>
                             </>

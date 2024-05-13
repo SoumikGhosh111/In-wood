@@ -1,3 +1,103 @@
 .add-to-menu-wrapper{ 
-    background-color: pink;
+    color: black;
 }
+/* Default styles */
+.add-to-menu-wrapper {
+    max-width: 700px;
+    /* width: fit-content; */
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .add-to-menu-wrapper h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .add-to-menu-wrapper form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .add-to-menu-wrapper label {
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .add-to-menu-wrapper input,
+  .add-to-menu-wrapper textarea,
+  .add-to-menu-wrapper select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .add-to-menu-wrapper textarea {
+    height: 100px; /* Adjust as needed */
+  }
+  
+  .add-to-menu-wrapper select {
+    appearance: none;
+  }
+  
+  .add-to-menu-wrapper button {
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .add-to-menu-wrapper button:hover {
+    background-color: #0056b3;
+  }
+  
+  .add-to-menu-wrapper .topping-inputs {
+    display: flex;
+    align-items: center;
+  }
+  
+  .add-to-menu-wrapper .topping-inputs input {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .add-to-menu-wrapper .topping-inputs button {
+    margin-top: 10px;
+  }
+  
+  .toppings-add-to-menu{ 
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .delete-button{ 
+    padding: 0.6rem 1rem !important;
+    margin: 0 !important;
+    height: 100%;
+
+  }
+
+
+
+
+
+
+
+
+  
+  
