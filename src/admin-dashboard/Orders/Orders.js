@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./Orders.css";
 import axios from "axios"; 
+import staticImg from "../../assets/pizza_1.png"
 
 import { redableTimeStamp } from '../../functions/readbleTimeFormat';
 
@@ -91,6 +92,7 @@ function Orders() {
                   <th>Customer Details</th>
                   <th>Order & Payment Status</th>
                   <th>Ordered at</th>
+
                 </thead>
                 <tbody>
                   {allOrders.data.order.map((item, index) => (
@@ -115,6 +117,7 @@ function Orders() {
                                   <td>
                                     {productIDX + 1}
                                   </td>
+                                  
                                   <td>
                                     {product.productName}
                                   </td>

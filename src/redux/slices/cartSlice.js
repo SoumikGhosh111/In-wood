@@ -10,12 +10,25 @@ const cartSlice = createSlice({
     },
     reducers: {
         addToCart: (state, action) => {
-            const existingItem = state.cart.find((item) => item.id === action.payload.id);
+            // const existingItem = state.cart.find((item) => item.id === action.payload.id);
+            // if (existingItem) {
+            //     state.cart = state.cart.map((item) => 
+            //         item.id === action.payload.id ? { ...item, qty: item.qty + 1}: item
+            //     ); 
+            // }else{ 
+            //     state.cart.push(action.payload); 
+            // }
+
+            const { id, qty: quantityToAdd } = action.payload;
+            const existingItem = state.cart.find((item) => item.id === id);
+            
             if (existingItem) {
+                // Item already exists in cart, increase quantity by quantityToAdd
                 state.cart = state.cart.map((item) => 
-                    item.id === action.payload.id ? { ...item, qty: item.qty + 1}: item
-                ); 
-            }else{ 
+                    item.id === id ? { ...item, qty: item.qty + quantityToAdd } : item
+                );
+            } else {
+                // Item not found in cart, add it with the specified quantity
                 state.cart.push(action.payload); 
             }
         },

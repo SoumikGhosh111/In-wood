@@ -16,6 +16,9 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
     const [selectedTopping, setSelectedTopping] = useState([]);
     const [isTopingsChecked, setIsToppingsChecked] = useState(false);
 
+
+    console.log(cartItems)
+
     const [quantity, setQuantity] = useState(1); 
     useEffect(() => {
         setItemData(data);
@@ -24,6 +27,7 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
     const handleSizeChange = (size) => {
         setSizeSelected(true);
         setSizeChange(size);
+        calculateTotalAmount(); 
     }
 
     const handleToppingChange = (topping, isChecked) => {
@@ -41,11 +45,16 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
         // Add base price based on selected size
         if (sizeChange === 'small') {
             total += itemData.prices[0];
-        } else if (sizeChange === 'medium') {
-            total += itemData.prices[1];
-        } else if (sizeChange === 'large') {
-            total += itemData.prices[2];
-        }
+        } 
+        
+        // else if (sizeChange === 'medium') 
+        // {
+        //     total += itemData.prices[1];
+        // } 
+        // else if (sizeChange === 'large') 
+        // {
+        //     total += itemData.prices[2];
+        // }
         // Add prices of selected toppings
         selectedTopping.forEach(topping => {
             total += topping.price;
@@ -63,12 +72,14 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
 
     const handleOrderClick = () => {
         dispatch(addToCart({
-            id: `${itemData._id}${selectedTopping.length > 0 && selectedTopping.map((toppings) => toppings._id)}${sizeChange}`,
+            id: `${itemData._id}${selectedTopping.length > 0 && selectedTopping.map((toppings) => toppings._id)}${sizeChange}${itemData.productType}`,
             name: itemData.title,
             price: calculateTotalAmount(),
             qty: quantity,
             toppings: selectedTopping.length > 0 ? selectedTopping : null,
-            size: sizeChange !== null ? sizeChange : null
+            // size: sizeChange !== null ? sizeChange : null
+            size: itemData?.productType ? itemData?.productType : "Large", 
+            img: itemData.img   
         }))
 
         orderReset(); 
@@ -115,7 +126,7 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
                         <h3>Choose an Option</h3>
                         <div className='size-options'>
                             <div className='input'>
-                                <input type='radio' name='size-options' onChange={() => handleSizeChange(itemData.productType ? itemData.productType : "large")} checked={sizeChange === "small"} />
+                                <input type='radio' name='size-options' onClick={() => handleSizeChange("small")} checked={sizeChange === "small"} />
                                 &nbsp;<label htmlFor='size-options'>{itemData.productType ? itemData.productType : "Large"}</label>
                             </div>
                             <span>$ {itemData.prices[0]}</span>

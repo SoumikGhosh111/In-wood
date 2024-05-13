@@ -22,7 +22,7 @@ function User() {
           <th>Name</th>
           <th>Email</th>
           <th>Role</th>
-          <th></th>
+          {/* <th></th> */}
           {/* <th>Country</th> */}
         </thead>
         <tbody>
@@ -33,9 +33,9 @@ function User() {
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>{item.role}</td>
-                <td>
+                {/* <td>
                   <DeleteRoundedIcon sx={{cursor: 'pointer'}} onClick= {() => console.log("hello")}/>
-                </td>
+                </td> */}
               </tr>
             ))}
           </>) : (<>Loading. . . </>)}

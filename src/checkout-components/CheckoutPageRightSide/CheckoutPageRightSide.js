@@ -73,6 +73,7 @@ function CheckoutPageRightSide() {
       const cartData = cartItems.map(item => ({
         name: item.name,
         qty: item.qty,
+        img: item.img,
         // id: item.id,
         toppings: item.toppings ? item.toppings.map(topping => ({ text: topping.text })) : []
       }));

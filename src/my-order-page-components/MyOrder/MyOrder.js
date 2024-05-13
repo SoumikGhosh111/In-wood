@@ -32,6 +32,35 @@ function MyOrder() {
         }
     };
 
+    const handleDownload = async (orderId) => {
+        try {
+            const response = await fetch(`http://localhost:8000/api/invoice/pdf/${orderId}`, {
+                method: 'GET', // Ensure method is explicitly set to GET
+                headers: {
+                    Accept: 'application/pdf', // Set Accept header to specify PDF response
+                },
+            });
+    
+            const blob = await response.blob();
+    
+            // Create a blob URL for the response data
+            const url = window.URL.createObjectURL(blob);
+    
+            // Create a temporary anchor element to initiate download
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'invoice.pdf');
+            document.body.appendChild(link);
+            link.click();
+    
+            // Cleanup
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('Error downloading invoice:', error);
+        }
+    };
+
     useEffect(() => {
         getUserDetails();
     }, []);
@@ -44,6 +73,7 @@ function MyOrder() {
     }
     return (
         <div className='my-order-wrapper' >
+        <img src={background} className='bgPizza' style={{zIndex: '-10'}}/>
             <button className='back-to-home-my-order' onClick={handleBackToHome}><ArrowBackIosRoundedIcon sx={{ transform: "translateY(10%)" }} /></button>
             <div className='my-orders'>
                 {orderDetails !== null ?
@@ -92,6 +122,11 @@ function MyOrder() {
                                             <div className='status-myorder'>
                                                 {item.delivery_status}
                                             </div>
+                                        </div>
+                                        <div className='delivery_status'>
+                                            {/* <div className='status-myorder'> */}
+                                                <button onClick={() => handleDownload(item._id)} className='invoice-button'>Generate Invoice</button>
+                                            {/* </div> */}
                                         </div>
                                     </div>
                                     {/* */}

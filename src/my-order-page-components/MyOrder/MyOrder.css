@@ -120,6 +120,21 @@ img{
 }
 
 
+.delivery_status button{ 
+    width: 90%;
+    height: fit-content;
+    padding: 1rem 0rem;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--mob-view-pay-button);
+    color: white;
+    cursor: pointer;
+}
+
+.sl-no{ 
+    color: white;
+}
+
 
 @media screen and (max-width: 993px){ 
     .my-order-order{ 

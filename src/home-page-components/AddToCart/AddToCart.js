@@ -18,7 +18,8 @@ function AddToCart({ onOrderClick }) {
     total + item.qty * item.price,
     0
   )
-  console.log(cartItems);
+
+  console.log(cartItems, "this is from add to cart");
 
   const handleOrderClick = async () => { 
     const isValid = await getUser(); 

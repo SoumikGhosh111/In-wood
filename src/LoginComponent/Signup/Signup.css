@@ -11,8 +11,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
+    padding-right: 1.3rem;
 }
+
+/* .pass-cnfm-pass{ 
+    margin: 0 !important;
+    padding: 0 !important;
+} */
 
 
 /* media queries */
@@ -24,5 +29,13 @@
        padding: 0;
         margin: 0;
         
+    }
+}
+
+
+@media screen and (max-width: 410px) {
+    .passBox{ 
+        width: 95%;
+        justify-content: space-around;
     }
 }

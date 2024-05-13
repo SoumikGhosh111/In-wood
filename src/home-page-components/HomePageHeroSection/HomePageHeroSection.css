@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap'); 
-.homeBox{
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
+.homeBox {
     width: 100vw;
     height: 100vh;
     /* position: relative; */
@@ -10,7 +11,7 @@
 
 
 /* bg image */
-.homeBg{
+.homeBg {
     height: 100vh;
     width: 100vw;
     object-fit: cover;
@@ -19,12 +20,13 @@
     transition: all 0.4s ease-in-out;
     /* display: none; */
 }
-.yumm{ 
+
+.yumm {
     z-index: 1;
     position: absolute;
     top: 50%;
     left: 50%;
-    font-size: 132px; 
+    font-size: 132px;
     font-weight: 400;
     font-family: "Kaushan Script", cursive;
     color: var(--yumm-color-home-hero);
@@ -46,12 +48,12 @@
     background-color: red;
     height: 100%;
     /* position: absolute; */
-    /* z-index: 10; */
-    /* transition: all 0.3s ease-in-out; */
-/* } */ 
+/* z-index: 10; */
+/* transition: all 0.3s ease-in-out; */
+/* } */
 
 
-.menu-section{ 
+.menu-section {
     background-color: var(--menu-page-color);
     transition: all 0.4s ease-in-out;
 }
@@ -72,7 +74,7 @@
     align-items: center;
     
 } */
-.leftBox{
+.leftBox {
     height: 55%;
     width: 45%;
     margin-top: 5rem;
@@ -89,15 +91,15 @@
     transform: translateY(-50%);
 }
 
-.leftBox span{
+.leftBox span {
     color: white;
     font-size: 112px;
     font-weight: 700;
     /* margin-left: 1vw; */
 }
 
-.home-hero-order-button{ 
-    
+.home-hero-order-button {
+
     background-color: var(--home-order-button);
     width: 281px;
     height: 76px;
@@ -119,10 +121,10 @@
 
 
 /* right side pizza image */
-.rightBox{
+.rightBox {
     position: fixed;
     height: 100vh;
-    width: 50vw; 
+    width: 50vw;
     right: 0;
     top: 0;
     transform: translateY(10%);
@@ -135,7 +137,7 @@
     /* border: 1px solid blue;  */
 }
 
-.rightBox .mainSlice{
+.rightBox .mainSlice {
     height: 450px;
     width: 340px;
     object-fit: cover;
@@ -143,7 +145,7 @@
     left: 30vw; */
 }
 
-.rightBox .topSlice{
+.rightBox .topSlice {
     height: 210px;
     width: 230px;
     object-fit: cover;
@@ -152,10 +154,10 @@
     transform: translate(140%, -50%) rotate(0deg);
     right: 17vw;
     bottom: 49vh;
-    
+
 }
 
-.rightBox .bottomSlice{
+.rightBox .bottomSlice {
     height: 210px;
     width: 230px;
     object-fit: cover;
@@ -164,7 +166,7 @@
     transform: translate(30%, 45%) rotate(0deg);
     right: 18vw;
     bottom: 21vh;
-    
+
 }
 
 
@@ -178,54 +180,64 @@
 
 
 
-
+@media screen and (max-width: 1000px) {
+    .leftBox span {
+        font-size: 90px;
+        font-weight: 700;
+        /* margin-left: 1vw; */
+    }
+}
 
 
 
 
 
 /* media queries */
-@media (max-width: 768px){
-    .yumm{ 
+@media (max-width: 768px) {
+    .yumm {
         top: 0;
         left: 0;
         display: block;
         transform: translateY(60%);
     }
-    .leftBox{ 
+
+    .leftBox {
         justify-content: center;
         gap: 1rem;
         width: 100%;
         transform: translateY(-20%);
     }
-    .leftBox span{ 
+
+    .leftBox span {
         font-size: 64px;
     }
-    .home-hero-order-button{ 
+
+    .home-hero-order-button {
         width: 158px;
         height: 45.08px;
         font-size: 14px;
         font-weight: 700;
     }
 
-    .mainSlice{ 
+    .mainSlice {
         width: 314px !important;
         height: 373px !important;
         transform: translateX(50%);
     }
 
-    .topSlice{ 
+    .topSlice {
         width: 211px !important;
         height: 165px !important;
         transform: translate(220%, -50%) !important;
     }
-    .bottomSlice{ 
+
+    .bottomSlice {
         width: 210px !important;
         height: 183px !important;
-        transform: translate(120%, 45%) !important; 
+        transform: translate(120%, 45%) !important;
     }
 
-    .rightBox{ 
+    .rightBox {
         width: fit-content;
         height: fit-content;
         transform: translateY(50%);

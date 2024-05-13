@@ -33,6 +33,7 @@ function Menu() {
           <thead>
             <tr>
               <th>SL No.</th>
+              <th>Img</th>
               <th>Name</th>
               <th>Description</th>
               <th>Extra Toppings</th>
@@ -44,6 +45,9 @@ function Menu() {
                 {menu.map((item, indx) => (
                   <tr>
                     <td>{indx + 1}</td>
+                    <td>
+                      <img src={item.img} style={{width: "100px", height: "100px"}}/>
+                    </td>
                     <td>
                       {item.title}
                     </td>

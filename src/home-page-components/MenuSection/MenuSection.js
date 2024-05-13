@@ -260,7 +260,8 @@ function MenuSection() {
                                         {/* </div> */}
                                         <div className='size'>
                                             <div className='price'>
-                                                ${item.prices[item.prices.length - 1]}
+                                                {/* ${item.prices[item.prices.length - 1]} */}
+                                                ${item.prices[0]}
                                             </div>
                                             <div className='size-param'>
                                                 {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
@@ -304,7 +305,8 @@ function MenuSection() {
                                         <p className='item-desc'>{item.desc}</p>
                                         <div className='size'>
                                             <div className='price'>
-                                                ${item.prices[item.prices.length - 1]}
+                                                {/* ${item.prices[item.prices.length - 1]} */}
+                                                ${item.prices[0]}
                                             </div>
                                             <div className='size-param'>
                                                 {item.prices?.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"}
@@ -349,7 +351,8 @@ function MenuSection() {
                                         <p className='item-desc'>{item.desc}</p>
                                         <div className='size'>
                                             <div className='price'>
-                                                ${item.prices[item.prices.length - 1]}
+                                                {/* ${item.prices[item.prices.length - 1]} */}
+                                                ${item.prices[0]}
                                             </div>
                                             <div className='size-param'>
                                                 {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"}
@@ -394,7 +397,8 @@ function MenuSection() {
                                         <p className='item-desc'>{item.desc}</p>
                                         <div className='size'>
                                             <div className='price'>
-                                                ${item.prices[item.prices.length - 1]}
+                                                {/* ${item.prices[item.prices.length - 1]} */}
+                                                ${item.prices[0]}
                                             </div>
                                             <div className='size-param'>
                                                 {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"}

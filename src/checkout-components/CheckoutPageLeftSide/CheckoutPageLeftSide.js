@@ -243,7 +243,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
       </div>
 
       <div className='vertical-line'></div>
-      <div className='delivery-stts' style={{ display: isEligble ? 'block' : 'none' }}>
+      {/* <div className='delivery-stts' style={{ display: isEligble ? 'block' : 'none' }}>
         <div className='if-home-delivery'>
           <input type='radio' name='delivery' />Pick Up
           <input type='radio' name='delivery' />Home Delivery
@@ -251,7 +251,8 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
           <p style={{ display: isEligble ? 'none' : 'block' }}>Sorry Delivery not Available in your Area</p>
         </div>
 
-      </div>
+      </div> */}
+      {/* Will be implemented in 2.0 */}
 
       {/* <div className='payment-info'>
         <h4>PAYMENT</h4>

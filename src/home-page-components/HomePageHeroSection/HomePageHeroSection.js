@@ -29,9 +29,9 @@ function HomePageHeroSection() {
             top: scrollPosition,
             behavior: 'smooth' 
         }); 
-        animate("#pizza-3", { scale: 0.8, y: 180, x: -100, rotate: "50deg" }, { duration: 1 })
-        animate("#pizza-1", { y: -400, rotate: "40deg" }, { duration: 1 })
-        animate("#pizza-2", { x: -600, y: -10, rotate: "40deg" }, { duration: 1 })
+        // animate("#pizza-3", { scale: 0.8, y: 180, x: -100, rotate: "50deg" }, { duration: 1 })
+        // animate("#pizza-1", { y: -400, rotate: "40deg" }, { duration: 1 })
+        // animate("#pizza-2", { x: -600, y: -10, rotate: "40deg" }, { duration: 1 })
     }
 
    
@@ -53,9 +53,9 @@ function HomePageHeroSection() {
     useEffect(() => {
         console.log(scroll)
         if (menuPageInView && scroll > window.innerHeight) {
-            animate("#pizza-3", { scale: 0.8, y: 180, x: -100, rotate: "50deg" }, { duration: 1 })
-            animate("#pizza-1", { y: -400, rotate: "40deg" }, { duration: 1 })
-            animate("#pizza-2", { x: -600, y: -10, rotate: "40deg" }, { duration: 1 })
+            // animate("#pizza-3", { scale: 0.8, y: 180, x: -100, rotate: "50deg" }, { duration: 1 })
+            // animate("#pizza-1", { y: -400, rotate: "40deg" }, { duration: 1 })
+            // animate("#pizza-2", { x: -600, y: -10, rotate: "40deg" }, { duration: 1 })
 
         }
     }, [menuPageInView]);
@@ -64,9 +64,9 @@ function HomePageHeroSection() {
     useEffect(() => {
 
         if (homePageinView && scroll < window.innerHeight) {
-            animate("#pizza-3", { scale: 1, y: 0, x: 0, rotate: "0deg" }, { duration: 1 })
-            animate("#pizza-1", { y: 0, rotate: "0deg" }, { duration: 1 })
-            animate("#pizza-2", { x: 0, y: 0, rotate: "0deg" }, { duration: 1 })
+            // animate("#pizza-3", { scale: 1, y: 0, x: 0, rotate: "0deg" }, { duration: 1 })
+            // animate("#pizza-1", { y: 0, rotate: "0deg" }, { duration: 1 })
+            // animate("#pizza-2", { x: 0, y: 0, rotate: "0deg" }, { duration: 1 })
             
         }
     }, [homePageinView]);

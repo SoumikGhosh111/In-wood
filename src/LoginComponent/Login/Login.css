@@ -277,3 +277,46 @@ form{
     transform: translate(5%);
    }
 }
+
+
+@media screen and (max-width: 410px){ 
+    .frTxt{ 
+       justify-content: space-around;
+        
+    }
+    .fr-txt-back-to-home{ 
+        display: flex;
+        justify-content: flex-start !important;
+        padding: 0rem 2.5rem;
+    }
+    .form__group2 { 
+        /* border: 1px solid red; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 90%;
+        margin: 0;
+        padding: 0;
+    }
+    .form__group2 h5{ 
+        width: 100%;
+        padding: 0rem 1rem;
+    }
+    .form__group h5{ 
+        width: 100%;
+        padding: 0rem 1rem;
+    }
+  .form__group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+    margin: 0;
+    padding: 0;
+    /* border: 1px solid red; */
+    margin-bottom: 1rem;
+  }
+    
+}

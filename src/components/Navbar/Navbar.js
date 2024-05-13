@@ -169,7 +169,7 @@ function Navbar() {
                     <ul>
                         <li><Link onClick={handleHomeClick} className={`nav-links ${isMenuActive ? '' : 'active'}`} id='home'>Home</Link></li>
                         <li><Link onClick={handleMenu} className={`nav-links ${isMenuActive ? 'active' : ''}`} id='menu'>Menu</Link></li>
-                        <li><Link className='nav-links' id='pages'>Pages</Link></li>
+                        <li><Link className='nav-links' id='pages' to={"/checkout"}>Checkout</Link></li>
                     </ul>
 
                     <div className='nav-bar-login-area'>

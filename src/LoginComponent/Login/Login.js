@@ -92,7 +92,7 @@ function Login({ onButtonClick }) {
                                 <p className="mb-5 pb-lg-2" style={{ color: 'white' }}>Don't have an account? <Link to={'/register'} style={{ color: '#e60909' }}>Register here</Link></p>
 
                             </div>
-                            <div className='frTxt' style={{marginTop: "1rem"}}>
+                            <div className='frTxt fr-txt-back-to-home' style={{marginTop: "1rem"}}>
 
                             <Link className="small text-muted" onClick={handleBackToHome} style={{ color: 'white' }}>Back to Home</Link>
 
