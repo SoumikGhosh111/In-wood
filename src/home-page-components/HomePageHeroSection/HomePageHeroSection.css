@@ -237,7 +237,6 @@
         height: fit-content;
         /* transform: translateX(-100%); */
         transform: translateY(50%);
-        border: 1px solid red;
         /* display: none; */
 
     }
