@@ -93,8 +93,8 @@
 
 .leftBox span {
     color: white;
-    font-size: 112px;
-    font-weight: 700;
+    font-size: 70px;
+    /* font-weight: 700; */
     /* margin-left: 1vw; */
 }
 
@@ -103,7 +103,7 @@
     background-color: var(--home-order-button);
     width: 281px;
     height: 76px;
-    border-radius: 54px;
+    border-radius: 10px;
     border: none;
     font-size: 24px;
     font-weight: 700;
@@ -134,8 +134,10 @@
     /* z-index: 10; */
     padding: 0rem 3rem;
     /* margin-right: 5vw; */
-    /* border: 1px solid blue;  */
+   
 }
+
+
 
 .rightBox .mainSlice {
     height: 450px;
@@ -173,13 +175,6 @@
 
 
 
-
-
-
-
-
-
-
 @media screen and (max-width: 1000px) {
     .leftBox span {
         font-size: 90px;
@@ -209,7 +204,7 @@
     }
 
     .leftBox span {
-        font-size: 64px;
+        font-size: 38px;
     }
 
     .home-hero-order-button {
@@ -240,7 +235,13 @@
     .rightBox {
         width: fit-content;
         height: fit-content;
+        /* transform: translateX(-100%); */
         transform: translateY(50%);
+        border: 1px solid red;
+        /* display: none; */
+
     }
+
+   
 
 }

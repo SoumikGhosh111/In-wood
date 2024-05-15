@@ -1,7 +1,23 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { resetCart } from '../../redux/slices/cartSlice';
+import { useDispatch } from 'react-redux';
 import "./CheckoutSuccess.css"
 
 function CheckoutSuccess() {
+const dispatch = useDispatch(); 
+  useEffect(() => { 
+    dispatch(resetCart()); 
+    setTimeout(() => { 
+      handleBackToHome(); 
+    }, 3000); 
+  }, []); 
+
+  const handleBackToHome = () => { 
+    window.location.href = '/my-order';
+
+    // Clearing the browser's history
+    window.history.replaceState(null, '', '/my-order');
+  }
   return (
     <div>
       <>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./Orders.css";
-import axios from "axios"; 
+import axios from "axios";
 import staticImg from "../../assets/pizza_1.png"
 
 import { redableTimeStamp } from '../../functions/readbleTimeFormat';
@@ -23,12 +23,13 @@ function Orders() {
     try {
       // Assuming you have a valid JWT token stored in localStorage
       const token = localStorage.getItem('token'); // Get the JWT token from localStorage
+      const email = localStorage.getItem('userEmail');
 
       if (!token) {
         throw new Error('Token not found');
       }
 
-      const response = await fetch(`http://localhost:8000/api/stripe/allOrder`, {
+      const response = await fetch(`http://localhost:8000/api/stripe/allOrder/${email}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -62,21 +63,21 @@ function Orders() {
   }, []);
 
   const handleChange = async (orderId, value) => {
-    console.log(orderId); 
-    console.log(value); 
+    console.log(orderId);
+    console.log(value);
     try {
       const { data } = await axios.put(`http://localhost:8000/admin/order-status/${orderId}`, {
         delivery_status: value,
       });
       fetchAllOrders();
-      console.log(data) 
+      console.log(data)
     } catch (error) {
       console.log(error);
     }
   };
 
 
-  
+
   return (
     <>
       <div className='orders-wrapper'>
@@ -117,7 +118,7 @@ function Orders() {
                                   <td>
                                     {productIDX + 1}
                                   </td>
-                                  
+
                                   <td>
                                     {product.productName}
                                   </td>
@@ -125,9 +126,9 @@ function Orders() {
                                     {product.quantity}
                                   </td>
                                   <td>
-                                    {product.description}
+                                    {product.extraTopings}
                                   </td>
-                                  
+
                                 </tr>
                               ))}
                             </tbody>
@@ -138,7 +139,7 @@ function Orders() {
 
                       <td>
                         <div className='customer-details'>
-                          <span><span  className='customer-details-title'>Name:</span> {item.shipping.name}</span>
+                          <span><span className='customer-details-title'>Name:</span> {item.shipping.name}</span>
                           <span><span className='customer-details-title'>Email:</span> {item.shipping.email}</span>
                           <span><span className='customer-details-title'>Ph:</span> {item.shipping.phone}</span>
                           <span><span className='customer-details-title'>Country:</span> {item.shipping.address.country}</span>
@@ -149,7 +150,6 @@ function Orders() {
                           <span><span className='customer-details-title'>Postal Code:</span> {item.shipping.address.postal_code}</span>
                           <span><span className='customer-details-title'>Order_Id:</span> {item._id}</span>
                           <span><span className='customer-details-title'>User_Id:</span> {item.userId}</span>
-
                         </div>
                       </td>
 
@@ -169,10 +169,10 @@ function Orders() {
                             <option>Out For Delivery</option>
                             <option>Delivered</option> */}
                             {status.map((s, i) => (
-                            <option key={i} value={s}>
-                              {s}
-                            </option>
-                          ))}
+                              <option key={i} value={s}>
+                                {s}
+                              </option>
+                            ))}
 
                           </select>
                         </div>

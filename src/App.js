@@ -13,6 +13,7 @@ import CheckoutSuccess from './checkout-components/CheckoutSuccess/CheckoutSucce
 import NotFound from './components/NotFound/NotFound';
 import { UserProvider } from './functions/useUserContext';
 import MyOrderPage from './pages/MyOrderPage';
+import Footer from './components/Footer/Footer';
 
 // importing react router dom
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
@@ -42,6 +43,7 @@ function App() {
             
           </Routes>
         </UserProvider>
+        
       </Router>
     </div>
   );

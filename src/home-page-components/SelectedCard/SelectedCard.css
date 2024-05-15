@@ -17,7 +17,9 @@
     display: flex;
     justify-content: space-between;
     padding: 1rem 1rem;
-    background-color: rgba(128, 128, 128, 0.396);
+    background-color: rgb(184, 183, 183);
+    position: sticky;
+    top: 0;
     
 }
 .selected-card-item-img{ 

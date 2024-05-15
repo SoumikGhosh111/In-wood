@@ -99,24 +99,21 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
       zipCode: zipCode
     }
 
-    const zip = parseInt(zipCode); // Convert to integer for numeric comparison
-
-    // Check if the zipcode is within the range of 10034-10040
-    if (zip >= 10034 && zip <= 10040) {
-      setEligible(true);
-      console.log(zip)
+    const allowedZipCodes = ["10034", "10035", "10036", "10037", "10038", "10039", "10040"];
+  
+    // Check if the entered zip code is in the list of allowed zip codes
+    if (allowedZipCodes.includes(zipCode)) {
+      // Save user info if the zip code is allowed
+      dispatch(setUserData(userDataObj));
+      toast.success("Info Saved");
+      setEligible(true); // Indicate that delivery is available
     } else {
+      // Display a message indicating no delivery in the area
+      toast.error("Sorry, pizza delivery is not available in your area");
       setEligible(false);
-      alert("No delivery in your area")
-    }
+    }
 
-    dispatch(setUserData(userDataObj));
-    toast.success("Info Saved");
-
-    // console.log("This is checkout user Info", userDataObj);
-
-    
-  }
+  }; 
 
 
   return (

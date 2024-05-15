@@ -253,7 +253,7 @@ function MenuSection() {
                                         <div className='item-img'>
                                             <img src={item.img == '' ? pizza1 : item.img} />
                                         </div>
-
+                                        <div style={{height: '10px', width: '100%'}} ></div>
                                         <span className='item-name'>{item.title}</span>
                                         {/* <div className='item-desc-'> */}
                                             <p className='item-desc'>{item.desc}</p>

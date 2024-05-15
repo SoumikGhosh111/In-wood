@@ -1,21 +1,49 @@
 import React, { useState, useEffect } from 'react';
-import "./User.css"; 
+import "./User.css";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 
 function User() {
   const [users, setUsers] = useState(null);
-  
+
   useEffect(() => {
-    fetch("http://localhost:8000/admin/alluser")
-      .then(res => res.json())
-      .then(result => setUsers(result))
-      .catch(err => alert(err));
+    // fetch("http://localhost:8000/admin/alluser")
+    //   .then(res => res.json())
+    //   .then(result => setUsers(result))
+    //   .catch(err => alert(err));
+    fetchUserDetails();
   }, []);
+
+  const fetchUserDetails = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const email = localStorage.getItem("userEmail"); 
+      const response = await fetch(`http://localhost:8000/admin/alluser/${email}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Send the JWT token in the Authorization header
+        },
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to fetch orders');
+      }
+
+      
+      const users = await response.json();
+      
+      setUsers(users)
+    }
+    catch(err) { 
+      alert(err); 
+      console.log(err)
+    }
+  }
 
   console.log(users);
   return (
     <div className='user-wrapper'>
-      <h2 style={{color: 'black'}}>User Data Table</h2>
+      <h2 style={{ color: 'black' }}>User Data Table</h2>
       <table>
         <thead>
           <th>SL. No</th>

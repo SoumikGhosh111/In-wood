@@ -53,6 +53,10 @@ const cartSlice = createSlice({
             state.cart = state.cart.map((item ) => 
                 item.id === action.payload.id ? {...item, qty: item.qty === 1 ? 1 : item.qty - 1} : item
             );
+        },
+        resetCart: state => {
+            state.cart = [];
+            localStorage.removeItem('persist:cart'); // Remove the persisted data from localStorage
         }
     }
 });
@@ -67,7 +71,7 @@ const presistConfig = {
 
 const persistedReducer = persistReducer(presistConfig, cartSlice.reducer)
 // actions
-export const { addToCart, removeFromCart, addToppingsToOrder, incrementQty, decrementQty } = cartSlice.actions;
+export const { addToCart, removeFromCart, addToppingsToOrder, incrementQty, decrementQty, resetCart } = cartSlice.actions;
 
 // reducer
 // export default cartSlice.reducer; 

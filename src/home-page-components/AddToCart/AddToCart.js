@@ -8,7 +8,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { getUser } from '../../functions/veifyUser';
 
 import background from "../../assets/abc.jpg";
+import emptyCartImage from "../../assets/empty_cart_img.svg"
 import { ToastContainer, toast } from 'react-toastify';
+
 
 function AddToCart({ onOrderClick }) {
   const Navigate = useNavigate(); 
@@ -39,6 +41,10 @@ function AddToCart({ onOrderClick }) {
   return (
     <div className='add-to-cart-wrapper'>
       <div className='order-items'>
+
+        {cartItems.length > 0 ? 
+        (<>
+        
         {cartItems.map((item) => (
           <div className='order-cart-cards'>
             <div className='item-name-qty-price'>
@@ -66,8 +72,19 @@ function AddToCart({ onOrderClick }) {
             }
           </div>
         ))}
+        </>) : 
+        (<>
+          <div className='epmty-cart-class'>
+            <img src={emptyCartImage}/>
+            <span >Cart is Empty - 'Order Now'</span>
+          </div>
+        </>)
+        }
+
+      
+
       </div>  
-      <div>Total Amount: ${(totalAmnt).toFixed(2)}</div>
+      <div className='total-amnt-add-to-cart'><span>Total Amount: </span> <span style={{fontWeight: '900'}}>${(totalAmnt).toFixed(2)}</span></div>
 
       <button className='add-to-cart-button' onClick={handleOrderClick}>PROCEED TO ORDER</button>
       <ToastContainer />

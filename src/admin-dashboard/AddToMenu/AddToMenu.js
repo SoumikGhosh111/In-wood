@@ -79,8 +79,19 @@ function AddToMenu() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/product/addfood', formData);
-      console.log('Food created:', response.data.data.food);
+      const token = localStorage.getItem('token'); 
+      const email = localStorage.getItem('userEmail'); 
+      const response = await fetch(`http://localhost:8000/api/product/addfood/${email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Send the JWT token in the Authorization header
+        },
+        body: JSON.stringify(formData),
+      });
+      console.log(formData)
+      const result = response.json(); 
+      console.log('Food created:', result);
       setFormData({
         title: '',
         desc: '',
@@ -151,7 +162,7 @@ function AddToMenu() {
           value={formData.productType}
           onChange={handleChange}
           required
-          // disabled
+        // disabled
         /><br /><br />
         <label htmlFor="category">Category:</label><br />
         <select

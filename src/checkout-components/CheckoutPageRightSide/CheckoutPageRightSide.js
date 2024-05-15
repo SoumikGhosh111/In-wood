@@ -14,9 +14,10 @@ function CheckoutPageRightSide() {
   const [tipPercent, setTipPercent] = useState(0);
   const [tipAmnt, setTipAmnt] = useState(null);
   const [tip, setTip] = useState("none");
-  const [popUp, setPopUp] = useState(false); 
+  const [popUp, setPopUp] = useState(false);
   const cartItems = useSelector((state) => state.cart.cart);
   const userData = useSelector((state) => state.userdata);
+  const [deliveryCharges, setDeliveryCharges] = useState(0);
   console.log(userData);
   const totalAmnt = cartItems.reduce((total, item) =>
     total + item.qty * item.price,
@@ -25,7 +26,10 @@ function CheckoutPageRightSide() {
 
   useEffect(() => {
     const EstimatedTax = ((totalAmnt * 8.75) / 100).toFixed(2);
-    setTax(EstimatedTax)
+    setTax(EstimatedTax);
+    const charges = totalAmnt > 20 ? 0 : 10;
+    setDeliveryCharges(charges);
+
   }, [totalAmnt])
   const SupportFee = 0.95;
 
@@ -57,8 +61,8 @@ function CheckoutPageRightSide() {
 
 
 
-  const confirmOrder = () => { 
-   
+  const confirmOrder = () => {
+
   }
 
   const handlePlaceOrderClick = () => {
@@ -78,20 +82,20 @@ function CheckoutPageRightSide() {
         toppings: item.toppings ? item.toppings.map(topping => ({ text: topping.text })) : []
       }));
 
-      const tempPriceData = cartItems.map(item => ({ 
+      const tempPriceData = cartItems.map(item => ({
         price: item.price,
         qty: item.qty,
-      })); 
+      }));
       const data = {
         cartItems,
         cartData,
-        tempPriceData, 
+        tempPriceData,
         userData,
         amount: {
           subTotal: totalAmnt,
           estimatedTax: tax,
           supportLocalfee: SupportFee,
-          total: (parseFloat(totalAmnt) + parseFloat(tax))
+          total: (parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(deliveryCharges))
         },
         // toppings: cartItems.map((item) => item.toppings ?  item.toppings.map((topping) => topping.text) : null) 
       }
@@ -126,7 +130,7 @@ function CheckoutPageRightSide() {
 
   return (
     <div className='check-out-right-side'>
-      <div style={{display: popUp ? 'none' : 'block'}}>
+      <div style={{ display: popUp ? 'none' : 'block' }}>
         <button className='place-order-button' onClick={() => setPopUp(true)} >
           <div className='place-order-button-inner' >
             <span>PLACE ODER</span>
@@ -143,10 +147,10 @@ function CheckoutPageRightSide() {
             <span>Estimated Tax</span>
             <span>${tax}</span>
           </div>
-          {/* <div className='tip'>
-          <span>Tip Amount ({tip})</span>
-          <span>${tipAmnt}</span>
-        </div> */}
+          <div className='tip' >
+            <span>Delivery Charges  </span>
+            <span >${totalAmnt > 0 ? deliveryCharges : 0}</span>
+          </div>
           {/* <div className='local'>
           <span> Support Local Fee</span>
           <span>${SupportFee}</span>
@@ -173,25 +177,35 @@ function CheckoutPageRightSide() {
           </li>
         </ul> */}
 
-          <div className='all-total'>
+          {/* <div className='all-total'>
             <span>Total</span>
-            <span>${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(tipAmnt)).toFixed(2)}</span>
+            <span>${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(tipAmnt)).toFixed(2) + parseFloat(deliveryCharges)}</span>
+          </div> */}
+          <div className='all-total'>
+            {/* <span>Total</span>
+            <span>${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(tipAmnt) + parseFloat(deliveryCharges)).toFixed(2)}</span> */}
+            <span>Total</span>
+            {totalAmnt === 0 ? ( // Display 0 if subtotal is 0
+              <span>$0.00</span>
+            ) : ( // Otherwise calculate total amount
+              <span>${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(tipAmnt) + parseFloat(deliveryCharges)).toFixed(2)}</span>
+            )}
           </div>
         </div>
       </div>
-        <div className='pop-u-checkout' style={{display: popUp ? 'block':'none'}}>
-            <div className='pop-up-inner'>
-             <div className='pop-up-text'>
-             <span> After Proceeding to the Payment Page </span>
-             <span>YOU CAN NOT CANCEL YOUR ORDER</span>
-             </div>
-              
-              <div className='pop-up-buttons'>
-                <button onClick={handlePlaceOrderClick}>Proceed to payment</button>
-                <button onClick={() => setPopUp(false)}>Cancel</button>
-              </div>
-            </div>
+      <div className='pop-u-checkout' style={{ display: popUp ? 'block' : 'none' }}>
+        <div className='pop-up-inner'>
+          <div className='pop-up-text'>
+            <span> After Proceeding to the Payment Page </span>
+            <span>YOU CAN NOT CANCEL YOUR ORDER</span>
+          </div>
+
+          <div className='pop-up-buttons'>
+            <button onClick={handlePlaceOrderClick}>Proceed to payment</button>
+            <button onClick={() => setPopUp(false)}>Cancel</button>
+          </div>
         </div>
+      </div>
       <ToastContainer />
 
     </div>
