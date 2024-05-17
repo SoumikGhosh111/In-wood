@@ -20,3 +20,28 @@
     background-color: #e1e1e15c;
     color: black;
 }
+
+.admin-menu-img{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.admin-menu-img-img{
+    width: 100px; 
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.menu-order-input-butttons{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+   
+
+}

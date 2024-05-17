@@ -157,6 +157,7 @@ function Orders() {
                       <td>
                         <div className='order-payment-stts'>
                           <span><span className='customer-details-title'>Payment:</span> {item.payment_status}</span>
+                          <span><span className='customer-details-title'>Total Amount:</span> ${item.total}</span><br/>
                           <span><span className='customer-details-title'>Delivery Status</span></span>
                           <select
                             bordered={false}

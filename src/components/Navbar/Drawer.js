@@ -27,7 +27,7 @@ export default function TemporaryDrawer() {
     const [scroll, setScroll] = useState(0);
     const [isLogin, setIsLogin] = useState(false);
 
-    const Navigate = useNavigate(); 
+    const Navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -46,18 +46,26 @@ export default function TemporaryDrawer() {
     }
 
     const handleLogout = () => {
-        setIsLogin(false); 
+        setIsLogin(false);
         localStorage.removeItem("token");
         localStorage.removeItem("userEmail");
-        toast.success("Logged out"); 
+        toast.success("Logged out");
     }
 
-    const handleLogin = () => { 
+    const handleLogin = () => {
         Navigate("/login")
     }
 
-    const handleProfileClick = () => { 
+    const handleProfileClick = () => {
         Navigate("/profile")
+    }
+
+    const handleCheckout = () => { 
+        Navigate("/checkout")
+    }
+
+    const handleMyOrderClick = () => { 
+        Navigate("my-order")
     }
     useEffect(() => {
         const checkUser = async () => {
@@ -69,7 +77,7 @@ export default function TemporaryDrawer() {
     }, [localStorage.getItem("token")]);
 
 
-   
+
     return (
         <div className='drawer-wrapper'>
             {/* <input placeholder='Search' style={{ opacity: scroll > window.innerHeight * 0.5 ? "1" : "0" }} /> */}
@@ -82,8 +90,14 @@ export default function TemporaryDrawer() {
             >
                 <div className='drawer-div' >
                     <div className='drawer-items-wrapper'>
-                        <div className='drawer-items'>
-                            <a>Apply Coupons</a>
+                        <div className='drawer-items' onClick={handleMyOrderClick}>
+                            <a>My Order</a>
+                            <EastRoundedIcon />
+                        </div>
+
+                        {/* <div className='hor-line'>Hello !</div> */}
+                        <div className='drawer-items' onClick = {handleCheckout}>
+                            <a>Checkout</a>
                             <EastRoundedIcon />
                         </div>
                         {/* <div className='hor-line'>Hello !</div> */}

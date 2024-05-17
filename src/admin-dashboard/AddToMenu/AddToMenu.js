@@ -198,7 +198,7 @@ function AddToMenu() {
             value={topping.text}
             onChange={(e) => setTopping({ ...topping, text: e.target.value })}
           /><br />
-          <label htmlFor="toppingPrice">Topping Price:</label>
+          <label htmlFor="toppingPrice">Topping Price: </label>
           <input
             type="number"
             id="toppingPrice"

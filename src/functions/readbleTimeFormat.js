@@ -7,8 +7,20 @@ export const redableTimeStamp = (time) => {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
-        timeZone: 'UTC' // Specify timezone if needed
+        timeZone: 'UTC' 
     };
     const formattedDate = date.toLocaleString('en-US', options);
+    return formattedDate;
+}
+
+export const formatReadableDate = (timestamp) => {
+    const date = new Date(timestamp);
+
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2); 
+    const day = ('0' + date.getDate()).slice(-2);
+
+    const formattedDate = `${year}-${month}-${day}`;
+
     return formattedDate;
 }

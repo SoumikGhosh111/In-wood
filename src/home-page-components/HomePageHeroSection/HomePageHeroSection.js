@@ -88,7 +88,7 @@ function HomePageHeroSection() {
 
 
     return (
-        <div>
+        <div >
             <div className='homeBox' ref={ref1}>
                 <span className='yumm'>Yumm</span>
                 <img className="homeBg" src={background} alt="background image" />
@@ -101,7 +101,7 @@ function HomePageHeroSection() {
                         </button>
                     </div>
                 </div>
-                <div className='rightBox' ref={scope} >
+                <div className='rightBox' >
                     {/* <div style={{transform: `rotate(${rotationAngle}deg)`}} className='pizza-container-hero-section'> */}
                         <div id='pizza-1' ><img className='topSlice' src={topSlice} alt="topSlice" /></div>
                         <div id='pizza-2'><img className='bottomSlice' src={bottomSlice} alt="bottomSlice" /></div>
@@ -109,12 +109,12 @@ function HomePageHeroSection() {
                     {/* </div> */}
                 </div>
             </div>
-            <div id='menu' className='menu-section' ref={ref2}>
+            <div id='menu' className='menu-section' ref={ref2} >
                 <MenuSection />
             </div>
-            <>
-                {/* <Footer /> */}
-            </>
+            <div >
+                <Footer />
+            </div>
         </div>
     )
 }

@@ -4,6 +4,8 @@ import "./CheckoutPageRightSide.css";
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
+import logo from "../../assets/maskot_logo_inwood.png"; 
+
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

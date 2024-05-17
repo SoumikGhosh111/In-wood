@@ -120,6 +120,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
     <div className='check-out-left-side'>
       <h4>CHECKOUT</h4>
       <h2>INWOOD PIZZA</h2>
+      <button onClick={handleBackEvent} className='back-tio-menu-btn' style={{display: cartItems?.length > 0 ? 'block' : 'none'}}>Explore More</button>
       {/* <ToastContainer /> */}
 
       {/* <div className='check-out-left-side-details'>
@@ -240,6 +241,10 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
       </div>
 
       <div className='vertical-line'></div>
+      <div className='free-delivery-check-out'>Free Delivery On 20$</div>
+      <div>
+      
+      </div>
       {/* <div className='delivery-stts' style={{ display: isEligble ? 'block' : 'none' }}>
         <div className='if-home-delivery'>
           <input type='radio' name='delivery' />Pick Up

@@ -10,7 +10,7 @@
     transition: all 0.3s ease-in-out;
 }
 .nav-bar{ 
-    width: 90%;
+    width: 100%;
     /* border: 1px solid blue; */
 }
 .mob-view-nav{ 
@@ -22,18 +22,19 @@
 .nav-bar-inner{ 
     width: 100%;
     height: 100%;
-}
-.nav-bar-inner{ 
     display: flex;
-   justify-content: space-between;
-   align-items: center;
+    justify-content: space-between;
+    align-items: center;
 }
+/* .nav-bar-inner{ 
+   
+} */
 .nav-bar-inner ul{ 
    list-style: none;
    display: flex;
    justify-content: center;
    align-items: center;
-   
+  
 
 
 }

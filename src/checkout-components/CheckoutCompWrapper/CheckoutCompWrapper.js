@@ -3,6 +3,7 @@ import "./CheckoutCompWrapper.css"
 import CheckoutPageLeftSide from '../CheckoutPageLeftSide/CheckoutPageLeftSide';
 import CheckoutPageRightSide from '../CheckoutPageRightSide/CheckoutPageRightSide';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
+import logo from "../../assets/maskot_logo_inwood.png"; 
 
 function CheckoutCompWrapper() {
   const [isClick, setIsClick] = useState(false);
@@ -14,11 +15,17 @@ function CheckoutCompWrapper() {
     <>
       <div className={`check-out-comp-wrapper ${isClick ? "disable-scroll" : ""}`}>
 
+
         <div className='check-out-page-left'>
           <CheckoutPageLeftSide onEdtBtnClick={handleClick} />
+          
         </div>
         <div className='check-out-page-right'>
+          
           <CheckoutPageRightSide />
+          <div className ='logo-div-check-out'>
+            <img  src = {logo} style={{width: '90%', height: 'auto'}} alt='Logo Image'/>
+          </div>
         </div>
 
 

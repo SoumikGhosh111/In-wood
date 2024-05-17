@@ -46,7 +46,9 @@ function Signup() {
     //             // Handle error here
     //         });
     // }
-
+    const isPasswordValid = (password) => { 
+        return password.length > 8; 
+    }
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         const from = e.target;
@@ -55,6 +57,10 @@ function Signup() {
         const passwordConfirm = from.confirmPassword.value;
         const userData = { name, email, password, passwordConfirm };
 
+        if(!isPasswordValid(password)){ 
+            toast.error('Password must be at least 8 characters long.');
+            return;
+        }
         fetch('http://localhost:8000/api/users/register', {
             method: 'POST',
             headers: {

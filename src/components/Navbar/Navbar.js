@@ -4,10 +4,12 @@ import { useLocation } from "react-router-dom"
 
 import { Link } from 'react-router-dom';
 import BusinessCenterRoundedIcon from '@mui/icons-material/BusinessCenterRounded';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import TemporaryDrawer from './Drawer';
 import { getUser } from '../../functions/veifyUser';
 import { verifyAdmin } from '../../functions/verifyAdmin';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'; 
+import logo from "../../assets/maskot_logo_inwood.png"; 
 
 function Navbar() {
     const location = useLocation();
@@ -163,16 +165,18 @@ function Navbar() {
 
 
     return (
-        <div className='nav-bar-wrapper' style={{ WebkitBackdropFilter: scroll > 200 ? "blur(10px)" : "", backdropFilter: scroll > 200 ? "blur(10px)" : "", color: scroll > window.innerHeight ? "black" : "" }}>
+        <div className='nav-bar-wrapper' style={{ WebkitBackdropFilter: scroll > 200 ? "blur(10px)" : "", backdropFilter: scroll > 200 ? "blur(10px)" : "", color: scroll > window.innerHeight ? "black" : "" , boxShadow: scroll > window.innerHeight ?  '0px 0px 14px 0px rgb(182, 182, 182)' : 'none' }}>
             <div className='nav-bar'>
                 <div className='nav-bar-inner'>
                     <ul>
+                    <li><img src={logo} style={{width: '150px', height: 'auto'}} alt='logo image'/></li>
                         <li><Link onClick={handleHomeClick} className={`nav-links ${isMenuActive ? '' : 'active'}`} id='home'>Home</Link></li>
                         <li><Link onClick={handleMenu} className={`nav-links ${isMenuActive ? 'active' : ''}`} id='menu'>Menu</Link></li>
                         <li><Link className='nav-links' id='pages' to={"/checkout"}>Checkout</Link></li>
                     </ul>
 
                     <div className='nav-bar-login-area'>
+                        {/* <div>We are Close at 11.00am</div> */}
                         {showAvater ? 
                             <span className='avater'>
                                 {profilePic !== null ? (
@@ -199,7 +203,7 @@ function Navbar() {
                             </span></>
                         }
 
-                        <span className='cart-icon' onClick={handleMenu}><BusinessCenterRoundedIcon sx={{ transform: "translateY(15%)", color: scroll > window.innerHeight ? "black" : "" }} /></span>
+                        <span className='cart-icon' onClick={handleMenu}><ShoppingCartOutlinedIcon sx={{ transform: "translateY(15%)", color: scroll > window.innerHeight ? "black" : "" }} /></span>
                     </div>
                 </div>
             </div>

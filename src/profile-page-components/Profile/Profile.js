@@ -24,6 +24,7 @@ import bottomLeftSlice from "../../assets/bottom_left_slice_1.png";
 import topLeftSlice from "../../assets/top_left_slice_1.png";
 import mainSlice from "../../assets/main_slice_1.png"
 import background from "../../assets/abc.jpg";
+import pizzaProfile from "../../assets/pizza_profile_img.png"
 
 // toast
 import { ToastContainer, toast } from 'react-toastify';
@@ -198,7 +199,7 @@ function Profile() {
                         {imageChange && (
                             <input className='input-image' type="file" onChange={(e) => handleImageChange(e)} accept="image/" />
                         )} */}
-                        <img src={bgGif} alt='bg gif profile page' />
+                        <img src={pizzaProfile} alt='bg gif profile page' />
                         {/* Hello World */}
                     </div>
                     <div className='profile-page-right'>

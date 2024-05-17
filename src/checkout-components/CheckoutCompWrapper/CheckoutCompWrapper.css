@@ -2,6 +2,7 @@
     display: flex;
     flex: 1;
     min-height: 100vh; 
+    overflow: hidden;
 }
 
 .check-out-page-left{ 
@@ -12,6 +13,10 @@
 .check-out-page-right{ 
     flex: 0.35;
     background-color: var(--check-out-page-right);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
 }
 .pick-up-insc{ 
     position: absolute;
@@ -42,7 +47,12 @@
 }
 
 
-
+.logo-div-check-out{ 
+    width: 100%;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
 
 
 

@@ -7,6 +7,7 @@ import staticImg from "../../assets/pizza_1.png";
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import logo from "../../assets/maskot_logo_inwood.png";
 import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
+import { formatReadableDate } from '../../functions/readbleTimeFormat';
 
 function MyOrder() {
     // const [userId, setUserId] = useState(null);
@@ -79,6 +80,20 @@ function MyOrder() {
     const handleRefresh = () => {
         window.location.reload();
     }
+    const statusColor = (status) => { 
+        console.log(status)
+        switch(status) { 
+            case "deliverd" : 
+                return "#71b422"; 
+            case"Shipped" : 
+                return "#71b422"; 
+            case "cancel" : 
+                return "#e92028"; 
+            default: 
+                return "#f7b500";
+
+        }
+    }
     return (
         <div className='my-order-wrapper' >
             {/* <img src={background} className='bgPizza' style={{zIndex: '-10'}}/> */}
@@ -92,9 +107,12 @@ function MyOrder() {
                             {orderDetails.length > 0 ?
                                 (<>
                                     {orderDetails.map((item, indx) => (
-                                        <>
+                                        <div className='order-container'>
                                             <div className='sl-no'>
-                                                Order No. &nbsp; {orderDetails.length - indx}
+                                                Order No. &nbsp; {orderDetails.length - indx} 
+                                            </div>
+                                            <div className='sl-no'>
+                                                Date. &nbsp; {formatReadableDate(item.createdAt)}
                                             </div>
                                             <div className='my-order-order'>
 
@@ -103,7 +121,7 @@ function MyOrder() {
                                                         <>
                                                             <div className='order-items-my-order'>
                                                                 <div className='item-img-my-order'>
-                                                                    <img src={staticImg} alt='Item Images' />
+                                                                    <img src={product.img} alt='Item Images' />
                                                                 </div>
                                                                 <div className='product-qty'>
                                                                     <div className='product-qty-item-div'>
@@ -113,7 +131,7 @@ function MyOrder() {
                                                                         Name:&nbsp; {product.productName}
                                                                     </div>
                                                                     <div className='product-name-my-order'>
-                                                                        Toppings: &nbsp; {product.description}
+                                                                        Toppings: &nbsp; {product.extraTopings}
                                                                     </div>
                                                                 </div>
 
@@ -132,8 +150,11 @@ function MyOrder() {
                                                         </>
                                                     ))}
                                                     <div className='delivery_status'>
-                                                        <div className='status-myorder'>
+                                                        <div className='status-myorder' style={{backgroundColor: statusColor(item.delivery_status), color: 'white'}}>
                                                             {item.delivery_status}
+                                                        </div>
+                                                        <div className='total-ammnt-my-order'>
+                                                            Total Amount: ${item.total}
                                                         </div>
                                                     </div>
                                                     <div className='delivery_status'>
@@ -146,7 +167,7 @@ function MyOrder() {
 
                                             </div>
 
-                                        </>
+                                        </div>
                                     ))}
                                 </>) :
 

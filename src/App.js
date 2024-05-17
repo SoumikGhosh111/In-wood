@@ -43,7 +43,7 @@ function App() {
             
           </Routes>
         </UserProvider>
-        
+        {/* <Footer /> */}
       </Router>
     </div>
   );

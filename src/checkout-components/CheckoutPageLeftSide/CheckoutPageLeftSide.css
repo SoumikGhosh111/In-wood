@@ -131,6 +131,14 @@
 
 
 
+.free-delivery-check-out{ 
+    width: 80%;
+    text-align: center;
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 700;
+}
+
 
 
 
@@ -148,6 +156,9 @@
         flex-direction: column;
     }
     .vertical-line{ 
+        width: 100%;
+    }
+    .free-delivery-check-out{ 
         width: 100%;
     }
 

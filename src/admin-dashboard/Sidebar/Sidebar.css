@@ -1,7 +1,7 @@
 #sidebar {
     grid-area: sidebar;
     height: 100%;
-    background-color: #263043;
+    background-color: #231812;
     overflow-y: auto;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
@@ -69,7 +69,7 @@
   .back-to-home-side-bar{ 
     position: absolute;
     bottom: 5%;
-    left: 33%;
+    left: 48%;
     transform: translate(-50%);
     border: none;
     padding: 1rem 1rem;
@@ -78,3 +78,51 @@
     border-radius: 10px;
     cursor: pointer;
   }
+
+
+
+
+  .store-container {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+    flex-direction: column;
+    position: absolute;
+    bottom: 15%;
+    left: 48%;
+    transform: translate(-50%);
+    color: white;
+  }
+  
+  .store-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-right: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .status-buttons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .status-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    transition: background-color 0.3s ease;
+  }
+  
+  .status-button.active {
+    background-color: #171717;
+    color: white;
+  }
+  
+  .store-status {
+    font-size: 24px;
+    margin-left: 20px;
+  }
+  

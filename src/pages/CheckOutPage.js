@@ -3,7 +3,7 @@ import CheckoutCompWrapper from '../checkout-components/CheckoutCompWrapper/Chec
 
 function CheckOutPage() {
   return (
-    <div>
+    <div >
       <CheckoutCompWrapper />
     </div>
   )
