@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div >
-      <Router>
+      {/* <Router> */}
         <Navbar />
         <UserProvider>
           <Routes>
@@ -44,7 +44,7 @@ function App() {
           </Routes>
         </UserProvider>
         {/* <Footer /> */}
-      </Router>
+      {/* </Router> */}
     </div>
   );
 }

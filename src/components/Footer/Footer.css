@@ -85,7 +85,12 @@
 .footer-bottom p {
     margin: 0;
 }
-
+.social{ 
+    
+    margin: 0 !important;
+    padding: 0 !important;
+    margin-top: 1rem !important;
+}
 .footer-section.social .social-links {
     display: flex;
     gap: 5px;

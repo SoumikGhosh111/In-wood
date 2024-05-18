@@ -18,6 +18,28 @@ function Footer() {
                             webblogoverflow is completely creative, clean &amp; 100% responsive
                             website. Put your business into next level with Webublogoverflow.
                         </p>
+
+                        <div className="footer-section social">
+                            <h2>Social Links</h2>
+                            <div className="social-links">
+                                <p>
+                                    <a href="#">Facebook</a>
+                                </p>
+                                <p>
+                                    <span />
+                                    <a href="#">Twitter</a>
+                                </p>
+                                <p>
+                                    <a href="#">Pinterest</a>
+                                </p>
+                                <p>
+                                    <a href="#">YouTube</a>
+                                </p>
+                                <p>
+                                    <a href="#">LinkedIn</a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                     <div className="footer-section links">
                         <h2>Important Links</h2>
@@ -58,7 +80,7 @@ function Footer() {
                             <a href="mailto:luckmoshy@gmail.com">luckmoshy@gmail.com</a>
                         </p>
                     </div>
-                    <div className="footer-section social">
+                    {/* <div className="footer-section social">
                         <h2>Social Links</h2>
                         <div className="social-links">
                             <p>
@@ -78,7 +100,7 @@ function Footer() {
                                 <a href="#">LinkedIn</a>
                             </p>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </footer>
             <div className="footer-bottom">

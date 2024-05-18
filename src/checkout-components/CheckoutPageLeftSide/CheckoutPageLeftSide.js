@@ -120,7 +120,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
     <div className='check-out-left-side'>
       <h4>CHECKOUT</h4>
       <h2>INWOOD PIZZA</h2>
-      <button onClick={handleBackEvent} className='back-tio-menu-btn' style={{display: cartItems?.length > 0 ? 'block' : 'none'}}>Explore More</button>
+      <button onClick={handleBackEvent} className='back-tio-menu-btn' style={{display: cartItems?.length > 0 ? 'block' : 'none'}}>Add To Menu</button>
       {/* <ToastContainer /> */}
 
       {/* <div className='check-out-left-side-details'>
@@ -194,7 +194,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
         </div>
       </div>
 
-
+      
       <div className='vertical-line'></div>
 
       <div className='contact-info-wrapper'>

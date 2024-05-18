@@ -176,10 +176,29 @@
 
 
 @media screen and (max-width: 1000px) {
+    .leftBox{ 
+        width: 69%;
+    }
     .leftBox span {
-        font-size: 90px;
+        font-size: 80px;
         font-weight: 700;
         /* margin-left: 1vw; */
+    }
+    .topSlice {
+        width: 280px !important;
+        height: 220px !important;
+        transform: translate(220%, -50%) !important;
+    }
+
+    .bottomSlice {
+        width: 280px !important;
+        height: 220px !important;
+        transform: translate(120%, 45%) !important;
+    }
+ .mainSlice {
+        width: 414px !important;
+        height: 480px !important;
+        transform: translateX(50%);
     }
 }
 
@@ -188,6 +207,35 @@
 
 
 /* media queries */
+
+/* @media screen and (orientation: landscape){ 
+    .leftBox span {
+        font-size: 30px;
+        font-weight: 700;
+    }
+    .topSlice {
+        width: 211px !important;
+        height: 165px !important;
+        transform: translate(220%, -50%) !important;
+    }
+
+    .bottomSlice {
+        width: 210px !important;
+        height: 183px !important;
+        transform: translate(120%, 45%) !important;
+    }
+ .mainSlice {
+        width: 314px !important;
+        height: 373px !important;
+        transform: translateX(50%);
+    }
+    .rightBox {
+        width: fit-content;
+        height: fit-content;
+        transform: translateY(50%);
+
+    }
+} */
 @media (max-width: 768px) {
     .yumm {
         top: 0;
