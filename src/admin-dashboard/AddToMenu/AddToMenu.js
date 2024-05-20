@@ -10,7 +10,7 @@ function AddToMenu() {
     img: uploadedImageUrl,
     catagory: '',
     productType: '',
-    prices: '',
+    prices: [],
     extraOptions: [],
   });
 
@@ -25,6 +25,8 @@ function AddToMenu() {
     text: '',
     price: '',
   });
+
+  const [price, setPrice] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,6 +58,31 @@ function AddToMenu() {
     setFormData({ ...formData, extraOptions: updatedToppings });
   };
 
+  const addPrice = () => {
+    if (price.trim() !== '') {
+      const newPrice = parseFloat(price);
+      setFormData({
+        ...formData,
+        prices: [...formData.prices, newPrice],
+      });
+      setPrice(''); // Reset price input after adding
+    } else {
+      alert('Please enter a price.');
+    }
+  };
+
+  const handlePriceChange = (e, index) => {
+    const { value } = e.target;
+    const updatedPrices = [...formData.prices];
+    updatedPrices[index] = parseFloat(value);
+    setFormData({ ...formData, prices: updatedPrices });
+  };
+
+  const removePrice = (indexToRemove) => {
+    const updatedPrices = formData.prices.filter((_, index) => index !== indexToRemove);
+    setFormData({ ...formData, prices: updatedPrices });
+  };
+
   const handleImageUpload = async (e) => {
     const file = e.target.files[0]; // Get the first selected file
     // setImage(file);
@@ -68,8 +95,6 @@ function AddToMenu() {
 
       setUploadedImageUrl(data.url);
       // console.log(image); 
-
-
     }
     catch (err) {
       console.log(err);
@@ -90,7 +115,7 @@ function AddToMenu() {
         body: JSON.stringify(formData),
       });
       console.log(formData)
-      const result = response.json(); 
+      const result = await response.json(); 
       console.log('Food created:', result);
       setFormData({
         title: '',
@@ -98,7 +123,7 @@ function AddToMenu() {
         img: '',
         catagory: '',
         productType: '',
-        prices: '',
+        prices: [],
         extraOptions: [],
       });
       setUploadedImageUrl('');
@@ -142,7 +167,6 @@ function AddToMenu() {
           name="img"
           value={formData.img}
           onChange={handleChange}
-          required
           disabled
         /><br /><br />
 
@@ -153,7 +177,7 @@ function AddToMenu() {
           accept="image/"
           onChange={(e) => handleImageUpload(e)}
         /><br /><br />
-        {/* <button onClick={handleImageUpload}>Up Load Img</button> */}
+
         <label htmlFor="productType">Product Type:</label><br />
         <input
           type="text"
@@ -162,8 +186,8 @@ function AddToMenu() {
           value={formData.productType}
           onChange={handleChange}
           required
-        // disabled
         /><br /><br />
+
         <label htmlFor="category">Category:</label><br />
         <select
           id="catagory"
@@ -173,21 +197,56 @@ function AddToMenu() {
           required
         >
           <option value="">Select a category</option>
-          <option value="Pizza">Pizza</option>
+          <option value="Pizza large 18inch">Pizza large 18inch</option>
+          <option value="Pizza by Slice">Pizza by Slice</option>
+          <option value="Inwood Favorites">Inwood Favorites</option>
+          <option value="Calzones">Calzones</option>
+          <option value="Family Special">Family Special</option>
+          <option value="Everyday Special">Everyday Special</option>
           <option value="Ice Cream">Ice Cream</option>
           <option value="Milk Shake">Milk Shake</option>
-          <option value="Non Veg Pizza">Non Veg Pizza</option>
+          <option value="Drinks">Drinks</option>
         </select><br /><br />
 
-        <label htmlFor="prices">Prices (comma-separated list):</label><br />
-        <input
-          type="number"
-          id="prices"
-          name="prices"
-          value={formData.prices}
-          onChange={handleChange}
-          required
-        /><br /><br />
+        {formData.catagory === 'Ice Cream' || formData.catagory === 'Milk Shake' ? (
+          <div>
+            <label htmlFor="prices">Prices:</label><br />
+            <input
+              type="number"
+              id="price"
+              name="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+            /> <br/>
+            <button type="button" onClick={addPrice}>Add Price</button><br /><br />
+            {formData.prices.map((price, index) => (
+              <div key={index} className='prices-add-to-menu'> 
+                <input
+                  type="number"
+                  value={price}
+                  onChange={(e) => handlePriceChange(e, index)}
+                />
+                <button
+                  type="button"
+                  onClick={() => removePrice(index)}
+                  className="delete-button"
+                >Delete</button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div>
+            <label htmlFor="prices">Prices:</label><br />
+            <input
+              type="number"
+              id="prices"
+              name="prices"
+              value={formData.prices}
+              onChange={handleChange}
+              required
+            /><br /><br />
+          </div>
+        )}
 
         <div>
           <label htmlFor="toppingText">Topping Name:</label>
@@ -238,6 +297,7 @@ function AddToMenu() {
 }
 
 export default AddToMenu;
+
 
 
 

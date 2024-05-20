@@ -79,7 +79,7 @@ function MobAddToCart({ isClicked }) {
                   <span className='pizza-name'>
                     {item.name} <br />
                     {item.size &&
-                      <>Size: {item.size}</>
+                      <>{item.size}</>
                     }<br />
                     {item.toppings &&
                       <>Toppings: {item.toppings.map((topping) => topping.text).join(', ')}</>

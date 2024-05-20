@@ -12,6 +12,7 @@
     /* overflow-y: hidden; */
     display: flex;
     justify-content: space-between;
+    border: 1px solid rgba(255, 255, 255, 0.118);
 
 }
 .title{ 
@@ -83,6 +84,10 @@
     font-weight: 700;
     text-transform:uppercase;
     margin: 0.5rem 0rem; 
+}
+
+.item-name-wrapper{ 
+    width: 281px;
 }
 
 .item-desc{ 
@@ -263,6 +268,9 @@
         padding: 0.5rem 0.5rem;
         border-radius: 10px;
     }
+    .item-name-wrapper{ 
+        width: 100%;
+    }
     .item-desc{ 
         /* font-size: 5px ; */
         line-height: 10px;
@@ -361,6 +369,7 @@
         padding: 0.5rem 0.5rem;
         border-radius: 10px;
     }
+    
     .cart{ 
         display: none;
     }

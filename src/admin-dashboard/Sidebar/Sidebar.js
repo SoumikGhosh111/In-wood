@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./Sidebar.css";
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
@@ -12,12 +12,35 @@ function Sidebar({ onSideBarItemClicked }) {
         onSideBarItemClicked(indx);
         setActiveClass(indx)
     }
-    const [storeStatus, setStoreStatus] = useState('open'); // State to manage store status
+    const [storeStatus, setStoreStatus] = useState('close'); 
 
-    // Function to handle change in store status
-    const handleStatusChange = (status) => {
-        setStoreStatus(status); // Update store status based on selected option
-        handleStoreUpdate(status); 
+    useEffect(() => {
+        fetchStoreStatus();
+    }, []);
+
+    const fetchStoreStatus = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/store/storeStatus');
+            const result = await response.json();
+            setStoreStatus(result.status); 
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    const handleStatusChange = async () => {
+        const newStatus = storeStatus === 'open' ? 'close' : 'open';
+        setStoreStatus(newStatus);
+        try {
+            await axios.put('http://localhost:8000/store/storeUpdate', { status: newStatus }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            fetchStoreStatus(); 
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const handleHomeClick = () => {
@@ -43,21 +66,22 @@ function Sidebar({ onSideBarItemClicked }) {
     //         console.log(err);
     //     }
     // }
-    const handleStoreUpdate = async (status) => {
-        console.log(status);
-        try {
-          const response = await axios.put('http://localhost:8000/store/storeUpdate', { status }, {
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          });
-      
-          const result = response.data;
-          console.log(result);
-        } catch (error) {
-          console.log(error);
-        }
-      };
+    // const handleStoreUpdate = async (status) => {
+    //     console.log(status);
+    //     try {
+    //         const response = await axios.put('http://localhost:8000/store/storeUpdate', { status }, {
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             }
+    //         });
+
+    //         const result = response.data;
+    //         console.log(result);
+    //         fetchStoreStatus();
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
     return (
         <aside id="sidebar" className=''>
@@ -131,6 +155,19 @@ function Sidebar({ onSideBarItemClicked }) {
                 </div>
                
             </div> */}
+
+            <div className="store-container">
+                <h1 className="store-title">Store</h1>
+                <div className="toggle-switch">
+                    <button
+                        className={`toggle-button ${storeStatus === 'open' ? 'active' : ''}`}
+                        onClick={handleStatusChange}
+                    >
+                        <div className={`toggle-circle ${storeStatus === 'open' ? 'open' : ''}`}></div>
+                    </button>
+                </div>
+                <span style={{ textTransform: 'uppercase' }}>{storeStatus}</span>
+            </div>
 
             <button className='back-to-home-side-bar' onClick={handleHomeClick}>Back to Home</button>
         </aside>

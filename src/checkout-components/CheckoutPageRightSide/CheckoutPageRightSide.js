@@ -70,7 +70,7 @@ function CheckoutPageRightSide() {
   const handlePlaceOrderClick = () => {
     if (cartItems.length === 0) {
       // alert("No items in the cart");
-      toast.error("No items in the cart")
+      toast.error("No items in the cart"); 
     }
     else if (userData.userId === null && userData.zipCode === null) {
       // alert("Save the address data");
@@ -119,7 +119,7 @@ function CheckoutPageRightSide() {
         })
         .catch((err) => {
           console.log(err);
-          toast.error(err);
+          toast.error(err.message);
         })
     }
   }
