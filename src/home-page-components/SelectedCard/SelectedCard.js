@@ -20,7 +20,7 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
     const milkShake = ['Sm', 'Lg'];
 
 
-    console.log(cartItems)
+    // console.log(cartItems)
 
     const [quantity, setQuantity] = useState(1);
     useEffect(() => {

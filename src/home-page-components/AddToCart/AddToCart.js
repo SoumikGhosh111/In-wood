@@ -21,7 +21,7 @@ function AddToCart({ onOrderClick }) {
     0
   )
 
-  console.log(cartItems, "this is from add to cart");
+  // console.log(cartItems, "this is from add to cart");
 
   const handleOrderClick = async () => { 
     const isValid = await getUser(); 

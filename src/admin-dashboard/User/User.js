@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./User.css";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import { baseUrl } from '../../functions/baseUrl';
 
 function User() {
   const [users, setUsers] = useState(null);
@@ -17,7 +18,7 @@ function User() {
     try {
       const token = localStorage.getItem('token');
       const email = localStorage.getItem("userEmail"); 
-      const response = await fetch(`http://localhost:8000/admin/alluser/${email}`, {
+      const response = await fetch(`${baseUrl}/admin/alluser/${email}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

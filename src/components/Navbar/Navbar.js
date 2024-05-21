@@ -10,6 +10,7 @@ import { getUser } from '../../functions/veifyUser';
 import { verifyAdmin } from '../../functions/verifyAdmin';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'; 
 import logo from "../../assets/maskot_logo_inwood.png"; 
+import { baseUrl } from '../../functions/baseUrl';
 
 function Navbar() {
     const location = useLocation();
@@ -111,7 +112,7 @@ function Navbar() {
 
     const fetchUserDetails = async() => { 
         try {
-            const response = await fetch(`http://localhost:8000/api/users/userDetails/${useremail}`);
+            const response = await fetch(`${baseUrl}/api/users/userDetails/${useremail}`);
             const result = await response.json();
             // console.log(result);
             // if (result && result.data && result.data.user) {

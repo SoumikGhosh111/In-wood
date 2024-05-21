@@ -5,6 +5,7 @@ import AddToCart from '../AddToCart/AddToCart';
 import MobAddToCart from '../MobAddToCart/MobAddToCart';
 import Backdrop from '@mui/material/Backdrop';
 import SelectedCard from '../SelectedCard/SelectedCard';
+import { baseUrl } from '../../functions/baseUrl';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart, decrementQty } from '../../redux/slices/cartSlice';
@@ -36,7 +37,8 @@ function MenuSection() {
     const [drinks, setDrinks] = useState(null);
 
 
-    console.log(window.innerWidth);
+
+    // console.log(window.innerWidth);
 
     const [catagoryMenu, setCatagoryMenu] = useState([]);
 
@@ -58,14 +60,14 @@ function MenuSection() {
 
 
     const handleMobClick = () => {
-        console.log("I am Clicked")
+        // console.log("I am Clicked")
     }
 
 
 
     // fetching the data
     useEffect(() => {
-        fetch(`http://localhost:8000/api/product/getAllFood/${active}`)
+        fetch(`${baseUrl}/api/product/getAllFood/${active}`)
             .then(res => res.json())
             .then((data) => setMenu(data.data.food))
             // .then(data => setPizza(data.data.food.filter((item) => item.catagory === "Pizza")))
@@ -87,7 +89,7 @@ function MenuSection() {
 
     const fetchFoodData = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/product/getAllFood/${active}`);
+            const response = await fetch(`${baseUrl}/api/product/getAllFood/All`);
             if (!response.ok) {
                 throw new Error('Failed to fetch data');
             }
@@ -137,9 +139,9 @@ function MenuSection() {
         fetchFoodData();
     }, []);
 
-    console.log(pizza)
-    console.log(iceCream, "iceCream")
-    console.log(milShake, "milkSHake")
+    // console.log(pizza)
+    // console.log(iceCream, "iceCream")
+    // console.log(milShake, "milkSHake")
     // console.log(nonVeg, "nonVeg");
 
 
@@ -152,7 +154,7 @@ function MenuSection() {
         if (window.innerWidth < 993) {
             animate1("#order-cart-mob", { pointerEvents: "all", opacity: 1 }, { duration: 1 });
         }
-        console.log("I am Goto Cart");
+        // console.log("I am Goto Cart");
     }
 
     // const directOrder = (item) => { 
@@ -167,13 +169,13 @@ function MenuSection() {
     //     goTocart(); 
     // }
     const handleOpen = (id) => {
-        fetch(`http://localhost:8000/api/product/getFood/${id}`)
+        fetch(`${baseUrl}/api/product/getFood/${id}`)
             .then(res => res.json())
             .then(data => setItemData(data.data.food))
             .catch(err => console.log(err));
         setOpen(true);
     };
-    console.log(itemData)
+    // console.log(itemData)
 
     const handleActiveClassClick = (indx) => {
         setActive(indx);

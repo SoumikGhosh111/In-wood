@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AddToMenu.css';
-
+import { baseUrl } from '../../functions/baseUrl';
 function AddToMenu() {
   const [uploadedImageUrl, setUploadedImageUrl] = useState('');
   const [formData, setFormData] = useState({
@@ -91,7 +91,7 @@ function AddToMenu() {
     formData.append("image", file);
 
     try {
-      const { data } = await axios.post('http://localhost:8000/api/image/uploadImage', formData);
+      const { data } = await axios.post(`${baseUrl}/api/image/uploadImage`, formData);
 
       setUploadedImageUrl(data.url);
       // console.log(image); 
@@ -106,7 +106,7 @@ function AddToMenu() {
     try {
       const token = localStorage.getItem('token'); 
       const email = localStorage.getItem('userEmail'); 
-      const response = await fetch(`http://localhost:8000/api/product/addfood/${email}`, {
+      const response = await fetch(`${baseUrl}/api/product/addfood/${email}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

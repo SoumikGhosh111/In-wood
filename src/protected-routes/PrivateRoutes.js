@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useUserContext } from '../functions/useUserContext';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import { baseUrl } from '../functions/baseUrl';
 
 export default function ProtectedRoutes({children}) {
     const {user, setUser} = useUserContext();
@@ -9,7 +10,7 @@ export default function ProtectedRoutes({children}) {
     const getUser = async () => {
         try {
             const res = await axios.post(
-                "http://localhost:8000/api/users/get-user",{
+                `${baseUrl}/api/users/get-user`,{
                 token: localStorage.getItem("token")
             }, { 
                     headers: {

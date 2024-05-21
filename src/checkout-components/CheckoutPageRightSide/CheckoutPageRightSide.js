@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import logo from "../../assets/maskot_logo_inwood.png";
+import { baseUrl } from '../../functions/baseUrl';
 
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -106,7 +107,7 @@ function CheckoutPageRightSide() {
       const id = userData.userId;
 
       axios
-        .post('http://localhost:8000/api/stripe/create-checkout-session', {
+        .post(`${baseUrl}/api/stripe/create-checkout-session`, {
           data: data,
           userId: id,
         })
@@ -130,11 +131,11 @@ function CheckoutPageRightSide() {
   const fetchStoreOpenCloseData = async () => {
 
     try {
-      const response = await fetch('http://localhost:8000/store/storeStatus');
+      const response = await fetch(`${baseUrl}/store/storeStatus`);
       const result = await response.json();
 
       if(result.status === 'close'){ 
-        toast.success('Oops Store is closed'); 
+        toast.error('Oops Store is closed'); 
       }
       setPopUp(result.status === 'open');
     }

@@ -5,6 +5,7 @@ import "./Login.css";
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { baseUrl } from '../../functions/baseUrl';
 
 
 function Login({ onButtonClick }) {
@@ -18,7 +19,7 @@ function Login({ onButtonClick }) {
         const password = from.password.value
         const userData = { email, password }
 
-        fetch('http://localhost:8000/api/users/login', {
+        fetch(`${baseUrl}/api/users/login`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"

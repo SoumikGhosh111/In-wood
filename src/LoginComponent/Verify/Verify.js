@@ -6,6 +6,8 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 
+import { baseUrl } from '../../functions/baseUrl';
+
 import axios from 'axios';
 
 function Verify() {
@@ -20,7 +22,7 @@ function Verify() {
     const handleVerifyOTP = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/users/otpVerify', { email, combineOtp, token }, { 
+            const response = await axios.post(`${baseUrl}/api/users/otpVerify`, { email, combineOtp, token }, { 
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}` // Correct syntax for setting Authorization header
                 }

@@ -5,6 +5,7 @@ import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 import RestaurantMenuRoundedIcon from '@mui/icons-material/RestaurantMenuRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import axios from 'axios';
+import { baseUrl } from '../../functions/baseUrl';
 
 function Sidebar({ onSideBarItemClicked }) {
     const [activeClass, setActiveClass] = useState(1)
@@ -12,7 +13,7 @@ function Sidebar({ onSideBarItemClicked }) {
         onSideBarItemClicked(indx);
         setActiveClass(indx)
     }
-    const [storeStatus, setStoreStatus] = useState('close'); 
+    const [storeStatus, setStoreStatus] = useState('close');
 
     useEffect(() => {
         fetchStoreStatus();
@@ -20,9 +21,9 @@ function Sidebar({ onSideBarItemClicked }) {
 
     const fetchStoreStatus = async () => {
         try {
-            const response = await fetch('http://localhost:8000/store/storeStatus');
+            const response = await fetch(`${baseUrl}/store/storeStatus`);
             const result = await response.json();
-            setStoreStatus(result.status); 
+            setStoreStatus(result.status);
         } catch (err) {
             console.log(err);
         }
@@ -32,15 +33,15 @@ function Sidebar({ onSideBarItemClicked }) {
         const newStatus = storeStatus === 'open' ? 'close' : 'open';
         setStoreStatus(newStatus);
         try {
-            const email = localStorage.getItem('userEmail'); 
-            const token = localStorage.getItem('token'); 
-            await axios.put(`http://localhost:8000/store/storeUpdate/${email}`, { status: newStatus }, {
+            const email = localStorage.getItem('userEmail');
+            const token = localStorage.getItem('token');
+            await axios.put(`${baseUrl}/store/storeUpdate/${email}`, { status: newStatus }, {
                 headers: {
-                    'Content-Type': 'application/json', 
+                    'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 }
             });
-            fetchStoreStatus(); 
+            fetchStoreStatus();
         } catch (error) {
             console.log(error);
         }
@@ -161,15 +162,17 @@ function Sidebar({ onSideBarItemClicked }) {
 
             <div className="store-container">
                 <h1 className="store-title">Store</h1>
-                <div className="toggle-switch">
-                    <button
-                        className={`toggle-button ${storeStatus === 'open' ? 'active' : ''}`}
-                        onClick={handleStatusChange}
-                    >
-                        <div className={`toggle-circle ${storeStatus === 'open' ? 'open' : ''}`}></div>
-                    </button>
+                <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', gap: '0.5rem'}}>
+                    <div className="toggle-switch">
+                        <button
+                            className={`toggle-button ${storeStatus === 'open' ? 'active' : ''}`}
+                            onClick={handleStatusChange}
+                        >
+                            <div className={`toggle-circle ${storeStatus === 'open' ? 'open' : ''}`}></div>
+                        </button>
+                    </div>
+                    <span style={{ textTransform: 'uppercase', transform: 'translateY(10%)' }}>{storeStatus}</span>
                 </div>
-                <span style={{ textTransform: 'uppercase' }}>{storeStatus}</span>
             </div>
 
             <button className='back-to-home-side-bar' onClick={handleHomeClick}>Back to Home</button>

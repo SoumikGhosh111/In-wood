@@ -5,6 +5,7 @@ import bgGif from "../../assets/profile_page_demo.gif"
 // functions
 import { getUser } from '../../functions/veifyUser';
 import { useLocation } from 'react-router-dom';
+import { baseUrl } from '../../functions/baseUrl';
 
 // axios
 import axios from 'axios';
@@ -56,7 +57,7 @@ function Profile() {
         formData.append("image", file);
 
         try {
-            const { data } = await axios.post('http://localhost:8000/api/image/uploadImage', formData);
+            const { data } = await axios.post(`${baseUrl}/api/image/uploadImage`, formData);
 
             setImage(data.url);
             // console.log(image); 
@@ -71,7 +72,7 @@ function Profile() {
     // function to fetch user details
     const getUserDetails = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/users/userDetails/${useremail}`);
+            const response = await fetch(`${baseUrl}/api/users/userDetails/${useremail}`);
             const result = await response.json();
             console.log(result);
             if (result && result.data && result.data.user) {
@@ -108,7 +109,7 @@ function Profile() {
                 userId: userId,
                 profileImg: image
             }
-            const response = await fetch(`http://localhost:8000/api/users/update`, {
+            const response = await fetch(`${baseUrl}/api/users/update`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -136,7 +137,7 @@ function Profile() {
                 zipCode: zipCode
             };
 
-            const response = await fetch(`http://localhost:8000/api/users/update`, {
+            const response = await fetch(`${baseUrl}/api/users/update`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

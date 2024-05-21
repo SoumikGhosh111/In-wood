@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import background from "../../assets/abc.jpg";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { baseUrl } from '../../functions/baseUrl';
 
 const Forgetpassword = () => {
     const [email, setEmail] = useState('');
@@ -25,9 +26,9 @@ const Forgetpassword = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8000/api/users/sendOtp', { email });
+            const response = await axios.post(`${baseUrl}/api/users/sendOtp`, { email });
             setResolved(true) 
-            console.log(email);
+            // console.log(email);
             setMessage(response.data.message);
             setIsEmailChecked(false);
             setIsOtpChecked(true);
@@ -42,7 +43,7 @@ const Forgetpassword = () => {
     const handleVerifyOTP = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/users/verifyOtp', { email, otp });
+            const response = await axios.post(`${baseUrl}/api/users/verifyOtp`, { email, otp });
             setMessage(response.data.message);
             setUserId(response.data.userId);
             setIsOtpChecked(false);
@@ -57,7 +58,7 @@ const Forgetpassword = () => {
     const handleChangePassword = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8000/api/users/changePassword', { userId, newPassword });
+            const response = await axios.post(`${baseUrl}/api/users/changePassword`, { userId, newPassword });
             setMessage(response.data.message);
             toast.success(response.data.message);
             setTimeout(() => {

@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 import "./Signup.css"
+import { baseUrl } from '../../functions/baseUrl';
 import axios from "axios"
 
 function Signup() {
@@ -61,7 +62,7 @@ function Signup() {
             toast.error('Password must be at least 8 characters long.');
             return;
         }
-        fetch('http://localhost:8000/api/users/register', {
+        fetch(`${baseUrl}/api/users/register`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

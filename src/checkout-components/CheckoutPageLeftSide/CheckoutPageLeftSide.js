@@ -4,6 +4,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import EmojiPeopleRoundedIcon from '@mui/icons-material/EmojiPeopleRounded';
 import BasicSwitches from '../../components/Switch/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { baseUrl } from '../../functions/baseUrl';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -47,7 +48,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
 
   const getUserDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/api/users/userDetails/${useremail}`);
+      const response = await fetch(`${baseUrl}/api/users/userDetails/${useremail}`);
       const result = await response.json();
       console.log(result);
       if (result && result.data && result.data.user) {

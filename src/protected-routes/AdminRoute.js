@@ -3,6 +3,7 @@ import { useUserContext } from '../functions/useUserContext';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 import NotFound from '../components/NotFound/NotFound';
+import { baseUrl } from '../functions/baseUrl';
 
 const AdminRoute = ({ children }) => {
     const { user, setUser } = useUserContext();
@@ -16,7 +17,7 @@ const AdminRoute = ({ children }) => {
                 }
 
                 const response = await axios.post(
-                    "http://localhost:8000/api/users/get-user",
+                    `${baseUrl}/api/users/get-user`,
                     { token },
                     {
                         headers: {

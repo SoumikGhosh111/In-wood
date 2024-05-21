@@ -8,6 +8,7 @@ import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
 import logo from "../../assets/maskot_logo_inwood.png";
 import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
 import { formatReadableDate } from '../../functions/readbleTimeFormat';
+import { baseUrl } from '../../functions/baseUrl';
 
 function MyOrder() {
     // const [userId, setUserId] = useState(null);
@@ -16,7 +17,7 @@ function MyOrder() {
 
     const getUserDetails = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/users/userDetails/${useremail}`);
+            const response = await fetch(`${baseUrl}/api/users/userDetails/${useremail}`);
             const result = await response.json();
             console.log(result, "this is result");
             // setUserId(result.data.user._id);
@@ -28,7 +29,7 @@ function MyOrder() {
 
     const getOrderDetails = async (userId) => { // Accept userId as a parameter
         try {
-            const response = await fetch(`http://localhost:8000/api/users/orderDetails/${userId}`);
+            const response = await fetch(`${baseUrl}/api/users/orderDetails/${userId}`);
             const result = await response.json();
             setOrderDetails(result);
             console.log(result, "this is result lll");
@@ -39,7 +40,7 @@ function MyOrder() {
 
     const handleDownload = async (orderId) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/invoice/pdf/${orderId}`, {
+            const response = await fetch(`${baseUrl}/api/invoice/pdf/${orderId}`, {
                 method: 'GET', // Ensure method is explicitly set to GET
                 headers: {
                     Accept: 'application/pdf', // Set Accept header to specify PDF response
