@@ -4,7 +4,7 @@ import "./CheckoutPageRightSide.css";
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
-import logo from "../../assets/maskot_logo_inwood.png"; 
+import logo from "../../assets/maskot_logo_inwood.png";
 
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -20,6 +20,7 @@ function CheckoutPageRightSide() {
   const cartItems = useSelector((state) => state.cart.cart);
   const userData = useSelector((state) => state.userdata);
   const [deliveryCharges, setDeliveryCharges] = useState(0);
+  // const [openClose, setOpenClose] = useState(null);
   console.log(userData);
   const totalAmnt = cartItems.reduce((total, item) =>
     total + item.qty * item.price,
@@ -70,7 +71,7 @@ function CheckoutPageRightSide() {
   const handlePlaceOrderClick = () => {
     if (cartItems.length === 0) {
       // alert("No items in the cart");
-      toast.error("No items in the cart"); 
+      toast.error("No items in the cart");
     }
     else if (userData.userId === null && userData.zipCode === null) {
       // alert("Save the address data");
@@ -126,6 +127,25 @@ function CheckoutPageRightSide() {
 
 
 
+  const fetchStoreOpenCloseData = async () => {
+
+    try {
+      const response = await fetch('http://localhost:8000/store/storeStatus');
+      const result = await response.json();
+
+      if(result.status === 'close'){ 
+        toast.success('Oops Store is closed'); 
+      }
+      setPopUp(result.status === 'open');
+    }
+    catch (err) {
+      toast.error(err.message); 
+    }
+
+  }
+
+
+
 
 
 
@@ -133,7 +153,7 @@ function CheckoutPageRightSide() {
   return (
     <div className='check-out-right-side'>
       <div style={{ display: popUp ? 'none' : 'block' }}>
-        <button className='place-order-button' onClick={() => setPopUp(true)} >
+        <button className='place-order-button' onClick={fetchStoreOpenCloseData} >
           <div className='place-order-button-inner' >
             <span>PLACE ODER</span>
             {/* <spann>${(parseFloat(totalAmnt) + parseFloat(SupportFee) + parseFloat(tax) + parseFloat(tipAmnt)).toFixed(2)}</spann> */}

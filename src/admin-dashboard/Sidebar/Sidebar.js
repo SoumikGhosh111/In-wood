@@ -32,9 +32,12 @@ function Sidebar({ onSideBarItemClicked }) {
         const newStatus = storeStatus === 'open' ? 'close' : 'open';
         setStoreStatus(newStatus);
         try {
-            await axios.put('http://localhost:8000/store/storeUpdate', { status: newStatus }, {
+            const email = localStorage.getItem('userEmail'); 
+            const token = localStorage.getItem('token'); 
+            await axios.put(`http://localhost:8000/store/storeUpdate/${email}`, { status: newStatus }, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json', 
+                    'Authorization': `Bearer ${token}`
                 }
             });
             fetchStoreStatus(); 

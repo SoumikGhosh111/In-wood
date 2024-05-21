@@ -4,6 +4,7 @@ import axios from "axios";
 import staticImg from "../../assets/pizza_1.png"
 
 import { redableTimeStamp } from '../../functions/readbleTimeFormat';
+import { baseUrl } from '../../functions/baseUrl';
 
 function Orders() {
 
@@ -29,7 +30,7 @@ function Orders() {
         throw new Error('Token not found');
       }
 
-      const response = await fetch(`http://localhost:8000/api/stripe/allOrder/${email}`, {
+      const response = await fetch(`${baseUrl}/api/stripe/allOrder/${email}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +67,7 @@ function Orders() {
     console.log(orderId);
     console.log(value);
     try {
-      const { data } = await axios.put(`http://localhost:8000/admin/order-status/${orderId}`, {
+      const { data } = await axios.put(`${baseUrl}/admin/order-status/${orderId}`, {
         delivery_status: value,
       });
       fetchAllOrders();

@@ -169,6 +169,8 @@ function Menu() {
     formData.append("image", file);
 
     try {
+      const email = localStorage.getItem('userEmail'); 
+      const token = localStorage.getItem('token'); 
       const { data } = await axios.post('http://localhost:8000/api/image/uploadImage', formData);
 
 
@@ -177,10 +179,11 @@ function Menu() {
         id: id
       }
 
-      const response = await fetch('http://localhost:8000/api/product/productImage', {
+      const response = await fetch(`http://localhost:8000/api/product/productImage/${email}`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(imageData)
       })
