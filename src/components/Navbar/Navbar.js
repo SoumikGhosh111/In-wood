@@ -163,6 +163,12 @@ function Navbar() {
         return null; 
     }
 
+    const styleMobView = {
+        WebkitBackdropFilter: scroll > 200 ? 'blur(10px)' : '',
+        backdropFilter: scroll > 200 ? 'blur(10px)' : '',
+        color: scroll > window.innerHeight ? 'black' : '',
+        boxShadow: scroll > window.innerHeight ? '0px 0px 14px 0px rgb(182, 182, 182)' : 'none',
+    };
 
 
     return (
@@ -208,9 +214,9 @@ function Navbar() {
                     </div>
                 </div>
             </div>
-            <div className='mob-view-nav'><TemporaryDrawer /></div>
+            <div className='mob-view-nav' style={{backgroundColor: scroll > window.innerHeight ? '#e7e7e7' : ''}}><TemporaryDrawer /></div>
         </div>
     )
 }
 
-export default Navbar
+export default Navbar;
