@@ -91,7 +91,7 @@ const Forgetpassword = () => {
                     <div className='form-title change-password' ><h1>Change Password</h1></div>
                     <div className='emailTxt'>
                         <form className="form forget-pass-form-body" >
-                            <div className="form__group" style={{ display: isEmailChecked ? 'block' : 'none' }}>
+                            <div className="form__group forget-page-inputs" style={{ display: isEmailChecked ? 'block' : 'none' }}>
                                 <h5>Enter e-mail</h5>
                                 <input
 
