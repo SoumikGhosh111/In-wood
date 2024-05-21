@@ -28,14 +28,27 @@
     .pass-cnfm-pass{ 
        padding: 0;
         margin: 0;
+    }
+    .sign-up-frTxt{ 
         
     }
 }
 
 
-@media screen and (max-width: 410px) {
+@media screen and (max-width: 768px) {
     .passBox{ 
         width: 95%;
         justify-content: space-around;
+        margin-left: 1.5rem;
+    }
+}
+
+
+@media screen and (max-width: 376px) {
+    .passBox{ 
+        margin-left: 1.5rem;
+        width: 90% ;
+        justify-content: space-around;
+
     }
 }

@@ -105,7 +105,7 @@ function Footer() {
             </footer>
             <div className="footer-bottom">
                 <p style={{ textAlign: "center" }}>
-                    © All Rights Reserved by Webublogoverflow.blogspot - (with all love)
+                    © All Rights Reserved by inwoodpizza.com - (with all love)
                 </p>
             </div>
         </div>

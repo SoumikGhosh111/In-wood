@@ -113,7 +113,6 @@
     background-color: #cccccc;
     color: #010117;
 }
-
 @media (max-width: 1024px) {
     .footer-container {
         flex-direction: column;

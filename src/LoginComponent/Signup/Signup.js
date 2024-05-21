@@ -151,9 +151,8 @@ function Signup() {
                                     />
                                 </div>
                             </div>
-                            <div className='frTxt'>
+                            <div className='frTxt sign-up-frTxt'>
                                 <p className="mb-5 pb-lg-2" style={{ color: 'white' }}>have an account? <Link to={'/login'} style={{ color: '#e60909' }}> login here</Link></p>
-
                             </div>
                             <div className="loginbtn" style={{ marginTop: "7vh" }}>
                                 <button type="submit" className='loginTxtbtn' style={{ fontWeight: "bold", cursor: "pointer" }} >
