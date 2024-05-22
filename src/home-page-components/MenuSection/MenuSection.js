@@ -129,7 +129,7 @@ function MenuSection() {
 
 
         } catch (error) {
-            console.error('Error fetching food data:', error);
+            console.log('Error fetching food data:', error);
         }
     };
     useEffect(() => {

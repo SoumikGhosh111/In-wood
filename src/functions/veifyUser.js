@@ -1,10 +1,11 @@
 // import { useNavigate } from 'react-router-dom'; // Import Navigate if you're using react-router-dom
 import axios from 'axios'; 
+import { baseUrl } from './baseUrl';
 
 export const getUser = async () => {
     try {
         const res = await axios.post(
-            "http://localhost:8000/api/users/get-user",
+            `${baseUrl}/api/users/get-user`,
             {
                 token: localStorage.getItem("token")
             },
