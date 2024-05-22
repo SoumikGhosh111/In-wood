@@ -155,10 +155,13 @@ function CheckoutPageRightSide() {
     <div className='check-out-right-side'>
       <div style={{ display: popUp ? 'none' : 'block' }}>
         <button className='place-order-button' onClick={fetchStoreOpenCloseData} >
-          <div className='place-order-button-inner' >
-            <span>PLACE ODER</span>
+          {/* <div className='place-order-button-inner' > */}
+            {/* <span> */}
+              PLACE ODER
+
+            {/* </span> */}
             {/* <spann>${(parseFloat(totalAmnt) + parseFloat(SupportFee) + parseFloat(tax) + parseFloat(tipAmnt)).toFixed(2)}</spann> */}
-          </div>
+          {/* </div> */}
         </button>
 
         <div className='tax-tip-local'>

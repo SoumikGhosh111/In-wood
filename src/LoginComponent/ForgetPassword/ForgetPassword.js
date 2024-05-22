@@ -16,27 +16,27 @@ const Forgetpassword = () => {
     const [isEmailChecked, setIsEmailChecked] = useState(true);
     const [isOtpChecked, setIsOtpChecked] = useState(false);
     const [isNewPasswordChecked, setIsNewPasswordChecked] = useState(false);
-    const [resolved, setResolved] = useState(false); 
+    const [resolved, setResolved] = useState(false);
     const navigate = useNavigate();
 
 
 
-    
+
     const handleForgotPassword = async (e) => {
         e.preventDefault();
 
         try {
             const response = await axios.post(`${baseUrl}/api/users/sendOtp`, { email });
-            setResolved(true) 
+            setResolved(true)
             // console.log(email);
             setMessage(response.data.message);
             setIsEmailChecked(false);
             setIsOtpChecked(true);
-            toast.success(response.data.message); 
+            toast.success(response.data.message);
         } catch (error) {
             console.error('Failed to initiate forgot password:', error);
             toast.error(error.message);
-            setResolved(false); 
+            setResolved(false);
         }
     };
 
@@ -70,6 +70,13 @@ const Forgetpassword = () => {
         }
     };
 
+    const handleBackToHome = () => {
+
+        window.location.href = '/';
+
+        // Clearing the browser's history
+        window.history.replaceState(null, '', '/');
+    }
     return (
         // <div>
         //   <h2>Forgot Password</h2>
@@ -136,7 +143,7 @@ const Forgetpassword = () => {
                             </div> */}
                             <div className="loginbtn">
                                 <button className='loginTxtbtn' style={{ fontWeight: "bold", display: isEmailChecked ? 'block' : 'none' }} onClick={(e) => handleForgotPassword(e)}>
-                                   Send Otp
+                                    Send Otp
                                 </button>
                                 <button className='loginTxtbtn' style={{ fontWeight: "bold", display: isOtpChecked ? 'block' : 'none' }} onClick={(e) => handleVerifyOTP(e)}>
                                     Verify Otp
@@ -145,6 +152,9 @@ const Forgetpassword = () => {
                                     Change Password
                                 </button>
                             </div>
+                                <div className='back-to-home-forget'>
+                                    <Link className="small" onClick={handleBackToHome} style={{ color: 'white' }}>Back to Home</Link>
+                                </div>
                             <div className='custom-message'>{message}</div>
                         </form>
 
