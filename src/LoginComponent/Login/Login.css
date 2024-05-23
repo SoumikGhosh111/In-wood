@@ -55,7 +55,7 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    /* object-fit: cover; */
     /* display: none; */
 }
 .form-body-wrapper{ 
@@ -64,6 +64,7 @@
     align-items: center;
     height: 100vh;
     overflow: hidden;
+
 }
 .formBody{
     border-radius: 25px;
