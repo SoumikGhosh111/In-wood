@@ -4,7 +4,7 @@ import Login from '../LoginComponent/Login/Login';
 
 function LoginPage() {
   return (
-    <div style={{overflow: 'hidden', height: '100vh'}}>
+    <div>
       {/* <UserRegister /> */}
       <Login />
     </div>
