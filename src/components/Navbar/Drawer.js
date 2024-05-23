@@ -132,10 +132,10 @@ export default function TemporaryDrawer() {
 
                         {/* <div className='hor-line'></div> */}
                     </div>
-                    <div className='theme-switcher'>
+                    {/* <div className='theme-switcher'>
                         Dark Theme
                         <SwitchTheme />
-                    </div>
+                    </div> */}
                 </div>
                 <ToastContainer />
             </Drawer>

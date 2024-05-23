@@ -67,17 +67,17 @@ function Footer() {
                             Phone:
                             <br />
                             <br /> <br />
-                            +255 789 54 50 40
-                            <br /> +2255 766 90 94 00
+                            +1 (646) 642-9432
+                            {/* <br /> +2255 766 90 94 00 */}
                         </p>
                         <br />
                         <p>
                             Email:
                             <br /> <br />
-                            <a href="mailto:support@webblogoverflow.com">
-                                support@webblogoverflow.com
+                            <a href="mailto:info@inwiodpizzallc.com">
+                            info@inwiodpizzallc.com
                             </a>{" "}
-                            <a href="mailto:luckmoshy@gmail.com">luckmoshy@gmail.com</a>
+                            {/* <a href="mailto:luckmoshy@gmail.com">luckmoshy@gmail.com</a> */}
                         </p>
                     </div>
                     {/* <div className="footer-section social">
@@ -105,7 +105,7 @@ function Footer() {
             </footer>
             <div className="footer-bottom">
                 <p style={{ textAlign: "center" }}>
-                    © All Rights Reserved by inwoodpizza.com - (with all love)
+                    © All Rights Reserved by inwoodpizzallc.com
                 </p>
             </div>
         </div>
