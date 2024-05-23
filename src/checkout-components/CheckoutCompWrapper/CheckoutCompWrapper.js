@@ -23,9 +23,9 @@ function CheckoutCompWrapper() {
         <div className='check-out-page-right'>
           
           <CheckoutPageRightSide />
-          <div className ='logo-div-check-out'>
+          {/* <div className ='logo-div-check-out'>
             <img  src = {logo} style={{width: '90%', height: 'auto'}} alt='Logo Image'/>
-          </div>
+          </div> */}
         </div>
 
 

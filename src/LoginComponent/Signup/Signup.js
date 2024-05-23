@@ -48,7 +48,7 @@ function Signup() {
     //         });
     // }
     const isPasswordValid = (password) => { 
-        return password.length > 8; 
+        return password.length > 7; 
     }
     const handleOnSubmit = async (e) => {
         e.preventDefault();
