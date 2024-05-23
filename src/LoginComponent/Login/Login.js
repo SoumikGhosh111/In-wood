@@ -60,9 +60,9 @@ function Login({ onButtonClick }) {
 
 
     return (
-        <div className='' style={{overflow: 'hidden'}}>
+        <div className='' style={{height: '100vh'}}>
             <img className='bgPizza' src={background} alt="PizzaImg" />
-            <div className='form-body-wrapper'>
+            <div className='form-body-wrapper' >
                 <div className='formBody'>
                     <div className='form-title'><h1>log in</h1></div>
                     <div className='emailTxt'>
