@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../functions/veifyUser';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import logo from "../../assets/maskot_logo_inwood.png"; 
+import logo from "../../assets/inwood_logo_transparent.png"; 
 
 
 
@@ -82,7 +82,7 @@ export default function TemporaryDrawer() {
     return (
         <div className='drawer-wrapper'>
             {/* <input placeholder='Search' style={{ opacity: scroll > window.innerHeight * 0.5 ? "1" : "0" }} /> */}
-            <img src={logo} alt = 'logo Image' style={{width: '140px', height: 'auto'}}/>
+            <img src={logo} alt = 'logo Image' style={{width: '50px', height: 'auto'}}/>
             <IconButton onClick={() => setOpen(true)}><MenuRoundedIcon sx={{ color: scroll > window.innerHeight ? "black" : "var(--white)" }} /></IconButton>
             <Drawer
                 anchor={"top"}

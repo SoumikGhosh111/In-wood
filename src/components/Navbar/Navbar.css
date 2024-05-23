@@ -14,7 +14,7 @@
     /* border: 1px solid blue; */
 }
 .mob-view-nav{ 
-    
+
 }
 .drawer-wrapper{ 
     display: none;
@@ -215,7 +215,8 @@
         justify-content: space-between;
         align-items: center;
         width: 100%;
-       
+        padding: 0.5rem 1rem;
+        /* border: 1px solid red; */
         /* margin-top: 1rem; */
     }
     .mob-view-nav{ 

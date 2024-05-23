@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "./ForgetPassword.css"
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import background from "../../assets/abc.jpg";
+import background from "../../assets/abc.webp";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { baseUrl } from '../../functions/baseUrl';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import background from "../../assets/abc.jpg";
+import background from "../../assets/abc.webp";
 import "./Login.css";
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';

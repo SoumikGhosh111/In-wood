@@ -30,7 +30,10 @@
         margin: 0;
     }
     .sign-up-frTxt{ 
-        
+        margin-top: 1rem;
+        /* margin-left: 0.5rem; */
+        margin-left: 2.5rem;
+        /* border: 1px solid red; */
     }
 }
 

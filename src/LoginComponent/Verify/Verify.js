@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "../Login/Login.css";
 import "./Verify.css"
-import background from "../../assets/abc.jpg"
+import background from "../../assets/abc.webp"
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';

@@ -9,7 +9,7 @@ import TemporaryDrawer from './Drawer';
 import { getUser } from '../../functions/veifyUser';
 import { verifyAdmin } from '../../functions/verifyAdmin';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'; 
-import logo from "../../assets/maskot_logo_inwood.png"; 
+import logo from "../../assets/inwood_logo_transparent.png"; 
 import { baseUrl } from '../../functions/baseUrl';
 
 function Navbar() {
@@ -176,7 +176,7 @@ function Navbar() {
             <div className='nav-bar'>
                 <div className='nav-bar-inner'>
                     <ul>
-                    <li><img src={logo} style={{width: '150px', height: 'auto'}} alt='logo image'/></li>
+                    <li><img src={logo} style={{width: '50px', height: 'auto'}} alt='logo image'/></li>
                         <li><Link onClick={handleHomeClick} className={`nav-links ${isMenuActive ? '' : 'active'}`} id='home'>Home</Link></li>
                         <li><Link onClick={handleMenu} className={`nav-links ${isMenuActive ? 'active' : ''}`} id='menu'>Menu</Link></li>
                         <li><Link className='nav-links' id='pages' to={"/checkout"}>Checkout</Link></li>
