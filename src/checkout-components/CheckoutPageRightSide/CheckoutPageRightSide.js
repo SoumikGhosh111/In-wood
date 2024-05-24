@@ -157,7 +157,7 @@ function CheckoutPageRightSide() {
         <button className='place-order-button' onClick={fetchStoreOpenCloseData} >
           {/* <div className='place-order-button-inner' > */}
             {/* <span> */}
-              PLACE ODER
+              PLACE ORDER
 
             {/* </span> */}
             {/* <spann>${(parseFloat(totalAmnt) + parseFloat(SupportFee) + parseFloat(tax) + parseFloat(tipAmnt)).toFixed(2)}</spann> */}

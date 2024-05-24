@@ -235,7 +235,9 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
                         </>)}
 
                     </div>
+                    
                     <div className='selected-card-item-toppings'>
+                    
                         {itemData.extraOptions.length > 0 && <h3>ADD TOPPINGS</h3>}
                         {itemData.extraOptions.map((item) => (
                             <>

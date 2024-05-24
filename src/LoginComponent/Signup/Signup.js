@@ -93,7 +93,7 @@ function Signup() {
 
         setEmail(newEmail);
         console.log(newEmail); 
-        localStorage.setItem('userEmail', newEmail); 
+        // localStorage.setItem('userEmail', newEmail); 
     };
 
 

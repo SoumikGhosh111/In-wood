@@ -173,7 +173,7 @@ function MyOrder() {
                                 </>) :
 
                                 (<div className='empty-orders'>
-                                    <img src={emptyOrder} alt='quack' />
+                                    {/* <img src={emptyOrder} alt='quack' /> */}
                                     <span>
                                         No Orders Found
                                     </span>

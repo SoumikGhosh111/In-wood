@@ -86,9 +86,9 @@ function MobAddToCart({ isClicked }) {
                     }
                   </span>
                   <div className='quantiy-button'>
-                    <button className='quantiy-button-inner-items quantiy-button-inner-items-button plus' onClick={() => dispatch(incrementQty({ id: item.id }))}>+</button>
+                    <button className='quantiy-button-inner-items quantiy-button-inner-items-button plus' onClick={() => dispatch(decrementQty({ id: item.id }))}>-</button>
                     <div className='quantiy-button-inner-items'>{item.qty}</div>
-                    <button className='quantiy-button-inner-items quantiy-button-inner-items-button minus' onClick={() => dispatch(decrementQty({ id: item.id }))}>-</button>
+                    <button className='quantiy-button-inner-items quantiy-button-inner-items-button minus' onClick={() => dispatch(incrementQty({ id: item.id }))}>+</button>
                   </div>
                 </div>
               ))}
