@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./SelectedCard.css";
-import pizzaImg from "../../assets/pizza_2.png";
+import pizzaImg from "../../assets/img_not_found.jpg";
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, incrementQty, decrementQty } from '../../redux/slices/cartSlice';

@@ -10,7 +10,7 @@ import { baseUrl } from '../../functions/baseUrl';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToCart, decrementQty } from '../../redux/slices/cartSlice';
 
-import pizza1 from "../../assets/pizza_1.png";
+import pizza1 from "../../assets/img_not_found.jpg";
 import pizza2 from "../../assets/pizza_2.png";
 import pizza3 from "../../assets/pizza_3.png";
 

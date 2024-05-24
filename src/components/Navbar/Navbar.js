@@ -206,7 +206,7 @@ function Navbar() {
                             </span> 
                             : 
                             <><span>
-                                <Link to={"/login"} className='nav-links'>Login</Link>/<Link to={"/register"} className='nav-links'>Sign up</Link>
+                                <Link to={"/login"} className='nav-links'>Login</Link>&nbsp;&nbsp;&nbsp;&nbsp;<Link to={"/register"} className='nav-links'>Sign up</Link>
                             </span></>
                         }
 
