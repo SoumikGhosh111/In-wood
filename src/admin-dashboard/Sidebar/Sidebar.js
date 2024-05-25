@@ -24,6 +24,7 @@ function Sidebar({ onSideBarItemClicked }) {
             const response = await fetch(`${baseUrl}/store/storeStatus`);
             const result = await response.json();
             setStoreStatus(result.status);
+            console.log(result);
         } catch (err) {
             console.log(err);
         }
