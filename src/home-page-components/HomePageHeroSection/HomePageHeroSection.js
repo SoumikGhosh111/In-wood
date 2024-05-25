@@ -50,7 +50,12 @@ function HomePageHeroSection() {
             window.removeEventListener("scroll", handleScroll);
         }
     }, []);
-
+    useEffect(() => { 
+        fetch('https://inwoodpizzallc.com/api/product/getAllFood/All')
+        .then(res => res.json())
+        .then(result=> console.log(result))
+        .catch(err => console.log(err.message)); 
+    }, []); 
 
     useEffect(() => {
         console.log(scroll)
