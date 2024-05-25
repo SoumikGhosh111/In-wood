@@ -74,7 +74,13 @@
 }
 
 .footer-section ul li a:hover{ 
+    /* cursor: not-allowed; */
+}
+.disabled{ 
     cursor: not-allowed;
+}
+.abled{ 
+    cursor: pointer;
 }
 .footer-section ul li:last-child {
     border-bottom: none;
