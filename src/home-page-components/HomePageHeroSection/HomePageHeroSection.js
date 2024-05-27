@@ -106,7 +106,7 @@ function HomePageHeroSection() {
                         </button>
                     </div>
                 </div>
-                <div className='rightBox' >
+                <div className='rightBox' style={{zIndex: scroll > window.innerHeight / 10 ? '0' : '1'}}>
                     {/* <div style={{transform: `rotate(${rotationAngle}deg)`}} className='pizza-container-hero-section'> */}
                         <div id='pizza-1' ><img className='topSlice' src={topSlice} alt="topSlice" /></div>
                         <div id='pizza-2'><img className='bottomSlice' src={bottomSlice} alt="bottomSlice" /></div>

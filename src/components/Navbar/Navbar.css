@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+
 .nav-bar-wrapper{ 
     position: fixed;
     top: 0;
@@ -92,7 +94,7 @@
     flex-direction: column;
     top: 120%;
     left: 50%;
-    transform: translate(-50%);
+    transform: translate(12%);
 }
 .nav-ver-line{ 
     width: 100%;
@@ -202,7 +204,9 @@
 
 
 
-
+.store-op-cl{ 
+    font-family: "Satisfy", cursive;
+}
 
 
 
@@ -236,3 +240,5 @@
       display: none; 
     }
 }
+
+

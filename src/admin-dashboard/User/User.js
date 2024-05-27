@@ -18,7 +18,7 @@ function User() {
     try {
       const token = localStorage.getItem('token');
       const email = localStorage.getItem("userEmail"); 
-      const response = await fetch(`${baseUrl}/admin/alluser/${email}`, {
+      const response = await fetch(`${baseUrl}/api/admin/alluser/${email}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

@@ -131,7 +131,7 @@ function CheckoutPageRightSide() {
   const fetchStoreOpenCloseData = async () => {
 
     try {
-      const response = await fetch(`${baseUrl}/store/storeStatus`);
+      const response = await fetch(`${baseUrl}/api/store/storeStatus`);
       const result = await response.json();
 
       if(result.status === 'close'){ 

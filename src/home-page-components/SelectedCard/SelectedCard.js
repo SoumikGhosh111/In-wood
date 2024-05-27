@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import "./SelectedCard.css";
 import pizzaImg from "../../assets/img_not_found.jpg";
-import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
+// import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
+import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, incrementQty, decrementQty } from '../../redux/slices/cartSlice';
 
@@ -63,7 +64,7 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
         // 'Sm Cup', 'Lg Cup', 'Sm Cone', 'Lg Cone'
 
 
-        if(itemData?.catagory === 'Milk Shake'){ 
+        if (itemData?.catagory === 'Milk Shake') {
             if (sizeChange === 'Sm') {
                 total += itemData.prices[0];
             }
@@ -148,7 +149,10 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
                 <div className='selected-card-item'>
                     <div className='selected-card-title'>
                         <h1>{itemData.title}</h1>
-                        <CancelRoundedIcon sx={{ fontSize: "40px", cursor: "pointer" }} onClick={handleCancelButtonClick} />
+                        <div className='cancel-bttn' onClick={handleCancelButtonClick}>
+                            {/* <CancelRoundedIcon sx={{ fontSize: "40px", cursor: "pointer" }} onClick={handleCancelButtonClick} /> */}
+                            <ClearRoundedIcon sx={{ fontSize: "30px" }}/>
+                        </div>
                     </div>
                     <div className='selected-card-item-img'>
                         <img src={itemData.img === '' ? pizzaImg : itemData.img} />
@@ -177,7 +181,7 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
 
                         {/* for Milk shakes Only */}
                         {itemData.catagory === 'Milk Shake' && (<>
-                            {milkShake.map((milkShakes, indx) => ( 
+                            {milkShake.map((milkShakes, indx) => (
                                 <>
                                     <div className='size-options'>
                                         <div className='input'>
@@ -235,9 +239,9 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
                         </>)}
 
                     </div>
-                    
+
                     <div className='selected-card-item-toppings'>
-                    
+
                         {itemData.extraOptions.length > 0 && <h3>ADD TOPPINGS</h3>}
                         {itemData.extraOptions.map((item) => (
                             <>

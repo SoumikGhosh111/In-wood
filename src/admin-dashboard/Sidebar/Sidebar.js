@@ -21,7 +21,7 @@ function Sidebar({ onSideBarItemClicked }) {
 
     const fetchStoreStatus = async () => {
         try {
-            const response = await fetch(`${baseUrl}/store/storeStatus`);
+            const response = await fetch(`${baseUrl}/api/store/storeStatus`);
             const result = await response.json();
             setStoreStatus(result.status);
             console.log(result);
@@ -36,7 +36,7 @@ function Sidebar({ onSideBarItemClicked }) {
         try {
             const email = localStorage.getItem('userEmail');
             const token = localStorage.getItem('token');
-            await axios.put(`${baseUrl}/store/storeUpdate/${email}`, { status: newStatus }, {
+            await axios.put(`${baseUrl}/api/store/storeUpdate/${email}`, { status: newStatus }, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`

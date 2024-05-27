@@ -26,3 +26,10 @@
   .policy-popup-wrapper::-webkit-scrollbar-thumb:hover {
     background: #b7b7b7; 
   }
+
+
+  @media screen and (max-width: 768px){ 
+    .policy-popup-wrapper{ 
+      width: 400px;
+    }
+  }

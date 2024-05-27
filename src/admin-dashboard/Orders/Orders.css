@@ -59,7 +59,7 @@
   }
   .all-orders table td, th {
     border: 1px solid #dddddd;
-    text-align: center;
+    text-align: left;
     padding: 8px;
     color: black;
     /* display: flex; */

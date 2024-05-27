@@ -67,7 +67,7 @@ function Orders() {
     console.log(orderId);
     console.log(value);
     try {
-      const { data } = await axios.put(`${baseUrl}/admin/order-status/${orderId}`, {
+      const { data } = await axios.put(`${baseUrl}/api/admin/order-status/${orderId}`, {
         delivery_status: value,
       });
       fetchAllOrders();
