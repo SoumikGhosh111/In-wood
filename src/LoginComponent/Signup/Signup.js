@@ -47,8 +47,8 @@ function Signup() {
     //             // Handle error here
     //         });
     // }
-    const isPasswordValid = (password) => { 
-        return password.length > 7; 
+    const isPasswordValid = (password) => {
+        return password.length > 7;
     }
     const handleOnSubmit = async (e) => {
         e.preventDefault();
@@ -58,7 +58,7 @@ function Signup() {
         const passwordConfirm = from.confirmPassword.value;
         const userData = { name, email, password, passwordConfirm };
 
-        if(!isPasswordValid(password)){ 
+        if (!isPasswordValid(password)) {
             toast.error('Password must be at least 8 characters long.');
             return;
         }
@@ -73,13 +73,18 @@ function Signup() {
             .then((data) => {
                 if (data.success) {
                     localStorage.setItem('token', data.data.token);
-                      toast.success(data.message); // Display toast message
+                    toast.success(data.message); // Display toast message
                     // alert(data.message);
-                    from.reset();
-                    navigate('/otppage', { state: { email } }); // Pass email as state
+                    localStorage.setItem('userEmail', email); 
+                    setTimeout(() => {
+                        from.reset();
+                        // navigate('/otppage', { state: { email } }); // Pass email as state
+                        navigate('/');
+                    }, 2000)
+
 
                 } else {
-                      toast.error(data.message);
+                    toast.error(data.message);
                     // alert(data.message)
                 }
             })
@@ -89,15 +94,15 @@ function Signup() {
     };
 
     const handleEmailChange = (e) => {
-        const newEmail = e.target.value; 
+        const newEmail = e.target.value;
 
         setEmail(newEmail);
-        console.log(newEmail); 
+        console.log(newEmail);
         // localStorage.setItem('userEmail', newEmail); 
     };
 
 
-    
+
     return (
         <div>
             <img className='bgPizza' src={background} alt="PizzaImg" />

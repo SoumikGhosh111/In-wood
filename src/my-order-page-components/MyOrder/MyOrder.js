@@ -122,7 +122,7 @@ function MyOrder() {
                                                         <>
                                                             <div className='order-items-my-order'>
                                                                 <div className='item-img-my-order'>
-                                                                    <img src={product.img} alt='Item Images' />
+                                                                    <img src={product.imageUrl} alt='Item Images' />
                                                                 </div>
                                                                 <div className='product-qty'>
                                                                     <div className='product-qty-item-div'>

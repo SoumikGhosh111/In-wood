@@ -27,7 +27,7 @@ function Verify() {
                     Authorization: `Bearer ${localStorage.getItem("token")}` // Correct syntax for setting Authorization header
                 }
             });
-            localStorage.setItem('userEmail', email); 
+            // localStorage.setItem('userEmail', email); 
             if (response.data.success) {
                 toast.success(response.data.message); // Use response.data.message
                 // alert(response.data.message);

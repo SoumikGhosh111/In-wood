@@ -8,6 +8,7 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useAnimate, useInView } from "framer-motion";
 import Footer from '../../components/Footer/Footer';
 import { motion, AnimatePresence } from 'framer-motion';
+import pizza from "../../assets/pizza.png"; 
 
 
 
@@ -106,7 +107,7 @@ function HomePageHeroSection() {
     const interval = setInterval(() => { 
         setHeroSentence(sentenceArr[index]); 
         index = (index + 1) % sentenceArr.length; 
-    }, 3000 );
+    }, 5000 );
 
     return () => clearInterval(interval); 
    }, [])
@@ -119,20 +120,22 @@ function HomePageHeroSection() {
                 <img className="homeBg" src={background} alt="background image" />
                 <div className='left-box-wraapper'>
                     <div className='leftBox'>
-                        <span >
+                        <span  >
                             Inwood Pizza, 
                             <br/> 
+                            {/* Animating the text */}
                             <AnimatePresence mode='wait'>
-                                <motion.span 
+                                <motion.div
+                                
                                 key={heroSentence} 
-                                initial={{ opacity: 0}}
-                                animate={{ opacity: 1}}
-                                exit={{ opacity: 0}}
-                                transition={{ duration: 1 }}
+                                initial={{ opacity: 0, x: -50}}
+                                animate={{ opacity: 1, x: 0}}
+                                exit={{ opacity: 0, x: 50}}
+                                transition={{ delay: 0 }}
                                 >
                                     {heroSentence}
-                                </motion.span>
-                            </AnimatePresence> 
+                                </motion.div>
+                            </AnimatePresence>  
                         </span>
                         <button className='home-hero-order-button' onClick={handleClick}>
                             <ShoppingCartOutlinedIcon sx={{ fontSize: window.innerWidth > 768 ? "25px" : "16px", transform: "translateY(15%)", marginRight: "1rem" }} />
@@ -141,10 +144,11 @@ function HomePageHeroSection() {
                     </div>
                 </div>
                 <div className='rightBox' style={{zIndex: scroll > window.innerHeight / 10 ? '0' : '1'}}>
-                    {/* <div style={{transform: `rotate(${rotationAngle}deg)`}} className='pizza-container-hero-section'> */}
-                        <div id='pizza-1' ><img className='topSlice' src={topSlice} alt="topSlice" /></div>
+                        {/* <div id='pizza-1' ><img className='topSlice' src={topSlice} alt="topSlice" /></div>
                         <div id='pizza-2'><img className='bottomSlice' src={bottomSlice} alt="bottomSlice" /></div>
-                        <div id='pizza-3'><img className='mainSlice' src={mainSlice} alt="mainSlice" /></div>
+                        <div id='pizza-3'><img className='mainSlice' src={mainSlice} alt="mainSlice" /></div> */}
+                    {/* <div style={{transform: `rotate(${rotationAngle}deg) `}} className='pizza-container-hero-section'> */}
+                        <img src={pizza} alt = 'pizza bg img' className='pizza-png' style={{transform: `rotate(${rotationAngle}deg) `}}/>
                     {/* </div> */}
                 </div>
             </div>

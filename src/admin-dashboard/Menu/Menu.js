@@ -154,7 +154,8 @@ function Menu() {
                         <img
                           src={item.img}
                           style={{ cursor: "pointer" }}
-                          alt={item.title}
+                          alt= {`..............................................
+                          upload image`}
                           onClick={() => {
                             setEditItemId(item._id);
                             setFileInputVisible(true);

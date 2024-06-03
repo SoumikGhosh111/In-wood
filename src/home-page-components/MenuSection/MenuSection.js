@@ -13,6 +13,7 @@ import { addToCart, decrementQty } from '../../redux/slices/cartSlice';
 import pizza1 from "../../assets/img_not_found.jpg";
 import pizza2 from "../../assets/pizza_2.png";
 import pizza3 from "../../assets/pizza_3.png";
+import loadingGif from "../../assets/Pizza_sliced.gif"; 
 
 function MenuSection() {
 
@@ -310,7 +311,11 @@ function MenuSection() {
                         ))}
 
                     </div>
-                ) : (<>Loading . . .</>)}
+                ) :
+                    (<>
+                        Loading . . .
+
+                    </>)}
 
 
                 <span className='title'>Pizza By Slice</span>
