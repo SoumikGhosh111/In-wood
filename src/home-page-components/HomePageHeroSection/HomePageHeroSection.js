@@ -7,18 +7,23 @@ import background from "../../assets/hero_background.png"
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useAnimate, useInView } from "framer-motion";
 import Footer from '../../components/Footer/Footer';
+import { motion, AnimatePresence } from 'framer-motion';
 
 
 
 import MenuSection from '../MenuSection/MenuSection';
 
+
 function HomePageHeroSection() {
     const [scroll, setScroll] = useState(0);
     const [rotationAngle, setRotationAngle] = useState(null); 
+    const [heroSentence, setHeroSentence] = useState('');   
     const ref1 = useRef(null);
     const ref2 = useRef(null);
+
     const homePageinView = useInView(ref1);
     const menuPageInView = useInView(ref2);
+
 
     const [isClicked, setIsClicked] = useState(false);
     const [scope, animate] = useAnimate();
@@ -89,7 +94,22 @@ function HomePageHeroSection() {
           return () => {
             window.removeEventListener('scroll', handleScroll);
           };
-    }, [])
+    }, []); 
+
+
+    const sentenceArr = ["where every slice is a slice of heaven.", "where each bite brings you closer to paradise", "where every slice tells a delicious story.", "where every bite is a taste of bliss."]
+
+   useEffect(() => { 
+    let index = 0; 
+    setHeroSentence(sentenceArr[index]); // Set initial sentence immediately for when the page gets load the sentence also laods 
+    index++;
+    const interval = setInterval(() => { 
+        setHeroSentence(sentenceArr[index]); 
+        index = (index + 1) % sentenceArr.length; 
+    }, 3000 );
+
+    return () => clearInterval(interval); 
+   }, [])
 
 
     return (
@@ -99,7 +119,21 @@ function HomePageHeroSection() {
                 <img className="homeBg" src={background} alt="background image" />
                 <div className='left-box-wraapper'>
                     <div className='leftBox'>
-                        <span>Inwood Pizza , where every slice is a slice of heaven.</span>
+                        <span >
+                            Inwood Pizza, 
+                            <br/> 
+                            <AnimatePresence mode='wait'>
+                                <motion.span 
+                                key={heroSentence} 
+                                initial={{ opacity: 0}}
+                                animate={{ opacity: 1}}
+                                exit={{ opacity: 0}}
+                                transition={{ duration: 1 }}
+                                >
+                                    {heroSentence}
+                                </motion.span>
+                            </AnimatePresence> 
+                        </span>
                         <button className='home-hero-order-button' onClick={handleClick}>
                             <ShoppingCartOutlinedIcon sx={{ fontSize: window.innerWidth > 768 ? "25px" : "16px", transform: "translateY(15%)", marginRight: "1rem" }} />
                             Order Now
