@@ -1,48 +1,160 @@
-.menu-wrapper{ 
+.menu-wrapper {
     /* background-color: black; */
     color: black;
+    padding: 20px;
 }
 
-.menu-table table{ 
+.menu-table table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    margin-bottom: 20px;
 }
 
-.menu-table table td, th{ 
+.menu-table table td,
+th {
     border: 1px solid #dddddd;
     text-align: center;
     padding: 8px;
     color: black;
 }
 
-.menu-table table tr:nth-child(even){ 
+.menu-table table tr:nth-child(even) {
     background-color: #e1e1e15c;
     color: black;
 }
 
-.admin-menu-img{ 
+.admin-menu-img {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-.admin-menu-img-img{
-    width: 100px; 
+    width: 100px;
     height: 100px;
-    border-radius: 50%;
+}
+
+.admin-menu-img-img {
+    width: 90%;
+    height: 90%;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 
 }
-.menu-order-input-butttons{ 
+
+.menu-order-input-butttons {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
-   
 
+
+}
+
+.edit-form {
+    background-color: #f9f9f9;
+    /* padding: 20px; */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+.edit-form-header{ 
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
+.edit-form h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.option-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .option-input input {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .option-input button {
+    padding: 6px 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .add-toppings{ 
+    padding: 6px 10px;
+    background-color: #3698f4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .option-input button:hover {
+    background-color: #d32f2f;
+  }
+
+.update-btn,
+.cancel-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.update-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.cancel-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.update-btn:hover {
+    background-color: #45a049;
+}
+
+.cancel-btn:hover {
+    background-color: #d32f2f;
 }
