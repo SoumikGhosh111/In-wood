@@ -6,6 +6,7 @@ import { baseUrl } from '../../functions/baseUrl';
 import axios from 'axios';
 import Backdrop from '@mui/material/Backdrop';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
+import DeleteIcon from '@mui/icons-material/Delete';
 //toast
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -178,13 +179,26 @@ function Menu() {
     
   }
 
-  // const handleSubmitImage = () => {
-  //   if (selectedFile && editItemId) {
-  //     handleImageUpload(editItemId, selectedFile);
-  //   } else {
-  //     console.error("No file selected or item ID missing.");
-  //   }
-  // }
+  const handleMenuItemDelete = async(id) => { 
+    try{ 
+      const email = localStorage.getItem('userEmail'); 
+      const token = localStorage.getItem('token'); 
+      const response = await fetch(`${baseUrl}/api/product/productDelete/${id}/${email}`, { 
+          method: 'DELETE', 
+          headers: { 
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+          }, 
+      });
+      const result = await response.json();
+      console.log(result);
+      fetchMenu(); 
+      toast.success(result.message);
+    }catch(err){ 
+
+    }
+  }
+
 
   
 
@@ -229,7 +243,10 @@ function Menu() {
                   </td>
                   <td>{item.catagory}</td>
                   <td>{item.prices.map((price) => (<div key={price}>$&nbsp; {price}</div>))}</td>
-                  <td><button onClick={() => { handleEditButtonClick(item); setOpen(true) }} style={{border: 'none', background: 'transparent', cursor: 'pointer'}}><BorderColorRoundedIcon /></button></td>
+                  <td>
+                    <button onClick={() => { handleEditButtonClick(item); setOpen(true) }} style={{border: 'none', background: 'transparent', cursor: 'pointer'}}><BorderColorRoundedIcon /></button> &nbsp;&nbsp;
+                    <button  onClick={() => handleMenuItemDelete(item._id)} style={{border: 'none', background: 'transparent', cursor: 'pointer'}}><DeleteIcon /></button>
+                  </td>
                 </tr>
               )) :
               <tr>

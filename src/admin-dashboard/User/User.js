@@ -4,6 +4,7 @@ import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import { baseUrl } from '../../functions/baseUrl';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function User() {
   const [users, setUsers] = useState(null);
@@ -45,17 +46,24 @@ function User() {
 
   const deleteUser = async (id) => {
     try {
-      const response = await fetch(`${baseUrl}/api/admin/deleteUser/${id}`, { method: 'DELETE' });
-      const result = await response.json();
-      console.log(result);
-      fetchUserDetails(); 
-      toast.success(result.message)
+        const email = localStorage.getItem('userEmail'); 
+        const token = localStorage.getItem('token'); 
+        const response = await fetch(`${baseUrl}/api/admin/deleteUser/${id}/${email}`, { 
+            method: 'DELETE', 
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }, 
+        });
+        const result = await response.json();
+        console.log(result);
+        fetchUserDetails(); 
+        toast.success(result.message);
+    } catch (err) {
+        console.log(err.message); 
+        toast.error(err.message);
     }
-    catch (err) {
-      console.log(err.message); 
-      toast.error(err.message)
-    }
-  }
+}
 
   console.log(users);
   return (
@@ -79,8 +87,8 @@ function User() {
                 <td>{item.email}</td>
                 <td>{item.role}</td>
                 <td>
-                  <button onClick={() => deleteUser(item._id)}>
-                    Delete User
+                  <button onClick={() => deleteUser(item._id)} style={{border: 'none', background: 'transparent', cursor: 'pointer'}}>
+                  <DeleteIcon />
                   </button>
                 </td>
                 {/* <td>
