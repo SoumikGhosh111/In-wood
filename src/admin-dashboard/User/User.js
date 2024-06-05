@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import "./User.css";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import { baseUrl } from '../../functions/baseUrl';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function User() {
   const [users, setUsers] = useState(null);
@@ -17,7 +19,7 @@ function User() {
   const fetchUserDetails = async () => {
     try {
       const token = localStorage.getItem('token');
-      const email = localStorage.getItem("userEmail"); 
+      const email = localStorage.getItem("userEmail");
       const response = await fetch(`${baseUrl}/api/admin/alluser/${email}`, {
         method: 'GET',
         headers: {
@@ -30,14 +32,28 @@ function User() {
         throw new Error(errorData.message || 'Failed to fetch orders');
       }
 
-      
+
       const users = await response.json();
-      
+
       setUsers(users)
     }
-    catch(err) { 
-      alert(err); 
+    catch (err) {
+      alert(err);
       console.log(err)
+    }
+  }
+
+  const deleteUser = async (id) => {
+    try {
+      const response = await fetch(`${baseUrl}/api/admin/deleteUser/${id}`, { method: 'DELETE' });
+      const result = await response.json();
+      console.log(result);
+      fetchUserDetails(); 
+      toast.success(result.message)
+    }
+    catch (err) {
+      console.log(err.message); 
+      toast.error(err.message)
     }
   }
 
@@ -51,7 +67,7 @@ function User() {
           <th>Name</th>
           <th>Email</th>
           <th>Role</th>
-          {/* <th></th> */}
+          <th>Delete User</th>
           {/* <th>Country</th> */}
         </thead>
         <tbody>
@@ -62,6 +78,11 @@ function User() {
                 <td>{item.name}</td>
                 <td>{item.email}</td>
                 <td>{item.role}</td>
+                <td>
+                  <button onClick={() => deleteUser(item._id)}>
+                    Delete User
+                  </button>
+                </td>
                 {/* <td>
                   <DeleteRoundedIcon sx={{cursor: 'pointer'}} onClick= {() => console.log("hello")}/>
                 </td> */}
@@ -71,6 +92,7 @@ function User() {
 
         </tbody>
       </table>
+      <ToastContainer />
     </div>
   )
 }

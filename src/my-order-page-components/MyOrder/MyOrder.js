@@ -45,9 +45,9 @@ function MyOrder() {
                 headers: {
                     Accept: 'application/pdf', // Set Accept header to specify PDF response
                 },
-            });
-
+            }); 
             const blob = await response.blob();
+            console.log(blob); 
 
             // Create a blob URL for the response data
             const url = window.URL.createObjectURL(blob);
@@ -63,7 +63,7 @@ function MyOrder() {
             document.body.removeChild(link);
             window.URL.revokeObjectURL(url);
         } catch (error) {
-            console.error('Error downloading invoice:', error);
+            console.error(error.message);
         }
     };
 

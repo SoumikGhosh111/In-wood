@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, lazy, Suspense, memo } from 'react';
 import "./HomePageHeroSection.css"
 import mainSlice from "../../assets/main_slice_1.png";
 import topSlice from "../../assets/top_left_slice_1.png";
@@ -6,13 +6,19 @@ import bottomSlice from "../../assets/bottom_left_slice_1.png";
 import background from "../../assets/hero_background.png"
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useAnimate, useInView } from "framer-motion";
-import Footer from '../../components/Footer/Footer';
 import { motion, AnimatePresence } from 'framer-motion';
 import pizza from "../../assets/pizza.png"; 
 
 
 
-import MenuSection from '../MenuSection/MenuSection';
+// import MenuSection from '../MenuSection/MenuSection';
+// import Footer from '../../components/Footer/Footer';
+
+const MenuSection = lazy(() => import("../MenuSection/MenuSection")); 
+const Footer = lazy(() => import("../../components/Footer/Footer")); 
+
+const MemoizedMenuSection  = memo(MenuSection); 
+const MemoizedFooter = memo(Footer); 
 
 
 function HomePageHeroSection() {
@@ -153,10 +159,16 @@ function HomePageHeroSection() {
                 </div>
             </div>
             <div id='menu' className='menu-section' ref={ref2} >
-                <MenuSection />
+                {/* <MenuSection /> */}
+                <Suspense fallback={<div>Loading . . .</div>}>
+                    <MemoizedMenuSection />
+                </Suspense>
             </div>
             <div >
-                <Footer />
+                {/* <Footer /> */}
+                <Suspense fallback = {<div>Loading . . .</div>}>
+                    <MemoizedFooter />
+                </Suspense>
             </div>
         </div>
     )
