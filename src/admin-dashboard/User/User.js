@@ -5,10 +5,12 @@ import { baseUrl } from '../../functions/baseUrl';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import Backdrop from '@mui/material/Backdrop';
 function User() {
   const [users, setUsers] = useState(null);
-
+  const [openPopUp, setOpenPopUp] = useState(false);
+  const [deleteId, setDeleteId] = useState(''); 
+  const [deletedName, setdeletedName] = useState(''); 
   useEffect(() => {
     // fetch("http://localhost:8000/admin/alluser")
     //   .then(res => res.json())
@@ -58,7 +60,9 @@ function User() {
         const result = await response.json();
         console.log(result);
         fetchUserDetails(); 
+        setOpenPopUp(false); 
         toast.success(result.message);
+        setDeleteId(''); 
     } catch (err) {
         console.log(err.message); 
         toast.error(err.message);
@@ -87,7 +91,7 @@ function User() {
                 <td>{item.email}</td>
                 <td>{item.role}</td>
                 <td>
-                  <button onClick={() => deleteUser(item._id)} style={{border: 'none', background: 'transparent', cursor: 'pointer'}}>
+                  <button onClick={() => {setOpenPopUp(true); setDeleteId(item._id); setdeletedName(item.name)}} style={{border: 'none', background: 'transparent', cursor: 'pointer'}}>
                   <DeleteIcon />
                   </button>
                 </td>
@@ -100,6 +104,20 @@ function User() {
 
         </tbody>
       </table>
+      <Backdrop
+        sx={{ color: '#000', zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: "rgba(0, 0, 0, 0.238)" }}
+        open={openPopUp}
+      >
+        <div className="popup-overlay">
+          <div className="popup">
+            <h2>Do you want to Delete <br/> Account: {deletedName} </h2>
+            <div className="popup-buttons">
+              <button className="popup-button save" onClick={() => deleteUser(deleteId)}>Delete</button>
+              <button className="popup-button cancel" onClick={() => setOpenPopUp(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      </Backdrop>
       <ToastContainer />
     </div>
   )

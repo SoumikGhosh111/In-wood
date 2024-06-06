@@ -16,6 +16,9 @@ function Menu() {
   const [editItemId, setEditItemId] = useState(null); // Track which item is being edited
   const [fileInputVisible, setFileInputVisible] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [openPopUp, setOpenPopUp] = useState(false);
+  const [deleteId, setDeleteId] = useState(''); 
+  const [deletedName, setDeletedName] = useState(''); 
   const [productDetails, setProductDetails] = useState({
     img: '',
     title: '',
@@ -64,11 +67,11 @@ function Menu() {
   const handleCatagoryChange = (e) => {
     const { value } = e.target;
     setProductDetails(prevState => ({
-     ...prevState,
+      ...prevState,
       catagory: value
     }));
   };
-  
+
 
   // handle prices array 
   const handlePriceChange = (index, value) => {
@@ -83,10 +86,10 @@ function Menu() {
   // const handlePriceChange = (index, value) => {
   //   // converting the number from text to number
   //   const newValue = Number(value);
-  
+
   //   const newPrices = [...productDetails.prices];
   //   newPrices[index] = newValue;
-  
+
   //   setProductDetails({
   //    ...productDetails,
   //     prices: newPrices
@@ -140,7 +143,7 @@ function Menu() {
 
       setUploadedImageUrl(data.url);
 
-      productDetails.img = data.url; 
+      productDetails.img = data.url;
       // console.log(image); 
     }
     catch (err) {
@@ -151,7 +154,7 @@ function Menu() {
   const handleUpdateProduct = async () => {
     try {
       const token = localStorage.getItem('token')
-      const email = localStorage.getItem('userEmail'); 
+      const email = localStorage.getItem('userEmail');
       const response = await fetch(`${baseUrl}/api/product/productDetails/${email}`, {
         method: 'PUT',
         headers: {
@@ -165,7 +168,7 @@ function Menu() {
       console.log(result);
       if (result.success) {
         toast.success("Product details updated successfully");
-        setOpen(false); 
+        setOpen(false);
         fetchMenu();
         setEditItemId(null);
       } else {
@@ -176,31 +179,33 @@ function Menu() {
       toast.error(error.message);
     }
 
-    
+
   }
 
-  const handleMenuItemDelete = async(id) => { 
-    try{ 
-      const email = localStorage.getItem('userEmail'); 
-      const token = localStorage.getItem('token'); 
-      const response = await fetch(`${baseUrl}/api/product/productDelete/${id}/${email}`, { 
-          method: 'DELETE', 
-          headers: { 
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
-          }, 
+  const handleMenuItemDelete = async (id) => {
+    try {
+      const email = localStorage.getItem('userEmail');
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${baseUrl}/api/product/productDelete/${id}/${email}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
       });
       const result = await response.json();
-      console.log(result);
-      fetchMenu(); 
+      // console.log(result);
+      setOpenPopUp(false); 
+      fetchMenu();
       toast.success(result.message);
-    }catch(err){ 
+      setDeleteId(''); 
+    } catch (err) {
 
     }
   }
 
 
-  
+
 
   return (
     <div className='menu-wrapper'>
@@ -244,8 +249,8 @@ function Menu() {
                   <td>{item.catagory}</td>
                   <td>{item.prices.map((price) => (<div key={price}>$&nbsp; {price}</div>))}</td>
                   <td>
-                    <button onClick={() => { handleEditButtonClick(item); setOpen(true) }} style={{border: 'none', background: 'transparent', cursor: 'pointer'}}><BorderColorRoundedIcon /></button> &nbsp;&nbsp;
-                    <button  onClick={() => handleMenuItemDelete(item._id)} style={{border: 'none', background: 'transparent', cursor: 'pointer'}}><DeleteIcon /></button>
+                    <button onClick={() => { handleEditButtonClick(item); setOpen(true) }} style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}><BorderColorRoundedIcon /></button> &nbsp;&nbsp;
+                    <button onClick={() => {setOpenPopUp(true); setDeleteId(item._id); setDeletedName(item.title)} } style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}><DeleteIcon /></button>
                   </td>
                 </tr>
               )) :
@@ -265,7 +270,7 @@ function Menu() {
         {editItemId && (
           <div className="edit-form">
             <div className='edit-form-header'>
-              <h2 style={{marginLeft: '1rem'}}>Edit Product</h2>
+              <h2 style={{ marginLeft: '1rem' }}>Edit Product</h2>
               <div className='cancel-bttn' onClick={() => setOpen(false)}>
                 <ClearRoundedIcon sx={{ fontSize: "30px" }} />
               </div>
@@ -357,6 +362,22 @@ function Menu() {
           </div>
         )}
 
+      </Backdrop>
+
+
+      <Backdrop
+        sx={{ color: '#000', zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: "rgba(0, 0, 0, 0.238)" }}
+        open={openPopUp}
+      >
+        <div className="popup-overlay">
+          <div className="popup">
+            <h2>Do you want to Delete <br/> item Name: {deletedName} </h2>
+            <div className="popup-buttons">
+              <button className="popup-button save" onClick={() => handleMenuItemDelete(deleteId)}>Delete</button>
+              <button className="popup-button cancel" onClick={() => setOpenPopUp(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
       </Backdrop>
       <ToastContainer />
     </div>

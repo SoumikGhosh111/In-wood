@@ -73,7 +73,8 @@ function Signup() {
             .then((data) => {
                 if (data.success) {
                     localStorage.setItem('token', data.data.token);
-                    toast.success(data.message); // Display toast message
+                    // toast.success(data.message); // Display toast message
+                    toast.success("Register Successfully"); 
                     // alert(data.message);
                     localStorage.setItem('userEmail', email); 
                     setTimeout(() => {
