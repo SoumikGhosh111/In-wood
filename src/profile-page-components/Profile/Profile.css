@@ -2,7 +2,10 @@
     overflow: hidden;
     position: relative;
     /* min-height: 100vh; */
+    background-image: url("../../assets/profile_page_bg.webp");
+    background-size: cover;
 }
+
 .profile-page-wrapper{ 
 
     width: 100%;
@@ -92,7 +95,7 @@
 .go-back-home-button-wrapper{ 
     width: fit-content;
     height: fit-content;
-    background: white;
+    /* background: white; */
     position: absolute;
     top: 0;
     display: flex;
@@ -198,6 +201,9 @@
 }
 /* media queries */
 @media screen and (max-width: 768px){
+    .profile-page-container{ 
+        background-image: none;
+    }
     .profile-page-title{ 
         padding: 0rem 1rem;
     }

@@ -242,7 +242,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
       </div>
 
       <div className='vertical-line'></div>
-      <div className='free-delivery-check-out'>Free Delivery On 20$</div>
+      {/* <div className='free-delivery-check-out'>Free Delivery On 20$</div> */}
       <div>
       
       </div>

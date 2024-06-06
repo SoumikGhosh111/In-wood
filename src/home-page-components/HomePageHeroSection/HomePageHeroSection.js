@@ -31,7 +31,6 @@ function HomePageHeroSection() {
     const homePageinView = useInView(ref1);
     const menuPageInView = useInView(ref2);
 
-
     const [isClicked, setIsClicked] = useState(false);
     const [scope, animate] = useAnimate();
     const handleClick = () => {
@@ -126,11 +125,14 @@ function HomePageHeroSection() {
                 <img className="homeBg" src={background} alt="background image" />
                 <div className='left-box-wraapper'>
                     <div className='leftBox'>
-                        <span  >
+                        <span  ref={ref1}>
                             Inwood Pizza, 
                             <br/> 
                             {/* Animating the text */}
                             <AnimatePresence mode='wait'>
+                                {homePageinView ? 
+                                <>
+                                
                                 <motion.div
                                 
                                 key={heroSentence} 
@@ -141,6 +143,8 @@ function HomePageHeroSection() {
                                 >
                                     {heroSentence}
                                 </motion.div>
+                                </> : 
+                                <></>}
                             </AnimatePresence>  
                         </span>
                         <button className='home-hero-order-button' onClick={handleClick}>

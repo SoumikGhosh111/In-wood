@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import "./Profile.css";
 
-import bgGif from "../../assets/profile_page_demo.gif"
+// import bgGif from "../../assets/profile_page_demo.gif"
 // functions
 import { getUser } from '../../functions/veifyUser';
 import { useLocation } from 'react-router-dom';
 import { baseUrl } from '../../functions/baseUrl';
+
+import profilePageBg from  "../../assets/profile_page_bg.webp"; 
 
 // axios
 import axios from 'axios';
@@ -201,7 +203,7 @@ function Profile() {
                         {imageChange && (
                             <input className='input-image' type="file" onChange={(e) => handleImageChange(e)} accept="image/" />
                         )} */}
-                        <img src={profileBg} alt='bg gif profile page' /> 
+                        {/* <img src={profilePageBg} alt='bg gif profile page' />  */}
                         {/* Hello World */}
                     </div>
                     <div className='profile-page-right'>

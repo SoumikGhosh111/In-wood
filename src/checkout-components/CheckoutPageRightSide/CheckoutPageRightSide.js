@@ -20,7 +20,7 @@ function CheckoutPageRightSide() {
   const [popUp, setPopUp] = useState(false);
   const cartItems = useSelector((state) => state.cart.cart);
   const userData = useSelector((state) => state.userdata);
-  const [deliveryCharges, setDeliveryCharges] = useState(0);
+  // const [deliveryCharges, setDeliveryCharges] = useState(0);
   // const [openClose, setOpenClose] = useState(null);
   console.log(userData);
   const totalAmnt = cartItems.reduce((total, item) =>
@@ -32,7 +32,7 @@ function CheckoutPageRightSide() {
     const EstimatedTax = ((totalAmnt * 8.75) / 100).toFixed(2);
     setTax(EstimatedTax);
     const charges = totalAmnt > 20 ? 0 : 10;
-    setDeliveryCharges(charges);
+    // setDeliveryCharges(charges);
 
   }, [totalAmnt])
   const SupportFee = 0.95;
@@ -99,7 +99,7 @@ function CheckoutPageRightSide() {
           subTotal: totalAmnt,
           estimatedTax: tax,
           supportLocalfee: SupportFee,
-          total: (parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(deliveryCharges))
+          total: (parseFloat(totalAmnt) + parseFloat(tax))
         },
         // toppings: cartItems.map((item) => item.toppings ?  item.toppings.map((topping) => topping.text) : null) 
       }
@@ -173,10 +173,10 @@ function CheckoutPageRightSide() {
             <span>Estimated Tax</span>
             <span>${tax}</span>
           </div>
-          <div className='tip' >
+          {/* <div className='tip' >
             <span>Delivery Charges  </span>
             <span >${totalAmnt > 0 ? deliveryCharges : 0}</span>
-          </div>
+          </div> */}
           {/* <div className='local'>
           <span> Support Local Fee</span>
           <span>${SupportFee}</span>
@@ -214,7 +214,7 @@ function CheckoutPageRightSide() {
             {totalAmnt === 0 ? ( // Display 0 if subtotal is 0
               <span>$0.00</span>
             ) : ( // Otherwise calculate total amount
-              <span>${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(tipAmnt) + parseFloat(deliveryCharges)).toFixed(2)}</span>
+              <span>${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(tipAmnt)).toFixed(2)}</span>
             )}
           </div>
         </div>
