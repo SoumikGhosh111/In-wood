@@ -240,8 +240,8 @@ function Menu() {
                     </div>
                   </td>
                   <td>{item.title}</td>
-                  <td>{item.desc}</td>
-                  <td>
+                  <td style={{width: '200px'}}>{item.desc}</td>
+                  <td style={{textAlign: 'left'}}>
                     {item.extraOptions?.map((topping, index) => (
                       <span key={index}>{topping.text} &nbsp; ${topping.price}<br /></span>
                     ))}
