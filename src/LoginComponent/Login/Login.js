@@ -89,7 +89,7 @@ function Login({ onButtonClick }) {
 
                             </div>
                             <div className='frTxt'>
-                                <Link className="small text-muted" to="/forgetpassword" style={{ color: 'white' }}>Forgot password?</Link>
+                                {/* <Link className="small text-muted" to="/forgetpassword" style={{ color: 'white' }}>Forgot password?</Link> */}
                                 <p className="mb-5 pb-lg-2" style={{ color: 'white' }}>Don't have an account? <Link to={'/register'} style={{ color: '#e60909' }}>Register here</Link></p>
 
                             </div>
