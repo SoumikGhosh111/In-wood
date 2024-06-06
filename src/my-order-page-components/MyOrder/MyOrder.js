@@ -158,13 +158,13 @@ function MyOrder() {
                                                             Total Amount: ${item.total}
                                                         </div>
                                                     </div>
-                                                    <div className='delivery_status'>
-                                                        {/* <div className='status-myorder'> */}
+                                                    {/* <div className='delivery_status'>
+                                                        
                                                         <button onClick={() => handleDownload(item._id)} className='invoice-button'>Generate Invoice</button>
-                                                        {/* </div> */}
-                                                    </div>
+
+                                                    </div> */}
                                                 </div>
-                                                {/* */}
+                                               
 
                                             </div>
 

@@ -161,7 +161,10 @@ img{
     background-color: var(--check-out-page-right);
     color: black;
     border-radius: 10px;
-    text-align: left;
+    /* text-align: left; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-transform: capitalize;
 }
 .total-ammnt-my-order{ 
