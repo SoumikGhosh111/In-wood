@@ -121,7 +121,7 @@ function HomePageHeroSection() {
     return (
         <div >
             <div className='homeBox' ref={ref1}>
-                <span className='yumm'>Yumm</span>
+                {/* <span className='yumm'>Yumm</span> */}
                 <img className="homeBg" src={background} alt="background image" />
                 <div className='left-box-wraapper'>
                     <div className='leftBox'>

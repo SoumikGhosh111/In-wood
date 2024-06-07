@@ -90,11 +90,12 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%);
+    text-transform: uppercase;
 }
 
 .leftBox span {
     color: white;
-    font-size: 70px;
+    font-size: 60px;
     /* text-transform: uppercase; */
     /* font-weight: 700; */
     /* margin-left: 1vw; */
@@ -270,7 +271,7 @@
     }
 
     .leftBox span {
-        font-size: 38px;
+        font-size: 35px;
     }
 
     .home-hero-order-button {
