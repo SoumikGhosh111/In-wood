@@ -312,3 +312,25 @@
    
 
 }
+
+
+@media screen and (max-width: 768px) and  (max-height: 800px){ 
+    .pizza-png{ 
+        width: 450px;
+        height: auto;
+    }
+    .yumm{ 
+        transform: translateY(30%);
+    }
+}
+
+
+@media screen and (max-width: 768px) and  (max-height: 700px){ 
+    .pizza-png{ 
+        width: 400px;
+        height: auto;
+    }
+    .leftBox span{ 
+        font-size: 30px;
+    }
+}
