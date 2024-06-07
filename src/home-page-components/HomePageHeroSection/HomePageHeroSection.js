@@ -103,7 +103,7 @@ function HomePageHeroSection() {
     }, []); 
 
 
-    const sentenceArr = ["where every slice is a slice of heaven.", "where each bite brings you closer to paradise", "where every slice tells a delicious story.", "where every bite is a taste of bliss."]
+    const sentenceArr = ["where every slice is a slice of heaven", "where each bite brings you closer to paradise", "where every slice tells a delicious story", "where every bite is a taste of bliss"]
 
    useEffect(() => { 
     let index = 0; 
