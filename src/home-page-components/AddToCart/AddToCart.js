@@ -87,7 +87,10 @@ function AddToCart({ onOrderClick }) {
       <div className='total-amnt-add-to-cart'><span >Total Amount: </span> <span style={{fontWeight: '700'}}>${(totalAmnt).toFixed(2)}</span></div>
 
       <button className='add-to-cart-button' onClick={handleOrderClick}>PROCEED TO ORDER</button>
-      <ToastContainer />
+      <ToastContainer 
+        position='top-center'
+        className={'toast-container-center'}
+      />
     </div>
   )
 }

@@ -211,9 +211,10 @@ function Navbar() {
                 <div className='nav-bar-inner'>
                     <ul>
                         <li><img src={logo} style={{ width: '50px', height: 'auto' }} alt='logo image' /></li>
-                        <li><Link onClick={handleHomeClick} className={`nav-links ${isMenuActive ? '' : 'active'}`} id='home'>Home</Link></li>
-                        <li><Link onClick={handleMenu} className={`nav-links ${isMenuActive ? 'active' : ''}`} id='menu'>Menu</Link></li>
-                        <li><Link className='nav-links' id='pages' to={"/checkout"}>Checkout</Link></li>
+                        <li><Link onClick={handleHomeClick} className={`nav-links btn-2 ${isMenuActive ? '' : 'active'}`} id='home'>Home</Link></li>
+                        <li><Link onClick={handleMenu} className={`nav-links btn-2 ${isMenuActive ? 'active' : ''}`} id='menu'>Menu</Link></li>
+                        <li><Link className='nav-links btn-2' id='pages' to={"/checkout"}>Checkout</Link></li>
+                        <li><Link className='nav-links btn-2' id='pages' to={"/promotion"}>Promotion</Link></li>
                     </ul>
 
                     <div className='nav-bar-login-area'>

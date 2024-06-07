@@ -158,7 +158,7 @@ function HomePageHeroSection() {
                         <div id='pizza-2'><img className='bottomSlice' src={bottomSlice} alt="bottomSlice" /></div>
                         <div id='pizza-3'><img className='mainSlice' src={mainSlice} alt="mainSlice" /></div> */}
                     {/* <div style={{transform: `rotate(${rotationAngle}deg) `}} className='pizza-container-hero-section'> */}
-                        <img src={pizza} alt = 'pizza bg img' className='pizza-png' style={{transform: `rotate(${rotationAngle}deg) `}}/>
+                        <img src={pizza} alt = 'pizza bg img' className='pizza-png' />
                     {/* </div> */}
                 </div>
             </div>
@@ -184,7 +184,7 @@ export default HomePageHeroSection
 // style={{opacity: isClicked ? 1 : 0}}
 // style={{ opacity: isClicked ? 1 : 0, zIndex: isClicked ? 10 : 0 }}
 // style={{ zIndex: isClicked ? 0 : 10, opacity: isClicked ? 0 : 1 }}
-
+// style={{transform: `rotate(${rotationAngle}deg) `}}
 
 
 // .rightBox .mainSlice {

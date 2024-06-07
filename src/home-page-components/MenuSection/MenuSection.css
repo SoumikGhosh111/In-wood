@@ -24,6 +24,7 @@
     flex-direction: column;
     overflow-y: scroll;
     height: 100%;
+    z-index: 1;
     
     /* justify-content:;  */
     /* position: relative; */
@@ -250,7 +251,11 @@
     color: black;
 }
 
-
+.menu-bg{ 
+    filter: blur(5px);
+    position: absolute;
+    z-index: 0;
+}
 
 
 
@@ -329,6 +334,9 @@
 
 @media screen and (max-width: 768px){ 
   
+    .menu-bg{ 
+        display: none;
+    }
     .menu-section-wrapper{ 
         height: 100vh;
         flex-direction: column;

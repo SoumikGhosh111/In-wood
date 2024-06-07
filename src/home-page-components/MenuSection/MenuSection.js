@@ -14,6 +14,7 @@ import pizza1 from "../../assets/img_not_found.jpg";
 import pizza2 from "../../assets/pizza_2.png";
 import pizza3 from "../../assets/pizza_3.png";
 import loadingGif from "../../assets/Pizza_sliced.gif"; 
+import menuBG from "../../assets/pizza_img_menu.png"
 
 function MenuSection() {
 
@@ -190,6 +191,7 @@ function MenuSection() {
 
     return (
         <div className='menu-section-wrapper' ref={scope}>
+            <img src={menuBG} alt='bg menu Img' className='menu-bg'/>
             {/* <div className='menu-cart'>
                 <span className='title'>Menu</span>
                 <div className='filter-buttons'>

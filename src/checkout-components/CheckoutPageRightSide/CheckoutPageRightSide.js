@@ -232,7 +232,10 @@ function CheckoutPageRightSide() {
           </div>
         </div>
       </div>
-      <ToastContainer />
+      <ToastContainer 
+        position='top-center'
+        className={'toast-container-center'}
+      />
 
     </div>
   )
