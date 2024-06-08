@@ -66,7 +66,10 @@ export default function TemporaryDrawer() {
     }
 
     const handleMyOrderClick = () => { 
-        Navigate("my-order")
+        Navigate("/my-order")
+    }
+    const handleCoupenClick = () => { 
+        Navigate("/coupens")
     }
     useEffect(() => {
         const checkUser = async () => {
@@ -114,6 +117,10 @@ export default function TemporaryDrawer() {
 
                         <div className='drawer-items' onClick={handleProfileClick}>
                             <a>Profile</a>
+                            <EastRoundedIcon />
+                        </div>
+                        <div className='drawer-items' onClick={handleCoupenClick}>
+                            <a>Coupens</a>
                             <EastRoundedIcon />
                         </div>
                         {/* <div className='hor-line'></div> */}

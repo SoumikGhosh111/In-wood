@@ -39,7 +39,7 @@ function App() {
             <Route path='/dashboard' element={<AdminRoute><DashboardPage /></AdminRoute>} />
             <Route path='/checkout-success' element={<ProtectedRoute><CheckoutSuccess /></ProtectedRoute>} />
             <Route path='/my-order' element={<ProtectedRoute><MyOrderPage /></ProtectedRoute>} />
-            {/* <Route path='/promotion' element={<ProtectedRoute><PromotionsPage /></ProtectedRoute>} /> */}
+            <Route path='/coupens' element={<ProtectedRoute><PromotionsPage /></ProtectedRoute>} />
             <Route path="*"  element={<NotFound />} />
             
           </Routes>

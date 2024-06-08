@@ -7,40 +7,49 @@ import background from "../../assets/hero_background.png"
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useAnimate, useInView } from "framer-motion";
 import { motion, AnimatePresence } from 'framer-motion';
-import pizza from "../../assets/pizza.png"; 
+import pizza from "../../assets/pizza.png";
+import maskot from "../../assets/maskot_logo_inwood.png"
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
+import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
 
 
 
 // import MenuSection from '../MenuSection/MenuSection';
 // import Footer from '../../components/Footer/Footer';
 
-const MenuSection = lazy(() => import("../MenuSection/MenuSection")); 
-const Footer = lazy(() => import("../../components/Footer/Footer")); 
+const MenuSection = lazy(() => import("../MenuSection/MenuSection"));
+const Footer = lazy(() => import("../../components/Footer/Footer"));
 
-const MemoizedMenuSection  = memo(MenuSection); 
-const MemoizedFooter = memo(Footer); 
+const MemoizedMenuSection = memo(MenuSection);
+const MemoizedFooter = memo(Footer);
 
 const carouselItems = [
     {
-      text: 'Slide 1: This is the first slide',
-      buttonText: 'Click Me 1',
-      imgSrc: 'https://via.placeholder.com/300',
+        text: 'Slide 1: This is the first slide',
+        buttonText: 'Order Now',
+        //   imgSrc: 'https://via.placeholder.com/300',
+        imgSrc: mainSlice, 
+        bgClr: 'green'
     },
     {
-      text: 'Slide 2: This is the second slide',
-      buttonText: 'Click Me 2',
-      imgSrc: 'https://via.placeholder.com/300/0000FF',
+        text: 'Slide 2: This is the second slide',
+        buttonText: 'Order Now',
+        //   imgSrc: 'https://via.placeholder.com/300/0000FF',
+        imgSrc: maskot,
+        bgClr: 'red'
     },
     {
-      text: 'Slide 3: This is the third slide',
-      buttonText: 'Click Me 3',
-      imgSrc: 'https://via.placeholder.com/300/008000',
+        text: 'Slide 3: This is the third slide',
+        buttonText: 'Order Now',
+        //   imgSrc: 'https://via.placeholder.com/300/008000',
+        imgSrc: pizza, 
+        bgClr: 'blue'
     },
-  ];
+];
 function HomePageHeroSection() {
     const [scroll, setScroll] = useState(0);
-    const [rotationAngle, setRotationAngle] = useState(null); 
-    const [heroSentence, setHeroSentence] = useState('');   
+    const [rotationAngle, setRotationAngle] = useState(null);
+    const [heroSentence, setHeroSentence] = useState('');
     const ref1 = useRef(null);
     const ref2 = useRef(null);
 
@@ -49,7 +58,7 @@ function HomePageHeroSection() {
 
     const [isClicked, setIsClicked] = useState(false);
     const [scope, animate] = useAnimate();
-    
+
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [transitionDirection, setTransitionDirection] = useState('');
@@ -89,7 +98,7 @@ function HomePageHeroSection() {
         }, 300); // 300ms is the duration of the transition
     };
 
-    const { text, buttonText, imgSrc } = carouselItems[currentIndex];
+    const { text, buttonText, imgSrc, bgClr } = carouselItems[currentIndex];
 
     const handleClick = () => {
         const scrollPosition = window.innerHeight * 1;
@@ -111,12 +120,12 @@ function HomePageHeroSection() {
         }
     }, []);
 
-    useEffect(() => { 
+    useEffect(() => {
         fetch('https://inwoodpizzallc.com/api/product/getAllFood/All')
-        .then(res => res.json())
-        .then(result=> console.log(result))
-        .catch(err => console.log(err.message)); 
-    }, []); 
+            .then(res => res.json())
+            .then(result => console.log(result))
+            .catch(err => console.log(err.message));
+    }, []);
 
     useEffect(() => {
         console.log(scroll)
@@ -137,31 +146,31 @@ function HomePageHeroSection() {
         }
     }, [homePageinView]);
 
-    useEffect(() => { 
+    useEffect(() => {
         const handleScroll = () => {
-            const newRotationAngle = window.scrollY * 0.2; 
+            const newRotationAngle = window.scrollY * 0.2;
             setRotationAngle(newRotationAngle);
         };
-      
+
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []); 
+    }, []);
 
     const sentenceArr = ["where every slice is a slice of heaven", "where each bite brings you closer to paradise", "where every slice tells a delicious story", "where every bite is a taste of bliss"]
 
-    useEffect(() => { 
-        let index = 0; 
-        setHeroSentence(sentenceArr[index]); 
+    useEffect(() => {
+        let index = 0;
+        setHeroSentence(sentenceArr[index]);
         index++;
-        const interval = setInterval(() => { 
-            setHeroSentence(sentenceArr[index]); 
-            index = (index + 1) % sentenceArr.length; 
-        }, 5000 );
+        const interval = setInterval(() => {
+            setHeroSentence(sentenceArr[index]);
+            index = (index + 1) % sentenceArr.length;
+        }, 5000);
 
-        return () => clearInterval(interval); 
-   }, [])
+        return () => clearInterval(interval);
+    }, [])
 
     return (
         <div >
@@ -169,7 +178,7 @@ function HomePageHeroSection() {
                 <img className="homeBg" src={background} alt="background image" />
                 <div className="carousel">
                     <button className="carousel-btn left-btn" onClick={handlePrevClick} disabled={isTransitioning}>
-                        &lt;
+                        <ArrowCircleLeftOutlinedIcon />
                     </button>
                     <AnimatePresence initial={false} custom={transitionDirection}>
                         <motion.div
@@ -180,7 +189,7 @@ function HomePageHeroSection() {
                             animate={{ x: 0, opacity: 1 }}
                             exit={{ x: transitionDirection === 'right' ? -500 : 500, opacity: 0 }}
                             transition={{ duration: 0.3 }}
-                            style={{ width: '100%' }}
+                            style={{ width: '100%', background: bgClr }}
                         >
                             <div className="left-box">
                                 <p>{text}</p>
@@ -192,7 +201,7 @@ function HomePageHeroSection() {
                         </motion.div>
                     </AnimatePresence>
                     <button className="carousel-btn right-btn" onClick={handleNextClick} disabled={isTransitioning}>
-                        &gt;
+                        <ArrowCircleRightOutlinedIcon/>
                     </button>
                 </div>
             </div>

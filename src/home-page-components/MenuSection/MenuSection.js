@@ -191,7 +191,7 @@ function MenuSection() {
 
     return (
         <div className='menu-section-wrapper' ref={scope}>
-            <img src={menuBG} alt='bg menu Img' className='menu-bg'/>
+            {/* <img src={menuBG} alt='bg menu Img' className='menu-bg'/> */}
             {/* <div className='menu-cart'>
                 <span className='title'>Menu</span>
                 <div className='filter-buttons'>

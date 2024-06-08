@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import Drawer from '@mui/material/Drawer';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useSelector, useDispatch } from 'react-redux';
-import { incrementQty, decrementQty } from '../../redux/slices/cartSlice';
+import { incrementQty, decrementQty, removeFromCart } from '../../redux/slices/cartSlice';
 import { setFalse } from '../../redux/slices/cartShow';
 
 import { Navigate, useNavigate } from 'react-router-dom';
@@ -90,6 +91,7 @@ function MobAddToCart({ isClicked }) {
                     <div className='quantiy-button-inner-items'>{item.qty}</div>
                     <button className='quantiy-button-inner-items quantiy-button-inner-items-button minus' onClick={() => dispatch(incrementQty({ id: item.id }))}>+</button>
                   </div>
+                  &nbsp; <button style={{background: 'none', border: 'none'}} onClick={() => dispatch(removeFromCart({id:item.id}))}><DeleteIcon /></button>
                 </div>
               ))}
             </div>

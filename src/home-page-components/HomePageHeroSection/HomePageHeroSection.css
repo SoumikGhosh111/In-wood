@@ -351,7 +351,7 @@
     z-index: 1;
     width: 100%;
     height: 100%;
-    padding: 0rem 1rem;
+    padding: 0rem 2.5rem;
 }
   
 
@@ -359,6 +359,7 @@
     display: flex;
     /* border: 1px solid #ccc; */
     border-radius: 10px;
+    padding: 0rem 1rem;
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -397,17 +398,26 @@
     /* background-color: #eee; */
     color: white;
 }
-  
+  .right-box img{ 
+    width: 100%;
+    height: auto;
+    
+  }
 .carousel-btn {
-    background-color: #007bff;
+    background-color: #ffdd00de;
     border: none;
     color: white;
-    padding: 10px;
     cursor: pointer;
     font-size: 18px;
-    margin: 0 10px;
-    border-radius: 50%;
+    min-width: 45px;
+    min-height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 1;
+    border-radius: 50%;
+    color: black;
+    
 }
   
 .carousel-btn:focus {
@@ -415,7 +425,12 @@
 }
 
 @media screen and (max-width: 768px){ 
+    .carousel-btn{ 
+        min-width: 35px;
+        min-height: 35px;
+    }
     .carousel{ 
+        padding: 0rem 1rem;
         padding-top: 50px;
     }
     .carousel-content{ 
