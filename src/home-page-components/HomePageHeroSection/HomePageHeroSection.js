@@ -101,7 +101,7 @@ function HomePageHeroSection() {
     const { text, buttonText, imgSrc, bgClr } = carouselItems[currentIndex];
 
     const handleClick = () => {
-        const scrollPosition = window.innerHeight * 1;
+        const scrollPosition = window.innerWidth < 769 ? window.innerHeight * 1.1 :  window.innerHeight * 1;
 
         window.scrollTo({
             top: scrollPosition,
