@@ -20,7 +20,23 @@ const Footer = lazy(() => import("../../components/Footer/Footer"));
 const MemoizedMenuSection  = memo(MenuSection); 
 const MemoizedFooter = memo(Footer); 
 
-
+const carouselItems = [
+    {
+      text: 'Slide 1: This is the first slide',
+      buttonText: 'Click Me 1',
+      imgSrc: 'https://via.placeholder.com/300',
+    },
+    {
+      text: 'Slide 2: This is the second slide',
+      buttonText: 'Click Me 2',
+      imgSrc: 'https://via.placeholder.com/300/0000FF',
+    },
+    {
+      text: 'Slide 3: This is the third slide',
+      buttonText: 'Click Me 3',
+      imgSrc: 'https://via.placeholder.com/300/008000',
+    },
+  ];
 function HomePageHeroSection() {
     const [scroll, setScroll] = useState(0);
     const [rotationAngle, setRotationAngle] = useState(null); 
@@ -33,24 +49,57 @@ function HomePageHeroSection() {
 
     const [isClicked, setIsClicked] = useState(false);
     const [scope, animate] = useAnimate();
-    const handleClick = () => {
-        // window.location.href = '#menu'
-        const scrollPosition = window.innerHeight * 1; // 100% of the viewport height
+    
 
-        // Scroll to the calculated position
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [transitionDirection, setTransitionDirection] = useState('');
+    const [isTransitioning, setIsTransitioning] = useState(false);
+
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         if (!isTransitioning) {
+    //             handleNextClick();
+    //         }
+    //     }, 3000); // 3000ms is the interval duration
+
+    //     return () => clearInterval(interval);
+    // }, [isTransitioning]);
+
+    const handlePrevClick = () => {
+        if (isTransitioning) return;
+        setIsTransitioning(true);
+        setTransitionDirection('left');
+        setTimeout(() => {
+            setCurrentIndex((prevIndex) =>
+                prevIndex === 0 ? carouselItems.length - 1 : prevIndex - 1
+            );
+            setIsTransitioning(false);
+        }, 300); // 300ms is the duration of the transition
+    };
+
+    const handleNextClick = () => {
+        if (isTransitioning) return;
+        setIsTransitioning(true);
+        setTransitionDirection('right');
+        setTimeout(() => {
+            setCurrentIndex((prevIndex) =>
+                prevIndex === carouselItems.length - 1 ? 0 : prevIndex + 1
+            );
+            setIsTransitioning(false);
+        }, 300); // 300ms is the duration of the transition
+    };
+
+    const { text, buttonText, imgSrc } = carouselItems[currentIndex];
+
+    const handleClick = () => {
+        const scrollPosition = window.innerHeight * 1;
+
         window.scrollTo({
             top: scrollPosition,
             behavior: 'smooth'
         });
-        // animate("#pizza-3", { scale: 0.8, y: 180, x: -100, rotate: "50deg" }, { duration: 1 })
-        // animate("#pizza-1", { y: -400, rotate: "40deg" }, { duration: 1 })
-        // animate("#pizza-2", { x: -600, y: -10, rotate: "40deg" }, { duration: 1 })
-    }
+    };
 
-
-
-
-    // getting the scroll height
     useEffect(() => {
         const handleScroll = () => {
             setScroll(window.scrollY);
@@ -61,6 +110,7 @@ function HomePageHeroSection() {
             window.removeEventListener("scroll", handleScroll);
         }
     }, []);
+
     useEffect(() => { 
         fetch('https://inwoodpizzallc.com/api/product/getAllFood/All')
         .then(res => res.json())
@@ -78,9 +128,7 @@ function HomePageHeroSection() {
         }
     }, [menuPageInView]);
 
-    // Animation for when homePageInView is true
     useEffect(() => {
-
         if (homePageinView && scroll < window.innerHeight) {
             // animate("#pizza-3", { scale: 1, y: 0, x: 0, rotate: "0deg" }, { duration: 1 })
             // animate("#pizza-1", { y: 0, rotate: "0deg" }, { duration: 1 })
@@ -91,86 +139,70 @@ function HomePageHeroSection() {
 
     useEffect(() => { 
         const handleScroll = () => {
-            const newRotationAngle = window.scrollY * 0.2; // Adjust rotation speed here
+            const newRotationAngle = window.scrollY * 0.2; 
             setRotationAngle(newRotationAngle);
-          };
+        };
       
-          window.addEventListener('scroll', handleScroll);
-      
-          return () => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
             window.removeEventListener('scroll', handleScroll);
-          };
+        };
     }, []); 
-
 
     const sentenceArr = ["where every slice is a slice of heaven", "where each bite brings you closer to paradise", "where every slice tells a delicious story", "where every bite is a taste of bliss"]
 
-   useEffect(() => { 
-    let index = 0; 
-    setHeroSentence(sentenceArr[index]); // Set initial sentence immediately for when the page gets load the sentence also laods 
-    index++;
-    const interval = setInterval(() => { 
+    useEffect(() => { 
+        let index = 0; 
         setHeroSentence(sentenceArr[index]); 
-        index = (index + 1) % sentenceArr.length; 
-    }, 5000 );
+        index++;
+        const interval = setInterval(() => { 
+            setHeroSentence(sentenceArr[index]); 
+            index = (index + 1) % sentenceArr.length; 
+        }, 5000 );
 
-    return () => clearInterval(interval); 
+        return () => clearInterval(interval); 
    }, [])
-
 
     return (
         <div >
             <div className='homeBox' ref={ref1}>
-                {/* <span className='yumm'>Yumm</span> */}
                 <img className="homeBg" src={background} alt="background image" />
-                <div className='left-box-wraapper'>
-                    <div className='leftBox'>
-                        <span  ref={ref1}>
-                            Inwood Pizza, 
-                            <br/> 
-                            {/* Animating the text */}
-                            <AnimatePresence mode='wait'>
-                                {homePageinView ? 
-                                <>
-                                
-                                <motion.div
-                                
-                                key={heroSentence} 
-                                initial={{ opacity: 0, x: -50}}
-                                animate={{ opacity: 1, x: 0}}
-                                exit={{ opacity: 0, x: 50}}
-                                transition={{ delay: 0 }}
-                                >
-                                    {heroSentence}
-                                </motion.div>
-                                </> : 
-                                <></>}
-                            </AnimatePresence>  
-                        </span>
-                        <button className='home-hero-order-button' onClick={handleClick}>
-                            <ShoppingCartOutlinedIcon sx={{ fontSize: window.innerWidth > 768 ? "25px" : "16px", transform: "translateY(15%)", marginRight: "1rem" }} />
-                            Order Now
-                        </button>
-                    </div>
-                </div>
-                <div className='rightBox' style={{zIndex: scroll > window.innerHeight / 10 ? '0' : '1'}}>
-                        {/* <div id='pizza-1' ><img className='topSlice' src={topSlice} alt="topSlice" /></div>
-                        <div id='pizza-2'><img className='bottomSlice' src={bottomSlice} alt="bottomSlice" /></div>
-                        <div id='pizza-3'><img className='mainSlice' src={mainSlice} alt="mainSlice" /></div> */}
-                    {/* <div style={{transform: `rotate(${rotationAngle}deg) `}} className='pizza-container-hero-section'> */}
-                        <img src={pizza} alt = 'pizza bg img' className='pizza-png' />
-                    {/* </div> */}
+                <div className="carousel">
+                    <button className="carousel-btn left-btn" onClick={handlePrevClick} disabled={isTransitioning}>
+                        &lt;
+                    </button>
+                    <AnimatePresence initial={false} custom={transitionDirection}>
+                        <motion.div
+                            key={currentIndex}
+                            className={`carousel-content ${transitionDirection}`}
+                            custom={transitionDirection}
+                            initial={{ x: transitionDirection === 'right' ? 500 : -500, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            exit={{ x: transitionDirection === 'right' ? -500 : 500, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            style={{ width: '100%' }}
+                        >
+                            <div className="left-box">
+                                <p>{text}</p>
+                                <button className='home-hero-order-button' onClick={handleClick}>{buttonText}</button>
+                            </div>
+                            <div className="right-box">
+                                <img src={imgSrc} alt="carousel" />
+                            </div>
+                        </motion.div>
+                    </AnimatePresence>
+                    <button className="carousel-btn right-btn" onClick={handleNextClick} disabled={isTransitioning}>
+                        &gt;
+                    </button>
                 </div>
             </div>
             <div id='menu' className='menu-section' ref={ref2} >
-                {/* <MenuSection /> */}
                 <Suspense fallback={<div>Loading . . .</div>}>
                     <MemoizedMenuSection />
                 </Suspense>
             </div>
             <div >
-                {/* <Footer /> */}
-                <Suspense fallback = {<div>Loading . . .</div>}>
+                <Suspense fallback={<div>Loading . . .</div>}>
                     <MemoizedFooter />
                 </Suspense>
             </div>
@@ -179,86 +211,3 @@ function HomePageHeroSection() {
 }
 
 export default HomePageHeroSection
-
-
-// style={{opacity: isClicked ? 1 : 0}}
-// style={{ opacity: isClicked ? 1 : 0, zIndex: isClicked ? 10 : 0 }}
-// style={{ zIndex: isClicked ? 0 : 10, opacity: isClicked ? 0 : 1 }}
-// style={{transform: `rotate(${rotationAngle}deg) `}}
-
-
-// .rightBox .mainSlice {
-//     height: 450px;
-//     width: 340px;
-//     object-fit: cover;
-//     /* position: absolute;
-//     left: 30vw; */
-// }
-
-// .rightBox .topSlice {
-//     height: 210px;
-//     width: 230px;
-//     object-fit: cover;
-//     /* position: absolute; */
-//     /* z-index: 1; */
-//     /* transform: translate(140%, -50%) rotate(0deg); */
-//     right: 17vw;
-//     bottom: 49vh;
-
-// }
-
-// .rightBox .bottomSlice {
-//     height: 210px;
-//     width: 230px;
-//     object-fit: cover;
-//     /* position: absolute; */
-//     /* z-index: 1; */
-//     transform: translate(30%, 45%) rotate(0deg);
-//     right: 18vw;
-//     bottom: 21vh;
-
-// }
-
-
-
-// .pizza-container-hero-section{ 
-//     /* border: 1px solid rebeccapurple; */
-//     width: fit-content;
-//     height: fit-content; 
-//     position: relative;
-// }
-
-
-// .mainSlice {
-//     height: 450px;
-//     width: 340px;
-//     object-fit: cover;
-//     transform: translateY(-50%) rotate(0deg);
-//     /* position: absolute !important; */
-//     /* top: 0;  */
-//     /* right: 0; */
-//     /* position: absolute; */
-//     /* left: 30vw; */
-    
-// }
-
-// .bottomSlice{ 
-//     height: 210px;
-//     width: 230px;
-//     object-fit: cover;
-//     /* position: absolute !important; */
-//     /* z-index: 1; */
-//     transform: translate(-50%, 90%) rotate(0deg);
-//     right: 18vw;
-//     bottom: 21vh;
-// }
-// .topSlice{ 
-//     height: 210px;
-//     width: 230px;
-//     object-fit: cover;
-//     /* position: absolute !important; */
-//     /* z-index: 1; */
-//     transform: translate(-60%, 100%) rotate(0deg);
-//     right: 17vw;
-//     bottom: 49vh;
-// }
