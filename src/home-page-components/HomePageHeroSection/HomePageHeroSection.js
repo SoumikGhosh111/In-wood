@@ -7,8 +7,10 @@ import background from "../../assets/hero_background.png"
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useAnimate, useInView } from "framer-motion";
 import { motion, AnimatePresence } from 'framer-motion';
-import pizza from "../../assets/pizza.png";
+import banner1 from "../../assets/banner-1.jpg";
+import banner2 from "../../assets/banner-2.png";
 import maskot from "../../assets/maskot_logo_inwood.png"
+import offerBanner from "../../assets/inwood-offer-banner.jpg"
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
 
@@ -25,25 +27,23 @@ const MemoizedFooter = memo(Footer);
 
 const carouselItems = [
     {
-        text: 'Slide 1: This is the first slide',
+        text: '',
         buttonText: 'Order Now',
         //   imgSrc: 'https://via.placeholder.com/300',
-        imgSrc: mainSlice, 
-        bgClr: 'green'
+        imgSrc: '', 
+        bgClr: '#BD1111',
+        bgImg: offerBanner, 
+        zId: 1
     },
+   
     {
-        text: 'Slide 2: This is the second slide',
-        buttonText: 'Order Now',
-        //   imgSrc: 'https://via.placeholder.com/300/0000FF',
-        imgSrc: maskot,
-        bgClr: 'red'
-    },
-    {
-        text: 'Slide 3: This is the third slide',
+        text: 'Feeling Hungry? Get 10% Off On Your First Order!',
         buttonText: 'Order Now',
         //   imgSrc: 'https://via.placeholder.com/300/008000',
-        imgSrc: pizza, 
-        bgClr: 'blue'
+        imgSrc: banner2, 
+        bgClr: '#FF362D',
+        bgImg: '', 
+        zId: 0
     },
 ];
 function HomePageHeroSection() {
@@ -98,7 +98,7 @@ function HomePageHeroSection() {
         }, 300); // 300ms is the duration of the transition
     };
 
-    const { text, buttonText, imgSrc, bgClr } = carouselItems[currentIndex];
+    const { text, buttonText, imgSrc, bgClr, bgImg, zId } = carouselItems[currentIndex];
 
     const handleClick = () => {
         const scrollPosition = window.innerWidth < 769 ? window.innerHeight * 1.1 :  window.innerHeight * 1;
@@ -191,12 +191,13 @@ function HomePageHeroSection() {
                             transition={{ duration: 0.3 }}
                             style={{ width: '100%', background: bgClr }}
                         >
+                            <img src={bgImg} className='carousel-bg' style={{display: bgImg === '' ? 'none' : '', zIndex: zId}}/>
                             <div className="left-box">
                                 <p>{text}</p>
-                                <button className='home-hero-order-button' onClick={handleClick}>{buttonText}</button>
+                                <button className='home-hero-order-button' onClick={handleClick} style={{marginTop: text === '' ? '16rem': '0'}}>{buttonText}</button>
                             </div>
                             <div className="right-box">
-                                <img src={imgSrc} alt="carousel" />
+                                <img src={imgSrc} />
                             </div>
                         </motion.div>
                     </AnimatePresence>

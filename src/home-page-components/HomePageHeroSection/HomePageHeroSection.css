@@ -114,6 +114,7 @@
     font-weight: 700;
     line-height: 21.22px;
     cursor: pointer;
+    z-index: 1;
 }
 
 
@@ -346,25 +347,31 @@
 
 .carousel {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     z-index: 1;
     width: 100%;
     height: 100%;
-    padding: 0rem 2.5rem;
+    padding: 0rem 0;
+    position: relative;
 }
   
 
 .carousel-content {
     display: flex;
     /* border: 1px solid #ccc; */
-    border-radius: 10px;
     padding: 0rem 1rem;
     overflow: hidden;
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 85%;
     /* border: 1px solid red; */
+}
+.carousel-bg{ 
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #000;
 }
   
 .left-box,
@@ -375,6 +382,7 @@
     justify-content: center;
     width: 50%;
     height: 100%;
+    z-index: 1;
     /* border: 1px solid red; */
 }
   
@@ -389,9 +397,12 @@
     flex-direction: column;
 }
 .left-box p{ 
-    font-size: 50px;
+    font-size: 70px;
     text-transform: uppercase;
     margin-bottom: 1rem;
+    font-style: italic;
+    font-weight: bold;
+    z-index: 0;
 }
   
 .right-box {
@@ -414,10 +425,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1;
+    z-index: 99;
     border-radius: 50%;
     color: black;
-    
+    position: absolute;
+}
+.left-btn{ 
+    left: 3%;
+    top: 50%;
+}
+.right-btn{ 
+    right: 3%;
+    top: 50%;
 }
   
 .carousel-btn:focus {
@@ -430,13 +449,14 @@
         min-height: 35px;
     }
     .carousel{ 
-        padding: 0rem 1rem;
+        /* padding: 0rem 1rem; */
         padding-top: 50px;
     }
     .carousel-content{ 
         flex-direction: column;
         flex-direction: column-reverse;
         width: 100%;
+        height: 98%;
     }
     .left-box{ 
         width: 100%;
