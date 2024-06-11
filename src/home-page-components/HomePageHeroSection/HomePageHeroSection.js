@@ -162,7 +162,7 @@ function HomePageHeroSection() {
         return () => clearInterval(interval);
     }, [])
     const handleSpecialOffersPage = () => { 
-        console.log("I am Clicked")
+       window.location.href = '/special-offers'; 
     }
     return (
         <div >
@@ -212,7 +212,7 @@ function HomePageHeroSection() {
                                 animate={{ x: 0, opacity: 1 }}
                                 exit={{ x: transitionDirection === 'right' ? -100 : 100, opacity: 0 }}
                                 transition={{ duration: 0.3 }}
-                                style={{ width: '100%', background: 'transparent'}}
+                                style={{ width: '100%', background: 'transparent', cursor: 'pointer'}}
                                 onClick={handleSpecialOffersPage}
                             >
                                 <img src={bgImg} className='carousel-bg'/>
