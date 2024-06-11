@@ -161,7 +161,9 @@ function HomePageHeroSection() {
 
         return () => clearInterval(interval);
     }, [])
-
+    const handleSpecialOffersPage = () => { 
+        console.log("I am Clicked")
+    }
     return (
         <div >
             <div className='homeBox' ref={ref1}>
@@ -192,7 +194,7 @@ function HomePageHeroSection() {
                         </span>
                         <button className='home-hero-order-button' onClick={handleClick}>
                             <ShoppingCartOutlinedIcon sx={{ fontSize: window.innerWidth > 768 ? "25px" : "16px", transform: "translateY(15%)", marginRight: "1rem" }} />
-                            Order Now
+                            Explore Menu
                         </button>
                     </div>
                 </div>
@@ -206,11 +208,12 @@ function HomePageHeroSection() {
                                 key={currentIndex}
                                 className={`carousel-content ${transitionDirection}`}
                                 custom={transitionDirection}
-                                initial={{ x: transitionDirection === 'right' ? 500 : -500, opacity: 0 }}
+                                initial={{ x: transitionDirection === 'right' ? 100 : -100, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
-                                exit={{ x: transitionDirection === 'right' ? -500 : 500, opacity: 0 }}
+                                exit={{ x: transitionDirection === 'right' ? -100 : 100, opacity: 0 }}
                                 transition={{ duration: 0.3 }}
                                 style={{ width: '100%', background: 'transparent'}}
+                                onClick={handleSpecialOffersPage}
                             >
                                 <img src={bgImg} className='carousel-bg'/>
                             </motion.div>
