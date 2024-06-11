@@ -21,6 +21,8 @@ function CheckoutPageRightSide() {
   const cartItems = useSelector((state) => state.cart.cart);
   const userData = useSelector((state) => state.userdata);
   const [selectedOption, setSelectedOption] = useState(0);
+  const [deliveryCharges, setDeliveryCharges] = useState(0); 
+  const [support, setSupport] = useState(0); 
   const [dscnt, setDscnt] = useState(0); // this will be used for discount purposes in the future
   // const [deliveryCharges, setDeliveryCharges] = useState(0);
   // const [openClose, setOpenClose] = useState(null);
@@ -34,20 +36,21 @@ function CheckoutPageRightSide() {
   //   setSelectedOption(event.target.value);
   // };
 
-
+  const SupportFee = 0.99; 
+  const charges = 2.99;
   useEffect(() => {
     // let discount = ((totalAmnt * selectedOption) / 100).toFixed(2);
     // setDscnt(discount);
     // let temp = totalAmnt === 0 ? 0 : totalAmnt - discount;
     const EstimatedTax = ((totalAmnt * 8.75) / 100).toFixed(2);
     setTax(EstimatedTax);
-    const charges = totalAmnt > 20 ? 0 : 10;
-    // setDeliveryCharges(charges);
+    setDeliveryCharges(totalAmnt > 0 ? charges : 0);
     // if (totalAmnt === 0) {
     //   setSelectedOption(0)
     // }
+    setSupport(totalAmnt > 0 ? SupportFee : 0); 
   }, [totalAmnt])
-  const SupportFee = 0.95;
+  
 
   // const handleActiveClassClick = (indx) => {
   //   setActive(indx);
@@ -111,7 +114,7 @@ function CheckoutPageRightSide() {
           subTotal: totalAmnt,
           estimatedTax: tax,
           supportLocalfee: SupportFee,
-          total: (parseFloat(totalAmnt) + parseFloat(tax))
+          total: (parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(support) + parseFloat(deliveryCharges))
         },
         // toppings: cartItems.map((item) => item.toppings ?  item.toppings.map((topping) => topping.text) : null) 
       }
@@ -181,12 +184,16 @@ function CheckoutPageRightSide() {
             <span>Sub-total</span>
             <span>${(totalAmnt).toFixed(2)}</span>
           </div>
-          {/* <div className='tax'>
-            <span>Discount</span>
-            <span>{selectedOption}%</span>
-          </div> */}
           <div className='tax'>
-            <span>Estimated Tax</span>
+            <span>Maintenance fee for the website</span>
+            <span>${SupportFee}</span>
+          </div>
+          <div className='tax'>
+            <span>Delivery Charges</span>
+            <span>${charges}</span>
+          </div>
+          <div className='tax'>
+            <span>Estimated Tax (8.75%)</span>
             <span>${tax}</span>
           </div>
 
@@ -231,7 +238,7 @@ function CheckoutPageRightSide() {
             {totalAmnt === 0 ? ( // Display 0 if subtotal is 0
               <span>$0.00</span>
             ) : ( // Otherwise calculate total amount
-              <span>${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(tipAmnt)).toFixed(2)}</span>
+              <span>${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(deliveryCharges) + parseFloat(support) + parseFloat(tipAmnt)).toFixed(2)}</span>
             )}
           </div>
         </div>

@@ -13,7 +13,7 @@ import { addToCart, decrementQty } from '../../redux/slices/cartSlice';
 import pizza1 from "../../assets/img_not_found.jpg";
 import pizza2 from "../../assets/pizza_2.png";
 import pizza3 from "../../assets/pizza_3.png";
-import loadingGif from "../../assets/Pizza_sliced.gif"; 
+import loadingGif from "../../assets/Pizza_sliced.gif";
 import menuBG from "../../assets/pizza_img_menu.png"
 
 function MenuSection() {
@@ -37,6 +37,12 @@ function MenuSection() {
     const [everyDaySpcl, setEveryDaySpcl] = useState(null);
     const [familySpcl, setFamilySpcl] = useState(null);
     const [drinks, setDrinks] = useState(null);
+
+
+    // offres and special items 
+    const [gameDayCore, setGameDayCore] = useState(null); 
+    const [gameDayPlus, setGameDayPlus] = useState(null); 
+    const [gameDayUltra, setGameDayUltra] = useState(null); 
 
 
 
@@ -128,6 +134,14 @@ function MenuSection() {
             const milkshake = data.data.food.filter(item => item.catagory === 'Milk Shake');
             setMilkShake(milkshake);
 
+            const specialGameDayCore = data.data.food.filter(item => item.catagory === 'Game Day Core');
+            setGameDayCore(specialGameDayCore); 
+
+            const specialGameDayPlus = data.data.food.filter(item => item.catagory === 'Game Day Plus');
+            setGameDayPlus(specialGameDayPlus); 
+
+            const specialGameDayUltra = data.data.food.filter(item => item.catagory === 'Game Day Ultra');
+            setGameDayUltra(specialGameDayUltra); 
 
 
         } catch (error) {
@@ -533,6 +547,161 @@ function MenuSection() {
 
                     <div className='menu-section-cards' id='cards' >
                         {everyDaySpcl?.map((item, indx) => (
+                            <>
+
+                                <div className='menu-section-card-item' >
+                                    <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
+                                        <div className='item-img'>
+                                            <img src={item.img == '' ? pizza1 : item.img} />
+                                        </div>
+                                        <div style={{ height: '10px', width: '100%' }} ></div>
+                                        <div className='item-name-wrapper'>
+                                            <span className='item-name' >{item.title}</span>
+                                        </div>
+                                        {/* <div className='item-desc-'> */}
+                                        <p className='item-desc'>{item.desc}</p>
+                                        {/* </div> */}
+                                        <div className='size'>
+                                            <div className='price'>
+                                                {/* ${item.prices[item.prices.length - 1]} */}
+                                                ${item.prices[0]}
+                                            </div>
+                                            <div className='size-param'>
+                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
+                                                {item.productType ? item.productType : "Large"}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='quantity-buttons-wrapper'>
+                                        <button className='quantity-buttons'
+                                            onClick={() => handleOpen(item._id)}
+                                        >
+                                            Add To Cart
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </>
+
+                        ))}
+
+                    </div>
+                ) : (<>Loading . . .</>)}
+
+                <span className='title'>Game Day Core</span>
+
+
+                {gameDayCore !== null ? (
+                    // menu.map((item) => item.filter(()))
+
+                    <div className='menu-section-cards' id='cards' >
+                        {gameDayCore?.map((item, indx) => (
+                            <>
+
+                                <div className='menu-section-card-item' >
+                                    <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
+                                        <div className='item-img'>
+                                            <img src={item.img == '' ? pizza1 : item.img} />
+                                        </div>
+                                        <div style={{ height: '10px', width: '100%' }} ></div>
+                                        <div className='item-name-wrapper'>
+                                            <span className='item-name' >{item.title}</span>
+                                        </div>
+                                        {/* <div className='item-desc-'> */}
+                                        <p className='item-desc'>{item.desc}</p>
+                                        {/* </div> */}
+                                        <div className='size'>
+                                            <div className='price'>
+                                                {/* ${item.prices[item.prices.length - 1]} */}
+                                                ${item.prices[0]}
+                                            </div>
+                                            <div className='size-param'>
+                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
+                                                {item.productType ? item.productType : "Large"}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='quantity-buttons-wrapper'>
+                                        <button className='quantity-buttons'
+                                            onClick={() => handleOpen(item._id)}
+                                        >
+                                            Add To Cart
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </>
+
+                        ))}
+
+                    </div>
+                ) : (<>Loading . . .</>)}
+
+
+
+                <span className='title'>Game Day Plus</span>
+
+
+                {gameDayPlus !== null ? (
+                    // menu.map((item) => item.filter(()))
+
+                    <div className='menu-section-cards' id='cards' >
+                        {gameDayPlus?.map((item, indx) => (
+                            <>
+
+                                <div className='menu-section-card-item' >
+                                    <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
+                                        <div className='item-img'>
+                                            <img src={item.img == '' ? pizza1 : item.img} />
+                                        </div>
+                                        <div style={{ height: '10px', width: '100%' }} ></div>
+                                        <div className='item-name-wrapper'>
+                                            <span className='item-name' >{item.title}</span>
+                                        </div>
+                                        {/* <div className='item-desc-'> */}
+                                        <p className='item-desc'>{item.desc}</p>
+                                        {/* </div> */}
+                                        <div className='size'>
+                                            <div className='price'>
+                                                {/* ${item.prices[item.prices.length - 1]} */}
+                                                ${item.prices[0]}
+                                            </div>
+                                            <div className='size-param'>
+                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
+                                                {item.productType ? item.productType : "Large"}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='quantity-buttons-wrapper'>
+                                        <button className='quantity-buttons'
+                                            onClick={() => handleOpen(item._id)}
+                                        >
+                                            Add To Cart
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </>
+
+                        ))}
+
+                    </div>
+                ) : (<>Loading . . .</>)}
+
+
+
+
+                <span className='title'>Game Day Ultra</span>
+
+
+                {gameDayUltra !== null ? (
+                    // menu.map((item) => item.filter(()))
+
+                    <div className='menu-section-cards' id='cards' >
+                        {gameDayUltra?.map((item, indx) => (
                             <>
 
                                 <div className='menu-section-card-item' >

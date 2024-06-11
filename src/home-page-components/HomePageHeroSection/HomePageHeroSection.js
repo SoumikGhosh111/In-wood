@@ -10,9 +10,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import banner1 from "../../assets/banner-1.jpg";
 import banner2 from "../../assets/banner-2.png";
 import maskot from "../../assets/maskot_logo_inwood.png"
-import offerBanner from "../../assets/inwood-offer-banner.jpg"
+import cheesePie from "../../assets/chesse_pie.png";
+import offerBanner from "../../assets/inwood_offer_banner 2.jpg"
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
+import inwoodOfferBanner from "../../assets/sample_banner.jpg";
 
 
 
@@ -27,23 +29,11 @@ const MemoizedFooter = memo(Footer);
 
 const carouselItems = [
     {
-        text: '',
-        buttonText: 'Order Now',
-        //   imgSrc: 'https://via.placeholder.com/300',
-        imgSrc: '', 
-        bgClr: '#BD1111',
-        bgImg: offerBanner, 
-        zId: 1
+        bgImg: inwoodOfferBanner,
     },
-   
+
     {
-        text: 'Feeling Hungry? Get 10% Off On Your First Order!',
-        buttonText: 'Order Now',
-        //   imgSrc: 'https://via.placeholder.com/300/008000',
-        imgSrc: banner2, 
-        bgClr: '#FF362D',
-        bgImg: '', 
-        zId: 0
+        bgImg: inwoodOfferBanner,
     },
 ];
 function HomePageHeroSection() {
@@ -98,10 +88,10 @@ function HomePageHeroSection() {
         }, 300); // 300ms is the duration of the transition
     };
 
-    const { text, buttonText, imgSrc, bgClr, bgImg, zId } = carouselItems[currentIndex];
+    const { bgImg} = carouselItems[currentIndex];
 
     const handleClick = () => {
-        const scrollPosition = window.innerWidth < 769 ? window.innerHeight * 1.1 :  window.innerHeight * 1;
+        const scrollPosition = window.innerWidth < 769 ? window.innerHeight * 1.1 : window.innerHeight * 1;
 
         window.scrollTo({
             top: scrollPosition,
@@ -176,7 +166,79 @@ function HomePageHeroSection() {
         <div >
             <div className='homeBox' ref={ref1}>
                 <img className="homeBg" src={background} alt="background image" />
-                <div className="carousel">
+                <div className='left-box-wraapper'>
+                    <div className='leftBox'>
+                        <span ref={ref1}>
+                            Inwood Pizza,
+                            <br />
+                            {/* Animating the text */}
+                            <AnimatePresence mode='wait'>
+                                {homePageinView ?
+                                    <>
+
+                                        <motion.div
+
+                                            key={heroSentence}
+                                            initial={{ opacity: 0, x: -50 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={{ opacity: 0, x: 50 }}
+                                            transition={{ delay: 0 }}
+                                        >
+                                            {heroSentence}
+                                        </motion.div>
+                                    </> :
+                                    <></>}
+                            </AnimatePresence>
+                        </span>
+                        <button className='home-hero-order-button' onClick={handleClick}>
+                            <ShoppingCartOutlinedIcon sx={{ fontSize: window.innerWidth > 768 ? "25px" : "16px", transform: "translateY(15%)", marginRight: "1rem" }} />
+                            Order Now
+                        </button>
+                    </div>
+                </div>
+                <div className='rightBox' style={{ zIndex: scroll > window.innerHeight / 10 ? '0' : '1' }}>
+                    <div className="carousel">
+                        <button className="carousel-btn left-btn" onClick={handlePrevClick} disabled={isTransitioning}>
+                            <ArrowCircleLeftOutlinedIcon />
+                        </button>
+                        <AnimatePresence initial={false} custom={transitionDirection}>
+                            <motion.div
+                                key={currentIndex}
+                                className={`carousel-content ${transitionDirection}`}
+                                custom={transitionDirection}
+                                initial={{ x: transitionDirection === 'right' ? 500 : -500, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                exit={{ x: transitionDirection === 'right' ? -500 : 500, opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                                style={{ width: '100%', background: 'transparent'}}
+                            >
+                                <img src={bgImg} className='carousel-bg'/>
+                            </motion.div>
+                        </AnimatePresence>
+                        <button className="carousel-btn right-btn" onClick={handleNextClick} disabled={isTransitioning}>
+                            <ArrowCircleRightOutlinedIcon />
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id='menu' className='menu-section' ref={ref2} >
+                <Suspense fallback={<div>Loading . . .</div>}>
+                    <MemoizedMenuSection />
+                </Suspense>
+            </div>
+            <div >
+                <Suspense fallback={<div>Loading . . .</div>}>
+                    <MemoizedFooter />
+                </Suspense>
+            </div>
+        </div>
+    )
+}
+
+export default HomePageHeroSection
+
+
+{/* <div className="carousel">
                     <button className="carousel-btn left-btn" onClick={handlePrevClick} disabled={isTransitioning}>
                         <ArrowCircleLeftOutlinedIcon />
                     </button>
@@ -204,20 +266,4 @@ function HomePageHeroSection() {
                     <button className="carousel-btn right-btn" onClick={handleNextClick} disabled={isTransitioning}>
                         <ArrowCircleRightOutlinedIcon/>
                     </button>
-                </div>
-            </div>
-            <div id='menu' className='menu-section' ref={ref2} >
-                <Suspense fallback={<div>Loading . . .</div>}>
-                    <MemoizedMenuSection />
-                </Suspense>
-            </div>
-            <div >
-                <Suspense fallback={<div>Loading . . .</div>}>
-                    <MemoizedFooter />
-                </Suspense>
-            </div>
-        </div>
-    )
-}
-
-export default HomePageHeroSection
+                </div> */}

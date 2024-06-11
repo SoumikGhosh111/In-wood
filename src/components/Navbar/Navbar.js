@@ -214,7 +214,7 @@ function Navbar() {
                         <li><Link onClick={handleHomeClick} className={`nav-links btn-2 ${isMenuActive ? '' : 'active'}`} id='home'>Home</Link></li>
                         <li><Link onClick={handleMenu} className={`nav-links btn-2 ${isMenuActive ? 'active' : ''}`} id='menu'>Menu</Link></li>
                         <li><Link className='nav-links btn-2' id='pages' to={"/checkout"}>Checkout</Link></li>
-                        <li><Link className='nav-links btn-2' id='pages' to={"/coupens"}>Coupens</Link></li>
+                        <li><Link className='nav-links btn-2' id='pages' to={"/coupens"}>Coupons</Link></li>
                     </ul>
 
                     <div className='nav-bar-login-area'>

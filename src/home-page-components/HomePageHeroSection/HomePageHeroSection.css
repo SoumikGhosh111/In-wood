@@ -3,8 +3,12 @@
 .homeBox {
     width: 100vw;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    
     /* position: relative; */
-    /* background-color:  */
+    background-color: black
 }
 
 
@@ -12,8 +16,8 @@
 
 /* bg image */
 .homeBg {
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     object-fit: cover;
     /* opacity: 0.1; */
     position: absolute;
@@ -75,22 +79,27 @@
     align-items: center;
     
 } */
+.left-box-wraapper{ 
+    height: 100%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    
+}
 .leftBox {
-    height: 55%;
-    width: 45%;
-    margin-top: 5rem;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 2rem;
     align-items: start;
     transition: all 0.4s ease-in-out;
-    padding: 0rem 2rem;
     z-index: 10;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
+    padding: 0rem 2rem;
     text-transform: uppercase;
+    
 }
 
 .leftBox span {
@@ -100,6 +109,7 @@
     /* font-weight: 700; */
     /* margin-left: 1vw; */
 }
+
 /* .inwood-pizza{ 
     text-transform: uppercase;
 } */
@@ -128,21 +138,14 @@
 
 /* right side pizza image */
 .rightBox {
-    position: absolute;
-    height: 100vh;
-    width: 50vw;
-    right: 0;
-    top: 0;
-    transform: translateY(10%);
+    height: 100%;
+    width: 50%;
     display: flex;
     justify-content: flex-end;
-    align-items: center;    
-    /* z-index: 1; */
+    align-items: center;
     padding: 0rem 3rem;
-    /* margin-right: 5vw; */
-    overflow: hidden;
-   
-}
+
+}   
 
 
 
@@ -178,23 +181,48 @@
 
 }
 
-.pizza-png{ 
+.pizza-png {
     width: 500px;
     height: auto;
 }
 
 
+@media screen and (max-width: 1001px){ 
+    .homeBox{ 
+        flex-direction: column-reverse;
 
+    }
+    .leftBox{ 
+        width: 100%;
+        height: 45%; 
+        
+    }
+    .rightBox{ 
+        margin-top: 8rem;
+        width: 100%;
+        height: 45%;
+        padding: 0rem 0rem;
+    }
+    .carousel{ 
+        width: 100%;
+        height: 100% !important;
+    }
+    .leftBox span{ 
+        font-size: 30px !important;
+    }
+}
 
 @media screen and (max-width: 1000px) {
-    .leftBox{ 
+    /* .leftBox {
         width: 69%;
-    }
+    } */
+
     .leftBox span {
         font-size: 80px;
         font-weight: 700;
         /* margin-left: 1vw; */
     }
+
     .topSlice {
         width: 280px !important;
         height: 220px !important;
@@ -206,7 +234,8 @@
         height: 220px !important;
         transform: translate(120%, 45%) !important;
     }
- .mainSlice {
+
+    .mainSlice {
         width: 414px !important;
         height: 480px !important;
         transform: translateX(50%);
@@ -251,30 +280,36 @@
 
 
 @media (max-width: 768px) {
-   
+
     /* .pizza-container-hero-section{ 
         transform: translateX(30%);
         border: 1px solid red;
     } */
-    
+
     .yumm {
         top: 0;
         left: 0;
         display: block;
         transform: translateY(60%);
     }
-
+    .left-box-wraapper{ 
+        width: 100%;
+    }
+    
     .leftBox {
         justify-content: center;
         gap: 1rem;
         width: 100%;
-        transform: translateY(-20%);
+        /* transform: translateY(-20%); */
     }
 
     .leftBox span {
         font-size: 35px;
     }
 
+    .rightBox{ 
+        padding: 0rem 2rem;
+    }
     .home-hero-order-button {
         width: 158px;
         height: 45.08px;
@@ -300,40 +335,37 @@
         transform: translate(120%, 45%) !important;
     }
 
-    .rightBox {
-        width: fit-content;
-        height: fit-content;
-        transform: translateY(50%);
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-end;
-    }
-    .pizza-png{ 
-       /* position: absolute; */
-       transform: translate(45%);
-    }
-   
 
+    .pizza-png {
+        /* position: absolute; */
+        transform: translate(45%);
+    }
+
+    .homeBox{ 
+        gap: 0;
+    }
 }
 
 
-@media screen and (max-width: 768px) and  (max-height: 800px){ 
-    .pizza-png{ 
+@media screen and (max-width: 768px) and (max-height: 800px) {
+    .pizza-png {
         width: 450px;
         height: auto;
     }
-    .yumm{ 
+
+    .yumm {
         transform: translateY(30%);
     }
 }
 
 
-@media screen and (max-width: 768px) and  (max-height: 700px){ 
-    .pizza-png{ 
+@media screen and (max-width: 768px) and (max-height: 700px) {
+    .pizza-png {
         width: 400px;
         height: auto;
     }
-    .leftBox span{ 
+
+    .leftBox span {
         font-size: 30px;
     }
 }
@@ -347,33 +379,38 @@
 
 .carousel {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
+    gap: 0.5rem;
     z-index: 1;
     width: 100%;
-    height: 100%;
-    padding: 0rem 0;
+    height: 50%;
+    padding: 0rem 0rem;
     position: relative;
+
 }
-  
+
 
 .carousel-content {
     display: flex;
     /* border: 1px solid #ccc; */
-    padding: 0rem 1rem;
-    overflow: hidden;
+    padding: 0rem 0rem;
+    /* overflow: hidden; */
     position: relative;
     width: 100%;
-    height: 85%;
+    height: 100%;
     /* border: 1px solid red; */
 }
-.carousel-bg{ 
-    position: absolute;
+
+.carousel-bg {
+    /* position: absolute; */
+    /* top: 0; */
     width: 100%;
-    height: 100%;
+    height: auto;
     background: #000;
+    border-radius: 10px;
 }
-  
+
 .left-box,
 .right-box {
     /* padding: 20px; */
@@ -385,7 +422,7 @@
     z-index: 1;
     /* border: 1px solid red; */
 }
-  
+
 .left-box {
     /* background-color: #fff; */
     color: white;
@@ -395,8 +432,10 @@
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
+    margin-left: 1rem;
 }
-.left-box p{ 
+
+.left-box p {
     font-size: 70px;
     text-transform: uppercase;
     margin-bottom: 1rem;
@@ -404,18 +443,20 @@
     font-weight: bold;
     z-index: 0;
 }
-  
+
 .right-box {
     /* background-color: #eee; */
     color: white;
 }
-  .right-box img{ 
-    width: 100%;
+
+.right-box img {
+    width: 80%;
     height: auto;
-    
-  }
+    filter: drop-shadow(5px 30px 15px rgba(0, 0, 0, 0.5)); 
+}
+
 .carousel-btn {
-    background-color: #ffdd00de;
+    background-color: rgba(255, 221, 0, 0.5);
     border: none;
     color: white;
     cursor: pointer;
@@ -427,47 +468,70 @@
     align-items: center;
     z-index: 99;
     border-radius: 50%;
-    color: black;
-    position: absolute;
+    color: rgba(0, 0, 0, 0.5);
+    /* position: absolute; */
+    transition: all 0.3s ease-in;
 }
-.left-btn{ 
-    left: 3%;
-    top: 50%;
+.carousel-btn:hover{ 
+    background-color: rgba(255, 221, 0, 0.8);
+    color: rgba(0, 0, 0, 0.9);
 }
-.right-btn{ 
-    right: 3%;
-    top: 50%;
+.left-btn {
+    /* left: 3%;
+    top: 50%; */
+
 }
-  
+
+.right-btn {
+    /* right: 3%;
+    top: 50%; */
+}
+
 .carousel-btn:focus {
     outline: none;
 }
 
-@media screen and (max-width: 768px){ 
-    .carousel-btn{ 
+@media screen and (max-width: 768px) {
+    .carousel-btn {
         min-width: 35px;
         min-height: 35px;
+        position: absolute;
     }
-    .carousel{ 
+    .left-btn{ 
+        bottom: -20%;
+        right: 13%
+    }
+    .right-btn{ 
+        bottom: -20%;
+        right: 0
+    }
+    .carousel-bg{ 
+        height: 100%;
+    }
+    .carousel {
         /* padding: 0rem 1rem; */
-        padding-top: 50px;
+        /* padding-top: 50px; */
+        /* border: 1px solid red; */
+        min-width: 100%;
     }
-    .carousel-content{ 
+
+    .carousel-content {
         flex-direction: column;
         flex-direction: column-reverse;
         width: 100%;
         height: 98%;
     }
-    .left-box{ 
+
+    .left-box {
         width: 100%;
         /* border: 1px solid red; */
     }
-    .right-box{ 
+
+    .right-box {
         width: 100%;
     }
-    .left-box p { 
+
+    .left-box p {
         font-size: 30px;
     }
 }
-
-  

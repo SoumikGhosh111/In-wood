@@ -206,6 +206,9 @@ function AddToMenu() {
           <option value="Ice Cream">Ice Cream</option>
           <option value="Milk Shake">Milk Shake</option>
           <option value="Drinks">Drinks</option>
+          <option value="Game Day Core">Game Day Core</option>
+          <option value="Game Day Plus">Game Day Plus</option>
+          <option value="Game Day Ultra">Game Day Ultra</option>
         </select><br /><br />
 
         {formData.catagory === 'Ice Cream' || formData.catagory === 'Milk Shake' ? (
