@@ -1,8 +1,10 @@
-import React from 'react'
-
+import React from 'react'; 
+import SpecialOffersMenu from "../special-offers-comp/SpecialOffersMenu/SpecialOffersMenu"; 
 function SpecialOffersPage() {
   return (
-    <div>SpecialOffersPage</div>
+    <div>
+      <SpecialOffersMenu />
+    </div>
   )
 }
 

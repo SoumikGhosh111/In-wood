@@ -4,6 +4,7 @@ import User from '../User/User';
 import Orders from '../Orders/Orders';
 import AddToMenu from '../AddToMenu/AddToMenu';
 import Menu from '../Menu/Menu';
+import AddSpecialOffers from '../AddSpecialOffers/AddSpecialOffers';
 
 function DashboardContent({itemToRender}) {
 
@@ -23,6 +24,9 @@ function DashboardContent({itemToRender}) {
             <div>
                 {itemToRender === 4 && <AddToMenu />}
             </div>
+            {/* <div>
+                {itemToRender === 5 && <AddSpecialOffers />}
+            </div> */}
           </>
 
         ) : (<></>)}

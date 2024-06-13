@@ -197,18 +197,13 @@ function AddToMenu() {
           required
         >
           <option value="">Select a category</option>
-          <option value="Pizza large 18inch">Pizza large 18inch</option>
-          <option value="Pizza by Slice">Pizza by Slice</option>
-          <option value="Inwood Favorites">Inwood Favorites</option>
-          <option value="Calzones">Calzones</option>
-          <option value="Family Special">Family Special</option>
-          <option value="Everyday Special">Everyday Special</option>
-          <option value="Ice Cream">Ice Cream</option>
-          <option value="Milk Shake">Milk Shake</option>
+          <option value="Pizza by Slice">Speciality Pizza</option>
+          <option value="Chicken Wings">Chicken Wings</option>
+          <option value="Deep Fried">Deep Fried</option>
+          <option value="Breads/Baked Goods">Breads/Baked Goods</option>
+          <option value="Cookies and Cream">Cookies and Cream</option>
+          <option value="Milk Shake">Shakes</option>
           <option value="Drinks">Drinks</option>
-          <option value="Game Day Core">Game Day Core</option>
-          <option value="Game Day Plus">Game Day Plus</option>
-          <option value="Game Day Ultra">Game Day Ultra</option>
         </select><br /><br />
 
         {formData.catagory === 'Ice Cream' || formData.catagory === 'Milk Shake' ? (

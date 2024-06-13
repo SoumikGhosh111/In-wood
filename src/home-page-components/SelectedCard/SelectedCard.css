@@ -54,6 +54,15 @@
     height: auto;
     background-image: cover;
 }
+.selected-card-desc{ 
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.7rem;
+    flex-direction: column;
+    padding: 0rem 1rem;
+    margin-bottom: 2rem;
+}
 .selected-card-item-img img{ 
     /* width: 100%;
     height: 100%; */

@@ -304,14 +304,14 @@ function Footer() {
                             Phone:
                             <br />
 
-                            <a href='tel:+1 (646) 642-9432'>+1 (646) 642-9432</a>
+                            <a href='tel:+1 (646) 642-9432'>+1 917-261-2880</a>
                         </p>
                         <br />
                         <p>
                             Email:
                             <br />
                             <a href="mailto:info@inwiodpizzallc.com">
-                                info@inwiodpizzallc.com
+                                info@inwoodpizzallc.com
                             </a>
                         </p>
                     </div>

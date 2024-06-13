@@ -2,10 +2,11 @@
 
 .homeBox {
     width: 100vw;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: flex-end; 
     
     /* position: relative; */
     background-color: black
@@ -82,9 +83,9 @@
 .left-box-wraapper{ 
     height: 100%;
     width: 50%;
-    display: flex;
     align-items: center;
     justify-content: center; 
+    display: none;
     
 }
 .leftBox {
@@ -138,12 +139,14 @@
 
 /* right side pizza image */
 .rightBox {
-    height: 100%;
-    width: 50%;
+    padding-top: 7rem !important;
+    height: 100vh;
+    width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    padding: 0rem 3rem;
+    /* flex-direction: column; */
+    padding: 0rem 0rem;
 }   
 
 
@@ -284,7 +287,10 @@
         transform: translateX(30%);
         border: 1px solid red;
     } */
-
+    .homeBox{ 
+        height: 100vh;
+    }
+    
     .yumm {
         top: 0;
         left: 0;
@@ -293,6 +299,7 @@
     }
     .left-box-wraapper{ 
         width: 100%;
+        display: flex;
     }
     
     .leftBox {
@@ -383,7 +390,7 @@
     gap: 0.5rem;
     z-index: 1;
     width: 100%;
-    height: 50%;
+    height: 100%;
     padding: 0rem 0rem;
     position: relative;
     /* overflow-x: hidden; */
@@ -392,6 +399,7 @@
 
 .carousel-content {
     display: flex;
+    /* align-items: center; */
     /* border: 1px solid #ccc; */
     padding: 0rem 0rem;
     /* overflow: hidden; */
@@ -405,7 +413,7 @@
     /* position: absolute; */
     /* top: 0; */
     width: 100%;
-    height: auto;
+    height: 100%;
     background: #000;
     border-radius: 10px;
 }
@@ -468,7 +476,7 @@
     z-index: 99;
     border-radius: 50%;
     color: rgba(0, 0, 0, 0.5);
-    /* position: absolute; */
+    position: absolute;
     transition: all 0.3s ease-in;
 }
 .carousel-btn:hover{ 
@@ -476,14 +484,14 @@
     color: rgba(0, 0, 0, 0.9);
 }
 .left-btn {
-    /* left: 3%;
-    top: 50%; */
+    left: 3%;
+    top: 50%;
 
 }
 
 .right-btn {
-    /* right: 3%;
-    top: 50%; */
+    right: 3%;
+    top: 50%;
 }
 
 .carousel-btn:focus {
@@ -497,12 +505,12 @@
         position: absolute;
     }
     .left-btn{ 
-        bottom: -20%;
-        right: 13%
+        left: 75%;
+        top: 100%;
     }
     .right-btn{ 
-        bottom: -20%;
-        right: 0
+       top: 100%;
+       right: 0;
     }
     .carousel-bg{ 
         height: 100%;

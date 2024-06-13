@@ -1,0 +1,76 @@
+/* src/PizzaForm.css */
+.special-offer-pizza-form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .special-offer-form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .special-offer-form-label {
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    color: black; /* Label color black */
+    margin-bottom: 0.5rem;
+  }
+  
+  .special-offer-form-input,
+  .special-offer-form-textarea {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .special-offer-form-input:focus,
+  .special-offer-form-textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .special-offer-form-textarea {
+    min-height: 100px;
+  }
+  
+  .special-offer-error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+  }
+  
+  .special-offer-form-button {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+  }
+  
+  .special-offer-form-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .special-offer-base-section,
+  .special-offer-added-item-section {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  

@@ -158,6 +158,10 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
                         <img src={itemData.img === '' ? pizzaImg : itemData.img} />
                         {/* <img src={itemData.img}/> */}
                     </div>
+                    <div className='selected-card-desc'>
+                    <h3>Description</h3>
+                    <p>{itemData.desc}</p>
+                    </div>
                     <div className='selected-card-item-body'>
                         <h3>Choose an Option</h3>
 

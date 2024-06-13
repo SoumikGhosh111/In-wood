@@ -206,7 +206,7 @@ function Navbar() {
 
 
     return (
-        <div className='nav-bar-wrapper' style={{ WebkitBackdropFilter: scroll > 200 ? "blur(10px)" : "", backdropFilter: scroll > 200 ? "blur(10px)" : "", color: scroll > window.innerHeight ? "black" : "", boxShadow: scroll > window.innerHeight ? '0px 0px 14px 0px rgb(182, 182, 182)' : 'none' }}>
+        <div className='nav-bar-wrapper' style={{ WebkitBackdropFilter: scroll > 200 ? "blur(10px)" : "", backdropFilter: scroll > 200 ? "blur(10px)" : "", color: scroll > window.innerHeight ? "black" : "", boxShadow: scroll > window.innerHeight ? '0px 0px 14px 0px rgb(182, 182, 182)' : 'none' }}>
             <div className='nav-bar'>
                 <div className='nav-bar-inner'>
                     <ul>

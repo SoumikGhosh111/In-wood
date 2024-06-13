@@ -17,8 +17,8 @@ function Menu() {
   const [fileInputVisible, setFileInputVisible] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [openPopUp, setOpenPopUp] = useState(false);
-  const [deleteId, setDeleteId] = useState(''); 
-  const [deletedName, setDeletedName] = useState(''); 
+  const [deleteId, setDeleteId] = useState('');
+  const [deletedName, setDeletedName] = useState('');
   const [productDetails, setProductDetails] = useState({
     img: '',
     title: '',
@@ -195,10 +195,10 @@ function Menu() {
       });
       const result = await response.json();
       // console.log(result);
-      setOpenPopUp(false); 
+      setOpenPopUp(false);
       fetchMenu();
       toast.success(result.message);
-      setDeleteId(''); 
+      setDeleteId('');
     } catch (err) {
 
     }
@@ -240,8 +240,8 @@ function Menu() {
                     </div>
                   </td>
                   <td>{item.title}</td>
-                  <td style={{width: '200px'}}>{item.desc}</td>
-                  <td style={{textAlign: 'left'}}>
+                  <td style={{ width: '200px' }}>{item.desc}</td>
+                  <td style={{ textAlign: 'left' }}>
                     {item.extraOptions?.map((topping, index) => (
                       <span key={index}>{topping.text} &nbsp; ${topping.price}<br /></span>
                     ))}
@@ -250,7 +250,7 @@ function Menu() {
                   <td>{item.prices.map((price) => (<div key={price}>$&nbsp; {price}</div>))}</td>
                   <td>
                     <button onClick={() => { handleEditButtonClick(item); setOpen(true) }} style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}><BorderColorRoundedIcon /></button> &nbsp;&nbsp;
-                    <button onClick={() => {setOpenPopUp(true); setDeleteId(item._id); setDeletedName(item.title)} } style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}><DeleteIcon /></button>
+                    <button onClick={() => { setOpenPopUp(true); setDeleteId(item._id); setDeletedName(item.title) }} style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}><DeleteIcon /></button>
                   </td>
                 </tr>
               )) :
@@ -288,14 +288,12 @@ function Menu() {
                 <label>Category:</label>
                 <select name="category" value={productDetails.catagory} onChange={(e) => handleCatagoryChange(e)}>
                   {/* <option value="">Select a category</option> */}
-                  <option value="Pizza large 18inch">Pizza large 18inch</option>
-                  <option value="Pizza by Slice">Pizza by Slice</option>
-                  <option value="Inwood Favorites">Inwood Favorites</option>
-                  <option value="Calzones">Calzones</option>
-                  <option value="Family Special">Family Special</option>
-                  <option value="Everyday Special">Everyday Special</option>
-                  <option value="Ice Cream">Ice Cream</option>
-                  <option value="Milk Shake">Milk Shake</option>
+                  <option value="Pizza by Slice">Speciality Pizza</option>
+                  <option value="Chicken Wings">Chicken Wings</option>
+                  <option value="Deep Fried">Deep Fried</option>
+                  <option value="Breads/Baked Goods">Breads/Baked Goods</option>
+                  <option value="Cookies and Cream">Cookies and Cream</option>
+                  <option value="Milk Shake">Shakes</option>
                   <option value="Drinks">Drinks</option>
                 </select>
               </div>
@@ -371,7 +369,7 @@ function Menu() {
       >
         <div className="popup-overlay">
           <div className="popup">
-            <h2>Do you want to Delete <br/> item Name: {deletedName} </h2>
+            <h2>Do you want to Delete <br /> item Name: {deletedName} </h2>
             <div className="popup-buttons">
               <button className="popup-button save" onClick={() => handleMenuItemDelete(deleteId)}>Delete</button>
               <button className="popup-button cancel" onClick={() => setOpenPopUp(false)}>Cancel</button>

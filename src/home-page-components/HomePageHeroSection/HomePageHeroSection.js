@@ -8,13 +8,13 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useAnimate, useInView } from "framer-motion";
 import { motion, AnimatePresence } from 'framer-motion';
 import banner1 from "../../assets/banner-1.jpg";
-import banner2 from "../../assets/banner-2.png";
 import maskot from "../../assets/maskot_logo_inwood.png"
 import cheesePie from "../../assets/chesse_pie.png";
 import offerBanner from "../../assets/inwood_offer_banner 2.jpg"
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
 import inwoodOfferBanner from "../../assets/sample_banner.jpg";
+import banner2 from "../../assets/banner_2.jpg";
 
 
 
@@ -33,7 +33,7 @@ const carouselItems = [
     },
 
     {
-        bgImg: inwoodOfferBanner,
+        bgImg: banner2,
     },
 ];
 function HomePageHeroSection() {
@@ -199,6 +199,7 @@ function HomePageHeroSection() {
                     </div>
                 </div>
                 <div className='rightBox' style={{ zIndex: scroll > window.innerHeight / 10 ? '0' : '1' }}>
+                    {/* <div style={{height: '120px', width: '100%'}}></div> */}
                     <div className="carousel">
                         <button className="carousel-btn left-btn" onClick={handlePrevClick} disabled={isTransitioning}>
                             <ArrowCircleLeftOutlinedIcon />
