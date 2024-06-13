@@ -28,21 +28,17 @@ function MenuSection() {
     const [open, setOpen] = useState(false);
     const [itemData, setItemData] = useState(null);
 
-    const [pizza, setPizza] = useState(null);
-    const [iceCream, setIceCream] = useState(null);
     const [milShake, setMilkShake] = useState(null);
     const [pizzaBySlice, setPizzaBySlice] = useState(null);
-    const [inwoodFav, setInwoodFav] = useState(null);
-    const [calzone, setCalZone] = useState(null);
-    const [everyDaySpcl, setEveryDaySpcl] = useState(null);
-    const [familySpcl, setFamilySpcl] = useState(null);
+    const [deepFried, setDeepFried] = useState(null);
+    const [chickenWings, setChickenwings] = useState(null);
+    const [breads, setBreads] = useState(null);
+    const [cookiesAndCream, setCookisAndCream] = useState(null);
     const [drinks, setDrinks] = useState(null);
 
 
     // offres and special items 
-    const [gameDayCore, setGameDayCore] = useState(null); 
-    const [gameDayPlus, setGameDayPlus] = useState(null); 
-    const [gameDayUltra, setGameDayUltra] = useState(null); 
+
 
 
 
@@ -83,7 +79,7 @@ function MenuSection() {
 
         // const pizza = menu.filter((item) => item.catagory === "Pizza"); 
         // setPizza(pizza); 
-        console.log(pizza, "this is Pizza");
+        // console.log(pizza, "this is Pizza");
         if (menu !== null) {
             const uniqueCategories = [
                 ...new Set(menu.map((food) => food.catagory)),
@@ -107,41 +103,26 @@ function MenuSection() {
             // setMenu(data.data.food);
 
             // Filter out only items with category 'Pizza'
-            const pizzaItems = data.data.food.filter(item => item.catagory === 'Pizza large 18inch');
-            setPizza(pizzaItems);
+            const deepFriedItems = data.data.food.filter(item => item.catagory === 'Deep Fried');
+            setDeepFried(deepFriedItems);
 
             const bySlice = data.data.food.filter(item => item.catagory === 'Pizza by Slice');
             setPizzaBySlice(bySlice);
 
-            const inwoodFavItems = data.data.food.filter(item => item.catagory === 'Inwood Favorites');
-            setInwoodFav(inwoodFavItems);
+            const chickenWingsItems = data.data.food.filter(item => item.catagory === 'Chicken Wings');
+            setChickenwings(chickenWingsItems);
 
-            const familySpclItems = data.data.food.filter(item => item.catagory === 'Family Special');
-            setFamilySpcl(familySpclItems);
+            const cookiesAndCreamItem = data.data.food.filter(item => item.catagory === 'Cookies and Cream');
+            setCookisAndCream(cookiesAndCreamItem);
 
-            const everyDaySpclItems = data.data.food.filter(item => item.catagory === 'Everyday Special');
-            setEveryDaySpcl(everyDaySpclItems);
-
-            const calzoneItems = data.data.food.filter(item => item.catagory === 'Calzones');
-            setCalZone(calzoneItems);
+            const breadItems = data.data.food.filter(item => item.catagory === 'Deep Fried');
+            setBreads(breadItems);
 
             const drinkItems = data.data.food.filter(item => item.catagory === 'Drinks');
             setDrinks(drinkItems);
 
-            const icecreamItems = data.data.food.filter(item => item.catagory === 'Ice Cream');
-            setIceCream(icecreamItems);
-
             const milkshake = data.data.food.filter(item => item.catagory === 'Milk Shake');
             setMilkShake(milkshake);
-
-            const specialGameDayCore = data.data.food.filter(item => item.catagory === 'Game Day Core');
-            setGameDayCore(specialGameDayCore); 
-
-            const specialGameDayPlus = data.data.food.filter(item => item.catagory === 'Game Day Plus');
-            setGameDayPlus(specialGameDayPlus); 
-
-            const specialGameDayUltra = data.data.food.filter(item => item.catagory === 'Game Day Ultra');
-            setGameDayUltra(specialGameDayUltra); 
 
 
         } catch (error) {
@@ -279,59 +260,6 @@ function MenuSection() {
 
 
             <div className='menu-cart'>
-                <span className='title'>18" Large Pizza</span>
-
-
-                {pizza !== null ? (
-                    // menu.map((item) => item.filter(()))
-
-                    <div className='menu-section-cards' id='cards' >
-                        {pizza?.map((item, indx) => (
-                            <>
-
-                                <div className='menu-section-card-item' >
-                                    <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
-                                        <div className='item-img'>
-                                            <img src={item.img == '' ? pizza1 : item.img} />
-                                        </div>
-                                        <div style={{ height: '10px', width: '100%' }} ></div>
-                                        <div className='item-name-wrapper'>
-                                            <span className='item-name' >{item.title}</span>
-                                        </div>
-                                        {/* <div className='item-desc-'> */}
-                                        <p className='item-desc'>{item.desc}</p>
-                                        {/* </div> */}
-                                        <div className='size'>
-                                            <div className='price'>
-                                                {/* ${item.prices[item.prices.length - 1]} */}
-                                                ${item.prices[0]}
-                                            </div>
-                                            <div className='size-param'>
-                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
-                                                {item.productType ? item.productType : "Large"}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='quantity-buttons-wrapper'>
-                                        <button className='quantity-buttons'
-                                            onClick={() => handleOpen(item._id)}
-                                        >
-                                            Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-
-
-                            </>
-
-                        ))}
-
-                    </div>
-                ) :
-                    (<>
-                        Loading . . .
-
-                    </>)}
 
 
                 <span className='title'>Pizza By Slice</span>
@@ -385,14 +313,14 @@ function MenuSection() {
                 ) : (<>Loading . . .</>)}
 
 
-                <span className='title'>Inwood Favorites</span>
+                <span className='title'>Chicken Wings</span>
 
 
-                {inwoodFav !== null ? (
+                {chickenWings !== null ? (
                     // menu.map((item) => item.filter(()))
 
                     <div className='menu-section-cards' id='cards' >
-                        {inwoodFav?.map((item, indx) => (
+                        {chickenWings?.map((item, indx) => (
                             <>
 
                                 <div className='menu-section-card-item' >
@@ -436,14 +364,114 @@ function MenuSection() {
                 ) : (<>Loading . . .</>)}
 
 
-                <span className='title'>Calzones</span>
+                <span className='title'>Deep Fried</span>
 
 
-                {calzone !== null ? (
+                {deepFried !== null ? (
                     // menu.map((item) => item.filter(()))
 
                     <div className='menu-section-cards' id='cards' >
-                        {calzone?.map((item, indx) => (
+                        {deepFried?.map((item, indx) => (
+                            <>
+
+                                <div className='menu-section-card-item' >
+                                    <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
+                                        <div className='item-img'>
+                                            <img src={item.img == '' ? pizza1 : item.img} />
+                                        </div>
+                                        <div style={{ height: '10px', width: '100%' }} ></div>
+                                        <div className='item-name-wrapper'>
+                                            <span className='item-name' >{item.title}</span>
+                                        </div>
+                                        {/* <div className='item-desc-'> */}
+                                        <p className='item-desc'>{item.desc}</p>
+                                        {/* </div> */}
+                                        <div className='size'>
+                                            <div className='price'>
+                                                {/* ${item.prices[item.prices.length - 1]} */}
+                                                ${item.prices[0]}
+                                            </div>
+                                            <div className='size-param'>
+                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
+                                                {item.productType ? item.productType : "Large"}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='quantity-buttons-wrapper'>
+                                        <button className='quantity-buttons'
+                                            onClick={() => handleOpen(item._id)}
+                                        >
+                                            Add To Cart
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </>
+
+                        ))}
+
+                    </div>
+                ) : (<>Loading . . .</>)}
+
+                <span className='title'>Breads/Baked Goods</span>
+
+
+                {breads !== null ? (
+                    // menu.map((item) => item.filter(()))
+
+                    <div className='menu-section-cards' id='cards' >
+                        {breads?.map((item, indx) => (
+                            <>
+
+                                <div className='menu-section-card-item' >
+                                    <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
+                                        <div className='item-img'>
+                                            <img src={item.img == '' ? pizza1 : item.img} />
+                                        </div>
+                                        <div style={{ height: '10px', width: '100%' }} ></div>
+                                        <div className='item-name-wrapper'>
+                                            <span className='item-name' >{item.title}</span>
+                                        </div>
+                                        {/* <div className='item-desc-'> */}
+                                        <p className='item-desc'>{item.desc}</p>
+                                        {/* </div> */}
+                                        <div className='size'>
+                                            <div className='price'>
+                                                {/* ${item.prices[item.prices.length - 1]} */}
+                                                ${item.prices[0]}
+                                            </div>
+                                            <div className='size-param'>
+                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
+                                                {item.productType ? item.productType : "Large"}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='quantity-buttons-wrapper'>
+                                        <button className='quantity-buttons'
+                                            onClick={() => handleOpen(item._id)}
+                                        >
+                                            Add To Cart
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </>
+
+                        ))}
+
+                    </div>
+                ) : (<>Loading . . .</>)}
+
+                <span className='title'>Cookies and Cream</span>
+
+
+                { cookiesAndCream!== null ? (
+                    // menu.map((item) => item.filter(()))
+
+                    <div className='menu-section-cards' id='cards' >
+                        {cookiesAndCream?.map((item, indx) => (
                             <>
 
                                 <div className='menu-section-card-item' >
@@ -487,313 +515,7 @@ function MenuSection() {
                 ) : (<>Loading . . .</>)}
 
 
-                <span className='title'>Family Special</span>
-
-
-                {familySpcl !== null ? (
-                    // menu.map((item) => item.filter(()))
-
-                    <div className='menu-section-cards' id='cards' >
-                        {familySpcl?.map((item, indx) => (
-                            <>
-
-                                <div className='menu-section-card-item' >
-                                    <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
-                                        <div className='item-img'>
-                                            <img src={item.img == '' ? pizza1 : item.img} />
-                                        </div>
-                                        <div style={{ height: '10px', width: '100%' }} ></div>
-                                        <div className='item-name-wrapper'>
-                                            <span className='item-name' >{item.title}</span>
-                                        </div>
-                                        {/* <div className='item-desc-'> */}
-                                        <p className='item-desc'>{item.desc}</p>
-                                        {/* </div> */}
-                                        <div className='size'>
-                                            <div className='price'>
-                                                {/* ${item.prices[item.prices.length - 1]} */}
-                                                ${item.prices[0]}
-                                            </div>
-                                            <div className='size-param'>
-                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
-                                                {item.productType ? item.productType : "Large"}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='quantity-buttons-wrapper'>
-                                        <button className='quantity-buttons'
-                                            onClick={() => handleOpen(item._id)}
-                                        >
-                                            Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-
-
-                            </>
-
-                        ))}
-
-                    </div>
-                ) : (<>Loading . . .</>)}
-
-
-
-                <span className='title'>Everyday Special</span>
-
-
-                {everyDaySpcl !== null ? (
-                    // menu.map((item) => item.filter(()))
-
-                    <div className='menu-section-cards' id='cards' >
-                        {everyDaySpcl?.map((item, indx) => (
-                            <>
-
-                                <div className='menu-section-card-item' >
-                                    <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
-                                        <div className='item-img'>
-                                            <img src={item.img == '' ? pizza1 : item.img} />
-                                        </div>
-                                        <div style={{ height: '10px', width: '100%' }} ></div>
-                                        <div className='item-name-wrapper'>
-                                            <span className='item-name' >{item.title}</span>
-                                        </div>
-                                        {/* <div className='item-desc-'> */}
-                                        <p className='item-desc'>{item.desc}</p>
-                                        {/* </div> */}
-                                        <div className='size'>
-                                            <div className='price'>
-                                                {/* ${item.prices[item.prices.length - 1]} */}
-                                                ${item.prices[0]}
-                                            </div>
-                                            <div className='size-param'>
-                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
-                                                {item.productType ? item.productType : "Large"}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='quantity-buttons-wrapper'>
-                                        <button className='quantity-buttons'
-                                            onClick={() => handleOpen(item._id)}
-                                        >
-                                            Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-
-
-                            </>
-
-                        ))}
-
-                    </div>
-                ) : (<>Loading . . .</>)}
-
-                <span className='title'>Game Day Core</span>
-
-
-                {gameDayCore !== null ? (
-                    // menu.map((item) => item.filter(()))
-
-                    <div className='menu-section-cards' id='cards' >
-                        {gameDayCore?.map((item, indx) => (
-                            <>
-
-                                <div className='menu-section-card-item' >
-                                    <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
-                                        <div className='item-img'>
-                                            <img src={item.img == '' ? pizza1 : item.img} />
-                                        </div>
-                                        <div style={{ height: '10px', width: '100%' }} ></div>
-                                        <div className='item-name-wrapper'>
-                                            <span className='item-name' >{item.title}</span>
-                                        </div>
-                                        {/* <div className='item-desc-'> */}
-                                        <p className='item-desc'>{item.desc}</p>
-                                        {/* </div> */}
-                                        <div className='size'>
-                                            <div className='price'>
-                                                {/* ${item.prices[item.prices.length - 1]} */}
-                                                ${item.prices[0]}
-                                            </div>
-                                            <div className='size-param'>
-                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
-                                                {item.productType ? item.productType : "Large"}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='quantity-buttons-wrapper'>
-                                        <button className='quantity-buttons'
-                                            onClick={() => handleOpen(item._id)}
-                                        >
-                                            Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-
-
-                            </>
-
-                        ))}
-
-                    </div>
-                ) : (<>Loading . . .</>)}
-
-
-
-                <span className='title'>Game Day Plus</span>
-
-
-                {gameDayPlus !== null ? (
-                    // menu.map((item) => item.filter(()))
-
-                    <div className='menu-section-cards' id='cards' >
-                        {gameDayPlus?.map((item, indx) => (
-                            <>
-
-                                <div className='menu-section-card-item' >
-                                    <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
-                                        <div className='item-img'>
-                                            <img src={item.img == '' ? pizza1 : item.img} />
-                                        </div>
-                                        <div style={{ height: '10px', width: '100%' }} ></div>
-                                        <div className='item-name-wrapper'>
-                                            <span className='item-name' >{item.title}</span>
-                                        </div>
-                                        {/* <div className='item-desc-'> */}
-                                        <p className='item-desc'>{item.desc}</p>
-                                        {/* </div> */}
-                                        <div className='size'>
-                                            <div className='price'>
-                                                {/* ${item.prices[item.prices.length - 1]} */}
-                                                ${item.prices[0]}
-                                            </div>
-                                            <div className='size-param'>
-                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
-                                                {item.productType ? item.productType : "Large"}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='quantity-buttons-wrapper'>
-                                        <button className='quantity-buttons'
-                                            onClick={() => handleOpen(item._id)}
-                                        >
-                                            Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-
-
-                            </>
-
-                        ))}
-
-                    </div>
-                ) : (<>Loading . . .</>)}
-
-
-
-
-                <span className='title'>Game Day Ultra</span>
-
-
-                {gameDayUltra !== null ? (
-                    // menu.map((item) => item.filter(()))
-
-                    <div className='menu-section-cards' id='cards' >
-                        {gameDayUltra?.map((item, indx) => (
-                            <>
-
-                                <div className='menu-section-card-item' >
-                                    <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
-                                        <div className='item-img'>
-                                            <img src={item.img == '' ? pizza1 : item.img} />
-                                        </div>
-                                        <div style={{ height: '10px', width: '100%' }} ></div>
-                                        <div className='item-name-wrapper'>
-                                            <span className='item-name' >{item.title}</span>
-                                        </div>
-                                        {/* <div className='item-desc-'> */}
-                                        <p className='item-desc'>{item.desc}</p>
-                                        {/* </div> */}
-                                        <div className='size'>
-                                            <div className='price'>
-                                                {/* ${item.prices[item.prices.length - 1]} */}
-                                                ${item.prices[0]}
-                                            </div>
-                                            <div className='size-param'>
-                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
-                                                {item.productType ? item.productType : "Large"}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='quantity-buttons-wrapper'>
-                                        <button className='quantity-buttons'
-                                            onClick={() => handleOpen(item._id)}
-                                        >
-                                            Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-
-
-                            </>
-
-                        ))}
-
-                    </div>
-                ) : (<>Loading . . .</>)}
-
-
-                <span className='title'>Ice Cream</span>
-
-
-                {iceCream !== null ? (
-                    // menu.map((item) => item.filter(()))
-
-                    <div className='menu-section-cards' id='cards' >
-                        {iceCream?.map((item, indx) => (
-                            <>
-
-                                <div className='menu-section-card-item' >
-                                    <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
-                                        <div className='item-img'>
-                                            <img src={item.img == '' ? pizza1 : item.img} />
-                                        </div>
-
-                                        <div className='item-name-wrapper'>
-                                            <span className='item-name' >{item.title}</span>
-                                        </div>
-                                        <p className='item-desc'>{item.desc}</p>
-                                        <div className='size'>
-                                            <div className='price'>
-                                                {/* ${item.prices[item.prices.length - 1]} */}
-                                                ${item.prices[item.prices.length - 1]}
-                                            </div>
-                                            <div className='size-param'>
-                                                Large Cone
-                                                {/* {item.catagory} */}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='quantity-buttons-wrapper'>
-                                        <button className='quantity-buttons'
-                                            onClick={() => handleOpen(item._id)}
-                                        >
-                                            Add To Cart
-                                        </button>
-                                    </div>
-                                </div>
-
-
-                            </>
-
-                        ))}
-
-                    </div>
-                ) : (<>Loading . . .</>)}
-
-                <span className='title'>Milk Shake</span>
+                <span className='title'>Shakes</span>
 
 
                 {milShake !== null ? (

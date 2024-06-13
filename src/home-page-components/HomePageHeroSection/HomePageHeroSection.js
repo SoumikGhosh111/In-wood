@@ -15,6 +15,8 @@ import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOu
 import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
 import inwoodOfferBanner from "../../assets/sample_banner.jpg";
 import banner2 from "../../assets/banner_2.jpg";
+import pizza from "../../assets/pizza.png"
+import italianBG from "../../assets/italian_bg.jpg"
 
 
 
@@ -167,7 +169,7 @@ function HomePageHeroSection() {
     return (
         <div >
             <div className='homeBox' ref={ref1}>
-                <img className="homeBg" src={background} alt="background image" />
+                <img className="homeBg" src={italianBG} alt="background image" />
                 <div className='left-box-wraapper'>
                     <div className='leftBox'>
                         <span ref={ref1}>
@@ -200,29 +202,9 @@ function HomePageHeroSection() {
                 </div>
                 <div className='rightBox' style={{ zIndex: scroll > window.innerHeight / 10 ? '0' : '1' }}>
                     {/* <div style={{height: '120px', width: '100%'}}></div> */}
-                    <div className="carousel">
-                        <button className="carousel-btn left-btn" onClick={handlePrevClick} disabled={isTransitioning}>
-                            <ArrowCircleLeftOutlinedIcon />
-                        </button>
-                        <AnimatePresence initial={false} custom={transitionDirection}>
-                            <motion.div
-                                key={currentIndex}
-                                className={`carousel-content ${transitionDirection}`}
-                                custom={transitionDirection}
-                                initial={{ x: transitionDirection === 'right' ? 100 : -100, opacity: 0 }}
-                                animate={{ x: 0, opacity: 1 }}
-                                exit={{ x: transitionDirection === 'right' ? -100 : 100, opacity: 0 }}
-                                transition={{ duration: 0.3 }}
-                                style={{ width: '100%', background: 'transparent', cursor: 'pointer'}}
-                                onClick={handleSpecialOffersPage}
-                            >
-                                <img src={bgImg} className='carousel-bg'/>
-                            </motion.div>
-                        </AnimatePresence>
-                        <button className="carousel-btn right-btn" onClick={handleNextClick} disabled={isTransitioning}>
-                            <ArrowCircleRightOutlinedIcon />
-                        </button>
-                    </div>
+                    {/* <img src={pizza} alt = 'pizza bg img' className='pizza-png' /> */}
+
+                   
                 </div>
             </div>
             <div id='menu' className='menu-section' ref={ref2} >
