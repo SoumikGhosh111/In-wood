@@ -108,7 +108,7 @@ function MenuSection() {
             setDeepFried(deepFriedItems);
 
             const specialityPizzaItems = data.data.food.filter(item => item.catagory === 'Speciality Pizza');
-            setSpecialityPizza(specialityPizza);
+            setSpecialityPizza(specialityPizzaItems);
 
             const bySlice = data.data.food.filter(item => item.catagory === 'Pizza by Slice');
             setPizzaBySlice(bySlice);
