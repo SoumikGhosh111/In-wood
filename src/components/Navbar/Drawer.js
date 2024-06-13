@@ -120,7 +120,7 @@ export default function TemporaryDrawer() {
                             <EastRoundedIcon />
                         </div>
                         <div className='drawer-items' onClick={handleCoupenClick}>
-                            <a>Coupens</a>
+                            <a>Coupon</a>
                             <EastRoundedIcon />
                         </div>
                         {/* <div className='hor-line'></div> */}
