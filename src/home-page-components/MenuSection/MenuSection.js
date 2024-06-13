@@ -29,6 +29,7 @@ function MenuSection() {
     const [itemData, setItemData] = useState(null);
 
     const [milShake, setMilkShake] = useState(null);
+    const [specialityPizza, setSpecialityPizza] = useState(null); 
     const [pizzaBySlice, setPizzaBySlice] = useState(null);
     const [deepFried, setDeepFried] = useState(null);
     const [chickenWings, setChickenwings] = useState(null);
@@ -105,6 +106,9 @@ function MenuSection() {
             // Filter out only items with category 'Pizza'
             const deepFriedItems = data.data.food.filter(item => item.catagory === 'Deep Fried');
             setDeepFried(deepFriedItems);
+
+            const specialityPizzaItems = data.data.food.filter(item => item.catagory === 'Speciality Pizza');
+            setSpecialityPizza(specialityPizza);
 
             const bySlice = data.data.food.filter(item => item.catagory === 'Pizza by Slice');
             setPizzaBySlice(bySlice);
@@ -260,6 +264,56 @@ function MenuSection() {
 
 
             <div className='menu-cart'>
+
+                <span className='title'>Speciality Pizza</span>
+
+
+                {specialityPizza !== null ? (
+                    // menu.map((item) => item.filter(()))
+
+                    <div className='menu-section-cards' id='cards' >
+                        {specialityPizza?.map((item, indx) => (
+                            <>
+
+                                <div className='menu-section-card-item' >
+                                    <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
+                                        <div className='item-img'>
+                                            <img src={item.img == '' ? pizza1 : item.img} />
+                                        </div>
+                                        <div style={{ height: '10px', width: '100%' }} ></div>
+                                        <div className='item-name-wrapper'>
+                                            <span className='item-name' >{item.title}</span>
+                                        </div>
+                                        {/* <div className='item-desc-'> */}
+                                        <p className='item-desc'>{item.desc}</p>
+                                        {/* </div> */}
+                                        <div className='size'>
+                                            <div className='price'>
+                                                {/* ${item.prices[item.prices.length - 1]} */}
+                                                ${item.prices[0]}
+                                            </div>
+                                            <div className='size-param'>
+                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
+                                                {item.productType ? item.productType : "Large"}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='quantity-buttons-wrapper'>
+                                        <button className='quantity-buttons'
+                                            onClick={() => handleOpen(item._id)}
+                                        >
+                                            Add To Cart
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </>
+
+                        ))}
+
+                    </div>
+                ) : (<>Loading . . .</>)}
 
 
                 <span className='title'>Pizza By Slice</span>
@@ -467,7 +521,7 @@ function MenuSection() {
                 <span className='title'>Cookies and Cream</span>
 
 
-                { cookiesAndCream!== null ? (
+                {cookiesAndCream !== null ? (
                     // menu.map((item) => item.filter(()))
 
                     <div className='menu-section-cards' id='cards' >

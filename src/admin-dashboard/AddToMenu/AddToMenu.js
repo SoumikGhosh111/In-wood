@@ -197,7 +197,8 @@ function AddToMenu() {
           required
         >
           <option value="">Select a category</option>
-          <option value="Pizza by Slice">Speciality Pizza</option>
+          <option value="Speciality Pizza">Speciality Pizza</option>
+          <option value="Pizza By Slice">Pizza By Slice</option>
           <option value="Chicken Wings">Chicken Wings</option>
           <option value="Deep Fried">Deep Fried</option>
           <option value="Breads/Baked Goods">Breads/Baked Goods</option>
