@@ -24,11 +24,11 @@ function Menu() {
     title: '',
     desc: '',
     catagory: '',
-    prices: [],
+    prices: [{ size: '', price: '' }],
     extraOptions: [{ text: '', price: '' }]
   });
   const [open, setOpen] = useState(false);
-  const [uploadedImageUrl, setUploadedImageUrl] = useState('')
+  const [uploadedImageUrl, setUploadedImageUrl] = useState('');
 
   const fetchMenu = async () => {
     try {
@@ -38,7 +38,7 @@ function Menu() {
     } catch (error) {
       console.error("Error fetching menu:", error);
     }
-  }
+  };
 
   useEffect(() => {
     fetchMenu();
@@ -54,7 +54,7 @@ function Menu() {
       prices: item.prices,
       extraOptions: item.extraOptions
     });
-  }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -62,7 +62,7 @@ function Menu() {
       ...productDetails,
       [name]: value
     });
-  }
+  };
 
   const handleCatagoryChange = (e) => {
     const { value } = e.target;
@@ -72,43 +72,43 @@ function Menu() {
     }));
   };
 
-
   // handle prices array 
-  const handlePriceChange = (index, value) => {
+  const handlePriceChange = (index, type, value) => {
     const newPrices = [...productDetails.prices];
-    newPrices[index] = value;
+    if (type === 'size') {
+      newPrices[index].size = value;
+    } else if (type === 'price') {
+      newPrices[index].price = parseFloat(value);
+    }
     setProductDetails({
       ...productDetails,
       prices: newPrices
     });
-  }
+  };
 
-  // const handlePriceChange = (index, value) => {
-  //   // converting the number from text to number
-  //   const newValue = Number(value);
+  const handleAddPrice = () => {
+    setProductDetails({
+      ...productDetails,
+      prices: [...productDetails.prices, { size: '', price: '' }]
+    });
+  };
 
-  //   const newPrices = [...productDetails.prices];
-  //   newPrices[index] = newValue;
-
-  //   setProductDetails({
-  //    ...productDetails,
-  //     prices: newPrices
-  //   });
-  // };
-
-
+  const handleRemovePrice = (index) => {
+    const newPrices = productDetails.prices.filter((_, i) => i !== index);
+    setProductDetails({
+      ...productDetails,
+      prices: newPrices
+    });
+  };
 
   // handle extra toppings array
   const handleExtraOptionChange = (index, type, value) => {
-    // creating a deep copy
-    const newOptions = productDetails.extraOptions.map(option => ({ ...option }));
-
+    const newOptions = [...productDetails.extraOptions];
     if (type === 'text') {
       newOptions[index].text = value;
     } else if (type === 'price') {
-      newOptions[index].price = value;
+      newOptions[index].price = parseFloat(value);
     }
-
     setProductDetails({
       ...productDetails,
       extraOptions: newOptions
@@ -118,9 +118,9 @@ function Menu() {
   const handleAddExtraOption = () => {
     setProductDetails({
       ...productDetails,
-      extraOptions: [...productDetails.extraOptions, '']
+      extraOptions: [...productDetails.extraOptions, { text: '', price: '' }]
     });
-  }
+  };
 
   const handleRemoveExtraOption = (index) => {
     const newOptions = productDetails.extraOptions.filter((_, i) => i !== index);
@@ -128,32 +128,28 @@ function Menu() {
       ...productDetails,
       extraOptions: newOptions
     });
-  }
-
+  };
 
   const handleImageUpload = async (e) => {
-    const file = e.target.files[0]; // Get the first selected file
-    // setImage(file);
-
+    const file = e.target.files[0];
     const formData = new FormData();
     formData.append("image", file);
 
     try {
       const { data } = await axios.post(`${baseUrl}/api/image/uploadImage`, formData);
-
       setUploadedImageUrl(data.url);
-
-      productDetails.img = data.url;
-      // console.log(image); 
-    }
-    catch (err) {
+      setProductDetails({
+        ...productDetails,
+        img: data.url
+      });
+    } catch (err) {
       console.log(err);
     }
   };
 
   const handleUpdateProduct = async () => {
     try {
-      const token = localStorage.getItem('token')
+      const token = localStorage.getItem('token');
       const email = localStorage.getItem('userEmail');
       const response = await fetch(`${baseUrl}/api/product/productDetails/${email}`, {
         method: 'PUT',
@@ -165,7 +161,6 @@ function Menu() {
       });
 
       const result = await response.json();
-      console.log(result);
       if (result.success) {
         toast.success("Product details updated successfully");
         setOpen(false);
@@ -178,9 +173,7 @@ function Menu() {
       console.error("Error updating product details:", error);
       toast.error(error.message);
     }
-
-
-  }
+  };
 
   const handleMenuItemDelete = async (id) => {
     try {
@@ -194,18 +187,14 @@ function Menu() {
         },
       });
       const result = await response.json();
-      // console.log(result);
       setOpenPopUp(false);
       fetchMenu();
       toast.success(result.message);
       setDeleteId('');
     } catch (err) {
-
+      console.log(err);
     }
-  }
-
-
-
+  };
 
   return (
     <div className='menu-wrapper'>
@@ -247,7 +236,11 @@ function Menu() {
                     ))}
                   </td>
                   <td>{item.catagory}</td>
-                  <td>{item.prices.map((price) => (<div key={price}>$&nbsp; {price}</div>))}</td>
+                  <td style={{width: '200px'}}>{item.prices.map((price, index) => (
+                    <div key={index}>
+                      Size: {price.size} &nbsp; Price: ${price.price}
+                    </div>
+                  ))}</td>
                   <td>
                     <button onClick={() => { handleEditButtonClick(item); setOpen(true) }} style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}><BorderColorRoundedIcon /></button> &nbsp;&nbsp;
                     <button onClick={() => { setOpenPopUp(true); setDeleteId(item._id); setDeletedName(item.title) }} style={{ border: 'none', background: 'transparent', cursor: 'pointer' }}><DeleteIcon /></button>
@@ -266,7 +259,6 @@ function Menu() {
         sx={{ color: '#000', zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: "rgba(0, 0, 0, 0.238)" }}
         open={open}
       >
-
         {editItemId && (
           <div className="edit-form">
             <div className='edit-form-header'>
@@ -286,8 +278,7 @@ function Menu() {
               </div>
               <div className="form-group">
                 <label>Category:</label>
-                <select name="category" value={productDetails.catagory} onChange={(e) => handleCatagoryChange(e)}>
-                  {/* <option value="">Select a category</option> */}
+                <select name="category" value={productDetails.catagory} onChange={handleCatagoryChange}>
                   <option value="Speciality Pizza">Speciality Pizza</option>
                   <option value="Pizza By Slice">Pizza By Slice</option>
                   <option value="Chicken Wings">Chicken Wings</option>
@@ -306,7 +297,6 @@ function Menu() {
                   id="img"
                   name="img"
                   value={productDetails.img}
-
                   disabled
                 />
                 <br /><br />
@@ -316,7 +306,7 @@ function Menu() {
                   type="file"
                   id="uploadImage"
                   accept="image/"
-                  onChange={(e) => handleImageUpload(e)}
+                  onChange={handleImageUpload}
                 />
               </div>
 
@@ -325,13 +315,23 @@ function Menu() {
                 {productDetails.prices.map((price, index) => (
                   <div key={index} className="price-input">
                     <input
-                      type="number"
-                      value={price}
-                      onChange={(e) => handlePriceChange(index, e.target.value)}
+                      type="text"
+                      placeholder="Size"
+                      value={price.size}
+                      onChange={(e) => handlePriceChange(index, 'size', e.target.value)}
                     />
+                    <input
+                      type="number"
+                      placeholder="Price"
+                      value={price.price}
+                      onChange={(e) => handlePriceChange(index, 'price', e.target.value)}
+                    />
+                    <button className='cancel-btn' type="button" style={{marginTop: '0.5rem'}} onClick={() => handleRemovePrice(index)}>Remove</button>
                   </div>
                 ))}
+                <button className='update-btn' style={{margin: '1rem 0rem'}} type="button" onClick={handleAddPrice}>Add Price</button>
               </div>
+              
               <div className="form-group">
                 <label>Extra Options:</label>
                 {productDetails.extraOptions.map((option, index) => (
@@ -348,7 +348,7 @@ function Menu() {
                       value={option.price}
                       onChange={(e) => handleExtraOptionChange(index, 'price', e.target.value)}
                     />
-                    <button type="button" onClick={() => handleRemoveExtraOption(index)}>Remove</button>
+                    <button className='cancel-btn' type="button" onClick={() => handleRemoveExtraOption(index)}>Remove</button>
                   </div>
                 ))}
                 <button className='add-toppings' type="button" onClick={handleAddExtraOption}>Add Option</button>
@@ -360,9 +360,7 @@ function Menu() {
             </div>
           </div>
         )}
-
       </Backdrop>
-
 
       <Backdrop
         sx={{ color: '#000', zIndex: (theme) => theme.zIndex.drawer + 1, backgroundColor: "rgba(0, 0, 0, 0.238)" }}
@@ -384,4 +382,3 @@ function Menu() {
 }
 
 export default Menu;
-

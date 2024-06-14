@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AddToMenu.css';
 import { baseUrl } from '../../functions/baseUrl';
+
 function AddToMenu() {
   const [uploadedImageUrl, setUploadedImageUrl] = useState('');
   const [formData, setFormData] = useState({
@@ -17,8 +18,8 @@ function AddToMenu() {
   useEffect(() => {
     setFormData({
       ...formData,
-      img: uploadedImageUrl
-    })
+      img: uploadedImageUrl,
+    });
   }, [uploadedImageUrl]);
 
   const [topping, setTopping] = useState({
@@ -26,7 +27,10 @@ function AddToMenu() {
     price: '',
   });
 
-  const [price, setPrice] = useState('');
+  const [priceInput, setPriceInput] = useState({
+    size: '',
+    price: '',
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -59,22 +63,22 @@ function AddToMenu() {
   };
 
   const addPrice = () => {
-    if (price.trim() !== '') {
-      const newPrice = parseFloat(price);
+    if (priceInput.size.trim() !== '' && priceInput.price.trim() !== '') {
+      const newPrice = { size: priceInput.size, price: parseFloat(priceInput.price) };
       setFormData({
         ...formData,
         prices: [...formData.prices, newPrice],
       });
-      setPrice(''); // Reset price input after adding
+      setPriceInput({ size: '', price: '' }); // Reset price input after adding
     } else {
-      alert('Please enter a price.');
+      alert('Please enter both size and price.');
     }
   };
 
   const handlePriceChange = (e, index) => {
-    const { value } = e.target;
+    const { name, value } = e.target;
     const updatedPrices = [...formData.prices];
-    updatedPrices[index] = parseFloat(value);
+    updatedPrices[index][name] = name === 'price' ? parseFloat(value) : value;
     setFormData({ ...formData, prices: updatedPrices });
   };
 
@@ -84,19 +88,14 @@ function AddToMenu() {
   };
 
   const handleImageUpload = async (e) => {
-    const file = e.target.files[0]; // Get the first selected file
-    // setImage(file);
-
+    const file = e.target.files[0];
     const formData = new FormData();
-    formData.append("image", file);
+    formData.append('image', file);
 
     try {
       const { data } = await axios.post(`${baseUrl}/api/image/uploadImage`, formData);
-
       setUploadedImageUrl(data.url);
-      // console.log(image); 
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
   };
@@ -104,18 +103,18 @@ function AddToMenu() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token'); 
-      const email = localStorage.getItem('userEmail'); 
+      const token = localStorage.getItem('token');
+      const email = localStorage.getItem('userEmail');
       const response = await fetch(`${baseUrl}/api/product/addfood/${email}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // Send the JWT token in the Authorization header
+          Authorization: `Bearer ${token}`, // Send the JWT token in the Authorization header
         },
         body: JSON.stringify(formData),
       });
-      console.log(formData)
-      const result = await response.json(); 
+      console.log(formData);
+      const result = await response.json();
       console.log('Food created:', result);
       setFormData({
         title: '',
@@ -174,8 +173,8 @@ function AddToMenu() {
         <input
           type="file"
           id="uploadImage"
-          accept="image/"
-          onChange={(e) => handleImageUpload(e)}
+          accept="image/*"
+          onChange={handleImageUpload}
         /><br /><br />
 
         <label htmlFor="productType">Product Type:</label><br />
@@ -185,7 +184,6 @@ function AddToMenu() {
           name="productType"
           value={formData.productType}
           onChange={handleChange}
-          required
         /><br /><br />
 
         <label htmlFor="category">Category:</label><br />
@@ -207,45 +205,45 @@ function AddToMenu() {
           <option value="Drinks">Drinks</option>
         </select><br /><br />
 
-        {formData.catagory === 'Ice Cream' || formData.catagory === 'Milk Shake' ? (
-          <div>
-            <label htmlFor="prices">Prices:</label><br />
+        <label htmlFor="prices">Prices:</label><br />
+        <input
+          type="text"
+          id="size"
+          name="size"
+          placeholder="Size"
+          value={priceInput.size}
+          onChange={(e) => setPriceInput({ ...priceInput, size: e.target.value })}
+        />
+        <input
+          type="number"
+          id="price"
+          name="price"
+          placeholder="Price"
+          value={priceInput.price}
+          onChange={(e) => setPriceInput({ ...priceInput, price: e.target.value })}
+        />
+        <button type="button" onClick={addPrice}>Add Price</button><br /><br />
+        {formData.prices.map((priceObj, index) => (
+          <div key={index} className='prices-add-to-menu'>
+            <input
+              type="text"
+              name="size"
+              value={priceObj.size}
+              onChange={(e) => handlePriceChange(e, index)}
+            />
             <input
               type="number"
-              id="price"
               name="price"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
-            /> <br/>
-            <button type="button" onClick={addPrice}>Add Price</button><br /><br />
-            {formData.prices.map((price, index) => (
-              <div key={index} className='prices-add-to-menu'> 
-                <input
-                  type="number"
-                  value={price}
-                  onChange={(e) => handlePriceChange(e, index)}
-                />
-                <button
-                  type="button"
-                  onClick={() => removePrice(index)}
-                  className="delete-button"
-                >Delete</button>
-              </div>
-            ))}
+              value={priceObj.price}
+              onChange={(e) => handlePriceChange(e, index)}
+            />
+            <button
+              type="button"
+              onClick={() => removePrice(index)}
+              className="delete-button"
+            >Delete</button>
           </div>
-        ) : (
-          <div>
-            <label htmlFor="prices">Prices:</label><br />
-            <input
-              type="number"
-              id="prices"
-              name="prices"
-              value={formData.prices}
-              onChange={handleChange}
-              required
-            /><br /><br />
-          </div>
-        )}
+        ))}
 
         <div>
           <label htmlFor="toppingText">Topping Name:</label>
@@ -268,7 +266,7 @@ function AddToMenu() {
         </div>
 
         {formData.extraOptions.map((topping, index) => (
-          <div key={index} className='toppings-add-to-menu'>
+          <div key={index}>
             <input
               type="text"
               name="text"
@@ -288,204 +286,12 @@ function AddToMenu() {
             >Delete</button>
           </div>
         ))}
-
-        <button type="submit">Create Food</button>
+        
+        <br />
+        <button type="submit" className='btn btn-primary'>Create New Food Item</button>
       </form>
     </div>
   );
 }
 
 export default AddToMenu;
-
-
-
-
-// import React, { useState } from 'react';
-// import axios from 'axios';
-// import './AddToMenu.css';
-
-// function AddToMenu() {
-//   const [uploadedImageUrl, setUploadedImageUrl] = useState('');
-//   const [formData, setFormData] = useState({
-//     title: '',
-//     desc: '',
-//     img: uploadedImageUrl,
-//     catagory: '',
-//     prices: '',
-//     extraOptions: [],
-//   });
-
-//   const [topping, setTopping] = useState({
-//         text: '',
-//         price: '',
-//       });
-
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     setFormData({ ...formData, [name]: value });
-//   };
-
-//   const handleToppingChange = (e, index) => {
-//     const { name, value } = e.target;
-//     const updatedToppings = [...formData.extraOptions];
-//     updatedToppings[index][name] = value;
-//     setFormData({ ...formData, extraOptions: updatedToppings });
-//   };
-
-//   const addTopping = () => {
-//     if (topping.text.trim() !== '' && topping.price.trim() !== '') {
-//       const newTopping = { text: topping.text, price: parseFloat(topping.price) };
-//       setFormData({
-//         ...formData,
-//         extraOptions: [...formData.extraOptions, newTopping],
-//       });
-//       setTopping({ text: '', price: '' }); // Reset topping input after adding
-//     } else {
-//       alert('Please enter both topping name and price.');
-//     }
-//   };
-
-//   const removeTopping = (indexToRemove) => {
-//     const updatedToppings = formData.extraOptions.filter((_, index) => index !== indexToRemove);
-//     setFormData({ ...formData, extraOptions: updatedToppings });
-//   };
-
-//   const handleImageUpload = async (e) => {
-//     const file = e.target.files[0];
-//     const formData = new FormData();
-//     formData.append('file', file);
-//     formData.append('upload_preset', 'your_cloudinary_upload_preset'); // Replace with your Cloudinary upload preset
-
-//     try {
-//       const {data} = await axios.post('http://localhost:8000/api/image/uploadImage', formData);
-//       setUploadedImageUrl(data.url); // Store the secure URL
-//     } catch (error) {
-//       console.error('Error uploading image:', error);
-//       alert('Failed to upload image. Please try again.');
-//     }
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     const updatedFormData = {
-//       ...formData,
-//       img: uploadedImageUrl || formData.img // Use uploaded image URL if available
-//     };
-
-//     try {
-//       const response = await axios.post('http://localhost:8000/api/product/addfood', updatedFormData);
-//       console.log('Food created:', response.data.data.food);
-//       setFormData({
-//         title: '',
-//         desc: '',
-//         img: '',
-//         catagory: '',
-//         prices: '',
-//         extraOptions: [],
-//       });
-//       setUploadedImageUrl(''); // Clear uploaded image URL
-//       alert('Food Successfully Added!');
-//     } catch (error) {
-//       console.error('Error creating food:', error);
-//       alert('Failed to add food. Please try again.');
-//     }
-//   };
-
-//   return (
-//     <div className="add-to-menu-wrapper">
-//       <h1>Create New Food Item</h1>
-//       <form onSubmit={handleSubmit}>
-//         <label htmlFor="title">Title:</label><br />
-//         <input
-//           type="text"
-//           id="title"
-//           name="title"
-//           value={formData.title}
-//           onChange={handleChange}
-//           required
-//           maxLength="60"
-//         /><br /><br />
-
-//         <label htmlFor="desc">Description:</label><br />
-//         <textarea
-//           id="desc"
-//           name="desc"
-//           value={formData.desc}
-//           onChange={handleChange}
-//           required
-//           maxLength="200"
-//         ></textarea><br /><br />
-
-//         <label htmlFor="img">Image URL:</label><br />
-//         <input
-//           type="text"
-//           id="img"
-//           name="img"
-//           value={uploadedImageUrl || formData.img}
-//           onChange={handleChange}
-//           disabled
-//         /><br /><br />
-
-//         <label htmlFor="uploadImage">Upload Image:</label><br />
-//         <input
-//           type="file"
-//           id="uploadImage"
-//           accept="image/*"
-//           onChange={handleImageUpload}
-//         /><br /><br />
-
-//         <label htmlFor="category">Category:</label><br />
-//         <select
-//           id="catagory"
-//           name="catagory"
-//           value={formData.catagory}
-//           onChange={handleChange}
-//           required
-//         >
-//           <option value="">Select a category</option>
-//           <option value="Pizza">Pizza</option>
-//           <option value="Ice Cream">Ice Cream</option>
-//           <option value="Milk Shake">Milk Shake</option>
-//           <option value="Non Veg Pizza">Non Veg Pizza</option>
-//         </select><br /><br />
-
-//         <label htmlFor="prices">Prices (comma-separated list):</label><br />
-//         <input
-//           type="text"
-//           id="prices"
-//           name="prices"
-//           value={formData.prices}
-//           onChange={handleChange}
-//           required
-//         /><br /><br />
-
-//         {formData.extraOptions.map((topping, index) => (
-//           <div key={index} className='toppings-add-to-menu'>
-//             <input
-//               type="text"
-//               name="text"
-//               value={topping.text}
-//               onChange={(e) => handleToppingChange(e, index)}
-//             />
-//             <input
-//               type="number"
-//               name="price"
-//               value={topping.price}
-//               onChange={(e) => handleToppingChange(e, index)}
-//             />
-//              <button
-//               type="button"
-//               onClick={() => removeTopping(index)}
-//               className="delete-button"
-//             >Delete</button>
-//           </div>
-//         ))}
-
-//         <button type="submit">Create Food</button>
-//       </form>
-//     </div>
-//   );
-// }
-
-// export default AddToMenu;
-

@@ -75,6 +75,16 @@
     
 
 }
+.price-size-wrapper{ 
+    width: 100%;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.size-param{ 
+   
+}
 .item-img img{
     width: 100%;
     height: auto; 
@@ -125,7 +135,7 @@
     /* background-color: rgba(217, 217, 217, 1); */
 
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     font-style: italic;
 }

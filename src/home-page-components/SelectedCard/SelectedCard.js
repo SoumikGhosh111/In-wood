@@ -13,6 +13,7 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
 
     const [sizeChange, setSizeChange] = useState(null);
     const [sizeSelected, setSizeSelected] = useState(false);
+    // const [size, setSize] = useState(null); 
 
     const [selectedTopping, setSelectedTopping] = useState([]);
     const [isTopingsChecked, setIsToppingsChecked] = useState(false);
@@ -47,51 +48,20 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
     const calculateTotalAmount = () => {
         let total = 0;
 
-        if (itemData?.catagory === 'Ice Cream') {
-            if (sizeChange === 'Sm Cup') {
-                total += itemData.prices[0];
-            }
-            else if (sizeChange === 'Lg Cup') {
-                total += itemData.prices[1];
-            }
-            else if (sizeChange === 'Sm Cone') {
-                total += itemData.prices[2];
-            }
-            else if (sizeChange === 'Lg Cone') {
-                total += itemData.prices[3];
+        if (itemData && itemData.prices) {
+            // Find the price based on the selected size
+            const selectedPrice = itemData.prices.find(priceItem => priceItem.size === sizeChange);
+
+            if (selectedPrice) {
+                total += selectedPrice.price;
             }
         }
-        // 'Sm Cup', 'Lg Cup', 'Sm Cone', 'Lg Cone'
 
-
-        if (itemData?.catagory === 'Milk Shake') {
-            if (sizeChange === 'Sm') {
-                total += itemData.prices[0];
-            }
-            else if (sizeChange === 'Lg') {
-                total += itemData.prices[1];
-            }
-        }
-        // 'Sm', 'Lg'
-
-
-        // Add base price based on selected size
-        if (sizeChange === 'small') {
-            total += itemData.prices[0];
-        }
-
-        // else if (sizeChange === 'medium') 
-        // {
-        //     total += itemData.prices[1];
-        // } 
-        // else if (sizeChange === 'large') 
-        // {
-        //     total += itemData.prices[2];
-        // }
         // Add prices of selected toppings
         selectedTopping.forEach(topping => {
             total += topping.price;
         });
+
         return total.toFixed(2);
     };
 
@@ -111,7 +81,7 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
             qty: quantity,
             toppings: selectedTopping.length > 0 ? selectedTopping : null,
             // size: sizeChange !== null ? sizeChange : null
-            size: itemData?.productType ? itemData?.productType : "Large",
+            size: sizeChange,
             img: itemData.img
         }))
 
@@ -151,7 +121,7 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
                         <h1>{itemData.title}</h1>
                         <div className='cancel-bttn' onClick={handleCancelButtonClick}>
                             {/* <CancelRoundedIcon sx={{ fontSize: "40px", cursor: "pointer" }} onClick={handleCancelButtonClick} /> */}
-                            <ClearRoundedIcon sx={{ fontSize: "30px" }}/>
+                            <ClearRoundedIcon sx={{ fontSize: "30px" }} />
                         </div>
                     </div>
                     <div className='selected-card-item-img'>
@@ -159,15 +129,15 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
                         {/* <img src={itemData.img}/> */}
                     </div>
                     <div className='selected-card-desc'>
-                    <h3>Description</h3>
-                    <p>{itemData.desc}</p>
+                        <h3>Description</h3>
+                        <p>{itemData.desc}</p>
                     </div>
                     <div className='selected-card-item-body'>
                         <h3>Choose an Option</h3>
 
 
                         {/* for Ice Creams only */}
-                        {itemData.catagory === 'Ice Cream' && (<>
+                        {/* {itemData.catagory === 'Ice Cream' && (<>
                             {iceCream.map((iceCreams, indx) => (
                                 <>
                                     <div className='size-options'>
@@ -181,10 +151,10 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
                                 </>
 
                             ))}
-                        </>)}
+                        </>)} */}
 
                         {/* for Milk shakes Only */}
-                        {itemData.catagory === 'Milk Shake' && (<>
+                        {/* {itemData.catagory === 'Milk Shake' && (<>
                             {milkShake.map((milkShakes, indx) => (
                                 <>
                                     <div className='size-options'>
@@ -197,51 +167,28 @@ function SelectedCard({ data, onCancelButtonClick, onOrderButtonClick }) {
                                     <div className='selected-card-item-ver-line'></div>
                                 </>
                             ))}
-                        </>)}
+                        </>)} */}
 
                         {/* for the rest of the items */}
-                        {itemData.catagory !== 'Milk Shake' && itemData.catagory !== 'Ice Cream' && (<>
-                            <div className='size-options'>
-                                <div className='input'>
-                                    <input type='radio' name='size-options' onClick={() => handleSizeChange("small")} checked={sizeChange === "small"} />
-                                    &nbsp;<label htmlFor='size-options'>{itemData.productType ? itemData.productType : "Large"}</label>
-                                </div>
-                                <span>$ {itemData.prices[0]}</span>
-                            </div>
-                            <div className='selected-card-item-ver-line'></div>
-                            {/* 
-                            {itemData.prices.length > 1 ? (
+                        <div className='size-options'>
+                            {itemData.prices.map((priceItem, index) => (
                                 <>
-                                    <div className='size-options'>
-                                        <div className='input'>
-                                            <input type='radio' name='size-options' onChange={() => handleSizeChange("medium")} checked={sizeChange === "medium"} />
-                                            &nbsp;<label htmlFor='size-options'>Medium</label>
+                                    <div key={index} className='selected-card-input'>
+                                        <div>
+                                            <input
+                                                type='radio'
+                                                name='size-options'
+                                                onClick={() => handleSizeChange(priceItem.size)}
+                                                checked={sizeChange === priceItem.size}
+                                            />
+                                            &nbsp;<label htmlFor='size-options'>{priceItem.size}</label>
                                         </div>
-                                        <span>$ {itemData.prices[2]}</span>
+                                        <span>$ {priceItem.price}</span>
                                     </div>
                                     <div className='selected-card-item-ver-line'></div>
                                 </>
-                            ) : (
-                                <></>
-                            )}
-                            <div className='selected-card-item-ver-line'></div>
-                            {itemData.prices.length > 2 ? (
-                                <>
-                                    <div className='size-options'>
-                                        <div className='input'>
-                                            <input type='radio' name='size-options' onChange={() => handleSizeChange("large")} checked={sizeChange === "large"} />
-                                            <label htmlFor='size-options'>Large</label>
-                                        </div>
-                                        &nbsp;<span>$ {itemData.prices[2]}</span>
-                                    </div>
-                                    <div className='selected-card-item-ver-line'></div>
-                                </>
-                            ) : (
-                                <></>
-                            )} */}
-
-                        </>)}
-
+                            ))}
+                        </div>
                     </div>
 
                     <div className='selected-card-item-toppings'>

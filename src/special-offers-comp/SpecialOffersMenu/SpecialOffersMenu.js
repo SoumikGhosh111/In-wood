@@ -28,11 +28,11 @@ const specialOffer = {
     ],
     "bases": [
         {
-            "base": "Pizza by Slice",
+            "base": "Pizza By Slice",
             "toppings": "4"
         },
         {
-            "base": "Pizza by Slice",
+            "base": "Pizza By Slice",
             "toppings": "2"
         }
     ],

@@ -29,7 +29,7 @@ function MenuSection() {
     const [itemData, setItemData] = useState(null);
 
     const [milShake, setMilkShake] = useState(null);
-    const [specialityPizza, setSpecialityPizza] = useState(null); 
+    const [specialityPizza, setSpecialityPizza] = useState(null);
     const [pizzaBySlice, setPizzaBySlice] = useState(null);
     const [deepFried, setDeepFried] = useState(null);
     const [chickenWings, setChickenwings] = useState(null);
@@ -110,8 +110,10 @@ function MenuSection() {
             const specialityPizzaItems = data.data.food.filter(item => item.catagory === 'Speciality Pizza');
             setSpecialityPizza(specialityPizzaItems);
 
-            const bySlice = data.data.food.filter(item => item.catagory === 'Pizza by Slice');
+            const bySlice = data.data.food.filter(item => item.catagory === 'Pizza By Slice');
             setPizzaBySlice(bySlice);
+
+            console.log(bySlice, "This is hell");
 
             const chickenWingsItems = data.data.food.filter(item => item.catagory === 'Chicken Wings');
             setChickenwings(chickenWingsItems);
@@ -119,7 +121,7 @@ function MenuSection() {
             const cookiesAndCreamItem = data.data.food.filter(item => item.catagory === 'Cookies and Cream');
             setCookisAndCream(cookiesAndCreamItem);
 
-            const breadItems = data.data.food.filter(item => item.catagory === 'Deep Fried');
+            const breadItems = data.data.food.filter(item => item.catagory === 'Breads/Baked Goods');
             setBreads(breadItems);
 
             const drinkItems = data.data.food.filter(item => item.catagory === 'Drinks');
@@ -288,14 +290,20 @@ function MenuSection() {
                                         <p className='item-desc'>{item.desc}</p>
                                         {/* </div> */}
                                         <div className='size'>
-                                            <div className='price'>
-                                                {/* ${item.prices[item.prices.length - 1]} */}
-                                                ${item.prices[0]}
-                                            </div>
-                                            <div className='size-param'>
-                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
-                                                {item.productType ? item.productType : "Large"}
-                                            </div>
+                                            {/* {item.prices.map((price, index) => ( */}
+                                                <div className='price-size-wrapper'>
+                                                    {item.prices.length > 0 && (
+                                                        <>
+                                                            <div className='price'>
+                                                                ${item.prices[item.prices.length - 1].price}
+                                                            </div>
+                                                            <div className='size-param'>
+                                                                {item.prices[item.prices.length - 1].size}
+                                                            </div>
+                                                        </>
+                                                    )}
+                                                </div>
+                                            {/* ))} */}
                                         </div>
                                     </div>
                                     <div className='quantity-buttons-wrapper'>
@@ -339,14 +347,20 @@ function MenuSection() {
                                         <p className='item-desc'>{item.desc}</p>
                                         {/* </div> */}
                                         <div className='size'>
-                                            <div className='price'>
-                                                {/* ${item.prices[item.prices.length - 1]} */}
-                                                ${item.prices[0]}
+                                            {/* {item.prices.map((price, index) => ( */}
+                                            <div className='price-size-wrapper'>
+                                                {item.prices.length > 0 && (
+                                                    <>
+                                                        <div className='price'>
+                                                            ${item.prices[item.prices.length - 1].price}
+                                                        </div>
+                                                        <div className='size-param'>
+                                                            {item.prices[item.prices.length - 1].size}
+                                                        </div>
+                                                    </>
+                                                )}
                                             </div>
-                                            <div className='size-param'>
-                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
-                                                {item.productType ? item.productType : "Large"}
-                                            </div>
+                                            {/* ))} */}
                                         </div>
                                     </div>
                                     <div className='quantity-buttons-wrapper'>
@@ -390,14 +404,20 @@ function MenuSection() {
                                         <p className='item-desc'>{item.desc}</p>
                                         {/* </div> */}
                                         <div className='size'>
-                                            <div className='price'>
-                                                {/* ${item.prices[item.prices.length - 1]} */}
-                                                ${item.prices[0]}
-                                            </div>
-                                            <div className='size-param'>
-                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
-                                                {item.productType ? item.productType : "Large"}
-                                            </div>
+                                            {/* {item.prices.map((price, index) => ( */}
+                                                <div className='price-size-wrapper'>
+                                                    {item.prices.length > 0 && (
+                                                        <>
+                                                            <div className='price'>
+                                                                ${item.prices[item.prices.length - 1].price}
+                                                            </div>
+                                                            <div className='size-param'>
+                                                                {item.prices[item.prices.length - 1].size}
+                                                            </div>
+                                                        </>
+                                                    )}
+                                                </div>
+                                            {/* ))} */}
                                         </div>
                                     </div>
                                     <div className='quantity-buttons-wrapper'>
@@ -441,14 +461,20 @@ function MenuSection() {
                                         <p className='item-desc'>{item.desc}</p>
                                         {/* </div> */}
                                         <div className='size'>
-                                            <div className='price'>
-                                                {/* ${item.prices[item.prices.length - 1]} */}
-                                                ${item.prices[0]}
-                                            </div>
-                                            <div className='size-param'>
-                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
-                                                {item.productType ? item.productType : "Large"}
-                                            </div>
+                                            {/* {item.prices.map((price, index) => ( */}
+                                                <div className='price-size-wrapper'>
+                                                    {item.prices.length > 0 && (
+                                                        <>
+                                                            <div className='price'>
+                                                                ${item.prices[item.prices.length - 1].price}
+                                                            </div>
+                                                            <div className='size-param'>
+                                                                {item.prices[item.prices.length - 1].size}
+                                                            </div>
+                                                        </>
+                                                    )}
+                                                </div>
+                                            {/* ))} */}
                                         </div>
                                     </div>
                                     <div className='quantity-buttons-wrapper'>
@@ -491,14 +517,20 @@ function MenuSection() {
                                         <p className='item-desc'>{item.desc}</p>
                                         {/* </div> */}
                                         <div className='size'>
-                                            <div className='price'>
-                                                {/* ${item.prices[item.prices.length - 1]} */}
-                                                ${item.prices[0]}
-                                            </div>
-                                            <div className='size-param'>
-                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
-                                                {item.productType ? item.productType : "Large"}
-                                            </div>
+                                            {/* {item.prices.map((price, index) => ( */}
+                                                <div  className='price-size-wrapper'>
+                                                    {item.prices.length > 0 && (
+                                                        <>
+                                                            <div className='price'>
+                                                                ${item.prices[item.prices.length - 1].price}
+                                                            </div>
+                                                            <div className='size-param'>
+                                                                {item.prices[item.prices.length - 1].size}
+                                                            </div>
+                                                        </>
+                                                    )}
+                                                </div>
+                                            {/* ))} */}
                                         </div>
                                     </div>
                                     <div className='quantity-buttons-wrapper'>
@@ -541,14 +573,20 @@ function MenuSection() {
                                         <p className='item-desc'>{item.desc}</p>
                                         {/* </div> */}
                                         <div className='size'>
-                                            <div className='price'>
-                                                {/* ${item.prices[item.prices.length - 1]} */}
-                                                ${item.prices[0]}
-                                            </div>
-                                            <div className='size-param'>
-                                                {/* {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"} */}
-                                                {item.productType ? item.productType : "Large"}
-                                            </div>
+                                            {/* {item.prices.map((price, index) => ( */}
+                                                <div  className='price-size-wrapper'>
+                                                    {item.prices.length > 0 && (
+                                                        <>
+                                                            <div className='price'>
+                                                                ${item.prices[item.prices.length - 1].price}
+                                                            </div>
+                                                            <div className='size-param'>
+                                                                {item.prices[item.prices.length - 1].size}
+                                                            </div>
+                                                        </>
+                                                    )}
+                                                </div>
+                                            {/* ))} */}
                                         </div>
                                     </div>
                                     <div className='quantity-buttons-wrapper'>
@@ -571,51 +609,47 @@ function MenuSection() {
 
                 <span className='title'>Shakes</span>
 
-
                 {milShake !== null ? (
-                    // menu.map((item) => item.filter(()))
-
-                    <div className='menu-section-cards' id='cards' >
+                    <div className='menu-section-cards' id='cards'>
                         {milShake.map((item, indx) => (
-                            <>
-
-                                <div className='menu-section-card-item' >
-                                    <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
-                                        <div className='item-img'>
-                                            <img src={item.img == '' ? pizza1 : item.img} />
-                                        </div>
-
-                                        <div className='item-name-wrapper'>
-                                            <span className='item-name' >{item.title}</span>
-                                        </div>
-                                        <p className='item-desc'>{item.desc}</p>
-                                        <div className='size'>
-                                            <div className='price'>
-                                                {/* ${item.prices[item.prices.length - 1]} */}
-                                                ${item.prices[item.prices.length - 1]}
-                                            </div>
-                                            <div className='size-param'>
-                                                Large
-                                                {/* {item.catagory} */}
-                                            </div>
-                                        </div>
+                            <div className='menu-section-card-item' key={item._id}>
+                                <div onClick={() => handleOpen(item._id)} style={{ cursor: "pointer" }}>
+                                    <div className='item-img'>
+                                        <img src={item.img === '' ? pizza1 : item.img} alt={item.title} />
                                     </div>
-                                    <div className='quantity-buttons-wrapper'>
-                                        <button className='quantity-buttons'
-                                            onClick={() => handleOpen(item._id)}
-                                        >
-                                            Add To Cart
-                                        </button>
+                                    <div className='item-name-wrapper'>
+                                        <span className='item-name'>{item.title}</span>
+                                    </div>
+                                    <p className='item-desc'>{item.desc}</p>
+                                    <div className='size'>
+                                        {/* {item.prices.map((price, index) => ( */}
+                                            <div className='price-size-wrapper'>
+                                                <div  className='price-size-wrapper'>
+                                                    {item.prices.length > 0 && (
+                                                        <>
+                                                            <div className='price'>
+                                                                ${item.prices[item.prices.length - 1].price}
+                                                            </div>
+                                                            <div className='size-param'>
+                                                                {item.prices[item.prices.length - 1].size}
+                                                            </div>
+                                                        </>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        {/* ))} */}
                                     </div>
                                 </div>
-
-
-                            </>
-
+                                <div className='quantity-buttons-wrapper'>
+                                    <button className='quantity-buttons' onClick={() => handleOpen(item._id)}>
+                                        Add To Cart
+                                    </button>
+                                </div>
+                            </div>
                         ))}
-
                     </div>
-                ) : (<>Loading . . .</>)}
+                ) : null}
+
 
                 <span className='title'>Drinks</span>
 
@@ -638,14 +672,22 @@ function MenuSection() {
                                         </div>
                                         <p className='item-desc'>{item.desc}</p>
                                         <div className='size'>
-                                            <div className='price'>
-                                                {/* ${item.prices[item.prices.length - 1]} */}
-                                                ${item.prices[0]}
-                                            </div>
-                                            <div className='size-param'>
-                                                {item.prices.length > 2 ? ("Large") : ("Medium") || item.prices.length === 1 && "Small"}
-                                                {/* {item.catagory} */}
-                                            </div>
+                                            {/* {item.prices.map((price, index) => ( */}
+                                                <div className='price-size-wrapper'>
+                                                    <div  className='price-size-wrapper'>
+                                                        {item.prices.length > 0 && (
+                                                            <>
+                                                                <div className='price'>
+                                                                    ${item.prices[item.prices.length - 1].price}
+                                                                </div>
+                                                                <div className='size-param'>
+                                                                    {item.prices[item.prices.length - 1].size}
+                                                                </div>
+                                                            </>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            {/* ))} */}
                                         </div>
                                     </div>
                                     <div className='quantity-buttons-wrapper'>
@@ -686,6 +728,7 @@ function MenuSection() {
                 </div>
             </div>
         </div>
+        // <></>
     )
 }
 

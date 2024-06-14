@@ -86,6 +86,7 @@
     align-items: center;
     justify-content: center; 
     display: flex;
+    /* display: none; */
 
     
 }
@@ -101,7 +102,6 @@
     z-index: 10;
     padding: 0rem 2rem;
     text-transform: uppercase;
-    
 }
 
 .leftBox span {
@@ -140,7 +140,7 @@
 
 /* right side pizza image */
 .rightBox {
-    padding-top: 7rem !important;
+    /* padding-top: 7rem !important; */
     height: 100vh;
     width: 50%;
     display: flex;

@@ -74,7 +74,7 @@
     margin-top: 2rem;
     padding: 0rem 1rem;
 }
-.size-options, .toppings-option{ 
+.toppings-option{ 
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -82,6 +82,20 @@
     padding: 1rem 0.5rem;
 
 }
+
+.size-options{ 
+    width: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1rem 0.5rem;
+}
+.selected-card-input{ 
+    margin: 1rem 0rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
 /* .size-options span{ 
     font-weight: 600 !important; 
     color: red !important; 

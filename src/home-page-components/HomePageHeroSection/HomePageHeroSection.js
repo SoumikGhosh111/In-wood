@@ -200,11 +200,7 @@ function HomePageHeroSection() {
                         </button>
                     </div>
                 </div>
-                <div className='rightBox' style={{ zIndex: scroll > window.innerHeight / 10 ? '0' : '1' }}>
-                    {/* <div style={{height: '120px', width: '100%'}}></div> */}
-                    {/* <img src={pizza} alt = 'pizza bg img' className='pizza-png' /> */}
-
-                   
+                <div className='rightBox' style={{ zIndex: scroll > window.innerHeight / 10 ? '0' : '1' }}>   
                 </div>
             </div>
             <div id='menu' className='menu-section' ref={ref2} >
