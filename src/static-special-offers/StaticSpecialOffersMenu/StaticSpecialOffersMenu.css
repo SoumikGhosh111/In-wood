@@ -1,0 +1,27 @@
+.special-menu-nav-bar{ 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    list-style: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #e3e3e3;
+
+}
+.special-menu-nav-bar li{ 
+    margin: 0rem 1rem;
+    padding: 0.5rem 1rem;
+    
+
+    cursor: pointer;
+}
+.special-offer-unactive{ 
+}
+.special-offers-active{ 
+    color: red;
+}
+.special-menu-cart{ 
+    width: 100%; 
+}
+

@@ -16,6 +16,7 @@ import MyOrderPage from './pages/MyOrderPage';
 import PromotionsPage from './pages/PromotionsPage';
 import SpecialOffersPage from './pages/SpecialOffersPage';
 
+
 // importing react router dom
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import ProtectedRoute from './protected-routes/PrivateRoutes';
@@ -41,7 +42,7 @@ function App() {
             <Route path='/checkout-success' element={<ProtectedRoute><CheckoutSuccess /></ProtectedRoute>} />
             <Route path='/my-order' element={<ProtectedRoute><MyOrderPage /></ProtectedRoute>} />
             <Route path='/coupens' element={<ProtectedRoute><PromotionsPage /></ProtectedRoute>} />
-            {/* <Route path='/special-offers' element={<ProtectedRoute><SpecialOffersPage /></ProtectedRoute>} /> */}
+            <Route path='/special-offers' element={<ProtectedRoute><SpecialOffersPage /></ProtectedRoute>} />
             <Route path="*"  element={<NotFound />} />
             
           </Routes>

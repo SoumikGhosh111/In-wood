@@ -4,13 +4,15 @@ import { persistStore } from "redux-persist";
 import cartSlice from "./slices/cartSlice";
 import cartShow from "./slices/cartShow";
 import userDataSlice from "./slices/userDataSlice";
+import specialOffersSlice from "./slices/specialOffersSlice"; 
 
 
 const Store = configureStore({ 
     reducer: { 
         cart: cartSlice,
         show: cartShow, 
-        userdata: userDataSlice
+        userdata: userDataSlice, 
+        specialoffer: specialOffersSlice,
     }
 }); 
 

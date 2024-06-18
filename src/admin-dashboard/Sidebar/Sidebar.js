@@ -119,11 +119,11 @@ function Sidebar({ onSideBarItemClicked }) {
                         <AddRoundedIcon sx={{ transform: "translateY(20%)", marginRight: "1rem" }} />  Add to Menu
                     </a>
                 </li>
-                {/* <li className={activeClass === 5 ? 'active-sidebar sidebar-list-item' : 'sidebar-list-item'} onClick={() => handleIconCLick(5)}>
+                <li className={activeClass === 5 ? 'active-sidebar sidebar-list-item' : 'sidebar-list-item'} onClick={() => handleIconCLick(5)}>
                     <a >
                         <AddRoundedIcon sx={{ transform: "translateY(20%)", marginRight: "1rem" }} />  Add Special Offers
                     </a>
-                </li> */}
+                </li>
                 {/*<li className='sidebar-list-item'>
                   <a href="">
                        Inventory

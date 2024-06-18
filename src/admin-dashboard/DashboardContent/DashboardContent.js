@@ -24,9 +24,9 @@ function DashboardContent({itemToRender}) {
             <div>
                 {itemToRender === 4 && <AddToMenu />}
             </div>
-            {/* <div>
+            <div>
                 {itemToRender === 5 && <AddSpecialOffers />}
-            </div> */}
+            </div>
           </>
 
         ) : (<></>)}
