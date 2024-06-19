@@ -18,6 +18,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function CheckoutPageLeftSide({ onEdtBtnClick }) {
+  const [specialOffer, setSpecialOffer] = useState(null);
   const cartItems = useSelector((state) => state.cart.cart);
   const userDetails = useSelector((state) => state.userdata);
   const dispatch = useDispatch();
@@ -32,6 +33,8 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
   const [email, setEmail] = useState(localStorage.getItem("userEmail") || '')
   const useremail = localStorage.getItem("userEmail");
 
+  const specialOffersObjs = useSelector(state => state.specialoffer.specialOrder); 
+  console.log(specialOffersObjs); 
 
   const handleBackEvent = () => {
     window.location.href = '/';
@@ -101,7 +104,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
     }
 
     const allowedZipCodes = ["10034", "10035", "10036", "10037", "10038", "10039", "10040"];
-  
+
     // Check if the entered zip code is in the list of allowed zip codes
     if (allowedZipCodes.includes(zipCode)) {
       // Save user info if the zip code is allowed
@@ -112,16 +115,25 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
       // Display a message indicating no delivery in the area
       toast.error("Sorry, pizza delivery is not available in your area");
       setEligible(false);
-    }
+    }
 
-  }; 
+  };
+
+  useEffect(() => {
+    setSpecialOffer(JSON.parse(localStorage.getItem('specialOrder')));
+  }, [localStorage.getItem('specialOrder')]);
+
+  const handleLocalStorageDelete = () => {
+    localStorage.removeItem('specialOrder');
+    setSpecialOffer(null);
+  }
 
 
   return (
     <div className='check-out-left-side'>
       <h4>CHECKOUT</h4>
       <h2>INWOOD PIZZA</h2>
-      <button onClick={handleBackEvent} className='back-tio-menu-btn' style={{display: cartItems?.length > 0 ? 'block' : 'none'}}>Add To Menu</button>
+      <button onClick={handleBackEvent} className='back-tio-menu-btn' style={{ display: cartItems?.length > 0 ? 'block' : 'none' }}>Add To Menu</button>
       {/* <ToastContainer /> */}
 
       {/* <div className='check-out-left-side-details'>
@@ -194,8 +206,14 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
 
         </div>
       </div>
+      {specialOffer && specialOffer.offerName && specialOffer.totalAmount && (
+        <div className='special-offers-order'>
+          specialOffer = {specialOffer.offerName}, price = {specialOffer.totalAmount}
+          <button onClick={handleLocalStorageDelete}>Delete</button>
+        </div>
+      )}
 
-      
+
       <div className='vertical-line'></div>
 
       <div className='contact-info-wrapper'>
@@ -244,7 +262,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
       <div className='vertical-line'></div>
       {/* <div className='free-delivery-check-out'>Free Delivery On 20$</div> */}
       <div>
-      
+
       </div>
       {/* <div className='delivery-stts' style={{ display: isEligble ? 'block' : 'none' }}>
         <div className='if-home-delivery'>

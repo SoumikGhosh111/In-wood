@@ -10,7 +10,7 @@ import Slider from 'react-slick';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { addToSpecialCart, deleteFromSpecialCart, checkQty, setQuantities } from '../../redux/slices/specialOffersSlice';
+import { addSpecialObject, deleteSpecialObject } from '../../redux/slices/specialOffersSlice';
 
 function ComboOffer2() {
   const [baseData, setBaseData] = useState(null);
@@ -22,7 +22,9 @@ function ComboOffer2() {
   const [selectedAddedItems, setSelectedAddedItems] = useState([]); 
   const [selectedAddedItems2, setSelectedAddedItems2] = useState([]); 
   const dispatch = useDispatch();
-  const { baseQty, addedQty, base, addedItems } = useSelector(state => state.specialoffer);
+  const obj = useSelector(state => state.specialoffer.specialOrder);
+
+  console.log(obj); 
 
 
 
@@ -63,7 +65,7 @@ function ComboOffer2() {
     fetchAddedData();
     fetchAddedData2(); 
     // handleSetQuantities(); 
-    console.log({ baseQty, addedQty, base, addedItems });
+    
   }, []);
 
   const handleToppingChange = (topping) => {
@@ -93,7 +95,7 @@ function ComboOffer2() {
 
   const handleBase = (item) => {
     const baseObject = {
-      title: item.title,
+      title: item.productType,
       toppings:  []
     };
 
@@ -109,7 +111,7 @@ function ComboOffer2() {
 
   const handleAddedClick = (item) => {
     const addedItems = { 
-      title: item.title
+      title: item.productType
     }
     if(selectedAddedItems.length < 1){ 
       setSelectedAddedItems([...selectedAddedItems, addedItems]); 
@@ -120,7 +122,7 @@ function ComboOffer2() {
 
   const handleAddedClick2 = (item) => {
     const addedItems = { 
-      title: item.title
+      title: item.productType
     }
     if(selectedAddedItems2.length < 1){ 
       setSelectedAddedItems2([...selectedAddedItems2, addedItems]); 
@@ -150,6 +152,33 @@ function ComboOffer2() {
   //   dispatch(setQuantities({ baseQty: 2, addedQty: 1 }));
 
   // }
+
+  const handleOrder = () => { 
+    if (selectedBaseItems.length !== 2) {
+      alert("You must select exactly 2 base items.");
+      return;
+    }
+    if (selectedAddedItems.length !== 1) {
+      alert("You must select exactly 1 item for 5pcs chicken wings.");
+      return;
+    }
+    if (selectedAddedItems.length !== 1) {
+      alert("You must select exactly 1 item for 2Ltr of Soda.");
+      return;
+    }
+    dispatch(deleteSpecialObject());  
+    const specialOrder = {
+      offerName: "Game Day Core", 
+      pizza: selectedBaseItems,
+      addedItems:[`${selectedAddedItems[0].title}(5Pcs)`, selectedAddedItems2[0].title],
+      item: [selectedAddedItems[0].title, selectedAddedItems2[0].title],
+      extraAdded: "",
+      totalAmount: 24.99,
+    };
+
+    alert("Order Created"); 
+    dispatch(addSpecialObject(specialOrder)); 
+  }
   return (
     <div className='combo-offer-2'>
       <div className='static-special-offers-wrapper'>
@@ -162,12 +191,12 @@ function ComboOffer2() {
                 <div className='special-offers-carousel-inner'>
                   <img src={item.img} alt={item.title} />
                   <div>
-                    <p>{item.title}</p>
+                    <p>{item.productType}</p>
                     <span style={{ fontSize: '10px' }}>{item.desc}</span>
                    
                     
                     <button className='add-to-cart-special-offer' onClick={() => handleBase(item)}>
-                      Add To Cart
+                      Select
                     </button>
                   </div>
                 </div>
@@ -184,10 +213,10 @@ function ComboOffer2() {
                 <div className='special-offers-carousel-inner'>
                   <img src={item.img} alt={item.title} />
                   <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
-                    <p>{item.title}</p>
+                    <p>{item.productType}</p>
                     <span style={{ fontSize: '10px' }}>{item.desc}</span>
                     <button className='add-to-cart-special-offer' onClick={() => handleAddedClick(item)}>
-                      Add To Cart
+                      Select
                     </button>
                   </div>
                 </div>
@@ -204,10 +233,10 @@ function ComboOffer2() {
                 <div className='special-offers-carousel-inner'>
                   <img src={item.img} alt={item.title} />
                   <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
-                    <p>{item.title}</p>
+                    <p>{item.productType}</p>
                     <span style={{ fontSize: '10px' }}>{item.desc}</span>
                     <button className='add-to-cart-special-offer' onClick={() => handleAddedClick2(item)}>
-                      Add To Cart
+                      Select
                     </button>
                   </div>
                 </div>
@@ -260,7 +289,7 @@ function ComboOffer2() {
           <div>
             <div className='total-amnt-add-to-cart'><span >Total Amount: </span> <span style={{ fontWeight: '700' }}>$ 24.99</span></div>
 
-            <button className='add-to-cart-button' >PROCEED TO ORDER</button>
+            <button className='add-to-cart-button' onClick={handleOrder}>PROCEED TO ORDER</button>
           </div>
         </div>
 

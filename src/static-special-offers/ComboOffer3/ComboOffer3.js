@@ -10,7 +10,7 @@ import Slider from 'react-slick';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { addToSpecialCart, deleteFromSpecialCart, checkQty, setQuantities } from '../../redux/slices/specialOffersSlice';
+import { addSpecialObject, deleteSpecialObject } from '../../redux/slices/specialOffersSlice';
 
 function ComboOffer3() {
   const [baseData, setBaseData] = useState(null);
@@ -19,8 +19,7 @@ function ComboOffer3() {
   const [selectedBaseItems, setSelectedBaseItems] = useState([]);
   const [selectedAddedItems, setSelectedAddedItems] = useState([]); 
   const dispatch = useDispatch();
-  const { baseQty, addedQty, base, addedItems } = useSelector(state => state.specialoffer);
-
+  const obj = useSelector(state => state.specialoffer.specialOrder);
 
 
   const fetchBaseData = async () => {
@@ -49,7 +48,6 @@ function ComboOffer3() {
     fetchBaseData();
     fetchAddedData();
     // handleSetQuantities(); 
-    console.log({ baseQty, addedQty, base, addedItems });
   }, []);
 
   const handleToppingChange = (topping) => {
@@ -79,7 +77,7 @@ function ComboOffer3() {
 
   const handleBase = (item) => {
     const baseObject = {
-      title: item.title,
+      title: item.productType,
       toppings: selectedToppings,
     };
 
@@ -95,7 +93,7 @@ function ComboOffer3() {
 
   const handleAddedClick = (item) => {
     const addedItems = { 
-      title: item.title
+      title: item.productType
     }
     if(selectedAddedItems.length < 1){ 
       setSelectedAddedItems([...selectedAddedItems, addedItems]); 
@@ -120,6 +118,7 @@ function ComboOffer3() {
 
   // }
   const handleOrder = () => {
+
     if (selectedBaseItems.length !== 2) {
       alert("You must select exactly 2 base items.");
       return;
@@ -128,19 +127,22 @@ function ComboOffer3() {
       alert("You must select exactly 1 item for 5pcs chicken wings.");
       return;
     }
-    const order = {
-      baseItems: selectedBaseItems,
-      addedItems:`5pcs of ${selectedAddedItems[0].title}`,
-      item: selectedAddedItems[0].title,
-      zepolis:"9pcs of zepolis",
+    dispatch(deleteSpecialObject()); 
+    const specialOrder = {
+      offerName: "Game Day Plus", 
+      pizza: selectedBaseItems,
+      addedItems:[`${selectedAddedItems[0].title}(5Pcs)`],
+      item: [selectedAddedItems[0].title],
+      extraAdded: "Zepolis(9pcs)",
       totalAmount: 27.99,
     };
-
-    console.log("Order placed:", order);
+    dispatch(addSpecialObject(specialOrder)); 
+    console.log("Order placed:", specialOrder);
     // Here you can dispatch an action to add the order to the cart or perform any other action
     // dispatch(addToSpecialCart(order));
     alert("Order placed successfully!");
-  }
+    localStorage.setItem('specialOrder', JSON.stringify(specialOrder));
+  } 
   
   return (
     <div className='combo-offer-2'>
@@ -154,7 +156,7 @@ function ComboOffer3() {
                 <div className='special-offers-carousel-inner'>
                   <img src={item.img} alt={item.title} />
                   <div>
-                    <p>{item.title}</p>
+                    <p>{item.productType}</p>
                     <span style={{ fontSize: '10px' }}>{item.desc}</span>
                     <h3>Select 2 Toppings of Your Choice</h3>
                     {["Topping 1", "Topping 2", "Topping 3", "Topping 4", "Topping 5", "Topping 6"].map(topping => (
@@ -170,7 +172,7 @@ function ComboOffer3() {
                       </div>
                     ))}
                     <button className='add-to-cart-special-offer' onClick={() => handleBase(item)}>
-                      Add To Cart
+                      Select
                     </button>
                   </div>
                 </div>
@@ -187,10 +189,10 @@ function ComboOffer3() {
                 <div className='special-offers-carousel-inner'>
                   <img src={item.img} alt={item.title} />
                   <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
-                    <p>{item.title}</p>
+                    <p>{item.productType}</p>
                     <span style={{ fontSize: '10px' }}>{item.desc}</span>
                     <button className='add-to-cart-special-offer' onClick={() => handleAddedClick(item)}>
-                      Add To Cart
+                      Select
                     </button>
                   </div>
                 </div>
@@ -207,7 +209,7 @@ function ComboOffer3() {
               <p>9 pcs of Zepolis</p>
               <span style={{ fontSize: '10px' }}>The classic pepperoni pizza is typically prepared with mozzarella cheese, tomato sauce, and a generous layer of pepperoni slices ...See more</span>
               <button className='add-to-cart-special-offer disabled'>
-                Add To Cart
+                Select
               </button>
             </div>
           </div>

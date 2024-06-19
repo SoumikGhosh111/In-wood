@@ -12,6 +12,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function CheckoutPageRightSide() {
+  const temp = JSON.parse(localStorage.getItem('specialOrder'));
+  const [specialOffer, setSpecialOffer] = useState(null);  
   const [tax, setTax] = useState(0);
   const [active, setActive] = useState(0);
   const [tipPercent, setTipPercent] = useState(0);
@@ -20,18 +22,37 @@ function CheckoutPageRightSide() {
   const [popUp, setPopUp] = useState(false);
   const cartItems = useSelector((state) => state.cart.cart);
   const userData = useSelector((state) => state.userdata);
+  const specialOffersObj = useSelector(state => state.specialoffer.specialOrder); 
   const [selectedOption, setSelectedOption] = useState(0);
   const [deliveryCharges, setDeliveryCharges] = useState(0); 
   const [support, setSupport] = useState(0); 
   const [dscnt, setDscnt] = useState(0); // this will be used for discount purposes in the future
   // const [deliveryCharges, setDeliveryCharges] = useState(0);
   // const [openClose, setOpenClose] = useState(null);
+
+  const[specialOffersAmnt, setSpecialOffersAmnt] = useState(0); 
   console.log(userData);
-  const totalAmnt = cartItems.reduce((total, item) =>
+  const tempAmnt = cartItems.reduce((total, item) =>
     total + item.qty * item.price,
     0
-  )
+  ); 
+  console.log(specialOffersObj)
+  useEffect(() => { 
+    if(specialOffersObj.hasOwnProperty('totalAmount')){ 
+      setSpecialOffersAmnt(specialOffersObj.totalAmount); 
+    }
+  },[specialOffersObj]); 
 
+  const totalAmnt = tempAmnt + specialOffersAmnt; 
+
+
+  console.log("this is offerPrice", specialOffersAmnt); 
+
+  useEffect(() => {
+    setSpecialOffer(JSON.parse(localStorage.getItem('specialOrder'))); 
+  },[localStorage.getItem('specialOrder')])
+  console.log(localStorage.getItem('specialOrder')); 
+ 
   // const handleOptionSelect = (event) => {
   //   setSelectedOption(event.target.value);
   // };
@@ -42,7 +63,7 @@ function CheckoutPageRightSide() {
     // let discount = ((totalAmnt * selectedOption) / 100).toFixed(2);
     // setDscnt(discount);
     // let temp = totalAmnt === 0 ? 0 : totalAmnt - discount;
-    const EstimatedTax = ((totalAmnt * 8.75) / 100).toFixed(2);
+    const EstimatedTax = (((totalAmnt) * 8.75) / 100).toFixed(2);
     setTax(EstimatedTax);
     setDeliveryCharges(totalAmnt > 0 ? charges : 0);
     // if (totalAmnt === 0) {
@@ -80,10 +101,7 @@ function CheckoutPageRightSide() {
 
 
 
-  const confirmOrder = () => {
-
-  }
-
+ 
   const handlePlaceOrderClick = () => {
     if (cartItems.length === 0) {
       // alert("No items in the cart");
@@ -105,7 +123,10 @@ function CheckoutPageRightSide() {
         price: item.price,
         qty: item.qty,
       }));
+
+      const comboData = specialOffersObj; 
       const data = {
+        comboData,
         cartItems,
         cartData,
         tempPriceData,
@@ -121,23 +142,23 @@ function CheckoutPageRightSide() {
       console.log(data)
       const id = userData.userId;
 
-      axios
-        .post(`${baseUrl}/api/stripe/create-checkout-session`, {
-          data: data,
-          userId: id,
-        })
-        .then((response) => {
-          if (response.data.url) {
-            toast.success("redirecting to Payment page");
-            setTimeout(() => {
-              window.location.href = response.data.url;
-            }, 2000)
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          toast.error(err.message);
-        })
+      // axios
+      //   .post(`${baseUrl}/api/stripe/create-checkout-session`, {
+      //     data: data,
+      //     userId: id,
+      //   })
+      //   .then((response) => {
+      //     if (response.data.url) {
+      //       toast.success("redirecting to Payment page");
+      //       setTimeout(() => {
+      //         window.location.href = response.data.url;
+      //       }, 2000)
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //     toast.error(err.message);
+      //   })
     }
   }
 
@@ -159,6 +180,10 @@ function CheckoutPageRightSide() {
     }
 
   }
+
+
+
+  
 
 
 
