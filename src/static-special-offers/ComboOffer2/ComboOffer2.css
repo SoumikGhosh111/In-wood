@@ -78,3 +78,7 @@
   align-items: center;
   flex-direction: column;
 }
+
+.special-offer-cart-button{ 
+  width: 100%;
+}

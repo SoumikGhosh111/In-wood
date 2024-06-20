@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { baseUrl } from '../../functions/baseUrl';
 import "./ComboOffer4.css";
 import pizzaImg from "../../assets/banner-1.jpg";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -13,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {addSpecialObject, deleteSpecialObject} from '../../redux/slices/specialOffersSlice';
 
 function ComboOffer4() {
+  const Navigate = useNavigate(); 
   const [baseData, setBaseData] = useState(null);
   const [addedData, setAddeddata] = useState(null);
   const [selectedToppings, setSelectedToppings] = useState([]);
@@ -135,24 +138,26 @@ function ComboOffer4() {
       pizza: selectedBaseItems,
       addedItems:[`${selectedAddedItems[0].title}(10Pcs)`],
       item: [selectedAddedItems[0].title],
-      zepolis:"Zepolis(6pcs)",
-      canolis:"Canolis(6Pcs)",
+      extraAdded: "Zepolis(6pcs) Canolis(6Pcs)",
       totalAmount: 39.99,
     };
 
-    dispatch(addSpecialObject); 
+    dispatch(addSpecialObject(specialOrder)); 
 
-    console.log("Order placed:", specialOrder);
+    // console.log("Order placed:", specialOrder);
     // Here you can dispatch an action to add the order to the cart or perform any other action
-    // dispatch(addToSpecialCart(order));
+    // dispatch(addToSpecialObject(order));
     alert("Order placed successfully!");
-    localStorage.setItem('specialOrder', JSON.stringify(specialOrder)); 
+
+    Navigate("/checkout")
+
+    
   }
   return (
     <div className='combo-offer-2'>
       <div className='static-special-offers-wrapper'>
 
-        <h2>Two Medium pies - 2 Toppings of Your Choice</h2>
+        <h2>Two Medium pies - 3 Toppings of Your Choice</h2>
         <div className='combo-offer-2-basses'>
           <Slider {...settings}>
             {baseData !== null && baseData.map((item) => (
@@ -251,7 +256,7 @@ function ComboOffer4() {
                       </div>
                     ))}
                     </div>
-                    <button onClick={() => handleBasedelete(indx)}>Delete</button>
+                    <button onClick={() => handleBasedelete(indx)} style={{border: 'none', backgroundColor: 'transparent', cursor: 'pointer'}}><DeleteIcon /></button>
                 </div>
               ))}
             </div>
@@ -260,7 +265,7 @@ function ComboOffer4() {
               {selectedAddedItems.length > 0 && selectedAddedItems.map((item, indx) => ( 
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                   {item.title}
-                  <button onClick={() => (handleAddedItemsDelete(indx))}>Delete</button>
+                  <button onClick={() => (handleAddedItemsDelete(indx))} style={{border: 'none', backgroundColor: 'transparent', cursor: 'pointer'}}> <DeleteIcon /></button>
                 </div>
               ))}
             </div>
@@ -273,10 +278,10 @@ function ComboOffer4() {
               Canolis
             </div>
           </div>
-          <div>
+          <div className='special-offer-cart-button'>
             <div className='total-amnt-add-to-cart'><span >Total Amount: </span> <span style={{ fontWeight: '700' }}>$ 39.99</span></div>
 
-            <button className='add-to-cart-button' onClick={handleOrder}>PROCEED TO ORDER</button>
+            <button className='add-to-cart-button' style={{backgroundColor: 'black', color: 'white'}} onClick={handleOrder}>PROCEED TO ORDER</button>
           </div>
         </div>
 

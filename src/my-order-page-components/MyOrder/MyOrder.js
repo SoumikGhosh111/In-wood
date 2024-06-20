@@ -5,6 +5,9 @@ import emptyOrder from "../../assets/duck.jpg";
 import "./MyOrder.css"
 import staticImg from "../../assets/pizza_1.png";
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
+import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 import logo from "../../assets/maskot_logo_inwood.png";
 import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
 import { formatReadableDate } from '../../functions/readbleTimeFormat';
@@ -14,6 +17,7 @@ function MyOrder() {
     // const [userId, setUserId] = useState(null);
     const [orderDetails, setOrderDetails] = useState(null);
     const useremail = localStorage.getItem("userEmail");
+    const [openDropDown, setOpenDropDown] = useState(false);
 
     const getUserDetails = async () => {
         try {
@@ -45,9 +49,9 @@ function MyOrder() {
                 headers: {
                     Accept: 'application/pdf', // Set Accept header to specify PDF response
                 },
-            }); 
+            });
             const blob = await response.blob();
-            console.log(blob); 
+            console.log(blob);
 
             // Create a blob URL for the response data
             const url = window.URL.createObjectURL(blob);
@@ -81,20 +85,24 @@ function MyOrder() {
     const handleRefresh = () => {
         window.location.reload();
     }
-    const statusColor = (status) => { 
+    const statusColor = (status) => {
         console.log(status)
-        switch(status) { 
-            case "deliverd" : 
-                return "#71b422"; 
-            case"Shipped" : 
-                return "#71b422"; 
-            case "cancel" : 
-                return "#e92028"; 
-            default: 
+        switch (status) {
+            case "deliverd":
+                return "#71b422";
+            case "Shipped":
+                return "#71b422";
+            case "cancel":
+                return "#e92028";
+            default:
                 return "#f7b500";
 
         }
     }
+
+    const toggleDropDown = () => {
+        setOpenDropDown(!openDropDown);
+      }
     return (
         <div className='my-order-wrapper' >
             {/* <img src={background} className='bgPizza' style={{zIndex: '-10'}}/> */}
@@ -110,7 +118,7 @@ function MyOrder() {
                                     {orderDetails.map((item, indx) => (
                                         <div className='order-container'>
                                             <div className='sl-no'>
-                                                Order No. &nbsp; {orderDetails.length - indx} 
+                                                Order No. &nbsp; {orderDetails.length - indx}
                                             </div>
                                             <div className='sl-no'>
                                                 Date. &nbsp; {formatReadableDate(item.createdAt)}
@@ -150,8 +158,44 @@ function MyOrder() {
                                                             {/* <div className='ver-line-my-order'></div> */}
                                                         </>
                                                     ))}
+                                                    {item.combo &&
+                                                        <div>
+                                                            {item.combo?.map((combos, comboIndx) => (
+                                                                <div style={{ paddingLeft: '1rem' }}>
+                                                                    <div className='drop-down-container-wrapper'>
+
+                                                                        <div className='drop-down-container'>
+                                                                            <div className='drop-down-offer-name'>
+                                                                                <div>Special Offer {combos.offerName}</div>
+                                                                            </div>
+
+                                                                            <button onClick={toggleDropDown} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
+                                                                                {openDropDown ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />}
+                                                                            </button>
+                                                                        </div>
+
+                                                                        <div className={`dropdown-info ${openDropDown ? 'open-dropdown' : 'close-dropdown'}`}>
+
+                                                                            {combos?.pizzas?.map((item) => (
+                                                                                <div>
+                                                                                    <div>{item.title}</div>
+                                                                                    <div>{item.toppings}</div>
+                                                                                </div>
+                                                                            ))}
+                                                                            <div>{combos.addedItems}</div>
+
+                                                                            {combos?.extraAdded &&
+                                                                                <div>{combos.extraAdded}</div>
+                                                                            }
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    }
                                                     <div className='delivery_status'>
-                                                        <div className='status-myorder' style={{backgroundColor: statusColor(item.delivery_status), color: 'white'}}>
+                                                        <div className='status-myorder' style={{ backgroundColor: statusColor(item.delivery_status), color: 'white' }}>
                                                             {item.delivery_status}
                                                         </div>
                                                         <div className='total-ammnt-my-order'>
@@ -164,7 +208,7 @@ function MyOrder() {
 
                                                     </div> */}
                                                 </div>
-                                               
+
 
                                             </div>
 

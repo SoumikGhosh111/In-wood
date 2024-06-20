@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { baseUrl } from '../../functions/baseUrl';
 import "./ComboOffer3.css";
 import pizzaImg from "../../assets/banner-1.jpg";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
@@ -11,6 +12,7 @@ import Slider from 'react-slick';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { addSpecialObject, deleteSpecialObject } from '../../redux/slices/specialOffersSlice';
+import { useNavigate } from 'react-router-dom';
 
 function ComboOffer3() {
   const [baseData, setBaseData] = useState(null);
@@ -20,6 +22,7 @@ function ComboOffer3() {
   const [selectedAddedItems, setSelectedAddedItems] = useState([]); 
   const dispatch = useDispatch();
   const obj = useSelector(state => state.specialoffer.specialOrder);
+  const Navigate = useNavigate(); 
 
 
   const fetchBaseData = async () => {
@@ -141,7 +144,7 @@ function ComboOffer3() {
     // Here you can dispatch an action to add the order to the cart or perform any other action
     // dispatch(addToSpecialCart(order));
     alert("Order placed successfully!");
-    localStorage.setItem('specialOrder', JSON.stringify(specialOrder));
+    Navigate("/checkout"); 
   } 
   
   return (
@@ -233,7 +236,7 @@ function ComboOffer3() {
                       </div>
                     ))}
                     </div>
-                    <button onClick={() => handleBasedelete(indx)}>Delete</button>
+                    <button onClick={() => handleBasedelete(indx)} style={{border: 'none', backgroundColor: 'transparent', cursor: 'pointer'}}><DeleteIcon /></button>
                 </div>
               ))}
             </div>
@@ -242,7 +245,7 @@ function ComboOffer3() {
               {selectedAddedItems.length > 0 && selectedAddedItems.map((item, indx) => ( 
                 <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                   {item.title}
-                  <button onClick={() => (handleAddedItemsDelete(indx))}>Delete</button>
+                  <button onClick={() => (handleAddedItemsDelete(indx))} style={{border: 'none', backgroundColor: 'transparent', cursor: 'pointer'}}><DeleteIcon /></button>
                 </div>
               ))}
             </div>
@@ -251,10 +254,10 @@ function ComboOffer3() {
               Zepolis
             </div>
           </div>
-          <div>
+          <div className='special-offer-cart-button'>
             <div className='total-amnt-add-to-cart'><span >Total Amount: </span> <span style={{ fontWeight: '700' }}>$ 27.99</span></div>
 
-            <button className='add-to-cart-button' onClick={handleOrder}>PROCEED TO ORDER</button>
+            <button className='add-to-cart-button' style={{backgroundColor: 'black', color: 'white'}} onClick={handleOrder}>PROCEED TO ORDER</button>
           </div>
         </div>
 

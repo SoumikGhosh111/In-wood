@@ -4,12 +4,17 @@ import HomeIcon from '@mui/icons-material/Home';
 import EmojiPeopleRoundedIcon from '@mui/icons-material/EmojiPeopleRounded';
 import BasicSwitches from '../../components/Switch/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
+import ExpandLessRoundedIcon from '@mui/icons-material/ExpandLessRounded';
 import { baseUrl } from '../../functions/baseUrl';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
+
+
 import { removeFromCart, incrementQty, decrementQty } from '../../redux/slices/cartSlice';
 import { setUserData } from '../../redux/slices/userDataSlice';
+import { addSpecialObject, deleteSpecialObject } from '../../redux/slices/specialOffersSlice';
 
 
 // toast
@@ -17,10 +22,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
+
 function CheckoutPageLeftSide({ onEdtBtnClick }) {
   const [specialOffer, setSpecialOffer] = useState(null);
   const cartItems = useSelector((state) => state.cart.cart);
   const userDetails = useSelector((state) => state.userdata);
+  const specialOffersObj = useSelector(state => state.specialoffer.specialOrder);
   const dispatch = useDispatch();
   // const [userName, setUserName] = useState('');
   const [userId, setUserId] = useState('');
@@ -33,8 +40,10 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
   const [email, setEmail] = useState(localStorage.getItem("userEmail") || '')
   const useremail = localStorage.getItem("userEmail");
 
-  const specialOffersObjs = useSelector(state => state.specialoffer.specialOrder); 
-  console.log(specialOffersObjs); 
+  const [openDropDown, setOpenDropDown] = useState(false);
+
+  const specialOffersObjs = useSelector(state => state.specialoffer.specialOrder);
+  console.log(specialOffersObjs);
 
   const handleBackEvent = () => {
     window.location.href = '/';
@@ -128,6 +137,13 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
     setSpecialOffer(null);
   }
 
+  const handleDeleteOfffer = () => {
+    dispatch(deleteSpecialObject())
+  }
+
+  const toggleDropDown = () => {
+    setOpenDropDown(!openDropDown);
+  }
 
   return (
     <div className='check-out-left-side'>
@@ -206,12 +222,44 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
 
         </div>
       </div>
-      {specialOffer && specialOffer.offerName && specialOffer.totalAmount && (
-        <div className='special-offers-order'>
-          specialOffer = {specialOffer.offerName}, price = {specialOffer.totalAmount}
-          <button onClick={handleLocalStorageDelete}>Delete</button>
+      {Object.keys(specialOffersObj).length > 0 &&
+
+        <div className='drop-down-container-wrapper'>
+
+          <div className='drop-down-container'>
+            <div className='drop-down-offer-name'>
+              <div>Special Offer {specialOffersObj.offerName}</div> <div>Price: {specialOffersObj.totalAmount}</div> <button onClick={handleDeleteOfffer} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} ><DeleteIcon /></button>
+            </div>
+
+            <button onClick={toggleDropDown} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
+              {openDropDown ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />}
+            </button>
+          </div>
+
+          <div className={`dropdown-info ${openDropDown ? 'open-dropdown' : 'close-dropdown'}`}>
+
+            {specialOffersObjs?.pizza.map((item) => ( 
+              <div>
+                <div>{item.title}</div>
+                {item.toppings?.map((topping) => ( 
+                  <div>{topping}</div>
+                ))}
+              </div>
+            ))}
+            {specialOffersObjs?.addedItems?.map((item) => ( 
+              <div>
+                {item}
+              </div>
+            ))}
+
+          {specialOffersObjs?.extraAdded && 
+              <div>{specialOffersObjs.extraAdded}</div>
+          }
+
+          </div>
         </div>
-      )}
+      }
+
 
 
       <div className='vertical-line'></div>

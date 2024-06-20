@@ -104,6 +104,7 @@ function Orders() {
                       </td>
                       <td>
                         <div className='order-details'>
+                        {item.products && <div style={{marginBottom: '1rem'}}>Regular Orders/:-</div>}
                           <table className='order-details-table'>
                             <thead>
                               <tr>
@@ -134,6 +135,61 @@ function Orders() {
                               ))}
                             </tbody>
                           </table>
+                          <br /><br />
+                          {item.combo && <div style={{marginBottom: '1rem'}}>Special Offers/:-</div>}
+                          {item.combo &&
+                            <table className='order-details-table'>
+                              <thead>
+                                <tr>
+                                  <th>Offer Name</th>
+                                  <th>Added Items</th>
+                                  <th>Extra Added</th>
+                                  <th>Main Course</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {item.combo && item.combo.map((combos, comboIDX) => (
+                                  <tr>
+                                    <td>
+                                      {combos.offerName}
+                                    </td>
+
+                                    <td>
+                                      {combos.addedItems}
+                                    </td>
+                                    <td>
+                                      {combos.extraAdded}
+                                    </td>
+                                    <td>
+                                      {combos.pizzas &&
+                                        <table>
+                                          <thead>
+                                            <tr>
+                                              <th>Pizza</th>
+                                              <th>Toppings</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            {combos.pizzas?.map((comboPizza, comboPizzaIndx) => (
+                                              <tr key={comboPizzaIndx}>
+                                                <td>
+                                                  {comboPizza.title}
+                                                </td>
+                                                <td>
+                                                  {comboPizza.toppings}
+                                                </td>
+                                              </tr>
+                                            ))}
+                                          </tbody>
+                                        </table>
+                                      }
+                                    </td>
+
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          }
 
                         </div>
                       </td>
@@ -158,7 +214,7 @@ function Orders() {
                       <td>
                         <div className='order-payment-stts'>
                           <span><span className='customer-details-title'>Payment:</span> {item.payment_status}</span>
-                          <span><span className='customer-details-title'>Total Amount:</span> ${item.total}</span><br/>
+                          <span><span className='customer-details-title'>Total Amount:</span> ${item.total}</span><br />
                           <span><span className='customer-details-title'>Delivery Status</span></span>
                           <select
                             bordered={false}

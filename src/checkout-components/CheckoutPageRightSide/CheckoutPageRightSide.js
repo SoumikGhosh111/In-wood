@@ -27,6 +27,7 @@ function CheckoutPageRightSide() {
   const [deliveryCharges, setDeliveryCharges] = useState(0); 
   const [support, setSupport] = useState(0); 
   const [dscnt, setDscnt] = useState(0); // this will be used for discount purposes in the future
+   
   // const [deliveryCharges, setDeliveryCharges] = useState(0);
   // const [openClose, setOpenClose] = useState(null);
 
@@ -40,6 +41,8 @@ function CheckoutPageRightSide() {
   useEffect(() => { 
     if(specialOffersObj.hasOwnProperty('totalAmount')){ 
       setSpecialOffersAmnt(specialOffersObj.totalAmount); 
+    }else{ 
+      setSpecialOffersAmnt(0); 
     }
   },[specialOffersObj]); 
 
@@ -102,15 +105,78 @@ function CheckoutPageRightSide() {
 
 
  
+  // const handlePlaceOrderClick = () => {
+  //   console.log("I am Clicked, this is special offer")
+  //   if (cartItems.length === 0 && Object.keys(specialOffersObj).length === 0) {
+  //     // alert("No items in the cart");
+  //     toast.error("No items in the cart");
+  //   }
+  //   else if (userData.userId === null && userData.zipCode === null) {
+  //     // alert("Save the address data");
+  //     toast.error("Save the address data");
+  //   } else if (cartItems.length > 0  && userData.userId !== null && userData.zipCode !== null) {
+  //     const cartData = cartItems.map(item => ({
+  //       name: item.name,
+  //       qty: item.qty,
+  //       img: item.img,
+  //       // id: item.id,
+  //       toppings: item.toppings ? item.toppings.map(topping => ({ text: topping.text })) : []
+  //     }));
+
+  //     const tempPriceData = cartItems.map(item => ({
+  //       price: item.price,
+  //       qty: item.qty,
+  //     }));
+
+  //     const comboData = specialOffersObj; 
+  //     const data = {
+  //       comboData,
+  //       cartItems,
+  //       cartData,
+  //       tempPriceData,
+  //       userData,
+  //       amount: {
+  //         subTotal: totalAmnt,
+  //         estimatedTax: tax,
+  //         supportLocalfee: SupportFee,
+  //         total: (parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(support) + parseFloat(deliveryCharges))
+  //       },
+  //       // toppings: cartItems.map((item) => item.toppings ?  item.toppings.map((topping) => topping.text) : null) 
+  //     }
+  //     console.log(data)
+  //     const id = userData.userId;
+
+  //     axios
+  //       .post(`${baseUrl}/api/stripe/create-checkout-session`, {
+  //         data: data,
+  //         userId: id,
+  //       })
+  //       .then((response) => {
+  //         if (response.data.url) {
+  //           toast.success("redirecting to Payment page");
+  //           setTimeout(() => {
+  //             window.location.href = response.data.url;
+  //           }, 2000)
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //         toast.error(err.message);
+  //       })
+  //   }
+  // }
+
+
   const handlePlaceOrderClick = () => {
-    if (cartItems.length === 0) {
+    console.log(Object.keys(specialOffersObj).length); 
+    if (cartItems.length === 0 && Object.keys(specialOffersObj).length === 0) {
       // alert("No items in the cart");
       toast.error("No items in the cart");
     }
     else if (userData.userId === null && userData.zipCode === null) {
       // alert("Save the address data");
       toast.error("Save the address data");
-    } else if (cartItems.length > 0 && userData.userId !== null && userData.zipCode !== null) {
+    } else if ((cartItems.length > 0 || Object.keys(specialOffersObj).length > 0) && userData.userId !== null && userData.zipCode !== null) {
       const cartData = cartItems.map(item => ({
         name: item.name,
         qty: item.qty,
@@ -142,23 +208,23 @@ function CheckoutPageRightSide() {
       console.log(data)
       const id = userData.userId;
 
-      // axios
-      //   .post(`${baseUrl}/api/stripe/create-checkout-session`, {
-      //     data: data,
-      //     userId: id,
-      //   })
-      //   .then((response) => {
-      //     if (response.data.url) {
-      //       toast.success("redirecting to Payment page");
-      //       setTimeout(() => {
-      //         window.location.href = response.data.url;
-      //       }, 2000)
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //     toast.error(err.message);
-      //   })
+      axios
+        .post(`${baseUrl}/api/stripe/create-checkout-session`, {
+          data: data,
+          userId: id,
+        })
+        .then((response) => {
+          if (response.data.url) {
+            toast.success("redirecting to Payment page");
+            setTimeout(() => {
+              window.location.href = response.data.url;
+            }, 2000)
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error(err.message);
+        })
     }
   }
 
@@ -180,17 +246,6 @@ function CheckoutPageRightSide() {
     }
 
   }
-
-
-
-  
-
-
-
-
-
-
-
   return (
     <div className='check-out-right-side'>
       <div style={{ display: popUp ? 'none' : 'block' }}>
