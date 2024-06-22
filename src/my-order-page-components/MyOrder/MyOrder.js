@@ -14,29 +14,25 @@ import { formatReadableDate } from '../../functions/readbleTimeFormat';
 import { baseUrl } from '../../functions/baseUrl';
 
 function MyOrder() {
-    // const [userId, setUserId] = useState(null);
     const [orderDetails, setOrderDetails] = useState(null);
     const useremail = localStorage.getItem("userEmail");
-    const [openDropDown, setOpenDropDown] = useState(false);
+    const [openDropDowns, setOpenDropDowns] = useState({});
 
     const getUserDetails = async () => {
         try {
             const response = await fetch(`${baseUrl}/api/users/userDetails/${useremail}`);
             const result = await response.json();
-            console.log(result, "this is result");
-            // setUserId(result.data.user._id);
             getOrderDetails(result.data.user._id);
         } catch (err) {
             console.log(err);
         }
     };
 
-    const getOrderDetails = async (userId) => { // Accept userId as a parameter
+    const getOrderDetails = async (userId) => {
         try {
             const response = await fetch(`${baseUrl}/api/users/orderDetails/${userId}`);
             const result = await response.json();
             setOrderDetails(result);
-            console.log(result, "this is result lll");
         } catch (err) {
             console.log(err);
         }
@@ -45,25 +41,18 @@ function MyOrder() {
     const handleDownload = async (orderId) => {
         try {
             const response = await fetch(`${baseUrl}/api/invoice/pdf/${orderId}`, {
-                method: 'GET', // Ensure method is explicitly set to GET
+                method: 'GET',
                 headers: {
-                    Accept: 'application/pdf', // Set Accept header to specify PDF response
+                    Accept: 'application/pdf',
                 },
             });
             const blob = await response.blob();
-            console.log(blob);
-
-            // Create a blob URL for the response data
             const url = window.URL.createObjectURL(blob);
-
-            // Create a temporary anchor element to initiate download
             const link = document.createElement('a');
             link.href = url;
             link.setAttribute('download', 'invoice.pdf');
             document.body.appendChild(link);
             link.click();
-
-            // Cleanup
             document.body.removeChild(link);
             window.URL.revokeObjectURL(url);
         } catch (error) {
@@ -74,49 +63,49 @@ function MyOrder() {
     useEffect(() => {
         getUserDetails();
     }, []);
+
     const handleBackToHome = () => {
-
         window.location.href = '/';
-
-        // Clearing the browser's history
         window.history.replaceState(null, '', '/');
     }
 
     const handleRefresh = () => {
         window.location.reload();
     }
+
     const statusColor = (status) => {
-        console.log(status)
         switch (status) {
             case "deliverd":
-                return "#71b422";
             case "Shipped":
                 return "#71b422";
             case "cancel":
                 return "#e92028";
             default:
                 return "#f7b500";
-
         }
     }
 
-    const toggleDropDown = () => {
-        setOpenDropDown(!openDropDown);
-      }
+    const toggleDropDown = (orderIndex, comboIndex) => {
+        const key = `${orderIndex}-${comboIndex}`;
+        setOpenDropDowns(prevState => ({
+            ...prevState,
+            [key]: !prevState[key]
+        }));
+    }
+
     return (
-        <div className='my-order-wrapper' >
-            {/* <img src={background} className='bgPizza' style={{zIndex: '-10'}}/> */}
+        <div className='my-order-wrapper'>
             <div className='back-to-home-my-order-button-wrapper'>
                 <button className='back-to-home-my-order' onClick={handleBackToHome}><ArrowBackIosRoundedIcon sx={{ transform: "translateY(10%)" }} /></button>
             </div>
             <div className='my-orders-divs'>
                 <div className='my-orders'>
-                    {orderDetails !== null ?
-                        (<>
-                            {orderDetails.length > 0 ?
-                                (<>
+                    {orderDetails !== null ? (
+                        <>
+                            {orderDetails.length > 0 ? (
+                                <>
                                     {orderDetails.map((item, indx) => (
-                                        <div className='order-container'>
+                                        <div className='order-container' key={indx}>
                                             <div className='sl-no'>
                                                 Order No. &nbsp; {orderDetails.length - indx}
                                             </div>
@@ -124,76 +113,56 @@ function MyOrder() {
                                                 Date. &nbsp; {formatReadableDate(item.createdAt)}
                                             </div>
                                             <div className='my-order-order'>
-
                                                 <div className='order-items-cont'>
-                                                    {item.products?.map((product) => (
-                                                        <>
-                                                            <div className='order-items-my-order'>
-                                                                <div className='item-img-my-order'>
-                                                                    <img src={product.imageUrl} alt='Item Images' />
-                                                                </div>
-                                                                <div className='product-qty'>
-                                                                    <div className='product-qty-item-div'>
-                                                                        QTY:&nbsp; {product.quantity}
-                                                                    </div>
-                                                                    <div className='product-name-my-order'>
-                                                                        Name:&nbsp; {product.productName}
-                                                                    </div>
-                                                                    <div className='product-name-my-order'>
-                                                                        Toppings: &nbsp; {product.extraTopings}
-                                                                    </div>
-                                                                </div>
-
+                                                    {item.products?.map((product, productIndex) => (
+                                                        <div className='order-items-my-order' key={productIndex}>
+                                                            <div className='item-img-my-order'>
+                                                                <img src={product.imageUrl} alt='Item Images' />
                                                             </div>
-                                                            {/* <div className='product-name-my-order'>
-                                                    Name:&nbsp; {product.productName}
-                                                </div>
-                                                <div className='product-name-my-order'>
-                                                    Toppings: &nbsp; {product.description}
-                                                </div> */}
-                                                            {/* <div className='product-name-topping'>
-                                                        <span className='product-name-topping-items'>{product.productName}</span>
-                                                        Tpooings: &nbsp; <span className='product-name-topping-items'>{product.description}</span>
-                                                    </div> */}
-                                                            {/* <div className='ver-line-my-order'></div> */}
-                                                        </>
+                                                            <div className='product-qty'>
+                                                                <div className='product-qty-item-div'>
+                                                                    QTY:&nbsp; {product.quantity}
+                                                                </div>
+                                                                <div className='product-name-my-order'>
+                                                                    Name:&nbsp; {product.productName}
+                                                                </div>
+                                                                <div className='product-name-my-order'>
+                                                                    Toppings: &nbsp; {product.extraTopings}
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     ))}
-                                                    {item.combo &&
+                                                    {item.combo && (
                                                         <div>
-                                                            {item.combo?.map((combos, comboIndx) => (
-                                                                <div style={{ paddingLeft: '1rem' }}>
-                                                                    <div className='drop-down-container-wrapper'>
-
-                                                                        <div className='drop-down-container'>
-                                                                            <div className='drop-down-offer-name'>
-                                                                                <div>Special Offer {combos.offerName}</div>
-                                                                            </div>
-
-                                                                            <button onClick={toggleDropDown} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
-                                                                                {openDropDown ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />}
-                                                                            </button>
-                                                                        </div>
-
-                                                                        <div className={`dropdown-info ${openDropDown ? 'open-dropdown' : 'close-dropdown'}`}>
-
-                                                                            {combos?.pizzas?.map((item) => (
-                                                                                <div>
-                                                                                    <div>{item.title}</div>
-                                                                                    <div>{item.toppings}</div>
+                                                            {item.combo?.map((combos, comboIndx) => {
+                                                                const key = `${indx}-${comboIndx}`;
+                                                                return (
+                                                                    <div className='combo-offers-wraper' key={comboIndx}>
+                                                                        <div className='drop-down-container-wrapper my-order-dropdown-container-wrapper'>
+                                                                            <div className='drop-down-container'>
+                                                                                <div className='drop-down-offer-name'>
+                                                                                    <div>Special Offer {combos.offerName}</div>
                                                                                 </div>
-                                                                            ))}
-                                                                            <div>{combos.addedItems}</div>
-
-                                                                            {combos?.extraAdded &&
-                                                                                <div>{combos.extraAdded}</div>
-                                                                            }
-
+                                                                                <button onClick={() => toggleDropDown(indx, comboIndx)} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
+                                                                                    {openDropDowns[key] ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />}
+                                                                                </button>
+                                                                            </div>
+                                                                            <div className={`dropdown-info ${openDropDowns[key] ? 'open-dropdown' : 'close-dropdown'} my-order-drop-down-info`}>
+                                                                                {combos?.pizzas?.map((item, pizzaIndx) => (
+                                                                                    <div key={pizzaIndx}>
+                                                                                        <div style={{fontWeight: '700'}}>{item.title}</div>
+                                                                                        <div>{item.toppings}</div>
+                                                                                    </div>
+                                                                                ))}
+                                                                                <div style={{fontWeight: '700'}}>{combos.addedItems}</div>
+                                                                                {combos?.extraAdded && <div style={{fontWeight: '700'}}>{combos.extraAdded}</div>}
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                            ))}
+                                                                );
+                                                            })}
                                                         </div>
-                                                    }
+                                                    )}
                                                     <div className='delivery_status'>
                                                         <div className='status-myorder' style={{ backgroundColor: statusColor(item.delivery_status), color: 'white' }}>
                                                             {item.delivery_status}
@@ -202,40 +171,29 @@ function MyOrder() {
                                                             Total Amount: ${item.total}
                                                         </div>
                                                     </div>
-                                                    {/* <div className='delivery_status'>
-                                                        
-                                                        <button onClick={() => handleDownload(item._id)} className='invoice-button'>Generate Invoice</button>
-
-                                                    </div> */}
                                                 </div>
-
-
                                             </div>
-
                                         </div>
                                     ))}
-                                </>) :
-
-                                (<div className='empty-orders'>
-                                    {/* <img src={emptyOrder} alt='quack' /> */}
-                                    <span>
-                                        No Orders Found
-                                    </span>
-                                </div>)}
-
-                        </>)
-                        :
-                        (<>Loading . . .</>)}
+                                </>
+                            ) : (
+                                <div className='empty-orders'>
+                                    <span>No Orders Found</span>
+                                </div>
+                            )}
+                        </>
+                    ) : (
+                        <>Loading . . .</>
+                    )}
                 </div>
                 <div className='my-order-bg-gif'>
-                    <img src={logo} alt='logo image' />
-                    <span style={{ margin: '1rem 1rem' }}>At Inwood Pizza, we believe in transparency. <br /> Track your order in real-time.</span>
-                    <button className='back-to-home-my-order refresh' onClick={handleRefresh}>Refresh &nbsp;  <RefreshRoundedIcon sx={{ transform: "translateY(0%)" }} /></button>
+                    {/* <img src={logo} alt='logo image' /> */}
+                    <span style={{ margin: '1rem 1rem' }}>At Inwood Pizza, we believe in transparency. <br /> Track your order in real-time.</span>
+                    <button className='back-to-home-my-order refresh' onClick={handleRefresh}>Refresh &nbsp; <RefreshRoundedIcon sx={{ transform: "translateY(0%)" }} /></button>
                 </div>
             </div>
-
         </div>
     )
 }
 
-export default MyOrder
+export default MyOrder;

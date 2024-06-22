@@ -10,7 +10,8 @@ import "./StaticSpecialOffersMenu.css"
 import { baseUrl } from '../../functions/baseUrl';
 
 import { useSelector, useDispatch } from 'react-redux';
-import ComboOffer1 from '../ComboOffer1/ComboOffer1';
+import EveryDaySpecial1 from '../EveryDaySpecial1/EveryDaySpecial1';
+import EveryDaySpecial2 from '../EveryDaySpecial2/EveryDaySpecial2';
 import ComboOffer2 from '../ComboOffer2/ComboOffer2';
 import ComboOffer3 from '../ComboOffer3/ComboOffer3';
 import ComboOffer4 from '../ComboOffer4/ComboOffer4';
@@ -159,33 +160,40 @@ function StaticSpecialOffersMenu() {
     return (
         <div className='menu-section-wrapper special-offres-page' ref={scope}>
             <div className='menu-cart special-menu-cart'>
-                <ul className='special-menu-nav-bar'>
-                    <li className={activeClass === 1 ? 'special-offers-active' : 'special-offer-unactive'} onClick={() => setActiveClass(1)}>Every Day Special</li>
-                    <li className={activeClass === 2 ? 'special-offers-active' : 'special-offer-unactive'} onClick={() => setActiveClass(2)}>Game Day Core</li>
-                    <li className={activeClass === 3 ? 'special-offers-active' : 'special-offer-unactive'} onClick={() => setActiveClass(3)}>Game Day Plus</li>
-                    <li className={activeClass === 4 ? 'special-offers-active' : 'special-offer-unactive'} onClick={() => setActiveClass(4)}>Game Day Ultra</li>
-                </ul>
-
-
-
-                <div style={{ padding: '0rem 1rem' }}>
-                    {activeClass === 1 && <ComboOffer1 />}
+                <div className='special-menu-nav-wrapper' >
+                    <ul className='special-menu-nav-bar'>
+                        <li className={activeClass === 1 ? 'special-offers-active' : 'special-offer-unactive'} onClick={() => setActiveClass(1)}>Every Day Special 1</li>
+                        <li className={activeClass === 6 ? 'special-offers-active' : 'special-offer-unactive'} onClick={() => setActiveClass(6)}>Every Day Special 2</li>
+                        <li className={activeClass === 2 ? 'special-offers-active' : 'special-offer-unactive'} onClick={() => setActiveClass(2)}>Game Day Core</li>
+                        <li className={activeClass === 3 ? 'special-offers-active' : 'special-offer-unactive'} onClick={() => setActiveClass(3)}>Game Day Plus</li>
+                        <li className={activeClass === 4 ? 'special-offers-active' : 'special-offer-unactive'} onClick={() => setActiveClass(4)}>Game Day Ultra</li>
+                    </ul>
                 </div>
 
-                <div style={{ padding: '0rem 1rem' }}>
+
+
+
+                <div style={{ padding: '0rem 0.5rem' }}>
+                    {activeClass === 1 && <EveryDaySpecial1 />}
+                </div>
+                <div style={{ padding: '0rem 0.5rem' }}>
+                    {activeClass === 6 && <EveryDaySpecial2 />}
+                </div>
+
+                <div style={{ padding: '0rem 0.5rem' }}>
                     {activeClass === 2 && <ComboOffer2 />}
                 </div>
 
-                <div style={{ padding: '0rem 1rem' }}>
+                <div style={{ padding: '0rem 0.5rem' }}>
                     {activeClass === 3 && <ComboOffer3 />}
                 </div>
 
-                <div style={{ padding: '0rem 1rem' }}>
+                <div style={{ padding: '0rem 0.5rem' }}>
                     {activeClass === 4 && <ComboOffer4 />}
                 </div>
             </div>
 
-            
+
         </div>
     );
 }

@@ -12,6 +12,14 @@
   align-items: flex-start;
   flex-direction: column;
 } */
+.slick-slide {
+  padding: 0 10px; /* Adjust this value to set the gap between slides */
+  box-sizing: border-box; /* Ensure padding is included in the width calculation */
+}
+
+.slick-list {
+  margin: 0 -10px; /* This compensates for the padding on the first and last slides */
+}
 
 .special-offers-carousel-inner{ 
   width: 100%;
@@ -81,4 +89,67 @@
 
 .special-offer-cart-button{ 
   width: 100%;
+}
+
+.special-cart-item-containers{ 
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.special-cart-item-containers-img-info{ 
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.8rem; 
+}
+
+.special-cart-item-containers-info{ 
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  
+  flex-direction: column;
+}
+
+.special-offer-mob-cart{ 
+  position: fixed;
+  bottom:5%;
+  right: 5%; 
+  border: none;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: white;
+  display: none;
+  box-shadow: 0px 10px 12px -3px rgb(139, 139, 139);
+}
+
+.special-cart-item-containers{ 
+  background-color: #f5f4f3;
+  padding: 0.5rem 0.5rem;
+  border-radius: 8px;
+}
+.special-cart-item-containers-img-info img{ 
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 8px !important;
+}
+@media screen and (max-width: 768px){ 
+  
+  .special-offers-cart{
+     display: none !important;
+  }
+  .combo-offer-2-basses{ 
+    width: 90% !important;
+  }
+  .combo-offers-2-added-items{ 
+    width: 90% !important;
+  }
+  .special-offer-mob-cart{ 
+    display: block;
+  }
 }

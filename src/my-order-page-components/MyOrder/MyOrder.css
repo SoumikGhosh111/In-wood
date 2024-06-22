@@ -139,6 +139,8 @@ img{
     flex-direction: column;
     gap: 0.5rem;    
 }
+
+
 .product-name-topping-items{ 
     padding: 0 !important;
     margin: 0 !important;
@@ -219,7 +221,34 @@ img{
     
 }
 
+
+
+
+
+
+.combo-offers-wraper{ 
+    padding:0rem 0.5rem;
+}
+
+.my-order-dropdown-container-wrapper{ 
+    margin-top: 0.5rem;
+}
+
+.my-order-drop-down-info{ 
+    /* margin: 0 ; */
+    padding-bottom: 0 ;
+    padding-top: 0;
+}
+
+
+
 @media screen and (max-width: 993px){ 
+    .my-order-dropdown-container-wrapper{ 
+        margin-top: 0.8rem;
+    }
+    .combo-offers-wraper{ 
+        padding:0rem 1rem;
+    }
     .order-container{ 
         width: 100%;
     }

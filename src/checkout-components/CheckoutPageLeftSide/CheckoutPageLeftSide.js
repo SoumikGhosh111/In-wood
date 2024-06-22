@@ -149,7 +149,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
     <div className='check-out-left-side'>
       <h4>CHECKOUT</h4>
       <h2>INWOOD PIZZA</h2>
-      <button onClick={handleBackEvent} className='back-tio-menu-btn' style={{ display: cartItems?.length > 0 ? 'block' : 'none' }}>Add To Menu</button>
+      <button onClick={handleBackEvent} className='back-tio-menu-btn' style={{ display: cartItems?.length > 0 ? 'block' : 'none' }}>Add To Order</button>
       {/* <ToastContainer /> */}
 
       {/* <div className='check-out-left-side-details'>
@@ -228,7 +228,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
 
           <div className='drop-down-container'>
             <div className='drop-down-offer-name'>
-              <div>Special Offer {specialOffersObj.offerName}</div> <div>Price: {specialOffersObj.totalAmount}</div> <button onClick={handleDeleteOfffer} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} ><DeleteIcon /></button>
+              <div>Special Offer {specialOffersObj.offerName}</div> <div>Price: $ {specialOffersObj.totalAmount}</div> <button onClick={handleDeleteOfffer} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} ><DeleteIcon /></button>
             </div>
 
             <button onClick={toggleDropDown} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
@@ -238,23 +238,23 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
 
           <div className={`dropdown-info ${openDropDown ? 'open-dropdown' : 'close-dropdown'}`}>
 
-            {specialOffersObjs?.pizza.map((item) => ( 
+            {specialOffersObjs?.pizza.map((item) => (
               <div>
-                <div>{item.title}</div>
-                {item.toppings?.map((topping) => ( 
+                <div style={{ fontWeight: '700' }}>{item.title}</div>
+                {item.toppings?.map((topping) => (
                   <div>{topping}</div>
                 ))}
               </div>
             ))}
-            {specialOffersObjs?.addedItems?.map((item) => ( 
-              <div>
+            {specialOffersObjs?.addedItems?.map((item) => (
+              <div style={{ fontWeight: '700' }}>
                 {item}
               </div>
             ))}
 
-          {specialOffersObjs?.extraAdded && 
-              <div>{specialOffersObjs.extraAdded}</div>
-          }
+            {specialOffersObjs?.extraAdded &&
+              <div style={{ fontWeight: '700' }}>{specialOffersObjs.extraAdded}</div>
+            }
 
           </div>
         </div>

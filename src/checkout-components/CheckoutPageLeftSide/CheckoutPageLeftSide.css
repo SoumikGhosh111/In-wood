@@ -147,11 +147,13 @@
 
 
 .drop-down-container{ 
-    border: 1px solid red;
+    /* border: 1px solid red; */
+    background-color: #f6f5f4;
     padding: 1rem 0.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: 10px;
 }
 .drop-down-offer-name{ 
     display: flex;
@@ -176,7 +178,7 @@
     border-radius: 5px;
 }
 .dropdown-info.open-dropdown{ 
-    max-height: 200px;
+    max-height: 250px;
     opacity: 1;
     padding: 20px;
 }
