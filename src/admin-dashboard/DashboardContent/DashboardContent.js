@@ -5,7 +5,7 @@ import Orders from '../Orders/Orders';
 import AddToMenu from '../AddToMenu/AddToMenu';
 import Menu from '../Menu/Menu';
 import AddSpecialOffers from '../AddSpecialOffers/AddSpecialOffers';
-
+import SpecialMenu from '../SpecialMenu/SpecialMenu';
 function DashboardContent({itemToRender}) {
 
   return (
@@ -26,6 +26,10 @@ function DashboardContent({itemToRender}) {
             </div>
             <div>
                 {itemToRender === 5 && <AddSpecialOffers />}
+            </div>
+
+            <div>
+                {itemToRender === 6 && <SpecialMenu />}
             </div>
           </>
 

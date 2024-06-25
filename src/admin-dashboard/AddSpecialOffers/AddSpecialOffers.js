@@ -1,212 +1,298 @@
-import React, { useState } from 'react';
-import './AddSpecialOffers.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+// import './AddToMenu.css';
+import { baseUrl } from '../../functions/baseUrl';
 
-export default function AddSpecialOffers() {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [offerPrice, setOfferPrice] = useState('');
-    const [bases, setBases] = useState([{ base: '', toppings: '', count: '' }]);
-    const [addedItems, setAddedItems] = useState([{ item: '', count: '' }]);
-    const [errors, setErrors] = useState({});
+function AddSpecialOffers() {
+  const [uploadedImageUrl, setUploadedImageUrl] = useState('');
+  const [formData, setFormData] = useState({
+    title: '',
+    desc: '',
+    img: uploadedImageUrl,
+    category: '',
+    productType: '',
+    prices: [],
+    extraOptions: [],
+  });
 
-    const validate = () => {
-        const errors = {};
-        if (!title) errors.title = 'Title is required';
-        if (!description) errors.description = 'Description is required';
-        if (!offerPrice) errors.offerPrice = 'Offer Price is required';
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      img: uploadedImageUrl,
+    });
+  }, [uploadedImageUrl]);
 
-        bases.forEach((base, index) => {
-            if (!base.base) errors[`base${index}`] = 'Base is required';
-            if (!base.toppings || isNaN(base.toppings) || base.toppings <= 0) errors[`toppings${index}`] = 'Number of toppings must be a positive number';
-            if (!base.count || isNaN(base.count) || base.count <= 0) errors[`count${index}`] = 'Count must be a positive number';
-        });
+  const [topping, setTopping] = useState({
+    text: '',
+    price: '',
+  });
 
-        addedItems.forEach((item, index) => {
-            if (!item.item) errors[`addedItem${index}`] = 'Added item is required';
-            if (!item.count || isNaN(item.count) || item.count <= 0) errors[`addedItemCount${index}`] = 'Number of this added item must be a positive number';
-        });
+  const [priceInput, setPriceInput] = useState({
+    size: '',
+    price: '',
+  });
 
-        return errors;
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-    const handleSubmit = (event) => {
-        event.preventDefault(); // Prevent default form submission
+  const handleToppingChange = (e, index) => {
+    const { name, value } = e.target;
+    const updatedToppings = [...formData.extraOptions];
+    updatedToppings[index][name] = value;
+    setFormData({ ...formData, extraOptions: updatedToppings });
+  };
 
-        console.log({ title, description, bases, addedItems, offerPrice });
-        const validationErrors = validate();
-        if (Object.keys(validationErrors).length === 0) {
-            // Add your form submission logic here
-        } else {
-            setErrors(validationErrors);
-        }
-    };
+  const addTopping = () => {
+    if (topping.text.trim() !== '' && topping.price.trim() !== '') {
+      const newTopping = { text: topping.text, price: parseFloat(topping.price) };
+      setFormData({
+        ...formData,
+        extraOptions: [...formData.extraOptions, newTopping],
+      });
+      setTopping({ text: '', price: '' }); // Reset topping input after adding
+    } else {
+      alert('Please enter both topping name and price.');
+    }
+  };
 
-    const handleBaseChange = (index, field, value) => {
-        const newBases = [...bases];
-        newBases[index][field] = value;
-        setBases(newBases);
-    };
+  const removeTopping = (indexToRemove) => {
+    const updatedToppings = formData.extraOptions.filter((_, index) => index !== indexToRemove);
+    setFormData({ ...formData, extraOptions: updatedToppings });
+  };
 
-    const handleAddedItemChange = (index, field, value) => {
-        const newAddedItems = [...addedItems];
-        newAddedItems[index][field] = value;
-        setAddedItems(newAddedItems);
-    };
+  const addPrice = () => {
+    if (priceInput.size.trim() !== '' && priceInput.price.trim() !== '') {
+      const newPrice = { size: priceInput.size, price: parseFloat(priceInput.price) };
+      setFormData({
+        ...formData,
+        prices: [...formData.prices, newPrice],
+      });
+      setPriceInput({ size: '', price: '' }); // Reset price input after adding
+    } else {
+      alert('Please enter both size and price.');
+    }
+  };
 
-    const addBase = () => {
-        setBases([...bases, { base: '', toppings: '', count: '' }]);
-    };
+  const handlePriceChange = (e, index) => {
+    const { name, value } = e.target;
+    const updatedPrices = [...formData.prices];
+    updatedPrices[index][name] = name === 'price' ? parseFloat(value) : value;
+    setFormData({ ...formData, prices: updatedPrices });
+  };
 
-    const removeBase = (index) => {
-        const updatedBases = [...bases];
-        updatedBases.splice(index, 1);
-        setBases(updatedBases);
-    };
+  const removePrice = (indexToRemove) => {
+    const updatedPrices = formData.prices.filter((_, index) => index !== indexToRemove);
+    setFormData({ ...formData, prices: updatedPrices });
+  };
 
-    const addAddedItem = () => {
-        setAddedItems([...addedItems, { item: '', count: '' }]);
-    };
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
 
-    const removeAddedItem = (index) => {
-        const updatedAddedItems = [...addedItems];
-        updatedAddedItems.splice(index, 1);
-        setAddedItems(updatedAddedItems);
-    };
+    try {
+      const { data } = await axios.post(`${baseUrl}/api/image/uploadImage`, formData);
+      setUploadedImageUrl(data.url);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-    return (
-        <form className="special-offer-pizza-form" onSubmit={handleSubmit}>
-            {/* Existing form groups */}
-            <div className="special-offer-form-group">
-                <label htmlFor="title" className="special-offer-form-label">Title:</label>
-                <input
-                    type="text"
-                    id="title"
-                    className="special-offer-form-input"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
-                {errors.title && <p className="special-offer-error-message">{errors.title}</p>}
-            </div>
-            <div className="special-offer-form-group">
-                <label htmlFor="description" className="special-offer-form-label">Description:</label>
-                <textarea
-                    id="description"
-                    className="special-offer-form-textarea"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-                {errors.description && <p className="special-offer-error-message">{errors.description}</p>}
-            </div>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem('token');
+      const email = localStorage.getItem('userEmail');
+      const response = await fetch(`${baseUrl}/api/combo/addCombofood/${email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // Send the JWT token in the Authorization header
+        },
+        body: JSON.stringify(formData),
+      });
+      console.log(formData);
+      const result = await response.json();
+      console.log('Food created:', result);
+      setFormData({
+        title: '',
+        desc: '',
+        img: '',
+        category: '',
+        productType: '',
+        prices: [],
+        extraOptions: [],
+      });
+      setUploadedImageUrl('');
+      setTopping({ text: '', price: '' });
+      alert('Food Successfully Added!');
+    } catch (error) {
+      console.error('Error creating food:', error);
+      alert('Failed to add food. Please try again.');
+    }
+  };
 
-            {bases.map((base, index) => (
-                <div key={index} className="special-offer-base-section">
-                    <div className="special-offer-form-group">
-                        <label htmlFor={`base${index}`} className="special-offer-form-label">Base {index + 1}:</label>
-                        <select
-                            id={`base${index}`}
-                            className="special-offer-form-input"
-                            value={base.base}
-                            onChange={(e) => handleBaseChange(index, 'base', e.target.value)}
-                        >
-                            <option value="">Select a base</option>
-                            <option value="Speciality Pizza">Speciality Pizza</option>
-                            <option value="Pizza By Slice">Pizza By Slice</option>
-                            <option value="Chicken Wings">Chicken Wings</option>
-                            <option value="Deep Fried">Deep Fried</option>
-                            <option value="Breads/Baked Goods">Breads/Baked Goods</option>
-                            <option value="Cookies and Cream">Cookies and Cream</option>
-                            <option value="Milk Shake">Shakes</option>
-                            <option value="Drinks">Drinks</option>
-                        </select>
-                        {errors[`base${index}`] && <p className="special-offer-error-message">{errors[`base${index}`]}</p>}
-                    </div>
+  return (
+    <div className="add-to-menu-wrapper">
+      <h1>Create Special Food Item</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="title">Title:</label><br />
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+          required
+          maxLength="60"
+        /><br /><br />
 
-                    <div className="special-offer-form-group">
-                        <label htmlFor={`toppings${index}`} className="special-offer-form-label">Number of Toppings:</label>
-                        <input
-                            type="number"
-                            id={`toppings${index}`}
-                            className="special-offer-form-input"
-                            value={base.toppings}
-                            onChange={(e) => handleBaseChange(index, 'toppings', e.target.value)}
-                        />
-                        {errors[`toppings${index}`] && <p className="special-offer-error-message">{errors[`toppings${index}`]}</p>}
-                    </div>
+        <label htmlFor="desc">Description:</label><br />
+        <textarea
+          id="desc"
+          name="desc"
+          value={formData.desc}
+          onChange={handleChange}
+          required
+          maxLength="200"
+        ></textarea><br /><br />
 
-                    <div className="special-offer-form-group">
-                        <label htmlFor={`count${index}`} className="special-offer-form-label">Count:</label>
-                        <input
-                            type="number"
-                            id={`count${index}`}
-                            className="special-offer-form-input"
-                            value={base.count}
-                            onChange={(e) => handleBaseChange(index, 'count', e.target.value)}
-                        />
-                        {errors[`count${index}`] && <p className="special-offer-error-message">{errors[`count${index}`]}</p>}
-                    </div>
+        <label htmlFor="img">Image URL:</label><br />
+        <input
+          type="text"
+          id="img"
+          name="img"
+          value={formData.img}
+          onChange={handleChange}
+          disabled
+        /><br /><br />
 
-                    <button type="button" className="special-offer-form-button" onClick={() => removeBase(index)}>Remove Base</button>
-                </div>
-            ))}
+        <label htmlFor="uploadImage">Upload Image:</label><br />
+        <input
+          type="file"
+          id="uploadImage"
+          accept="image/*"
+          onChange={handleImageUpload}
+        /><br /><br />
 
-            <button type="button" className="special-offer-form-button" onClick={addBase}>Add Base</button>
+        <label htmlFor="productType">Product Type:</label><br />
+        <input
+          type="text"
+          id="productType"
+          name="productType"
+          value={formData.productType}
+          onChange={handleChange}
+        /><br /><br />
 
-            {/* Added Items */}
-            {addedItems.map((item, index) => (
-                <div key={index} className="special-offer-added-item-section">
-                    <div className="special-offer-form-group">
-                        <label htmlFor={`addedItem${index}`} className="special-offer-form-label">Added Item {index + 1}:</label>
-                        <select
-                            id={`addedItem${index}`}
-                            className="special-offer-form-input"
-                            value={item.item}
-                            onChange={(e) => handleAddedItemChange(index, 'item', e.target.value)}
-                        >
-                            <option value="">Select an added item</option>
-                            <option value="Speciality Pizza">Speciality Pizza</option>
-                            <option value="Pizza By Slice">Pizza By Slice</option>
-                            <option value="Chicken Wings">Chicken Wings</option>
-                            <option value="Deep Fried">Deep Fried</option>
-                            <option value="Breads/Baked Goods">Breads/Baked Goods</option>
-                            <option value="Cookies and Cream">Cookies and Cream</option>
-                            <option value="Milk Shake">Shakes</option>
-                            <option value="Drinks">Drinks</option>
-                            {/* Other options */}
-                        </select>
-                        {errors[`addedItem${index}`] && <p className="special-offer-error-message">{errors[`addedItem${index}`]}</p>}
-                    </div>
-                    <div className="special-offer-form-group">
-                        <label htmlFor={`addedItemCount${index}`} className="special-offer-form-label">Count:</label>
-                        <input
-                            type="number"
-                            id={`addedItemCount${index}`}
-                            className="special-offer-form-input"
-                            value={item.count}
-                            onChange={(e) => handleAddedItemChange(index, 'count', e.target.value)}
-                        />
-                        {errors[`addedItemCount${index}`] && <p className="special-offer-error-message">{errors[`addedItemCount${index}`]}</p>}
-                    </div>
-                    <button type="button" className="special-offer-form-button" onClick={() => removeAddedItem(index)}>Remove Added Item</button>
-                </div>
-            ))}
+        <label htmlFor="category">Category:</label><br />
+        <select
+          id="category"
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select a Special Category</option>
+          <option value="">Select a Special Category</option>
+          <option value="Small Pie">Small Pie</option>
+          <option value="Medium Pie">Medium Pie</option>
+          <option value="Large Pie">Large Pie</option>
+          <option value="Cheese Pie">Cheese Pie</option>
+          <option value="Medium Cheese Pie">Medium Cheese Pie</option>
+          <option value="Chicken Wings 10Pcs">Chicken Wings 10Pcs</option>
+          <option value="Chicken Wings 5Pcs">Chicken Wings 5Pcs</option>
+          <option value="2 Ltr Soda">2 Ltr Soda</option>
+        </select><br /><br />
 
-            <button type="button" className="special-offer-form-button" onClick={addAddedItem}>Add Added Item</button>
+        <label htmlFor="prices">Prices:</label><br />
+        <input
+          type="text"
+          id="size"
+          name="size"
+          placeholder="Size"
+          value={priceInput.size}
+          onChange={(e) => setPriceInput({ ...priceInput, size: e.target.value })}
+        />
+        <input
+          type="number"
+          id="price"
+          name="price"
+          placeholder="Price"
+          value={priceInput.price}
+          onChange={(e) => setPriceInput({ ...priceInput, price: e.target.value })}
+        />
+        <button type="button" onClick={addPrice}>Add Price</button><br /><br />
+        {formData.prices.map((priceObj, index) => (
+          <div key={index} className='prices-add-to-menu'>
+            <input
+              type="text"
+              name="size"
+              value={priceObj.size}
+              onChange={(e) => handlePriceChange(e, index)}
+            />
+            <input
+              type="number"
+              name="price"
+              value={priceObj.price}
+              onChange={(e) => handlePriceChange(e, index)}
+            />
+            <button
+              type="button"
+              onClick={() => removePrice(index)}
+              className="delete-button"
+            >Delete</button>
+          </div>
+        ))}
 
-            {/* Offer Price */}
-            <div className="special-offer-form-group">
-                <label htmlFor="offerPrice" className="special-offer-form-label">Offer Price</label>
-                <input
-                    type='number'
-                    id="offerPrice"
-                    className="special-offer-form-input"
-                    value={offerPrice}
-                    onChange={(e) => setOfferPrice(e.target.value)}
-                />
-                {errors.offerPrice && <p className="special-offer-error-message">{errors.offerPrice}</p>}
-            </div>
+        <div>
+          <label htmlFor="toppingText">Topping Name:</label>
+          <input
+            type="text"
+            id="toppingText"
+            name="text"
+            value={topping.text}
+            onChange={(e) => setTopping({ ...topping, text: e.target.value })}
+          /><br />
+          <label htmlFor="toppingPrice">Topping Price: </label>
+          <input
+            type="number"
+            id="toppingPrice"
+            name="price"
+            value={topping.price}
+            onChange={(e) => setTopping({ ...topping, price: e.target.value })}
+          /><br />
+          <button type="button" onClick={addTopping}>Add Topping</button><br /><br />
+        </div>
 
-            {/* Submit button */}
-            <button type="submit" className="special-offer-form-button" >Submit</button>
-        </form>
-    );
+        {formData.extraOptions.map((topping, index) => (
+          <div key={index}>
+            <input
+              type="text"
+              name="text"
+              value={topping.text}
+              onChange={(e) => handleToppingChange(e, index)}
+            />
+            <input
+              type="number"
+              name="price"
+              value={topping.price}
+              onChange={(e) => handleToppingChange(e, index)}
+            />
+            <button
+              type="button"
+              onClick={() => removeTopping(index)}
+              className="delete-button"
+            >Delete</button>
+          </div>
+        ))}
+        
+        <br />
+        <button type="submit" className='btn btn-primary'>Create New Food Item</button>
+      </form>
+    </div>
+  );
 }
+
+export default AddSpecialOffers;

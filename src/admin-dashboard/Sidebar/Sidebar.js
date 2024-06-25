@@ -4,6 +4,7 @@ import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 import RestaurantMenuRoundedIcon from '@mui/icons-material/RestaurantMenuRounded';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import GradeIcon from '@mui/icons-material/Grade';
 
 import axios from 'axios';
 import { baseUrl } from '../../functions/baseUrl';
@@ -121,7 +122,12 @@ function Sidebar({ onSideBarItemClicked }) {
                 </li>
                 <li className={activeClass === 5 ? 'active-sidebar sidebar-list-item' : 'sidebar-list-item'} onClick={() => handleIconCLick(5)}>
                     <a >
-                        <AddRoundedIcon sx={{ transform: "translateY(20%)", marginRight: "1rem" }} />  Add Special Offers
+                        <GradeIcon sx={{ transform: "translateY(20%)", marginRight: "1rem" }} />  Add Special Items
+                    </a>
+                </li>
+                <li className={activeClass === 6 ? 'active-sidebar sidebar-list-item' : 'sidebar-list-item'} onClick={() => handleIconCLick(6)}>
+                    <a >
+                        <GradeIcon sx={{ transform: "translateY(20%)", marginRight: "1rem" }} />  Special Items Menu
                     </a>
                 </li>
                 {/*<li className='sidebar-list-item'>

@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import { resetCart } from '../../redux/slices/cartSlice';
+import {deleteSpecialObject} from "../../redux/slices/specialOffersSlice";
 import { useDispatch } from 'react-redux';
 import "./CheckoutSuccess.css"
 
@@ -7,6 +8,7 @@ function CheckoutSuccess() {
 const dispatch = useDispatch(); 
   useEffect(() => { 
     dispatch(resetCart()); 
+    dispatch(deleteSpecialObject()); 
     setTimeout(() => { 
       handleBackToHome(); 
     }, 3000); 

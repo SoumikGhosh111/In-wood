@@ -90,7 +90,7 @@ function HomePageHeroSection() {
         }, 300); // 300ms is the duration of the transition
     };
 
-    const { bgImg} = carouselItems[currentIndex];
+    const { bgImg } = carouselItems[currentIndex];
 
     const handleClick = () => {
         const scrollPosition = window.innerWidth < 769 ? window.innerHeight * 1.1 : window.innerHeight * 1;
@@ -163,8 +163,8 @@ function HomePageHeroSection() {
 
         return () => clearInterval(interval);
     }, [])
-    const handleSpecialOffersPage = () => { 
-       window.location.href = '/special-offers'; 
+    const handleSpecialOffersPage = () => {
+        window.location.href = '/special-offers';
     }
     return (
         <div >
@@ -200,7 +200,30 @@ function HomePageHeroSection() {
                         </button>
                     </div>
                 </div>
-                <div className='rightBox' style={{ zIndex: scroll > window.innerHeight / 10 ? '0' : '1' }}>   
+                <div className='rightBox' style={{ zIndex: scroll > window.innerHeight / 10 ? '0' : '1' }}>
+                    <div className="home-page-carousel">
+                        <button className="home-page-carousel-btn left-btn" onClick={handlePrevClick} disabled={isTransitioning}>
+                            <ArrowCircleLeftOutlinedIcon />
+                        </button>
+                        <AnimatePresence initial={false} custom={transitionDirection}>
+                            <motion.div
+                                key={currentIndex}
+                                className={`home-page-carousel-content ${transitionDirection}`}
+                                custom={transitionDirection}
+                                initial={{ x: transitionDirection === 'right' ? 100 : -100, opacity: 0 }}
+                                animate={{ x: 0, opacity: 1 }}
+                                exit={{ x: transitionDirection === 'right' ? -100 : 100, opacity: 0 }}
+                                transition={{ duration: 0.3 }}
+                                style={{ width: '100%', background: 'transparent', cursor: 'pointer' }}
+                                onClick={handleSpecialOffersPage}
+                            >
+                                <img src={bgImg} className='home-page-carousel-bg' />
+                            </motion.div>
+                        </AnimatePresence>
+                        <button className="home-page-carousel-btn right-btn" onClick={handleNextClick} disabled={isTransitioning}>
+                            <ArrowCircleRightOutlinedIcon />
+                        </button>
+                    </div>
                 </div>
             </div>
             <div id='menu' className='menu-section' ref={ref2} >

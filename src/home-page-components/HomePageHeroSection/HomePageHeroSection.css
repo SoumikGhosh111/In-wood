@@ -85,7 +85,7 @@
     width: 50%;
     align-items: center;
     justify-content: center; 
-    display: flex;
+    display: none;
     /* display: none; */
 
     
@@ -142,7 +142,7 @@
 .rightBox {
     /* padding-top: 7rem !important; */
     height: 100vh;
-    width: 50%;
+    width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -207,7 +207,7 @@
         height: 45%;
         padding: 0rem 0rem;
     }
-    .carousel{ 
+    .home-page-carousel{ 
         width: 100%;
         height: 100% !important;
     }
@@ -301,10 +301,11 @@
     }
     .left-box-wraapper{ 
         width: 100%;
-        /* display: flex; */
+        display: flex;
     }
     
     .leftBox {
+        /* display: flex; */
         justify-content: center;
         gap: 1rem;
         width: 100%;
@@ -385,7 +386,7 @@
 
 
 
-.carousel {
+.home-page-carousel {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -399,7 +400,7 @@
 }
 
 
-.carousel-content {
+.home-page-carousel-content {
     display: flex;
     /* align-items: center; */
     /* border: 1px solid #ccc; */
@@ -411,7 +412,7 @@
 
 }
 
-.carousel-bg {
+.home-page-carousel-bg {
     /* position: absolute; */
     /* top: 0; */
     width: 100%;
@@ -464,7 +465,7 @@
     filter: drop-shadow(5px 30px 15px rgba(0, 0, 0, 0.5)); 
 }
 
-.carousel-btn {
+.home-page-carousel-btn {
     background-color: rgba(255, 221, 0, 0.5);
     border: none;
     color: white;
@@ -481,7 +482,7 @@
     position: absolute;
     transition: all 0.3s ease-in;
 }
-.carousel-btn:hover{ 
+.home-page-carousel-btn:hover{ 
     background-color: rgba(255, 221, 0, 0.8);
     color: rgba(0, 0, 0, 0.9);
 }
@@ -496,12 +497,12 @@
     top: 50%;
 }
 
-.carousel-btn:focus {
+.home-page-carousel-btn:focus {
     outline: none;
 }
 
 @media screen and (max-width: 768px) {
-    .carousel-btn {
+    .home-page-carousel-btn {
         min-width: 35px;
         min-height: 35px;
         position: absolute;
@@ -514,17 +515,17 @@
        top: 100%;
        right: 0;
     }
-    .carousel-bg{ 
+    .home-page-carousel-bg{ 
         height: 100%;
     }
-    .carousel {
+    .home-page-carousel {
         /* padding: 0rem 1rem; */
         /* padding-top: 50px; */
         /* border: 1px solid red; */
         min-width: 100%;
     }
 
-    .carousel-content {
+    .home-page-carousel-content {
         flex-direction: column;
         flex-direction: column-reverse;
         width: 100%;
