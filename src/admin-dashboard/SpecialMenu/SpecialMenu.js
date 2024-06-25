@@ -131,69 +131,69 @@ function SpecialMenu() {
   };
 
   const handleImageUpload = async (e) => {
-    // const file = e.target.files[0];
-    // const formData = new FormData();
-    // formData.append("image", file);
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", file);
 
-    // try {
-    //   const { data } = await axios.post(`${baseUrl}/api/image/uploadImage`, formData);
-    //   setUploadedImageUrl(data.url);
-    //   setProductDetails({
-    //     ...productDetails,
-    //     img: data.url
-    //   });
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      const { data } = await axios.post(`${baseUrl}/api/image/uploadImage`, formData);
+      setUploadedImageUrl(data.url);
+      setProductDetails({
+        ...productDetails,
+        img: data.url
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleUpdateProduct = async () => {
-    // try {
-    //   const token = localStorage.getItem('token');
-    //   const email = localStorage.getItem('userEmail');
-    //   const response = await fetch(`${baseUrl}/api/product/productDetails/${email}`, {
-    //     method: 'PUT',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Authorization': `Bearer ${token}`
-    //     },
-    //     body: JSON.stringify({ id: editItemId, ...productDetails })
-    //   });
+    try {
+      const token = localStorage.getItem('token');
+      const email = localStorage.getItem('userEmail');
+      const response = await fetch(`${baseUrl}/api/combo/updateProductDetails/${email}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ id: editItemId, ...productDetails })
+      });
 
-    //   const result = await response.json();
-    //   if (result.success) {
-    //     toast.success("Product details updated successfully");
-    //     setOpen(false);
-    //     fetchMenu();
-    //     setEditItemId(null);
-    //   } else {
-    //     toast.error("Failed to update product details");
-    //   }
-    // } catch (error) {
-    //   console.error("Error updating product details:", error);
-    //   toast.error(error.message);
-    // }
+      const result = await response.json();
+      if (result.success) {
+        toast.success("Product details updated successfully");
+        setOpen(false);
+        fetchMenu();
+        setEditItemId(null);
+      } else {
+        toast.error("Failed to update product details");
+      }
+    } catch (error) {
+      console.error("Error updating product details:", error);
+      toast.error(error.message);
+    }
   };
 
   const handleMenuItemDelete = async (id) => {
-    // try {
-    //   const email = localStorage.getItem('userEmail');
-    //   const token = localStorage.getItem('token');
-    //   const response = await fetch(`${baseUrl}/api/product/productDelete/${id}/${email}`, {
-    //     method: 'DELETE',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Authorization': `Bearer ${token}`
-    //     },
-    //   });
-    //   const result = await response.json();
-    //   setOpenPopUp(false);
-    //   fetchMenu();
-    //   toast.success(result.message);
-    //   setDeleteId('');
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      const email = localStorage.getItem('userEmail');
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${baseUrl}/api/combo/comboProductDelete/${id}/${email}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+      const result = await response.json();
+      setOpenPopUp(false);
+      fetchMenu();
+      toast.success(result.message);
+      setDeleteId('');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -236,7 +236,7 @@ function SpecialMenu() {
                     ))}
                   </td>
                   <td>{item.category}</td>
-                  <td style={{width: '200px'}}>{item.prices.map((price, index) => (
+                  <td style={{ width: '200px' }}>{item.prices.map((price, index) => (
                     <div key={index}>
                       Size: {price.size} &nbsp; Price: ${price.price}
                     </div>
@@ -279,14 +279,15 @@ function SpecialMenu() {
               <div className="form-group">
                 <label>Category:</label>
                 <select name="category" value={productDetails.catagory} onChange={handleCatagoryChange}>
-                  <option value="Speciality Pizza">Speciality Pizza</option>
-                  <option value="Pizza By Slice">Pizza By Slice</option>
-                  <option value="Chicken Wings">Chicken Wings</option>
-                  <option value="Deep Fried">Deep Fried</option>
-                  <option value="Breads/Baked Goods">Breads/Baked Goods</option>
-                  <option value="Cookies and Cream">Cookies and Cream</option>
-                  <option value="Milk Shake">Shakes</option>
-                  <option value="Drinks">Drinks</option>
+
+                  <option value="Small Pie">Small Pie</option>
+                  <option value="Medium Pie">Medium Pie</option>
+                  <option value="Large Pie">Large Pie</option>
+                  <option value="Cheese Pie">Cheese Pie</option>
+                  <option value="Medium Cheese Pie">Medium Cheese Pie</option>
+                  <option value="Chicken Wings 10Pcs">Chicken Wings 10Pcs</option>
+                  <option value="Chicken Wings 5Pcs">Chicken Wings 5Pcs</option>
+                  <option value="2 Ltr Soda">2 Ltr Soda</option>
                 </select>
               </div>
 
@@ -326,12 +327,12 @@ function SpecialMenu() {
                       value={price.price}
                       onChange={(e) => handlePriceChange(index, 'price', e.target.value)}
                     />
-                    <button className='cancel-btn' type="button" style={{marginTop: '0.5rem'}} onClick={() => handleRemovePrice(index)}>Remove</button>
+                    <button className='cancel-btn' type="button" style={{ marginTop: '0.5rem' }} onClick={() => handleRemovePrice(index)}>Remove</button>
                   </div>
                 ))}
-                <button className='update-btn' style={{margin: '1rem 0rem'}} type="button" onClick={handleAddPrice}>Add Price</button>
+                <button className='update-btn' style={{ margin: '1rem 0rem' }} type="button" onClick={handleAddPrice}>Add Price</button>
               </div>
-              
+
               <div className="form-group">
                 <label>Extra Options:</label>
                 {productDetails.extraOptions.map((option, index) => (

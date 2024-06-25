@@ -195,7 +195,6 @@ function AddSpecialOffers() {
           required
         >
           <option value="">Select a Special Category</option>
-          <option value="">Select a Special Category</option>
           <option value="Small Pie">Small Pie</option>
           <option value="Medium Pie">Medium Pie</option>
           <option value="Large Pie">Large Pie</option>
