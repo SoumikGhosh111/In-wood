@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { baseUrl } from '../../functions/baseUrl';
+import { baseUrl } from '../../functions/baseUrl'; 
 
 import pizzaImg from "../../assets/banner-1.jpg";
 import borderRadius from "../../assets/special-offer-drawer-border.svg";
@@ -89,6 +89,14 @@ function EveryDaySpecial1() {
 
   useEffect(() => {
     fetchBaseData();
+    const baseObject = {
+      title: 'Cheese Pizza',
+      baseImg: 'https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png',
+      desc: 'Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible',
+      toppings: []
+    };
+
+    setSelectedBaseItems([baseObject]);
 
   }, []);
 
@@ -116,11 +124,16 @@ function EveryDaySpecial1() {
     let newBaseItems = selectedBaseItems.filter((__, index) => index !== indx)
     setSelectedBaseItems(newBaseItems);
   }
+
+
   const handleOrder = () => {
+     
     if (selectedBaseItems.length !== 1) {
       alert("You must select exactly 1 base item.");
       return;
     }
+
+
 
     dispatch(deleteSpecialObject());
     const specialOrder = {
@@ -145,9 +158,9 @@ function EveryDaySpecial1() {
     <div className='combo-offer-2'>
       <div className='static-special-offers-wrapper'>
 
-        <h2>1 Medium Chese Pie of Your Choice</h2>
-        <div className='combo-offer-2-basses'>
-          <Slider {...settings}>
+        <h2>1 Medium Chese </h2>
+        <div className='combo-offer-2-basses every-day-special-static-bases'>
+          {/* <Slider {...settings}>
             {baseData !== null && baseData.map((item) => (
               <div key={item._id}>
                 <div className='special-offers-carousel-inner'>
@@ -164,7 +177,19 @@ function EveryDaySpecial1() {
                 </div>
               </div>
             ))}
-          </Slider>
+          </Slider> */}
+          <div className='extra-items-special-offer evryday-special-1-static'>
+              <div className='special-offers-carousel-inner'>
+                <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png' alt='yess' />
+                <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
+                  <h4>Cheesy Perfection</h4>
+                  <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible</div>
+                  <button className='add-to-cart-special-offer disabled'>
+                    Select
+                  </button>
+                </div>
+              </div>
+            </div>
         </div>
 
 
@@ -172,7 +197,7 @@ function EveryDaySpecial1() {
 
         <div className='add-to-cart-wrapper special-offers-cart every-day-special'>
           <div className='order-cart-cards'>
-            <div>
+            {/* <div>
               <h3>Two Medium Chese Pies of Your Choice</h3>
               {selectedBaseItems.length > 0 ?
                 (
@@ -184,11 +209,6 @@ function EveryDaySpecial1() {
                           <div className='special-cart-item-containers-info'>
                             <div style={{ fontWeight: '700' }}>{item.title}</div>
                             <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
-                              {/* {item.toppings.length > 0 && item.toppings.map((topping) => (
-                              <div>
-                                {topping}
-                              </div>
-                            ))} */}
                               {item.desc}
                             </div>
                           </div>
@@ -212,7 +232,22 @@ function EveryDaySpecial1() {
                     ))}
                   </>
                 )}
+            </div> */}
+            <div >
+              <h3>1 Medium Cheese Pie </h3>
+              <div className='special-cart-item-containers'>
+                <div className='special-cart-item-containers-img-info'>
+                  <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png' alt={pizzaImg} style={{ width: '100px', height: 'auto' }} />
+                  <div className='special-cart-item-containers-info'>
+                    <div style={{ fontWeight: '700' }}>Cheesy Perfection</div>
+                    <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
+                    Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+            
 
 
           </div>
@@ -283,7 +318,7 @@ function EveryDaySpecial1() {
 
           <div style={{ padding: '1rem 1rem' }}>
 
-            <div>
+            {/* <div>
               <h3>1 Medium Chese Pie of Your Choice</h3>
               {selectedBaseItems.length > 0 ?
                 (
@@ -295,11 +330,7 @@ function EveryDaySpecial1() {
                           <div className='special-cart-item-containers-info'>
                             <div style={{ fontWeight: '700' }}>{item.title}</div>
                             <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
-                              {/* {item.toppings.length > 0 && item.toppings.map((topping) => (
-                              <div>
-                                {topping}
-                              </div>
-                            ))} */}
+                              
                               {item.desc}
                             </div>
                           </div>
@@ -323,9 +354,24 @@ function EveryDaySpecial1() {
                     ))}
                   </>
                 )}
+            </div> */}
+              <div >
+              <h3>1 Medium Cheese Pie </h3>
+              <div className='special-cart-item-containers'>
+                <div className='special-cart-item-containers-img-info'>
+                  <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png' alt={pizzaImg} style={{ width: '100px', height: 'auto' }} />
+                  <div className='special-cart-item-containers-info'>
+                    <div style={{ fontWeight: '700' }}>Cheesy Perfection</div>
+                    <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
+                    Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             
-        
+
+
 
 
             <div className='special-offer-cart-button'>

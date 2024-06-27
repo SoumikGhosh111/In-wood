@@ -5,6 +5,9 @@
     /* margin: 0 auto; */
     margin: 1rem 1rem;
   }
+  .static-bases{ 
+    margin: 1rem 0rem !important;
+  }
 
 /* .static-special-offers-wrapper{ 
   display: flex;
@@ -145,6 +148,9 @@
   }
   .combo-offer-2-basses{ 
     width: 90% !important;
+  }
+  .static-bases{ 
+    width: 100% !important;
   }
   .combo-offers-2-added-items{ 
     width: 90% !important;
