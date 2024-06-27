@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { animate, useAnimate } from 'framer-motion';
+import { animate, transform, useAnimate } from 'framer-motion';
 import "../../home-page-components/MenuSection/MenuSection.css";
 // import "./SpecialOffersMenu.css";
 import AddToCart from '../../home-page-components/AddToCart/AddToCart';
 import MobAddToCart from '../../home-page-components/MobAddToCart/MobAddToCart';
 import Backdrop from '@mui/material/Backdrop';
+import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined';
 // import SpecialCard from "../SpecialCard/SpecialCard"
 import "./StaticSpecialOffersMenu.css"
 import { baseUrl } from '../../functions/baseUrl';
@@ -154,7 +155,13 @@ function StaticSpecialOffersMenu() {
         setSelectedItems(updatedSelectedItems);
     };
 
+    const handleBackToHome = () => {
 
+        window.location.href = '/';
+
+        // Clearing the browser's history
+        window.history.replaceState(null, '', '/');
+    }
 
 
     return (
@@ -162,11 +169,12 @@ function StaticSpecialOffersMenu() {
             <div className='menu-cart special-menu-cart'>
                 <div className='special-menu-nav-wrapper' >
                     <ul className='special-menu-nav-bar'>
-                        <li className={activeClass === 1 ? 'special-offers-active' : 'special-offer-unactive'} onClick={() => setActiveClass(1)}>Every Day Special 1</li>
-                        <li className={activeClass === 6 ? 'special-offers-active' : 'special-offer-unactive'} onClick={() => setActiveClass(6)}>Every Day Special 2</li>
-                        <li className={activeClass === 2 ? 'special-offers-active' : 'special-offer-unactive'} onClick={() => setActiveClass(2)}>Game Day Core</li>
-                        <li className={activeClass === 3 ? 'special-offers-active' : 'special-offer-unactive'} onClick={() => setActiveClass(3)}>Game Day Plus</li>
-                        <li className={activeClass === 4 ? 'special-offers-active' : 'special-offer-unactive'} onClick={() => setActiveClass(4)}>Game Day Ultra</li>
+                    <li className= 'special-offers-padding' onClick={handleBackToHome}><ExploreOutlinedIcon sx={{transform: 'translateY(5%)'}}/></li>
+                        <li className={activeClass === 1 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(1)}>Every Day Special 1</li>
+                        <li className={activeClass === 6 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(6)}>Every Day Special 2</li>
+                        <li className={activeClass === 2 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(2)}>Game Day Core</li>
+                        <li className={activeClass === 3 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(3)}>Game Day Plus</li>
+                        <li className={activeClass === 4 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(4)}>Game Day Ultra</li>
                     </ul>
                 </div>
 

@@ -40,5 +40,9 @@
     border: 1px solid red;
 } */
 
-
+.special-offers-padding{ 
+    padding: 0.5rem 0.5rem ;
+    background-color: white;
+    border-radius: 8px;
+}
 
