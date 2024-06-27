@@ -38,7 +38,7 @@ function ComboOffer3() {
 
   const fetchBaseData = async () => {
     try {
-      const response = await fetch(`${baseUrl}/api/product/getAllFood/Speciality Pizza`);
+      const response = await fetch(`${baseUrl}/api/combo/allComboFood/Medium Pie`);
       const result = await response.json();
       setBaseData(result.data.food);
       console.log(result.data.food);
@@ -49,7 +49,7 @@ function ComboOffer3() {
 
   const fetchAddedData = async () => {
     try {
-      const response = await fetch(`${baseUrl}/api/product/getAllFood/Chicken Wings`);
+      const response = await fetch(`${baseUrl}/api/combo/allComboFood/Chicken Wings 5Pcs`);
       const result = await response.json();
       setAddeddata(result.data.food);
       console.log(result.data.food);

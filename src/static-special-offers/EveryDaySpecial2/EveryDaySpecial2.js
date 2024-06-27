@@ -37,7 +37,7 @@ function EveryDaySpecial2() {
 
   const fetchBaseData = async () => {
     try {
-      const response = await fetch(`${baseUrl}/api/product/getAllFood/Speciality Pizza`);
+      const response = await fetch(`${baseUrl}/api/combo/allComboFood/Medium Pie`);
       const result = await response.json();
       setBaseData(result.data.food);
       console.log(result.data.food);

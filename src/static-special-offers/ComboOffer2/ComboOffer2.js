@@ -43,20 +43,20 @@ function ComboOffer2() {
 
   const requiredPies = 2;
 
-  const fetchBaseData = async () => {
-    try {
-      const response = await fetch(`${baseUrl}/api/product/getAllFood/Speciality Pizza`);
-      const result = await response.json();
-      setBaseData(result.data.food);
-      console.log(result.data.food);
-    } catch (err) {
-      alert(err.message);
-    }
-  }
+  // const fetchBaseData = async () => {
+  //   try {
+  //     const response = await fetch(`${baseUrl}/api/combo/allComboFood/All`);
+  //     const result = await response.json();
+  //     setBaseData(result.data.food);
+  //     console.log(result.data.food);
+  //   } catch (err) {
+  //     alert(err.message);
+  //   }
+  // }
 
   const fetchAddedData = async () => {
     try {
-      const response = await fetch(`${baseUrl}/api/product/getAllFood/Chicken Wings`);
+      const response = await fetch(`${baseUrl}/api/combo/allComboFood/Chicken Wings 5Pcs`);
       const result = await response.json();
       setAddeddata(result.data.food);
       console.log(result.data.food);
@@ -66,7 +66,7 @@ function ComboOffer2() {
   }
   const fetchAddedData2 = async () => {
     try {
-      const response = await fetch(`${baseUrl}/api/product/getAllFood/Deep Fried`);
+      const response = await fetch(`${baseUrl}/api/combo/allComboFood/2 Ltr Soda`);
       const result = await response.json();
       setAddeddata2(result.data.food);
       console.log(result.data.food);
@@ -76,7 +76,7 @@ function ComboOffer2() {
   }
 
   useEffect(() => {
-    fetchBaseData();
+    // fetchBaseData();
     fetchAddedData();
     fetchAddedData2();
     const baseObject = {

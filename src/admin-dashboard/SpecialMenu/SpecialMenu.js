@@ -50,7 +50,7 @@ function SpecialMenu() {
       img: item.img,
       title: item.title,
       desc: item.desc,
-      catagory: item.catagory,
+      catagory: item.category,
       prices: item.prices,
       extraOptions: item.extraOptions
     });
@@ -283,8 +283,6 @@ function SpecialMenu() {
                   <option value="Small Pie">Small Pie</option>
                   <option value="Medium Pie">Medium Pie</option>
                   <option value="Large Pie">Large Pie</option>
-                  <option value="Cheese Pie">Cheese Pie</option>
-                  <option value="Medium Cheese Pie">Medium Cheese Pie</option>
                   <option value="Chicken Wings 10Pcs">Chicken Wings 10Pcs</option>
                   <option value="Chicken Wings 5Pcs">Chicken Wings 5Pcs</option>
                   <option value="2 Ltr Soda">2 Ltr Soda</option>
