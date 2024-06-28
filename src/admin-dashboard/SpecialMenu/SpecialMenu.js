@@ -23,7 +23,7 @@ function SpecialMenu() {
     img: '',
     title: '',
     desc: '',
-    catagory: '',
+    category: '',
     prices: [{ size: '', price: '' }],
     extraOptions: [{ text: '', price: '' }]
   });
@@ -50,7 +50,7 @@ function SpecialMenu() {
       img: item.img,
       title: item.title,
       desc: item.desc,
-      catagory: item.category,
+      category: item.category,
       prices: item.prices,
       extraOptions: item.extraOptions
     });
@@ -68,7 +68,7 @@ function SpecialMenu() {
     const { value } = e.target;
     setProductDetails(prevState => ({
       ...prevState,
-      catagory: value
+      category: value
     }));
   };
 
@@ -278,7 +278,7 @@ function SpecialMenu() {
               </div>
               <div className="form-group">
                 <label>Category:</label>
-                <select name="category" value={productDetails.catagory} onChange={handleCatagoryChange}>
+                <select name="category" value={productDetails.category} onChange={handleCatagoryChange}>
 
                   <option value="Small Pie">Small Pie</option>
                   <option value="Medium Pie">Medium Pie</option>
