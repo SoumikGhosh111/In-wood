@@ -51,7 +51,7 @@ function ComboOffer4() {
 
   const fetchAddedData = async () => {
     try {
-      const response = await fetch(`${baseUrl}/api/combo/allComboFood/Chicken Wings 5Pcs`);
+      const response = await fetch(`${baseUrl}/api/combo/allComboFood/Chicken Wings 10Pcs`);
       const result = await response.json();
       setAddeddata(result.data.food);
       console.log(result.data.food);
@@ -174,7 +174,7 @@ function ComboOffer4() {
       return;
     }
     if (selectedAddedItems.length !== 1) {
-      alert("You must select exactly 1 item for 5pcs chicken wings.");
+      alert("You must select exactly 1 item for 10pcs chicken wings.");
       return;
     }
     dispatch(deleteSpecialObject());
@@ -192,7 +192,7 @@ function ComboOffer4() {
     // console.log("Order placed:", specialOrder);
     // Here you can dispatch an action to add the order to the cart or perform any other action
     // dispatch(addToSpecialObject(order));
-    alert("Order placed successfully!");
+    alert("Order Created!");
 
     Navigate("/checkout")
 
