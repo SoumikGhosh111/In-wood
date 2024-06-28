@@ -237,7 +237,7 @@ function ComboOffer3() {
         <div className='extra-items-special-offer'>
           <h2>9Pcs of Zeppoles</h2>
           <div className='special-offers-carousel-inner'>
-            <img src={pizzaImg} alt='yess' />
+            <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718733929/hec2i3lm7yckghiuwn23.png' alt='Zeppoles' />
             <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
               <h4>9Pcs of Zeppoles</h4>
               <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>Light and fluffy fried dough balls, generously dusted with powdered sugar. A sweet delight!</div>
@@ -329,7 +329,7 @@ function ComboOffer3() {
               <h3>9Pcs of Zeppoles </h3>
               <div className='special-cart-item-containers'>
                 <div className='special-cart-item-containers-img-info'>
-                  <img src={pizzaImg} alt={pizzaImg} style={{ width: '100px', height: 'auto' }} />
+                  <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718733929/hec2i3lm7yckghiuwn23.png' alt='Zeppoles' style={{ width: '100px', height: 'auto' }} />
                   <div className='special-cart-item-containers-info'>
                     <div style={{ fontWeight: '700' }}>Zeppoles</div>
                     <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
