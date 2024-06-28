@@ -169,7 +169,7 @@ function ComboOffer3() {
     <div className='combo-offer-2'>
       <div className='static-special-offers-wrapper'>
 
-        <h2>2 Medium pies - 2 toppings <span style={{fontSize: '15px'}}>(of your choice)</span></h2>
+        <h2>2 Medium Pies - 2 toppings <span style={{fontSize: '15px'}}>(of your choice)</span></h2>
         <div className='combo-offer-2-basses'>
           <Slider {...settings}>
             {baseData !== null && baseData.map((item) => (
