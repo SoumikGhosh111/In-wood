@@ -158,7 +158,7 @@ function EveryDaySpecial1() {
     <div className='combo-offer-2'>
       <div className='static-special-offers-wrapper'>
 
-        <h2>1 Medium Chese </h2>
+        <h2>1 Medium Cheese Pie </h2>
         <div className='combo-offer-2-basses every-day-special-static-bases'>
           {/* <Slider {...settings}>
             {baseData !== null && baseData.map((item) => (
@@ -185,7 +185,7 @@ function EveryDaySpecial1() {
                   <h4>Cheesy Perfection</h4>
                   <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible</div>
                   <button className='add-to-cart-special-offer disabled'>
-                    Select
+                    Selected
                   </button>
                 </div>
               </div>

@@ -26,9 +26,11 @@ function ComboOffer4() {
   const Navigate = useNavigate();
   const [baseData, setBaseData] = useState(null);
   const [addedData, setAddeddata] = useState(null);
+  const [addedData2, setAddeddata2] = useState(null);
   const [selectedToppings, setSelectedToppings] = useState([]);
   const [selectedBaseItems, setSelectedBaseItems] = useState([]);
   const [selectedAddedItems, setSelectedAddedItems] = useState([]);
+  const [selectedAddedItems2, setSelectedAddedItems2] = useState([]);
 
   const [isOpen, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -38,7 +40,7 @@ function ComboOffer4() {
 
   const fetchBaseData = async () => {
     try {
-      const response = await fetch(`${baseUrl}/api/combo/allComboFood/Medium Pie`);
+      const response = await fetch(`${baseUrl}/api/combo/allComboFood/Large Pie`);
       const result = await response.json();
       setBaseData(result.data.food);
       console.log(result.data.food);
@@ -58,10 +60,22 @@ function ComboOffer4() {
     }
   }
 
+  const fetchAddedData2 = async () => {
+    try {
+      const response = await fetch(`${baseUrl}/api/combo/allComboFood/2 Ltr Soda`);
+      const result = await response.json();
+      setAddeddata2(result.data.food);
+      console.log(result.data.food);
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+
   useEffect(() => {
     fetchBaseData();
     fetchAddedData();
     // handleSetQuantities();
+    fetchAddedData2(); 
   }, []);
 
   const handleToppingChange = (topping) => {
@@ -120,6 +134,19 @@ function ComboOffer4() {
     }
   }
 
+  const handleAddedClick2 = (item) => {
+    const addedItems = {
+      title: item.productType,
+      addedItemImg: item.img,
+      desc: item.desc,
+    }
+    if (selectedAddedItems2.length < 1) {
+      setSelectedAddedItems2([...selectedAddedItems2, addedItems]);
+    } else {
+      alert("You can only add one");
+    }
+  }
+
   const handleBasedelete = (indx) => {
     let newBaseItems = selectedBaseItems.filter((__, index) => index !== indx)
     setSelectedBaseItems(newBaseItems);
@@ -128,6 +155,11 @@ function ComboOffer4() {
   const handleAddedItemsDelete = (indx) => {
     let newAddedItems = selectedAddedItems.filter((__, index) => index !== indx);
     setSelectedAddedItems(newAddedItems);
+  }
+
+  const handleAddedItemsDelete2 = (indx) => {
+    let newAddedItems = selectedAddedItems2.filter((__, index) => index !== indx);
+    setSelectedAddedItems2(newAddedItems);
   }
 
   // const handleSetQuantities = () => {
@@ -149,9 +181,9 @@ function ComboOffer4() {
     const specialOrder = {
       offerName: "Game Day Ultra",
       pizza: selectedBaseItems,
-      addedItems: [`${selectedAddedItems[0].title}(10Pcs)`],
+      addedItems: [`${selectedAddedItems[0].title}(10Pcs)`, selectedAddedItems2[0].title],
       item: [selectedAddedItems[0].title],
-      extraAdded: "Zepolis(6pcs) Canolis(6Pcs)",
+      extraAdded: "Zeppoles(6pcs) Cannolis(6Pcs)",
       totalAmount: 39.99,
     };
 
@@ -174,7 +206,7 @@ function ComboOffer4() {
     <div className='combo-offer-2'>
       <div className='static-special-offers-wrapper'>
 
-        <h2>Two Medium pies - 3 Toppings of Your Choice</h2>
+        <h2>2 Large Pies - 3 toppings <span style={{fontSize: '15px'}}>(of your choice)</span></h2>
         <div className='combo-offer-2-basses'>
           <Slider {...settings}>
             {baseData !== null && baseData.map((item) => (
@@ -184,7 +216,7 @@ function ComboOffer4() {
                   <div>
                     <h3>{item.productType}</h3>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
-                    <h4 style={{ marginBottom: '0.5rem' }}>Select 3 Toppings of Your Choice</h4>
+                    <h4 style={{ marginBottom: '0.5rem' }}>Select 3 Toppings <span style={{fontSize: '12px'}}>(of your choice)</span></h4>
                     {["Topping 1", "Topping 2", "Topping 3", "Topping 4", "Topping 5", "Topping 6"].map(topping => (
                       <div key={topping}>
                         <input
@@ -207,7 +239,7 @@ function ComboOffer4() {
           </Slider>
         </div>
 
-        <h2>Ten Pcs Wings of Your Choice</h2>
+        <h2>10Pcs Wings <span style={{fontSize: '15px'}}>(of your choice)</span></h2>
         <div className='combo-offers-2-added-items'>
           <Slider {...settings}>
             {addedData !== null && addedData.map((item) => (
@@ -227,29 +259,49 @@ function ComboOffer4() {
           </Slider>
         </div>
 
+        <h2>2Ltr Soda <span style={{fontSize: '15px'}}>(of your choice)</span></h2>
+        <div className='combo-offers-2-added-items'>
+          <Slider {...settings}>
+            {addedData2 !== null && addedData2.map((item) => (
+              <div key={item._id}>
+                <div className='special-offers-carousel-inner'>
+                  <img src={item.img} alt={item.title} />
+                  <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
+                    <h4>{item.productType}</h4>
+                    <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
+                    <button className='add-to-cart-special-offer' onClick={() => handleAddedClick2(item)}>
+                      Select
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
+
         <div className='extra-items-special-offer'>
-          <h2>6 pcs of Zepolis</h2>
+          <h2>6Pcs of Zeppoles</h2>
           <div className='special-offers-carousel-inner'>
-            <img src={pizzaImg} alt='yess' />
+            <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718733929/hec2i3lm7yckghiuwn23.png' alt='Zepolis' />
             <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
-              <h4>6 pcs of Zepolis</h4>
+              <h4>6Pcs of Zeppoles</h4>
               <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>The classic pepperoni pizza is typically prepared with mozzarella cheese, tomato sauce, and a generous layer of pepperoni slices ...See more</div>
               <button className='add-to-cart-special-offer disabled'>
-                Select
+                Selected
               </button>
             </div>
           </div>
         </div>
 
         <div className='extra-items-special-offer'>
-          <h2>6 pcs of Canolis</h2>
+          <h2>6Pcs of Cannolis</h2>
           <div className='special-offers-carousel-inner'>
-            <img src={pizzaImg} alt='yess' />
+            <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718734265/z17tw3fhykjxhcwtzh0w.png' alt='Canolis' />
             <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
-              <h4>6 pcs of Canolis</h4>
+              <h4>6Pcs of Cannolis</h4>
               <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>The classic pepperoni pizza is typically prepared with mozzarella cheese, tomato sauce, and a generous layer of pepperoni slices ...See more</div>
               <button className='add-to-cart-special-offer disabled'>
-                Select
+                Selected
               </button>
             </div>
           </div>
@@ -262,7 +314,7 @@ function ComboOffer4() {
         <div className='add-to-cart-wrapper special-offers-cart combo-4'>
           <div className='order-cart-cards'>
             <div>
-              <h3>Two Medium Pies - 3 toppings of your choice </h3>
+              <h3>2 Large Pies - 3 toppings <span style={{fontSize: '13px'}}>(of your choice)</span> </h3>
               {selectedBaseItems.length > 0 ?
                 (
                   <>
@@ -307,7 +359,7 @@ function ComboOffer4() {
                 )}
             </div>
             <div>
-              <h3>10pcs of Chicken wings of your Choice </h3>
+              <h3>10Pcs Wings <span style={{fontSize: '13px'}}>(of your choice)</span></h3>
               {selectedAddedItems.length > 0 ? (
                 <>
                   {selectedAddedItems.map((item, indx) => (
@@ -332,11 +384,40 @@ function ComboOffer4() {
                   </>
                 )}
             </div>
+
             <div>
-              <h3>6 pcs of Zepoles </h3>
+              <h3>2Ltr Soda <span style={{fontSize: '13px'}}>(of your choice)</span></h3>
+
+              {selectedAddedItems2.length > 0 ?
+                (
+                  <>
+                    {selectedAddedItems2.map((item, indx) => (
+                      <div className='special-cart-item-containers'>
+                        <div className='special-cart-item-containers-img-info'>
+                          <img src={item.addedItemImg} alt={item.addedItemImg} style={{ width: '100px', height: 'auto' }} />
+                          <div className='special-cart-item-containers-info'>
+                            <div style={{ fontWeight: '700' }}>{item.title}</div>
+                            <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
+                              {item.desc}
+                            </div>
+                          </div>
+                        </div>
+                        <button onClick={() => handleAddedItemsDelete2(indx)} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}  ><DeleteIcon /></button>
+                      </div>
+                    ))}
+                  </>
+                ) :
+                (
+                  <>
+                    <img src={loadingCartImg} />
+                  </>
+                )}
+            </div>
+            <div>
+              <h3>6Pcs of Zeppoles </h3>
               <div className='special-cart-item-containers'>
                 <div className='special-cart-item-containers-img-info'>
-                  <img src={pizzaImg} alt={pizzaImg} style={{ width: '100px', height: 'auto' }} />
+                  <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718733929/hec2i3lm7yckghiuwn23.png' alt='Zepolis' style={{ width: '100px', height: 'auto' }} />
                   <div className='special-cart-item-containers-info'>
                     <div style={{ fontWeight: '700' }}>Zepolis</div>
                     <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
@@ -347,10 +428,10 @@ function ComboOffer4() {
               </div>
             </div>
             <div>
-              <h3>6 pcs of Canoles </h3>
+              <h3>6Pcs of Cannolis </h3>
               <div className='special-cart-item-containers'>
                 <div className='special-cart-item-containers-img-info'>
-                  <img src={pizzaImg} alt={pizzaImg} style={{ width: '100px', height: 'auto' }} />
+                  <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718734265/z17tw3fhykjxhcwtzh0w.png' alt='Canolis' style={{ width: '100px', height: 'auto' }} />
                   <div className='special-cart-item-containers-info'>
                     <div style={{ fontWeight: '700' }}>Canolis</div>
                     <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
@@ -384,7 +465,7 @@ function ComboOffer4() {
           </div>
           <div style={{ padding: '1rem 1rem' }}>
             <div>
-              <h3>Two Medium Pies - 3 toppings of your choice </h3>
+              <h3>2 Large Pies - 3 toppings <span style={{fontSize: '13px'}}>(of your choice)</span> </h3>
               {selectedBaseItems.length > 0 ?
                 (
                   <>
@@ -429,7 +510,7 @@ function ComboOffer4() {
                 )}
             </div>
             <div>
-              <h3>10pcs of Chicken wings of your Choice </h3>
+              <h3>10Pcs Wings <span style={{fontSize: '13px'}}>(of your choice)</span> </h3>
               {selectedAddedItems.length > 0 ? (
                 <>
                   {selectedAddedItems.map((item, indx) => (
@@ -455,10 +536,38 @@ function ComboOffer4() {
                 )}
             </div>
             <div>
-              <h3>6 pcs of Zepolis </h3>
+              <h3>2Ltr Soda <span style={{fontSize: '13px'}}>(of your choice)</span></h3>
+
+              {selectedAddedItems2.length > 0 ?
+                (
+                  <>
+                    {selectedAddedItems2.map((item, indx) => (
+                      <div className='special-cart-item-containers'>
+                        <div className='special-cart-item-containers-img-info'>
+                          <img src={item.addedItemImg} alt={item.addedItemImg} style={{ width: '100px', height: 'auto' }} />
+                          <div className='special-cart-item-containers-info'>
+                            <div style={{ fontWeight: '700' }}>{item.title}</div>
+                            <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
+                              {item.desc}
+                            </div>
+                          </div>
+                        </div>
+                        <button onClick={() => handleAddedItemsDelete2(indx)} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}  ><DeleteIcon /></button>
+                      </div>
+                    ))}
+                  </>
+                ) :
+                (
+                  <>
+                    <img src={loadingCartImg} />
+                  </>
+                )}
+            </div>
+            <div>
+              <h3>6 pcs of Zeppoles </h3>
               <div className='special-cart-item-containers'>
                 <div className='special-cart-item-containers-img-info'>
-                  <img src={pizzaImg} alt={pizzaImg} style={{ width: '100px', height: 'auto' }} />
+                  <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718733929/hec2i3lm7yckghiuwn23.png' alt='Zepolis' style={{ width: '100px', height: 'auto' }} />
                   <div className='special-cart-item-containers-info'>
                     <div style={{ fontWeight: '700' }}>Zepolis</div>
                     <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
@@ -469,10 +578,10 @@ function ComboOffer4() {
               </div>
             </div>
             <div>
-              <h3>6 pcs of Canolis </h3>
+              <h3>6 pcs of Cannolis </h3>
               <div className='special-cart-item-containers'>
                 <div className='special-cart-item-containers-img-info'>
-                  <img src={pizzaImg} alt={pizzaImg} style={{ width: '100px', height: 'auto' }} />
+                  <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718734265/z17tw3fhykjxhcwtzh0w.png' alt='Canolis' style={{ width: '100px', height: 'auto' }} />
                   <div className='special-cart-item-containers-info'>
                     <div style={{ fontWeight: '700' }}>Canolis</div>
                     <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>

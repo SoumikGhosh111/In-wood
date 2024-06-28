@@ -216,7 +216,7 @@ function ComboOffer2() {
       alert("You must select exactly 1 item for 5pcs chicken wings.");
       return;
     }
-    if (selectedAddedItems.length !== 1) {
+    if (selectedAddedItems2.length !== 1) {
       alert("You must select exactly 1 item for 2Ltr of Soda.");
       return;
     }
@@ -242,7 +242,7 @@ function ComboOffer2() {
     <div className='combo-offer-2 '>
       <div className='static-special-offers-wrapper'>
 
-        <h2>Two Medium Chese Pies </h2>
+        <h2>2 Medium Cheese Pies </h2>
         <div className='combo-offer-2-basses static-bases'>
           {/* <Slider {...settings}>
             {baseData !== null && baseData.map((item) => (
@@ -269,14 +269,14 @@ function ComboOffer2() {
                   <h4>Cheesy Perfection</h4>
                   <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible</div>
                   <button className='add-to-cart-special-offer disabled'>
-                    Select
+                    Selected
                   </button>
                 </div>
               </div>
             </div>
         </div>
 
-        <h2>Five Pcs Wings of Your Choice</h2>
+        <h2>5Pcs Wings <span style={{fontSize: '15px'}}>(of your choice)</span></h2>
         <div className='combo-offers-2-added-items'>
           <Slider {...settings}>
             {addedData !== null && addedData.map((item) => (
@@ -296,7 +296,7 @@ function ComboOffer2() {
           </Slider>
         </div>
 
-        <h2>2Ltr Soda of your choice</h2>
+        <h2>2Ltr Soda <span style={{fontSize: '15px'}}>(of your choice)</span></h2>
         <div className='combo-offers-2-added-items'>
           <Slider {...settings}>
             {addedData2 !== null && addedData2.map((item) => (
@@ -323,7 +323,7 @@ function ComboOffer2() {
         <div className='add-to-cart-wrapper special-offers-cart'>
           <div className='order-cart-cards'>
             <div>
-              <h3>Two Medium Chese Pies of Your Choice</h3>
+              <h3>2 Medium Cheese Pies</h3>
               {/* {selectedBaseItems.length > 0 ?
                 (
                   <>
@@ -392,7 +392,7 @@ function ComboOffer2() {
             </div>
             </div>
             <div>
-              <h3>5pcs of Chicken wings of your Choice </h3>
+              <h3>5Pcs of Wings <span style={{fontSize: '13px'}}>(of your choice)</span></h3>
 
 
               {selectedAddedItems.length > 0 ? (
@@ -420,7 +420,7 @@ function ComboOffer2() {
                 )}
             </div>
             <div>
-              <h3>2Ltr Soda of Your Choice</h3>
+              <h3>2Ltr Soda <span style={{fontSize: '13px'}}>(of your choice)</span></h3>
 
               {selectedAddedItems2.length > 0 ?
                 (
@@ -518,7 +518,7 @@ function ComboOffer2() {
           <div style={{ padding: '1rem 1rem' }}>
 
           <div>
-              <h3>Two Medium Chese Pies of Your Choice</h3>
+              <h3>2 Medium Cheese Pies</h3>
               {/* {selectedBaseItems.length > 0 ?
                 (
                   <>
@@ -587,7 +587,7 @@ function ComboOffer2() {
             </div>
             </div>
             <div>
-              <h3>5pcs of Chicken wings of your Choice </h3>
+              <h3>5Pcs of Wings <span style={{fontSize: '13px'}}>(of your choice)</span> </h3>
 
 
               {selectedAddedItems.length > 0 ? (
@@ -615,7 +615,7 @@ function ComboOffer2() {
                 )}
             </div>
             <div>
-              <h3>2Ltr Soda of Your Choice</h3>
+              <h3>2Ltr Soda <span style={{fontSize: '13px'}}>(of your choice)</span></h3>
 
               {selectedAddedItems2.length > 0 ?
                 (

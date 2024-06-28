@@ -130,7 +130,7 @@ function EveryDaySpecial2() {
   return (
     <div className='combo-offer-2'>
       <div className='static-special-offers-wrapper'>
-        <h2>1 Medium pie - 2 Toppings of Your Choice</h2>
+        <h2>1 Medium Pie - 2 toppings <span style={{fontSize: '15px'}}>(of your choice)</span></h2>
         <div className='combo-offer-2-basses'>
           <Slider {...settings}>
             {baseData !== null && baseData.map((item) => (
@@ -140,7 +140,7 @@ function EveryDaySpecial2() {
                   <div>
                     <h3>{item.productType}</h3>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
-                    <h4 style={{ marginBottom: '0.5rem' }}>Select 2 Toppings of Your Choice</h4>
+                    <h4 style={{ marginBottom: '0.5rem' }}>Select 2 toppings <span style={{fontSize: '10px'}}>(of your choice)</span></h4>
                     {["Topping 1", "Topping 2", "Topping 3", "Topping 4", "Topping 5", "Topping 6"].map(topping => (
                       <div key={topping}>
                         <input
@@ -167,7 +167,7 @@ function EveryDaySpecial2() {
         <div className='add-to-cart-wrapper special-offers-cart every-day-special'>
           <div className='order-cart-cards'>
             <div>
-              <h3>1 Medium Pie - 2 toppings of your choice </h3>
+              <h3>1 Medium Pie - 2 toppings <span style={{fontSize: '13px'}}>(of your choice)</span> </h3>
               {selectedBaseItems.length > 0 ?
                 (
                   <>
@@ -269,7 +269,7 @@ function EveryDaySpecial2() {
             </div>
             <button className='add-to-cart-button' style={{ backgroundColor: 'black', color: 'white' }} onClick={handleOrder}>PROCEED TO ORDER</button> */}
             <div>
-              <h3>1 Medium Pie - 2 toppings of your choice </h3>
+              <h3><h2>1 Medium Pie - 2 toppings <span style={{fontSize: '13px'}}>(of your choice)</span></h2></h3>
               {selectedBaseItems.length > 0 ?
                 (
                   <>

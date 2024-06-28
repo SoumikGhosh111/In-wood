@@ -150,14 +150,14 @@ function ComboOffer3() {
       pizza: selectedBaseItems,
       addedItems: [`${selectedAddedItems[0].title}(5Pcs)`],
       item: [selectedAddedItems[0].title],
-      extraAdded: "Zepolis(9pcs)",
+      extraAdded: "Zeppoles(9pcs)",
       totalAmount: 27.99,
     };
     dispatch(addSpecialObject(specialOrder));
     console.log("Order placed:", specialOrder);
     // Here you can dispatch an action to add the order to the cart or perform any other action
     // dispatch(addToSpecialCart(order));
-    alert("Order placed successfully!");
+    alert("Order Created!");
     Navigate("/checkout");
   }
 
@@ -169,7 +169,7 @@ function ComboOffer3() {
     <div className='combo-offer-2'>
       <div className='static-special-offers-wrapper'>
 
-        <h2>Two Medium pies - 2 Toppings of Your Choice</h2>
+        <h2>2 Medium pies - 2 toppings <span style={{fontSize: '15px'}}>(of your choice)</span></h2>
         <div className='combo-offer-2-basses'>
           <Slider {...settings}>
             {baseData !== null && baseData.map((item) => (
@@ -179,7 +179,19 @@ function ComboOffer3() {
                   <div>
                     <h3>{item.productType}</h3>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
-                    <h4 style={{ marginBottom: '0.5rem' }}>Select 2 Toppings of Your Choice</h4>
+                    <h4 style={{ marginBottom: '0.5rem' }}>Select 2 toppings <span style={{fontSize: '12px'}}>(of your choice)</span></h4>
+                    {/* {item.extraOptions?.map(topping => (
+                      <div key={topping.text}>
+                        <input
+                          type='checkbox'
+                          id={topping.text}
+                          checked={selectedToppings.includes(topping.text)}
+                          disabled={isToppingDisabled(topping.text)}
+                          onChange={() => handleToppingChange(topping.text)}
+                        />
+                        <label htmlFor={topping.text}>{topping.text}</label>
+                      </div>
+                    ))} */}
                     {["Topping 1", "Topping 2", "Topping 3", "Topping 4", "Topping 5", "Topping 6"].map(topping => (
                       <div key={topping}>
                         <input
@@ -202,7 +214,7 @@ function ComboOffer3() {
           </Slider>
         </div>
 
-        <h2>Five Pcs Wings of Your Choice</h2>
+        <h2>5Pcs Wings <span style={{fontSize: '15px'}}>(of your choice)</span></h2>
         <div className='combo-offers-2-added-items'>
           <Slider {...settings}>
             {addedData !== null && addedData.map((item) => (
@@ -223,14 +235,14 @@ function ComboOffer3() {
         </div>
 
         <div className='extra-items-special-offer'>
-          <h2>9 pcs of Zepolis</h2>
+          <h2>9Pcs of Zeppoles</h2>
           <div className='special-offers-carousel-inner'>
             <img src={pizzaImg} alt='yess' />
             <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
-              <h4>9 pcs of Zepolis</h4>
+              <h4>9Pcs of Zeppoles</h4>
               <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>Light and fluffy fried dough balls, generously dusted with powdered sugar. A sweet delight!</div>
               <button className='add-to-cart-special-offer disabled'>
-                Select
+                Selected
               </button>
             </div>
           </div>
@@ -243,7 +255,7 @@ function ComboOffer3() {
         <div className='add-to-cart-wrapper special-offers-cart'>
           <div className='order-cart-cards'>
             <div>
-              <h3>Two Medium Pies - 2 toppings of your choice </h3>
+              <h3>2 Medium Pies - 2 toppings <span style={{fontSize: '13px'}}>(of your choice)</span> </h3>
               {selectedBaseItems.length > 0 ?
                 (
                   <>
@@ -288,7 +300,7 @@ function ComboOffer3() {
                 )}
             </div>
             <div>
-              <h3>5pcs of Chicken wings of your Choice </h3>
+              <h3>5Pcs Wings <span style={{fontSize: '13px'}}>(of your choice)</span> </h3>
               {selectedAddedItems.length > 0 ? (
                 <>
                   {selectedAddedItems.map((item, indx) => (
@@ -314,12 +326,12 @@ function ComboOffer3() {
                 )}
             </div>
             <div >
-              <h3>9pcs of Zepoles </h3>
+              <h3>9Pcs of Zeppoles </h3>
               <div className='special-cart-item-containers'>
                 <div className='special-cart-item-containers-img-info'>
                   <img src={pizzaImg} alt={pizzaImg} style={{ width: '100px', height: 'auto' }} />
                   <div className='special-cart-item-containers-info'>
-                    <div style={{ fontWeight: '700' }}>Zepolis</div>
+                    <div style={{ fontWeight: '700' }}>Zeppoles</div>
                     <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
                       Light and fluffy fried dough balls, generously dusted with powdered sugar. A sweet delight!
                     </div>
@@ -380,11 +392,11 @@ function ComboOffer3() {
 
             <div  style={{minHeight: '100px'}}>
               <h3>9pcs of Zepoles </h3>
-              Zepolis
+              Zeppoles
             </div>
             <button className='add-to-cart-button' style={{ backgroundColor: 'black', color: 'white' }} onClick={handleOrder}>PROCEED TO ORDER</button> */}
             <div>
-              <h3>Two Medium Pies - 2 toppings of your choice </h3>
+              <h3>2 Medium Pies - 2 toppings <span style={{fontSize: '13px'}}>(of your choice)</span> </h3>
               {selectedBaseItems.length > 0 ?
                 (
                   <>
@@ -429,7 +441,7 @@ function ComboOffer3() {
                 )}
             </div>
             <div>
-              <h3>5pcs of Chicken wings of your Choice </h3>
+              <h3>5Pcs Wings <span style={{fontSize: '13px'}}>(of your choice)</span> </h3>
               {selectedAddedItems.length > 0 ? (
                 <>
                   {selectedAddedItems.map((item, indx) => (
@@ -455,12 +467,12 @@ function ComboOffer3() {
                 )}
             </div>
             <div >
-              <h3>9pcs of Zepoles </h3>
+              <h3>9Pcs of Zeppoles </h3>
               <div className='special-cart-item-containers'>
                 <div className='special-cart-item-containers-img-info'>
                   <img src={pizzaImg} alt={pizzaImg} style={{ width: '100px', height: 'auto' }} />
                   <div className='special-cart-item-containers-info'>
-                    <div style={{ fontWeight: '700' }}>Zepolis</div>
+                    <div style={{ fontWeight: '700' }}>Zeppoles</div>
                     <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
                       Light and fluffy fried dough balls, generously dusted with powdered sugar. A sweet delight!
                     </div>
