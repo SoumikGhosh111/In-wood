@@ -91,7 +91,7 @@ function ComboOffer3() {
 
   const handleBase = (item) => {
     const baseObject = {
-      title: item.productType,
+      title: item.title,
       toppings: selectedToppings,
       baseImg: item.img,
     };
@@ -108,7 +108,7 @@ function ComboOffer3() {
 
   const handleAddedClick = (item) => {
     const addedItems = {
-      title: item.productType,
+      title: item.title,
       addedItemImg: item.img,
       desc: item.desc,
     }
@@ -177,7 +177,7 @@ function ComboOffer3() {
                 <div className='special-offers-carousel-inner'>
                   <img src={item.img} alt={item.title} />
                   <div>
-                    <h3>{item.productType}</h3>
+                    <h3>{item.title}</h3>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
                     <h4 style={{ marginBottom: '0.5rem' }}>Select 2 toppings <span style={{fontSize: '12px'}}>(of your choice)</span></h4>
                     {/* {item.extraOptions?.map(topping => (
@@ -192,7 +192,7 @@ function ComboOffer3() {
                         <label htmlFor={topping.text}>{topping.text}</label>
                       </div>
                     ))} */}
-                    {["Topping 1", "Topping 2", "Topping 3", "Topping 4", "Topping 5", "Topping 6"].map(topping => (
+                    {["Jalapenos", "Sausage", "Corn", "Onions & Peppers", "Ground Beef", "Chicken", "Olives","Mushrooms","Cheese","Ham","Bacon", "Pepperoni", "Extra Cheese"].map(topping => (
                       <div key={topping}>
                         <input
                           type='checkbox'
@@ -222,7 +222,7 @@ function ComboOffer3() {
                 <div className='special-offers-carousel-inner'>
                   <img src={item.img} alt={item.title} />
                   <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
-                    <h4>{item.productType}</h4>
+                    <h4>{item.title}</h4>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
                     <button className='add-to-cart-special-offer' onClick={() => handleAddedClick(item)}>
                       Select
@@ -470,7 +470,7 @@ function ComboOffer3() {
               <h3>9Pcs of Zeppoles </h3>
               <div className='special-cart-item-containers'>
                 <div className='special-cart-item-containers-img-info'>
-                  <img src={pizzaImg} alt={pizzaImg} style={{ width: '100px', height: 'auto' }} />
+                  <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718733929/hec2i3lm7yckghiuwn23.png' alt='Zeppoles' style={{ width: '100px', height: 'auto' }} />
                   <div className='special-cart-item-containers-info'>
                     <div style={{ fontWeight: '700' }}>Zeppoles</div>
                     <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>

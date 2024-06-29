@@ -161,7 +161,7 @@ function ComboOffer2() {
 
   const handleAddedClick = (item) => {
     const addedItems = {
-      title: item.productType,
+      title: item.title,
       addedItemImg: item.img,
       desc: item.desc,
     }
@@ -174,7 +174,7 @@ function ComboOffer2() {
 
   const handleAddedClick2 = (item) => {
     const addedItems = {
-      title: item.productType,
+      title: item.title,
       addedItemImg: item.img,
       desc: item.desc,
     }
@@ -284,7 +284,7 @@ function ComboOffer2() {
                 <div className='special-offers-carousel-inner'>
                   <img src={item.img} alt={item.title} />
                   <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
-                    <h4>{item.productType}</h4>
+                    <h4>{item.title}</h4>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
                     <button className='add-to-cart-special-offer' onClick={() => handleAddedClick(item)}>
                       Select
@@ -304,7 +304,7 @@ function ComboOffer2() {
                 <div className='special-offers-carousel-inner'>
                   <img src={item.img} alt={item.title} />
                   <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
-                    <h4>{item.productType}</h4>
+                    <h4>{item.title}</h4>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
                     <button className='add-to-cart-special-offer' onClick={() => handleAddedClick2(item)}>
                       Select

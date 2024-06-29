@@ -77,7 +77,7 @@ function EveryDaySpecial2() {
 
   const handleBase = (item) => {
     const baseObject = {
-      title: item.productType,
+      title: item.title,
       toppings: selectedToppings,
       baseImg: item.img,
     };
@@ -118,7 +118,7 @@ function EveryDaySpecial2() {
     console.log("Order placed:", specialOrder);
     // Here you can dispatch an action to add the order to the cart or perform any other action
     // dispatch(addToSpecialCart(order));
-    alert("Order placed successfully!");
+    alert("Order Created!");
     Navigate("/checkout");
   }
 
@@ -138,10 +138,10 @@ function EveryDaySpecial2() {
                 <div className='special-offers-carousel-inner'>
                   <img src={item.img} alt={item.title} />
                   <div>
-                    <h3>{item.productType}</h3>
+                    <h3>{item.title}</h3>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
                     <h4 style={{ marginBottom: '0.5rem' }}>Select 2 toppings <span style={{fontSize: '10px'}}>(of your choice)</span></h4>
-                    {["Topping 1", "Topping 2", "Topping 3", "Topping 4", "Topping 5", "Topping 6"].map(topping => (
+                    {["Jalapenos", "Sausage", "Corn", "Onions & Peppers", "Ground Beef", "Chicken", "Olives","Mushrooms","Cheese","Ham","Bacon", "Pepperoni", "Extra Cheese"].map(topping => (
                       <div key={topping}>
                         <input
                           type='checkbox'

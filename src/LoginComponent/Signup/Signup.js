@@ -7,12 +7,19 @@ import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 import "./Signup.css"
 import { baseUrl } from '../../functions/baseUrl';
-import axios from "axios"
+import axios from "axios"; 
+
+// phone react 
+// import PhoneInput from 'react-phone-input-2';
+// import 'react-phone-input-2/lib/style.css'; 
 
 function Signup() {
 
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
+    // const [phone, setPhone] = useState(''); 
+
+    // console.log(phone); 
 
     // const handleOnSubmit = async (e) => {
     //     e.preventDefault();
@@ -135,6 +142,14 @@ function Signup() {
                                 // ref={loginNameRef}
                                 />
                             </div>
+                            {/* <div className="form__group">
+                                <h5>Phone Number</h5>
+                                <PhoneInput 
+                                    country={'in'}
+                                    value={phone}
+                                    onChange={phone => setPhone(phone)}
+                                />
+                            </div> */}
                             <div className='passBox' > {/* style={{ display: 'flex', marginTop: "4.5vh" }} */}
                                 <div className="form__group2 pass-cnfm-pass">
                                     <h5>Password</h5>
