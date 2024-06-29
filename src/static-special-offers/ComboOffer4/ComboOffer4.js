@@ -22,6 +22,8 @@ import loadingCartImg from "../../assets/cartLoading.svg";
 // importing drawer
 import { Drawer } from '@mui/material';
 
+import { toast } from 'react-toastify';
+
 function ComboOffer4() {
   const Navigate = useNavigate();
   const [baseData, setBaseData] = useState(null);
@@ -31,6 +33,10 @@ function ComboOffer4() {
   const [selectedBaseItems, setSelectedBaseItems] = useState([]);
   const [selectedAddedItems, setSelectedAddedItems] = useState([]);
   const [selectedAddedItems2, setSelectedAddedItems2] = useState([]);
+
+  const [isFull, setIsFull] = useState(false); 
+  const [isFull2, setIsFull2] = useState(false);
+  const [isFull3, setIsFull3] = useState(false);
 
   const [isOpen, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -48,6 +54,22 @@ function ComboOffer4() {
       alert(err.message);
     }
   }
+
+  useEffect(() => {   
+    setIsFull(selectedBaseItems.length === 2 ? true : false); 
+  }, [selectedBaseItems]); 
+
+
+  useEffect(() => {   
+    setIsFull2(selectedAddedItems.length === 1 ? true : false); 
+  }, [selectedAddedItems]); 
+  
+
+
+  useEffect(() => {   
+    setIsFull3(selectedAddedItems2.length === 1 ? true : false); 
+  }, [selectedAddedItems2]); 
+
 
   const fetchAddedData = async () => {
     try {
@@ -113,7 +135,8 @@ function ComboOffer4() {
     if (selectedBaseItems.length < 2) {
       setSelectedBaseItems([...selectedBaseItems, baseObject]);
     } else {
-      alert("You can only select up to 2 base items.");
+      // alert("You can only select up to 2 base items.");
+      toast.error("You can only select up to 2 base items"); 
     }
     setSelectedToppings([])
 
@@ -130,7 +153,8 @@ function ComboOffer4() {
     if (selectedAddedItems.length < 1) {
       setSelectedAddedItems([...selectedAddedItems, addedItems]);
     } else {
-      alert("You can only add one");
+      // alert("You can only add one");
+      toast.error("You can only add one"); 
     }
   }
 
@@ -143,7 +167,7 @@ function ComboOffer4() {
     if (selectedAddedItems2.length < 1) {
       setSelectedAddedItems2([...selectedAddedItems2, addedItems]);
     } else {
-      alert("You can only add one");
+      toast.error("You can only add one");
     }
   }
 
@@ -170,11 +194,18 @@ function ComboOffer4() {
 
   const handleOrder = () => {
     if (selectedBaseItems.length !== 2) {
-      alert("You must select exactly 2 base items.");
+      // alert("You must select exactly 2 base items.");
+      toast.error("You must select exactly 2 base items");
       return;
     }
     if (selectedAddedItems.length !== 1) {
-      alert("You must select exactly 1 item for 10pcs chicken wings.");
+      // alert("You must select exactly 1 item for 10pcs chicken wings.");
+      toast.error("You must select exactly 1 item for 10pcs chicken wings");
+      return;
+    }
+    if (selectedAddedItems2.length !== 1) {
+      // alert("You must select exactly 1 item for 10pcs chicken wings.");
+      toast.error("You must select exactly 1 item for 2 Ltr Soda");
       return;
     }
     dispatch(deleteSpecialObject());
@@ -192,9 +223,10 @@ function ComboOffer4() {
     // console.log("Order placed:", specialOrder);
     // Here you can dispatch an action to add the order to the cart or perform any other action
     // dispatch(addToSpecialObject(order));
-    alert("Order Created!");
-
-    Navigate("/checkout")
+    toast.success("Order Created!"); 
+    setTimeout(() => { 
+      Navigate("/checkout");
+    }, 1000); 
 
 
   }
@@ -229,8 +261,9 @@ function ComboOffer4() {
                         <label htmlFor={topping}>{topping}</label>
                       </div>
                     ))}
-                    <button className='add-to-cart-special-offer' onClick={() => handleBase(item)}>
-                      Select
+                    {/* disabled */}
+                    <button className={`add-to-cart-special-offer ${isFull ? 'disabled' : ''}`} onClick={() => handleBase(item)}>
+                      {isFull ? 'Selected' : 'Select'}
                     </button>
                   </div>
                 </div>
@@ -249,8 +282,8 @@ function ComboOffer4() {
                   <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
                     <h4>{item.title}</h4>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
-                    <button className='add-to-cart-special-offer' onClick={() => handleAddedClick(item)}>
-                      Select
+                    <button className={`add-to-cart-special-offer ${isFull2 ? 'disabled' : ''}`} onClick={() => handleAddedClick(item)}>
+                       {isFull2 ? 'Selected' : 'Select'}
                     </button>
                   </div>
                 </div>
@@ -269,8 +302,8 @@ function ComboOffer4() {
                   <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
                     <h4>{item.title}</h4>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
-                    <button className='add-to-cart-special-offer' onClick={() => handleAddedClick2(item)}>
-                      Select
+                    <button className={`add-to-cart-special-offer ${isFull3 ? 'disabled' : ''}`} onClick={() => handleAddedClick2(item)}>
+                    {isFull3 ? 'Selected' : 'Select'}
                     </button>
                   </div>
                 </div>
@@ -451,7 +484,7 @@ function ComboOffer4() {
 
 
 
-        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} /></button>
+        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} /> <span style={{fontSize: '15px', fontWeight: '700', transform: 'translateY(10%)'}}>$39.99</span> </button>
 
 
         <Drawer
@@ -463,7 +496,7 @@ function ComboOffer4() {
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '5px' }}>
             <img src={borderRadius} style={{ width: '30%', height: 'auto' }} />
           </div>
-          <div style={{ padding: '1rem 1rem' }}>
+          <div style={{ padding: '1rem 1rem', maxHeight: '500px', overflowY: 'scroll' }}>
             <div>
               <h3>2 Large Pies - 3 toppings <span style={{fontSize: '13px'}}>(of your choice)</span> </h3>
               {selectedBaseItems.length > 0 ?

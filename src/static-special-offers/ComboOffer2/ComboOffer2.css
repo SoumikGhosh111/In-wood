@@ -123,11 +123,15 @@
   bottom:10%;
   right: 5%; 
   border: none;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
+  height: fit-content;
+  width: fit-content; 
+  padding: 0.5rem 0.5rem;
+  border-radius: 8px;
   background-color: white;
   display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
   box-shadow: 0px 10px 12px -3px rgb(139, 139, 139);
 }
 
@@ -156,6 +160,6 @@
     width: 90% !important;
   }
   .special-offer-mob-cart{ 
-    display: block;
+    display: flex;
   }
 }

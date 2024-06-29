@@ -24,6 +24,9 @@ import loadingCartImg from "../../assets/cartLoading.svg";
 // importting mui drawer
 import Drawer from '@mui/material/Drawer';
 
+// toastify
+import { toast } from 'react-toastify';
+
 function ComboOffer2() {
   const Navigate = useNavigate();
   const [baseData, setBaseData] = useState(null);
@@ -34,6 +37,9 @@ function ComboOffer2() {
   const [selectedBaseItems, setSelectedBaseItems] = useState([]);
   const [selectedAddedItems, setSelectedAddedItems] = useState([]);
   const [selectedAddedItems2, setSelectedAddedItems2] = useState([]);
+
+  const [isFull2, setIsFull2] = useState(false);
+  const [isFull3, setIsFull3] = useState(false);
 
   const [isOpen, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -89,6 +95,16 @@ function ComboOffer2() {
     setSelectedBaseItems([baseObject, baseObject]);
 
   }, []);
+
+  useEffect(() => {   
+    setIsFull2(selectedAddedItems.length === 1 ? true : false); 
+  }, [selectedAddedItems]); 
+  
+
+
+  useEffect(() => {   
+    setIsFull3(selectedAddedItems2.length === 1 ? true : false); 
+  }, [selectedAddedItems2]);
 
   const handleToppingChange = (topping) => {
     const updatedToppings = selectedToppings.includes(topping)
@@ -168,7 +184,8 @@ function ComboOffer2() {
     if (selectedAddedItems.length < 1) {
       setSelectedAddedItems([...selectedAddedItems, addedItems]);
     } else {
-      alert("You can only add one");
+      // alert("You can only add one");
+      toast.error("You can only add one"); 
     }
   }
 
@@ -181,7 +198,8 @@ function ComboOffer2() {
     if (selectedAddedItems2.length < 1) {
       setSelectedAddedItems2([...selectedAddedItems2, addedItems]);
     } else {
-      alert("You can only add one");
+      // alert("You can only add one");
+      toast.error("You can only add one"); 
     }
   }
 
@@ -209,15 +227,17 @@ function ComboOffer2() {
 
   const handleOrder = () => {
     if (selectedBaseItems.length !== 2) {
-      alert("You must select exactly 2 base items.");
+      // alert("You must select exactly 2 base items.");
       return;
     }
     if (selectedAddedItems.length !== 1) {
-      alert("You must select exactly 1 item for 5pcs chicken wings.");
+      // alert("You must select exactly 1 item for 5pcs chicken wings.");
+      toast.error("You must select exactly 1 item for 5pcs chicken wings"); 
       return;
     }
     if (selectedAddedItems2.length !== 1) {
-      alert("You must select exactly 1 item for 2Ltr of Soda.");
+      // alert("You must select exactly 1 item for 2Ltr of Soda.");
+      toast.error("You must select exactly 1 item for 2Ltr of Soda"); 
       return;
     }
     dispatch(deleteSpecialObject());
@@ -230,9 +250,11 @@ function ComboOffer2() {
       totalAmount: 24.99,
     };
 
-    alert("Order Created");
     dispatch(addSpecialObject(specialOrder));
-    Navigate("/checkout")
+    toast.success("Order Created!")
+    setTimeout(() => { 
+      Navigate("/checkout");
+    }, 1000); 
   }
 
   const handleMobCartClose = () => {
@@ -286,8 +308,8 @@ function ComboOffer2() {
                   <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
                     <h4>{item.title}</h4>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
-                    <button className='add-to-cart-special-offer' onClick={() => handleAddedClick(item)}>
-                      Select
+                    <button className={`add-to-cart-special-offer ${isFull2 ? 'disabled' : ''}`} onClick={() => handleAddedClick(item)}>
+                       {isFull2 ? 'Selected' : 'Select'}
                     </button>
                   </div>
                 </div>
@@ -306,8 +328,8 @@ function ComboOffer2() {
                   <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
                     <h4>{item.title}</h4>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
-                    <button className='add-to-cart-special-offer' onClick={() => handleAddedClick2(item)}>
-                      Select
+                    <button className={`add-to-cart-special-offer ${isFull3 ? 'disabled' : ''}`} onClick={() => handleAddedClick2(item)}>
+                    {isFull3 ? 'Selected' : 'Select'}
                     </button>
                   </div>
                 </div>
@@ -459,7 +481,7 @@ function ComboOffer2() {
 
         </div>
 
-        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} /></button>
+        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} /> <span style={{fontSize: '15px', fontWeight: '700', transform: 'translateY(10%)'}}>$24.99</span></button>
 
 
         <Drawer

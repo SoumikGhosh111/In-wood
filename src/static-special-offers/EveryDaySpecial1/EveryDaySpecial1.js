@@ -25,6 +25,7 @@ import loadingCartImg from "../../assets/cartLoading.svg";
 
 // importting mui drawer
 import Drawer from '@mui/material/Drawer';
+import { toast } from 'react-toastify';
 
 function EveryDaySpecial1() {
   const Navigate = useNavigate();
@@ -145,9 +146,11 @@ function EveryDaySpecial1() {
       totalAmount: 6.99,
     };
 
-    alert("Order Created");
     dispatch(addSpecialObject(specialOrder));
-    Navigate("/checkout")
+    toast.success("Order Created!"); 
+    setTimeout(() => { 
+      Navigate("/checkout");
+    }, 1000); 
   }
 
   const handleMobCartClose = () => {
@@ -260,7 +263,7 @@ function EveryDaySpecial1() {
 
 
 
-        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} /></button>
+        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} />  <span style={{fontSize: '15px', fontWeight: '700', transform: 'translateY(10%)'}}>$6.99</span></button>
 
 
         <Drawer

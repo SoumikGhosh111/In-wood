@@ -21,12 +21,19 @@ import loadingCartImg from "../../assets/cartLoading.svg";
 // importing drawer
 import { Drawer } from '@mui/material';
 
+// toasify
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 function EveryDaySpecial2() {
   const [baseData, setBaseData] = useState(null);
- 
+
   const [selectedToppings, setSelectedToppings] = useState([]);
   const [selectedBaseItems, setSelectedBaseItems] = useState([]);
- 
+
+  const [isFull, setIsFull] = useState(false);
+
 
   const [isOpen, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -51,6 +58,10 @@ function EveryDaySpecial2() {
     fetchBaseData();
   }, []);
 
+  useEffect(() => {
+    setIsFull(selectedBaseItems.length === 1 ? true : false);
+  }, [selectedBaseItems]);
+
   const handleToppingChange = (topping) => {
     const updatedToppings = selectedToppings.includes(topping)
       ? selectedToppings.filter(t => t !== topping)
@@ -59,7 +70,8 @@ function EveryDaySpecial2() {
     if (updatedToppings.length <= 2) {
       setSelectedToppings(updatedToppings);
     } else {
-      alert("You can only select up to 2 toppings.");
+      // alert("You can only select up to 2 toppings.");
+      toast.error("You can only select up to 2 toppings"); 
     }
   }
 
@@ -85,7 +97,8 @@ function EveryDaySpecial2() {
     if (selectedBaseItems.length < 1) {
       setSelectedBaseItems([...selectedBaseItems, baseObject]);
     } else {
-      alert("You can only select up to 1 base items.");
+      // alert("You can only select up to 1 base items.");
+      toast.error("You can only select up to 1 base items.")
     }
 
     console.log(selectedBaseItems)
@@ -101,10 +114,11 @@ function EveryDaySpecial2() {
   const handleOrder = () => {
 
     if (selectedBaseItems.length !== 1) {
-      alert("You must select exactly 1 base item.");
+      // alert("You must select exactly 1 base item.");
+      toast.error("You must select exactly 1 base item.")
       return;
     }
-    
+
     dispatch(deleteSpecialObject());
     const specialOrder = {
       offerName: "Every Day Special 2",
@@ -118,8 +132,10 @@ function EveryDaySpecial2() {
     console.log("Order placed:", specialOrder);
     // Here you can dispatch an action to add the order to the cart or perform any other action
     // dispatch(addToSpecialCart(order));
-    alert("Order Created!");
-    Navigate("/checkout");
+    toast.success("Order Created!")
+    setTimeout(() => { 
+      Navigate("/checkout");
+    }, 1000); 
   }
 
   const handleMobCartClose = () => {
@@ -130,7 +146,7 @@ function EveryDaySpecial2() {
   return (
     <div className='combo-offer-2'>
       <div className='static-special-offers-wrapper'>
-        <h2>1 Medium Pie - 2 toppings <span style={{fontSize: '15px'}}>(of your choice)</span></h2>
+        <h2>1 Medium Pie - 2 toppings <span style={{ fontSize: '15px' }}>(of your choice)</span></h2>
         <div className='combo-offer-2-basses'>
           <Slider {...settings}>
             {baseData !== null && baseData.map((item) => (
@@ -140,8 +156,8 @@ function EveryDaySpecial2() {
                   <div>
                     <h3>{item.title}</h3>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
-                    <h4 style={{ marginBottom: '0.5rem' }}>Select 2 toppings <span style={{fontSize: '10px'}}>(of your choice)</span></h4>
-                    {["Jalapenos", "Sausage", "Corn", "Onions & Peppers", "Ground Beef", "Chicken", "Olives","Mushrooms","Cheese","Ham","Bacon", "Pepperoni", "Extra Cheese"].map(topping => (
+                    <h4 style={{ marginBottom: '0.5rem' }}>Select 2 toppings <span style={{ fontSize: '10px' }}>(of your choice)</span></h4>
+                    {["Jalapenos", "Sausage", "Corn", "Onions & Peppers", "Ground Beef", "Chicken", "Olives", "Mushrooms", "Cheese", "Ham", "Bacon", "Pepperoni", "Extra Cheese"].map(topping => (
                       <div key={topping}>
                         <input
                           type='checkbox'
@@ -153,8 +169,8 @@ function EveryDaySpecial2() {
                         <label htmlFor={topping}>{topping}</label>
                       </div>
                     ))}
-                    <button className='add-to-cart-special-offer' onClick={() => handleBase(item)}>
-                      Select
+                    <button className={`add-to-cart-special-offer ${isFull ? 'disabled' : ''}`} onClick={() => handleBase(item)}>
+                      {isFull ? 'Selected' : 'Select'}
                     </button>
                   </div>
                 </div>
@@ -167,7 +183,7 @@ function EveryDaySpecial2() {
         <div className='add-to-cart-wrapper special-offers-cart every-day-special'>
           <div className='order-cart-cards'>
             <div>
-              <h3>1 Medium Pie - 2 toppings <span style={{fontSize: '13px'}}>(of your choice)</span> </h3>
+              <h3>1 Medium Pie - 2 toppings <span style={{ fontSize: '13px' }}>(of your choice)</span> </h3>
               {selectedBaseItems.length > 0 ?
                 (
                   <>
@@ -222,7 +238,7 @@ function EveryDaySpecial2() {
         </div>
 
 
-        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} /></button>
+        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} /><span style={{fontSize: '15px', fontWeight: '700', transform: 'translateY(10%)'}}>$7.99</span></button>
 
 
         <Drawer
@@ -269,7 +285,7 @@ function EveryDaySpecial2() {
             </div>
             <button className='add-to-cart-button' style={{ backgroundColor: 'black', color: 'white' }} onClick={handleOrder}>PROCEED TO ORDER</button> */}
             <div>
-              <h3><h2>1 Medium Pie - 2 toppings <span style={{fontSize: '13px'}}>(of your choice)</span></h2></h3>
+              <h3><h2>1 Medium Pie - 2 toppings <span style={{ fontSize: '13px' }}>(of your choice)</span></h2></h3>
               {selectedBaseItems.length > 0 ?
                 (
                   <>
@@ -313,8 +329,8 @@ function EveryDaySpecial2() {
                   </>
                 )}
             </div>
-            
-           
+
+
             <div className='special-offer-cart-button'>
               <div className='total-amnt-add-to-cart'><span >Total Amount: </span> <span style={{ fontWeight: '700' }}>$ 7.99</span></div>
 

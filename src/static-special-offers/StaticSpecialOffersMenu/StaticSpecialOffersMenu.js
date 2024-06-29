@@ -17,6 +17,11 @@ import ComboOffer2 from '../ComboOffer2/ComboOffer2';
 import ComboOffer3 from '../ComboOffer3/ComboOffer3';
 import ComboOffer4 from '../ComboOffer4/ComboOffer4';
 
+
+// importing toastify
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const specialOffer = {
     title: "Game Day Special",
     description: "Game Day Special",
@@ -201,7 +206,10 @@ function StaticSpecialOffersMenu() {
                 </div>
             </div>
 
-
+            <ToastContainer 
+                position='top-center'
+                className={'toast-container-center'}
+            />
         </div>
     );
 }
