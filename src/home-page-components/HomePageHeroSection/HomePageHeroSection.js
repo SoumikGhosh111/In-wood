@@ -7,18 +7,24 @@ import background from "../../assets/hero_background.png"
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useAnimate, useInView } from "framer-motion";
 import { motion, AnimatePresence } from 'framer-motion';
-import banner1 from "../../assets/banner-1.jpg";
 import maskot from "../../assets/maskot_logo_inwood.png"
 import cheesePie from "../../assets/chesse_pie.png";
 import offerBanner from "../../assets/inwood_offer_banner 2.jpg"
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import ArrowCircleLeftOutlinedIcon from '@mui/icons-material/ArrowCircleLeftOutlined';
-import inwoodOfferBanner from "../../assets/sample_banner.jpg";
-import banner2 from "../../assets/banner_2.jpg";
 import pizza from "../../assets/pizza.png"
 import italianBG from "../../assets/italian_bg.jpg"
 
+// slick carousel
+import Slider from 'react-slick';
 
+// banners
+import banner1 from "../../assets/offer_banner_1.jpg"; 
+import banner2 from "../../assets/offer_banner_2.jpg";
+import banner3 from "../../assets/offer_banner_3.jpg";
+import banner4 from "../../assets/offer_banner_4.jpg";
+import banner5 from "../../assets/offer_banner_5.jpg";
+import banner6 from "../../assets/offer_banner_6.jpg";
 
 // import MenuSection from '../MenuSection/MenuSection';
 // import Footer from '../../components/Footer/Footer';
@@ -31,11 +37,23 @@ const MemoizedFooter = memo(Footer);
 
 const carouselItems = [
     {
-        bgImg: inwoodOfferBanner,
+        bgImg: banner1,
     },
 
     {
         bgImg: banner2,
+    },
+    {
+        bgImg: banner3,
+    },
+    {
+        bgImg: banner4,
+    },
+    {
+        bgImg: banner5,
+    },
+    {
+        bgImg: banner6,
     },
 ];
 function HomePageHeroSection() {
@@ -55,6 +73,44 @@ function HomePageHeroSection() {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [transitionDirection, setTransitionDirection] = useState('');
     const [isTransitioning, setIsTransitioning] = useState(false);
+
+    var settings = {
+        arrows: true,
+        dots: true,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        pauseOnHover: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              initialSlide: 1
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
+      }
 
     // useEffect(() => {
     //     const interval = setInterval(() => {
@@ -200,29 +256,18 @@ function HomePageHeroSection() {
                         </button>
                     </div>
                 </div>
-                <div className='rightBox' style={{ zIndex: scroll > window.innerHeight / 10 ? '0' : '1' }}>
-                    <div className="home-page-carousel">
-                        <button className="home-page-carousel-btn left-btn" onClick={handlePrevClick} disabled={isTransitioning}>
-                            <ArrowCircleLeftOutlinedIcon />
-                        </button>
-                        <AnimatePresence initial={false} custom={transitionDirection}>
-                            <motion.div
-                                key={currentIndex}
-                                className={`home-page-carousel-content ${transitionDirection}`}
-                                custom={transitionDirection}
-                                initial={{ x: transitionDirection === 'right' ? 100 : -100, opacity: 0 }}
-                                animate={{ x: 0, opacity: 1 }}
-                                exit={{ x: transitionDirection === 'right' ? -100 : 100, opacity: 0 }}
-                                transition={{ duration: 0.3 }}
-                                style={{ width: '100%', background: 'transparent', cursor: 'pointer' }}
-                                onClick={handleSpecialOffersPage}
-                            >
-                                <img src={bgImg} className='home-page-carousel-bg' />
-                            </motion.div>
-                        </AnimatePresence>
-                        <button className="home-page-carousel-btn right-btn" onClick={handleNextClick} disabled={isTransitioning}>
-                            <ArrowCircleRightOutlinedIcon />
-                        </button>
+                <div className='rightBox' style={{ zIndex: scroll > window.innerHeight / 10 ? '0' : '1',  }}>
+                    <div className='home-page-slider-wrapper'>
+                    <Slider {...settings}>
+                        {carouselItems?.map((banners, indx) => ( 
+                            <div key={indx} className='home-pg-slider-items'>
+                               <div style={{width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer'}} onClick={handleSpecialOffersPage}> 
+                                <img src={banners.bgImg} />
+                               </div>
+                            </div>  
+                        ))}
+                        
+                    </Slider>
                     </div>
                 </div>
             </div>
@@ -243,32 +288,26 @@ function HomePageHeroSection() {
 export default HomePageHeroSection
 
 
-{/* <div className="carousel">
-                    <button className="carousel-btn left-btn" onClick={handlePrevClick} disabled={isTransitioning}>
-                        <ArrowCircleLeftOutlinedIcon />
-                    </button>
-                    <AnimatePresence initial={false} custom={transitionDirection}>
-                        <motion.div
-                            key={currentIndex}
-                            className={`carousel-content ${transitionDirection}`}
-                            custom={transitionDirection}
-                            initial={{ x: transitionDirection === 'right' ? 500 : -500, opacity: 0 }}
-                            animate={{ x: 0, opacity: 1 }}
-                            exit={{ x: transitionDirection === 'right' ? -500 : 500, opacity: 0 }}
-                            transition={{ duration: 0.3 }}
-                            style={{ width: '100%', background: bgClr }}
-                        >
-                            <img src={bgImg} className='carousel-bg' style={{display: bgImg === '' ? 'none' : '', zIndex: zId}}/>
-                            <div className="left-box">
-                                <p>{text}</p>
-                                <button className='home-hero-order-button' onClick={handleClick} style={{marginTop: text === '' ? '16rem': '0'}}>{buttonText}</button>
-                            </div>
-                            <div className="right-box">
-                                <img src={imgSrc} />
-                            </div>
-                        </motion.div>
-                    </AnimatePresence>
-                    <button className="carousel-btn right-btn" onClick={handleNextClick} disabled={isTransitioning}>
-                        <ArrowCircleRightOutlinedIcon/>
-                    </button>
-                </div> */}
+    // < div className = "home-page-carousel" >
+    //                     <button className="home-page-carousel-btn left-btn" onClick={handlePrevClick} disabled={isTransitioning}>
+    //                         <ArrowCircleLeftOutlinedIcon />
+    //                     </button>
+    //                     <AnimatePresence initial={false} custom={transitionDirection}>
+    //                         <motion.div
+    //                             key={currentIndex}
+    //                             className={`home-page-carousel-content ${transitionDirection}`}
+    //                             custom={transitionDirection}
+    //                             initial={{ x: transitionDirection === 'right' ? 100 : -100, opacity: 0 }}
+    //                             animate={{ x: 0, opacity: 1 }}
+    //                             exit={{ x: transitionDirection === 'right' ? -100 : 100, opacity: 0 }}
+    //                             transition={{ duration: 0.3 }}
+    //                             style={{ width: '100%', background: 'transparent', cursor: 'pointer' }}
+    //                             onClick={handleSpecialOffersPage}
+    //                         >
+    //                             <img src={bgImg} className='home-page-carousel-bg' />
+    //                         </motion.div>
+    //                     </AnimatePresence>
+    //                     <button className="home-page-carousel-btn right-btn" onClick={handleNextClick} disabled={isTransitioning}>
+    //                         <ArrowCircleRightOutlinedIcon />
+    //                     </button>
+    //                 </div >
