@@ -145,7 +145,7 @@
   }
   
   .slick-dots li.slick-active button:before {
-    color: red; /* Change this to the desired active dot color */
+    color: #ffd029; /* Change this to the desired active dot color */
     opacity: 1; /* Make the active dot fully opaque */
   }
 

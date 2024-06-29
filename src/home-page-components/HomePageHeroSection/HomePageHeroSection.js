@@ -78,7 +78,7 @@ function HomePageHeroSection() {
         arrows: true,
         dots: true,
         autoplay: true,
-        autoplaySpeed: 2000,
+        autoplaySpeed: 4000,
         pauseOnHover: false,
         infinite: true,
         speed: 500,
