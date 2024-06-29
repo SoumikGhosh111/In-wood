@@ -481,7 +481,7 @@ function ComboOffer2() {
 
         </div>
 
-        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><span style={{fontSize: '15px', fontWeight: '700', transform: 'translateY(10%)'}}>$24.99</span> <ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} /> </button>
+        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} /> <span style={{fontSize: '15px', fontWeight: '700', transform: 'translateY(10%)'}}>$24.99</span></button>
 
 
         <Drawer
