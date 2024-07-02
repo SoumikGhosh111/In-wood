@@ -33,12 +33,15 @@ function MyOrder() {
             const response = await fetch(`${baseUrl}/api/users/orderDetails/${userId}`);
             const result = await response.json();
             setOrderDetails(result);
+            console.log(result);
         } catch (err) {
             console.log(err);
         }
     };
 
     const handleDownload = async (orderId) => {
+
+        console.log(orderId);
         try {
             const response = await fetch(`${baseUrl}/api/invoice/pdf/${orderId}`, {
                 method: 'GET',
@@ -150,12 +153,12 @@ function MyOrder() {
                                                                             <div className={`dropdown-info ${openDropDowns[key] ? 'open-dropdown' : 'close-dropdown'} my-order-drop-down-info`}>
                                                                                 {combos?.pizzas?.map((item, pizzaIndx) => (
                                                                                     <div key={pizzaIndx}>
-                                                                                        <div style={{fontWeight: '700'}}>{item.title}</div>
+                                                                                        <div style={{ fontWeight: '700' }}>{item.title}</div>
                                                                                         <div>{item.toppings}</div>
                                                                                     </div>
                                                                                 ))}
-                                                                                <div style={{fontWeight: '700'}}>{combos.addedItems}</div>
-                                                                                {combos?.extraAdded && <div style={{fontWeight: '700'}}>{combos.extraAdded}</div>}
+                                                                                <div style={{ fontWeight: '700' }}>{combos.addedItems}</div>
+                                                                                {combos?.extraAdded && <div style={{ fontWeight: '700' }}>{combos.extraAdded}</div>}
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -170,6 +173,9 @@ function MyOrder() {
                                                         <div className='total-ammnt-my-order'>
                                                             Total Amount: ${item.total}
                                                         </div>
+                                                    </div>
+                                                    <div className='delivery_status'>
+                                                        <button onClick={() => handleDownload(item._id)} className='invoice-generate-button'>Generate invoice</button>
                                                     </div>
                                                 </div>
                                             </div>
