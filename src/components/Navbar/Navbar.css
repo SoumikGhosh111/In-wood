@@ -178,7 +178,7 @@
     align-items: center;
     flex-direction: column;
     padding: 0rem 1rem ;
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     
 }
 .drawer-items{ 
@@ -190,7 +190,10 @@
     border-bottom-color: grey;
     margin-top: 1rem;
 }
-
+.drawer-items-last-item{ 
+    border:  none !important;
+    margin-bottom: 2rem;
+}
 .drawer-wrapper input:focus{ 
     outline: none;
 }

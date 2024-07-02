@@ -133,7 +133,7 @@ export default function TemporaryDrawer() {
                                 <EastRoundedIcon />
                             </div>
                             :
-                            <div className='drawer-items' onClick={handleLogin}>
+                            <div className='drawer-items drawer-items-last-item' onClick={handleLogin}>
                                 <a>Login</a>
                                 <EastRoundedIcon />
                             </div>
