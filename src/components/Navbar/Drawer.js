@@ -128,7 +128,7 @@ export default function TemporaryDrawer() {
                         {/* <div className='hor-line'></div> */}
 
                         {isLogin ?
-                            <div className='drawer-items' onClick={handleLogout}>
+                            <div className='drawer-items drawer-items-last-item' onClick={handleLogout}>
                                 <a>Logout</a>
                                 <EastRoundedIcon />
                             </div>
