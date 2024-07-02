@@ -39,7 +39,7 @@ function App() {
             <Route path='/profile' element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
             <Route path='/forgetpassword' element={<ForgetPasswordPage />} />
             <Route path='/dashboard' element={<AdminRoute><DashboardPage /></AdminRoute>} />
-            <Route path='/checkout-success' element={<ProtectedRoute><CheckoutSuccess /></ProtectedRoute>} />
+            <Route path='/checkout-success' element={<CheckoutSuccess />} />
             <Route path='/my-order' element={<ProtectedRoute><MyOrderPage /></ProtectedRoute>} />
             <Route path='/coupens' element={<ProtectedRoute><PromotionsPage /></ProtectedRoute>} />
             <Route path='/special-offers' element={<ProtectedRoute><SpecialOffersPage /></ProtectedRoute>} />
