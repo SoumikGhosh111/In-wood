@@ -214,7 +214,7 @@ function Navbar() {
                         <li><Link onClick={handleHomeClick} className={`nav-links btn-2 ${isMenuActive ? '' : 'active'}`} id='home'>Home</Link></li>
                         <li><Link onClick={handleMenu} className={`nav-links btn-2 ${isMenuActive ? 'active' : ''}`} id='menu'>Menu</Link></li>
                         <li><Link className='nav-links btn-2' id='pages' to={"/checkout"}>Checkout</Link></li>
-                        <li><Link className='nav-links btn-2' id='pages' to={"/coupens"}>Coupons</Link></li>
+                        <li><Link className='nav-links btn-2' id='pages' to={"/special-offers"}>Special Offers</Link></li>
                     </ul>
 
                     <div className='nav-bar-login-area'>
@@ -231,7 +231,7 @@ function Navbar() {
                                                 <span className= 'store-op-cl' style={{color: '#71b422'}}>we are Open now</span>    
                                             </> : 
                                             <>
-                                                <span className= 'store-op-cl' style={{color: '#e92028'}}>we are Close now</span> 
+                                                <span className= 'store-op-cl' style={{color: '#e92028'}}>we are Closed now</span> 
                                             </>}
                                         </> : <></> }
                                     

@@ -68,8 +68,10 @@ export default function TemporaryDrawer() {
     const handleMyOrderClick = () => { 
         Navigate("/my-order")
     }
+
+    // now redirecting to special offers page
     const handleCoupenClick = () => { 
-        Navigate("/coupens")
+        Navigate("/special-offers")
     }
     useEffect(() => {
         const checkUser = async () => {
@@ -120,7 +122,7 @@ export default function TemporaryDrawer() {
                             <EastRoundedIcon />
                         </div>
                         <div className='drawer-items' onClick={handleCoupenClick}>
-                            <a>Coupons</a>
+                            <a>Special Offers</a>
                             <EastRoundedIcon />
                         </div>
                         {/* <div className='hor-line'></div> */}
