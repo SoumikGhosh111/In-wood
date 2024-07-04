@@ -19,12 +19,18 @@ import italianBG from "../../assets/italian_bg.jpg"
 import Slider from 'react-slick';
 
 // banners
-import banner1 from "../../assets/offer_banner_1.jpg"; 
+import banner1 from "../../assets/offer_banner_1.jpg";
 import banner2 from "../../assets/offer_banner_2.jpg";
 import banner3 from "../../assets/offer_banner_3.jpg";
 import banner4 from "../../assets/offer_banner_4.jpg";
 import banner5 from "../../assets/offer_banner_5.jpg";
 import banner6 from "../../assets/offer_banner_6.jpg";
+
+import specialBanner from "../../assets/independence_day_banner.jpg";
+
+// redux file offer numeric
+import { setOfferNumeric, deleteOfferNumeric } from '../../redux/slices/specialOffersSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 // import MenuSection from '../MenuSection/MenuSection';
 // import Footer from '../../components/Footer/Footer';
@@ -59,6 +65,9 @@ const carouselItems = [
 function HomePageHeroSection() {
     const [scroll, setScroll] = useState(0);
     const [rotationAngle, setRotationAngle] = useState(null);
+    const dispatch = useDispatch();
+    const offerNumeric = useSelector((state) => state.specialoffer.offerNumeric); 
+    console.log(offerNumeric)
     const [heroSentence, setHeroSentence] = useState('');
     const ref1 = useRef(null);
     const ref2 = useRef(null);
@@ -85,32 +94,32 @@ function HomePageHeroSection() {
         slidesToShow: 1,
         slidesToScroll: 1,
         responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
-              infinite: true,
-              dots: true
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 1
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
             }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
-              initialSlide: 1
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
         ]
-      }
+    }
 
     // useEffect(() => {
     //     const interval = setInterval(() => {
@@ -222,6 +231,43 @@ function HomePageHeroSection() {
     const handleSpecialOffersPage = () => {
         window.location.href = '/special-offers';
     }
+
+    const handleOffer1 = () => {
+        dispatch(deleteOfferNumeric()); 
+        dispatch(setOfferNumeric(4));
+        window.location.href = '/special-offers';
+    }
+    const handleOffer2 = () => {
+        dispatch(deleteOfferNumeric()); 
+        dispatch(setOfferNumeric(2));
+        window.location.href = '/special-offers';
+    }
+
+    const handleOffer3 = () => {
+        dispatch(deleteOfferNumeric()); 
+        dispatch(setOfferNumeric(3));
+        window.location.href = '/special-offers';
+    }
+
+    const handleOffer4 = () => {
+        dispatch(deleteOfferNumeric()); 
+        dispatch(setOfferNumeric(5));
+        window.location.href = '/special-offers';
+    }
+
+
+    const handleOffer5 = () => {
+        dispatch(deleteOfferNumeric()); 
+        dispatch(setOfferNumeric(3));
+        window.location.href = '/special-offers';
+    }
+
+    const handleOffer6 = () => {
+        dispatch(deleteOfferNumeric()); 
+        dispatch(setOfferNumeric(6));
+        window.location.href = '/special-offers';
+    }
+
     return (
         <div >
             <div className='homeBox' ref={ref1}>
@@ -256,18 +302,55 @@ function HomePageHeroSection() {
                         </button>
                     </div>
                 </div>
-                <div className='rightBox' style={{ zIndex: scroll > window.innerHeight / 10 ? '0' : '1',  }}>
+                <div className='rightBox' style={{ zIndex: scroll > window.innerHeight / 10 ? '0' : '1', }}>
                     <div className='home-page-slider-wrapper'>
-                    <Slider {...settings}>
-                        {carouselItems?.map((banners, indx) => ( 
+                        <Slider {...settings}>
+                            {/* {carouselItems?.map((banners, indx) => ( 
                             <div key={indx} className='home-pg-slider-items'>
                                <div style={{width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer'}} onClick={handleSpecialOffersPage}> 
                                 <img src={banners.bgImg} />
                                </div>
                             </div>  
-                        ))}
-                        
-                    </Slider>
+                        ))} */}
+
+                            <div className='home-pg-slider-items'>
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer1()}>
+                                    <img src={banner1} />
+                                </div>
+                            </div>
+
+                            <div className='home-pg-slider-items'>
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer2()}>
+                                    <img src={banner2} />
+                                </div>
+                            </div>
+
+                            <div className='home-pg-slider-items'>
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer3()}>
+                                    <img src={specialBanner} />
+                                </div>
+                            </div>
+
+
+                            <div className='home-pg-slider-items'>
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer4()}>
+                                    <img src={banner4} />
+                                </div>
+                            </div>
+
+                            <div className='home-pg-slider-items'>
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer5()}>
+                                    <img src={banner5} />
+                                </div>
+                            </div>
+
+                            <div className='home-pg-slider-items'>
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer6()}>
+                                    <img src={banner6} />
+                                </div>
+                            </div>
+
+                        </Slider>
                     </div>
                 </div>
             </div>
@@ -288,26 +371,26 @@ function HomePageHeroSection() {
 export default HomePageHeroSection
 
 
-    // < div className = "home-page-carousel" >
-    //                     <button className="home-page-carousel-btn left-btn" onClick={handlePrevClick} disabled={isTransitioning}>
-    //                         <ArrowCircleLeftOutlinedIcon />
-    //                     </button>
-    //                     <AnimatePresence initial={false} custom={transitionDirection}>
-    //                         <motion.div
-    //                             key={currentIndex}
-    //                             className={`home-page-carousel-content ${transitionDirection}`}
-    //                             custom={transitionDirection}
-    //                             initial={{ x: transitionDirection === 'right' ? 100 : -100, opacity: 0 }}
-    //                             animate={{ x: 0, opacity: 1 }}
-    //                             exit={{ x: transitionDirection === 'right' ? -100 : 100, opacity: 0 }}
-    //                             transition={{ duration: 0.3 }}
-    //                             style={{ width: '100%', background: 'transparent', cursor: 'pointer' }}
-    //                             onClick={handleSpecialOffersPage}
-    //                         >
-    //                             <img src={bgImg} className='home-page-carousel-bg' />
-    //                         </motion.div>
-    //                     </AnimatePresence>
-    //                     <button className="home-page-carousel-btn right-btn" onClick={handleNextClick} disabled={isTransitioning}>
-    //                         <ArrowCircleRightOutlinedIcon />
-    //                     </button>
-    //                 </div >
+// < div className = "home-page-carousel" >
+//                     <button className="home-page-carousel-btn left-btn" onClick={handlePrevClick} disabled={isTransitioning}>
+//                         <ArrowCircleLeftOutlinedIcon />
+//                     </button>
+//                     <AnimatePresence initial={false} custom={transitionDirection}>
+//                         <motion.div
+//                             key={currentIndex}
+//                             className={`home-page-carousel-content ${transitionDirection}`}
+//                             custom={transitionDirection}
+//                             initial={{ x: transitionDirection === 'right' ? 100 : -100, opacity: 0 }}
+//                             animate={{ x: 0, opacity: 1 }}
+//                             exit={{ x: transitionDirection === 'right' ? -100 : 100, opacity: 0 }}
+//                             transition={{ duration: 0.3 }}
+//                             style={{ width: '100%', background: 'transparent', cursor: 'pointer' }}
+//                             onClick={handleSpecialOffersPage}
+//                         >
+//                             <img src={bgImg} className='home-page-carousel-bg' />
+//                         </motion.div>
+//                     </AnimatePresence>
+//                     <button className="home-page-carousel-btn right-btn" onClick={handleNextClick} disabled={isTransitioning}>
+//                         <ArrowCircleRightOutlinedIcon />
+//                     </button>
+//                 </div >

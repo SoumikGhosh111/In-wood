@@ -61,6 +61,28 @@ function Orders() {
   }
   useEffect(() => {
     fetchAllOrders();
+
+
+    const eventSource = new EventSource(`${baseUrl}/api/sse/orders`, {withCredentials: true});
+    console.log(eventSource); 
+    eventSource.onmessage = (event) => {
+      const newOrder = JSON.parse(event.data);
+      console.log(event.data);
+      // setAllOrders((prevOrders) => [...prevOrders, newOrder]);
+      console.log(newOrder); 
+      // if (audioRef.current) {
+      //   audioRef.current.play();
+      // }
+    };
+
+    eventSource.onerror = (e) => {
+      console.log(e);
+      eventSource.close();
+    };
+
+    return () => {
+      eventSource.close();
+    };
   }, []);
 
   const handleChange = async (orderId, value) => {

@@ -6,7 +6,8 @@ import storage from "redux-persist/lib/storage";
 const specialOfferSlice = createSlice({
     name: "specialoffer", 
     initialState: {
-        specialOrder:{}
+        specialOrder:{}, 
+        offerNumeric: null
     },
     reducers: {
         addSpecialObject: (state, action) => { 
@@ -16,6 +17,13 @@ const specialOfferSlice = createSlice({
             state.specialOrder = {}; 
         }, 
         
+        setOfferNumeric: (state, action) => { 
+            state.offerNumeric = action.payload
+        }, 
+        deleteOfferNumeric: (state, action) => { 
+            state.offerNumeric = null
+        }
+
     }
 });
 
@@ -29,5 +37,5 @@ const persistConfig = {
 const persistedReducer = persistReducer(persistConfig, specialOfferSlice.reducer);
 
 // Export actions and the persisted reducer
-export const { addSpecialObject, deleteSpecialObject } = specialOfferSlice.actions;
+export const { addSpecialObject, deleteSpecialObject, setOfferNumeric, deleteOfferNumeric } = specialOfferSlice.actions;
 export default persistedReducer;

@@ -24,6 +24,8 @@ import { Drawer } from '@mui/material';
 // toastify
 import { toast } from 'react-toastify';
 
+
+
 function ComboOffer3() {
   const [baseData, setBaseData] = useState(null);
   const [addedData, setAddeddata] = useState(null);
@@ -165,7 +167,7 @@ function ComboOffer3() {
     }
     dispatch(deleteSpecialObject());
     const specialOrder = {
-      offerName: "Game Day Plus",
+      offerName: "Independence Day Special",
       pizza: selectedBaseItems,
       addedItems: [`${selectedAddedItems[0].title}(5Pcs)`],
       item: [selectedAddedItems[0].title],
@@ -191,7 +193,8 @@ function ComboOffer3() {
 
   return (
     <div className='combo-offer-2'>
-      <div className='static-special-offers-wrapper'>
+      
+      <div className='static-special-offers-wrapper' >
 
         <h2>2 Medium Pies - 2 toppings <span style={{fontSize: '15px'}}>(of your choice)</span></h2>
         <div className='combo-offer-2-basses'>

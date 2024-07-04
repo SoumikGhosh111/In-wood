@@ -11,6 +11,8 @@ import "./StaticSpecialOffersMenu.css"
 import { baseUrl } from '../../functions/baseUrl';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { deleteOfferNumeric } from '../../redux/slices/specialOffersSlice';
+
 import EveryDaySpecial1 from '../EveryDaySpecial1/EveryDaySpecial1';
 import EveryDaySpecial2 from '../EveryDaySpecial2/EveryDaySpecial2';
 import ComboOffer2 from '../ComboOffer2/ComboOffer2';
@@ -21,6 +23,9 @@ import ComboOffer4 from '../ComboOffer4/ComboOffer4';
 // importing toastify
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+// Usa flag 
+import usaFlag from "../../assets/usa_flag.png"; 
 
 const specialOffer = {
     title: "Game Day Special",
@@ -45,6 +50,7 @@ const specialOffer = {
 function StaticSpecialOffersMenu() {
     const dispatch = useDispatch();
     const cartItems = useSelector((state) => state.cart.cart);
+    const offerNumeric = useSelector((state) => state.specialoffer.offerNumeric); 
     const [menu, setMenu] = useState(null);
     const [active, setActive] = useState('All');
     const [scope, animate1] = useAnimate();
@@ -52,7 +58,10 @@ function StaticSpecialOffersMenu() {
 
     const [catagoryMenu, setCatagoryMenu] = useState([]);
     const [selectedItems, setSelectedItems] = useState(null);
-    const [activeClass, setActiveClass] = useState(1);
+    const [activeClass, setActiveClass] = useState(offerNumeric ? offerNumeric : 3);
+
+
+    console.log(offerNumeric); 
 
 
 
@@ -161,6 +170,7 @@ function StaticSpecialOffersMenu() {
     };
 
     const handleBackToHome = () => {
+        dispatch(deleteOfferNumeric()); 
 
         window.location.href = '/';
 
@@ -175,11 +185,13 @@ function StaticSpecialOffersMenu() {
                 <div className='special-menu-nav-wrapper' >
                     <ul className='special-menu-nav-bar'>
                     <li className= 'special-offers-padding' onClick={handleBackToHome}><HomeRoundedIcon sx={{transform: 'translateY(5%)'}}/></li>
+                        <li className={activeClass === 3 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} style={{position: 'relative',}} onClick={() => setActiveClass(3)}>
+                            <img src={usaFlag} style={{position: 'absolute', borderRadius: '8px'}}/>Independence Day Special <div style={{background: 'black', width: '100%', height: '100%',position: 'absolute', opacity: '0.5', borderRadius: '8px'}}></div>    <div style={{position: 'absolute', color: 'white'}}>Independence Day Special</div>
+                        </li>
                         <li className={activeClass === 1 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(1)}>Every Day Special 1</li>
-                        <li className={activeClass === 6 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(6)}>Every Day Special 2</li>
-                        <li className={activeClass === 2 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(2)}>Game Day Core</li>
-                        <li className={activeClass === 3 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(3)}>Game Day Plus</li>
-                        <li className={activeClass === 4 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(4)}>Game Day Ultra</li>
+                        <li className={activeClass === 2 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(6)}>Every Day Special 2</li>
+                        <li className={activeClass === 4 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(2)}>Game Day Core</li>
+                        <li className={activeClass === 5 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(4)}>Game Day Ultra</li>
                     </ul>
                 </div>
 
