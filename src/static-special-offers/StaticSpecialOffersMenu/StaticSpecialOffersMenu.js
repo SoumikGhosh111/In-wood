@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { animate, transform, useAnimate } from 'framer-motion';
 import "../../home-page-components/MenuSection/MenuSection.css";
 // import "./SpecialOffersMenu.css";
@@ -62,6 +62,14 @@ function StaticSpecialOffersMenu() {
 
 
     console.log(offerNumeric); 
+
+    const itemRefs = useRef([]); 
+
+    useEffect(() => {
+        if (offerNumeric && itemRefs.current[offerNumeric]) {
+            itemRefs.current[offerNumeric].scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [offerNumeric]);
 
 
 
@@ -185,13 +193,13 @@ function StaticSpecialOffersMenu() {
                 <div className='special-menu-nav-wrapper' >
                     <ul className='special-menu-nav-bar'>
                     <li className= 'special-offers-padding' onClick={handleBackToHome}><HomeRoundedIcon sx={{transform: 'translateY(5%)'}}/></li>
-                        <li className={activeClass === 3 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} style={{position: 'relative',}} onClick={() => setActiveClass(3)}>
+                        <li ref={el => itemRefs.current[3] = el} className={activeClass === 3 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} style={{position: 'relative',}} onClick={() => setActiveClass(3)}>
                             <img src={usaFlag} style={{position: 'absolute', borderRadius: '8px'}}/>Independence Day Special <div style={{background: 'black', width: '100%', height: '100%',position: 'absolute', opacity: '0.5', borderRadius: '8px'}}></div>    <div style={{position: 'absolute', color: 'white'}}>Independence Day Special</div>
                         </li>
-                        <li className={activeClass === 1 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(1)}>Every Day Special 1</li>
-                        <li className={activeClass === 2 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(2)}>Every Day Special 2</li>
-                        <li className={activeClass === 4 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(4)}>Game Day Core</li>
-                        <li className={activeClass === 5 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(5)}>Game Day Ultra</li>
+                        <li ref={el => itemRefs.current[1] = el} className={activeClass === 1 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(1)}>Every Day Special 1</li>
+                        <li ref={el => itemRefs.current[2] = el} className={activeClass === 2 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(2)}>Every Day Special 2</li>
+                        <li ref={el => itemRefs.current[4] = el} className={activeClass === 4 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(4)}>Game Day Core</li>
+                        <li ref={el => itemRefs.current[5] = el} className={activeClass === 5 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(5)}>Game Day Ultra</li>
                     </ul>
                 </div>
 
@@ -209,7 +217,7 @@ function StaticSpecialOffersMenu() {
                     {activeClass === 3 && <ComboOffer3 />}
                 </div>
 
-                
+
                 <div style={{ padding: '0rem 0.5rem' }}>
                     {activeClass === 4 && <ComboOffer2 />}
                 </div>

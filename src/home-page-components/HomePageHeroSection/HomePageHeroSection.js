@@ -256,15 +256,15 @@ function HomePageHeroSection() {
     }
 
 
-    const handleOffer5 = () => {
-        dispatch(deleteOfferNumeric()); 
-        dispatch(setOfferNumeric(3));
-        window.location.href = '/special-offers';
-    }
+    // const handleOffer5 = () => {
+    //     dispatch(deleteOfferNumeric()); 
+    //     dispatch(setOfferNumeric(3));
+    //     window.location.href = '/special-offers';
+    // }
 
     const handleOffer6 = () => {
         dispatch(deleteOfferNumeric()); 
-        dispatch(setOfferNumeric(6));
+        dispatch(setOfferNumeric(5));
         window.location.href = '/special-offers';
     }
 
@@ -338,11 +338,11 @@ function HomePageHeroSection() {
                                 </div>
                             </div>
 
-                            <div className='home-pg-slider-items'>
+                            {/* <div className='home-pg-slider-items'>
                                 <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer5()}>
                                     <img src={banner5} />
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div className='home-pg-slider-items'>
                                 <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer6()}>
