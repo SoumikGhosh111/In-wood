@@ -66,7 +66,7 @@ function HomePageHeroSection() {
     const [scroll, setScroll] = useState(0);
     const [rotationAngle, setRotationAngle] = useState(null);
     const dispatch = useDispatch();
-    const offerNumeric = useSelector((state) => state.specialoffer.offerNumeric); 
+    const offerNumeric = useSelector((state) => state.specialoffer.offerNumeric);
     console.log(offerNumeric)
     const [heroSentence, setHeroSentence] = useState('');
     const ref1 = useRef(null);
@@ -233,27 +233,27 @@ function HomePageHeroSection() {
     }
 
     const handleOffer1 = () => {
-        dispatch(deleteOfferNumeric()); 
+        dispatch(deleteOfferNumeric());
         dispatch(setOfferNumeric(4));
         window.location.href = '/special-offers';
     }
     const handleOffer2 = () => {
-        dispatch(deleteOfferNumeric()); 
+        dispatch(deleteOfferNumeric());
         dispatch(setOfferNumeric(2));
         window.location.href = '/special-offers';
     }
 
     const handleOffer3 = () => {
-        dispatch(deleteOfferNumeric()); 
+        dispatch(deleteOfferNumeric());
         dispatch(setOfferNumeric(3));
         window.location.href = '/special-offers';
     }
 
-    const handleOffer4 = () => {
-        dispatch(deleteOfferNumeric()); 
-        dispatch(setOfferNumeric(5));
-        window.location.href = '/special-offers';
-    }
+    // const handleOffer4 = () => {
+    //     dispatch(deleteOfferNumeric());
+    //     dispatch(setOfferNumeric(5));
+    //     window.location.href = '/special-offers';
+    // }
 
 
     // const handleOffer5 = () => {
@@ -263,7 +263,7 @@ function HomePageHeroSection() {
     // }
 
     const handleOffer6 = () => {
-        dispatch(deleteOfferNumeric()); 
+        dispatch(deleteOfferNumeric());
         dispatch(setOfferNumeric(5));
         window.location.href = '/special-offers';
     }
@@ -312,13 +312,12 @@ function HomePageHeroSection() {
                                </div>
                             </div>  
                         ))} */}
-
                             <div className='home-pg-slider-items'>
-                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer1()}>
-                                    <img src={banner1} />
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer3()}>
+                                    <img src={specialBanner} />
                                 </div>
                             </div>
-
+                            
                             <div className='home-pg-slider-items'>
                                 <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer2()}>
                                     <img src={banner2} />
@@ -326,17 +325,16 @@ function HomePageHeroSection() {
                             </div>
 
                             <div className='home-pg-slider-items'>
-                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer3()}>
-                                    <img src={specialBanner} />
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer1()}>
+                                    <img src={banner1} />
                                 </div>
                             </div>
 
-
-                            <div className='home-pg-slider-items'>
+                            {/* <div className='home-pg-slider-items'>
                                 <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer4()}>
                                     <img src={banner4} />
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* <div className='home-pg-slider-items'>
                                 <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer5()}>
