@@ -87,7 +87,7 @@ function Signup() {
                     setTimeout(() => {
                         from.reset();
                         // navigate('/otppage', { state: { email } }); // Pass email as state
-                        navigate('/');
+                        navigate('/special-offers');
                     }, 2000)
 
 
