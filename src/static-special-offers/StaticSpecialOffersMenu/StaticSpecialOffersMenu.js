@@ -189,9 +189,9 @@ function StaticSpecialOffersMenu() {
                             <img src={usaFlag} style={{position: 'absolute', borderRadius: '8px'}}/>Independence Day Special <div style={{background: 'black', width: '100%', height: '100%',position: 'absolute', opacity: '0.5', borderRadius: '8px'}}></div>    <div style={{position: 'absolute', color: 'white'}}>Independence Day Special</div>
                         </li>
                         <li className={activeClass === 1 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(1)}>Every Day Special 1</li>
-                        <li className={activeClass === 2 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(6)}>Every Day Special 2</li>
-                        <li className={activeClass === 4 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(2)}>Game Day Core</li>
-                        <li className={activeClass === 5 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(4)}>Game Day Ultra</li>
+                        <li className={activeClass === 2 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(2)}>Every Day Special 2</li>
+                        <li className={activeClass === 4 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(4)}>Game Day Core</li>
+                        <li className={activeClass === 5 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(5)}>Game Day Ultra</li>
                     </ul>
                 </div>
 
