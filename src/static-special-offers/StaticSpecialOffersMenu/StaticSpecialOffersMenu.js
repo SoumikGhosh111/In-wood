@@ -196,36 +196,36 @@ function StaticSpecialOffersMenu() {
                         <li ref={el => itemRefs.current[3] = el} className={activeClass === 3 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} style={{position: 'relative',}} onClick={() => setActiveClass(3)}>
                             <img src={usaFlag} style={{position: 'absolute', borderRadius: '8px'}}/>Independence Day Special <div style={{background: 'black', width: '100%', height: '100%',position: 'absolute', opacity: '0.5', borderRadius: '8px'}}></div>    <div style={{position: 'absolute', color: 'white'}}>Independence Day Special</div>
                         </li>
-                        <li ref={el => itemRefs.current[1] = el} className={activeClass === 1 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(1)}>Every Day Special 1</li>
+                        {/* <li ref={el => itemRefs.current[1] = el} className={activeClass === 1 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(1)}>Every Day Special 1</li>
                         <li ref={el => itemRefs.current[2] = el} className={activeClass === 2 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(2)}>Every Day Special 2</li>
                         <li ref={el => itemRefs.current[4] = el} className={activeClass === 4 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(4)}>Game Day Core</li>
-                        <li ref={el => itemRefs.current[5] = el} className={activeClass === 5 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(5)}>Game Day Ultra</li>
+                        <li ref={el => itemRefs.current[5] = el} className={activeClass === 5 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(5)}>Game Day Ultra</li> */}
                     </ul>
                 </div>
 
 
 
 
-                <div style={{ padding: '0rem 0.5rem' }}>
+                {/* <div style={{ padding: '0rem 0.5rem' }}>
                     {activeClass === 1 && <EveryDaySpecial1 />}
                 </div>
                 <div style={{ padding: '0rem 0.5rem' }}>
                     {activeClass === 2 && <EveryDaySpecial2 />}
-                </div>
+                </div> */}
 
                 <div style={{ padding: '0rem 0.5rem' }}>
                     {activeClass === 3 && <ComboOffer3 />}
                 </div>
 
 
-                <div style={{ padding: '0rem 0.5rem' }}>
+                {/* <div style={{ padding: '0rem 0.5rem' }}>
                     {activeClass === 4 && <ComboOffer2 />}
-                </div>
+                </div> */}
 
 
-                <div style={{ padding: '0rem 0.5rem' }}>
+                {/* <div style={{ padding: '0rem 0.5rem' }}>
                     {activeClass === 5 && <ComboOffer4 />}
-                </div>
+                </div> */}
             </div>
 
             <ToastContainer 

@@ -84,9 +84,9 @@ function HomePageHeroSection() {
     const [isTransitioning, setIsTransitioning] = useState(false);
 
     var settings = {
-        arrows: true,
-        dots: true,
-        autoplay: true,
+        arrows: false,
+        dots: false,
+        autoplay: false,
         autoplaySpeed: 4000,
         pauseOnHover: false,
         infinite: true,
@@ -319,22 +319,22 @@ function HomePageHeroSection() {
                             </div>
 
                             <div className='home-pg-slider-items'>
-                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer5()}>
-                                    <img src={banner5} />
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer3()}>
+                                    <img src={specialBanner} />
                                 </div>
                             </div>
                             
-                            <div className='home-pg-slider-items'>
+                            {/* <div className='home-pg-slider-items'>
                                 <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer2()}>
                                     <img src={banner2} />
                                 </div>
-                            </div>
+                            </div> */}
 
-                            <div className='home-pg-slider-items'>
+                            {/* <div className='home-pg-slider-items'>
                                 <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer1()}>
                                     <img src={banner1} />
                                 </div>
-                            </div>
+                            </div> */}
 
                             {/* <div className='home-pg-slider-items'>
                                 <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer4()}>
@@ -348,11 +348,11 @@ function HomePageHeroSection() {
                                 </div>
                             </div> */}
 
-                            <div className='home-pg-slider-items'>
+                            {/* <div className='home-pg-slider-items'>
                                 <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer6()}>
                                     <img src={banner6} />
                                 </div>
-                            </div>
+                            </div> */}
 
                         </Slider>
                     </div>
