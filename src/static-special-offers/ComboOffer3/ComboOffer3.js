@@ -7,6 +7,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
+// verifying
+import { getUser } from '../../functions/veifyUser';
+
 // slick-carousel
 import Slider from 'react-slick';
 
@@ -153,7 +156,19 @@ function ComboOffer3() {
   //   dispatch(setQuantities({ baseQty: 2, addedQty: 1 }));
 
   // }
-  const handleOrder = () => {
+  const handleOrder = async() => {
+
+    const isValid = await getUser(); 
+    if(!isValid){ 
+      toast.error("Not a user need to login"); 
+
+      setTimeout(() => { 
+        Navigate("/login")
+      }, 5000); 
+      
+
+    }
+
 
     if (selectedBaseItems.length !== 2) {
       // alert("You must select exactly 2 base items.");
