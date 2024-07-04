@@ -13,10 +13,10 @@ function DashboardContent({itemToRender}) {
         {itemToRender ? (
           <>
             <div>
-                {itemToRender === 1 && <User />}
+                {itemToRender === 1 && <Orders />}
             </div>
             <div>
-                {itemToRender === 2 && <Orders />}
+                {itemToRender === 2 && <User />}
             </div>
             <div>
                 {itemToRender === 3 && <Menu />}

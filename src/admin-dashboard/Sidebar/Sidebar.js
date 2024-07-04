@@ -102,12 +102,12 @@ function Sidebar({ onSideBarItemClicked }) {
             <ul className='sidebar-list'>
                 <li className={activeClass === 1 ? 'active-sidebar sidebar-list-item' : 'sidebar-list-item'} onClick={() => handleIconCLick(1)}>
                     <a>
-                        <SupervisedUserCircleIcon sx={{ transform: "translateY(20%)", marginRight: "1rem" }} />   Users
+                        <BorderColorRoundedIcon sx={{ transform: "translateY(20%)", marginRight: "1rem" }} />   Orders
                     </a>
                 </li>
                 <li className={activeClass === 2 ? 'active-sidebar sidebar-list-item' : 'sidebar-list-item'} onClick={() => handleIconCLick(2)}>
                     <a>
-                        <BorderColorRoundedIcon sx={{ transform: "translateY(20%)", marginRight: "1rem" }} />   Orders
+                        <SupervisedUserCircleIcon sx={{ transform: "translateY(20%)", marginRight: "1rem" }} />   Users
                     </a>
                 </li>
                 <li className={activeClass === 3 ? 'active-sidebar sidebar-list-item' : 'sidebar-list-item'} onClick={() => handleIconCLick(3)}>
@@ -170,7 +170,7 @@ function Sidebar({ onSideBarItemClicked }) {
 
             <div className="store-container">
                 <h1 className="store-title">Store</h1>
-                <div style={{display: 'flex', justifyContent: 'center', alignItems:'center', gap: '0.5rem'}}>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem' }}>
                     <div className="toggle-switch">
                         <button
                             className={`toggle-button ${storeStatus === 'open' ? 'active' : ''}`}
