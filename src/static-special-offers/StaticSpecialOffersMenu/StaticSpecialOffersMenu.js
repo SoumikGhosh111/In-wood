@@ -202,19 +202,19 @@ function StaticSpecialOffersMenu() {
                     {activeClass === 1 && <EveryDaySpecial1 />}
                 </div>
                 <div style={{ padding: '0rem 0.5rem' }}>
-                    {activeClass === 6 && <EveryDaySpecial2 />}
+                    {activeClass === 2 && <EveryDaySpecial2 />}
                 </div>
 
                 <div style={{ padding: '0rem 0.5rem' }}>
-                    {activeClass === 2 && <ComboOffer2 />}
+                    {activeClass === 3 && <ComboOffer2 />}
                 </div>
 
                 <div style={{ padding: '0rem 0.5rem' }}>
-                    {activeClass === 3 && <ComboOffer3 />}
+                    {activeClass === 4 && <ComboOffer3 />}
                 </div>
 
                 <div style={{ padding: '0rem 0.5rem' }}>
-                    {activeClass === 4 && <ComboOffer4 />}
+                    {activeClass === 5 && <ComboOffer4 />}
                 </div>
             </div>
 
