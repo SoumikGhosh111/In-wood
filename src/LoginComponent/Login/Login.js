@@ -33,7 +33,7 @@ function Login({ onButtonClick }) {
                     localStorage.setItem("token", data.data.token);
                     // alert(data.message)
                     from.reset()
-                    navigate('/');
+                    navigate('/special-offers');
                     localStorage.setItem('userEmail', email);
                 }
                 else {
