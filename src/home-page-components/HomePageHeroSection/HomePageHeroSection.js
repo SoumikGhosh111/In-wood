@@ -23,7 +23,7 @@ import banner1 from "../../assets/offer_banner_1.jpg";
 import banner2 from "../../assets/offer_banner_2.jpg";
 import banner3 from "../../assets/offer_banner_3.jpg";
 import banner4 from "../../assets/offer_banner_4.jpg";
-import banner5 from "../../assets/offer_banner_5.jpg";
+import banner5 from "../../assets/everyday_special_banner.jpg";
 import banner6 from "../../assets/offer_banner_6.jpg";
 
 import specialBanner from "../../assets/independence_day_banner.jpg";
@@ -256,11 +256,11 @@ function HomePageHeroSection() {
     // }
 
 
-    // const handleOffer5 = () => {
-    //     dispatch(deleteOfferNumeric()); 
-    //     dispatch(setOfferNumeric(3));
-    //     window.location.href = '/special-offers';
-    // }
+    const handleOffer5 = () => {
+        dispatch(deleteOfferNumeric()); 
+        dispatch(setOfferNumeric(1));
+        window.location.href = '/special-offers';
+    }
 
     const handleOffer6 = () => {
         dispatch(deleteOfferNumeric());
@@ -315,6 +315,12 @@ function HomePageHeroSection() {
                             <div className='home-pg-slider-items'>
                                 <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer3()}>
                                     <img src={specialBanner} />
+                                </div>
+                            </div>
+
+                            <div className='home-pg-slider-items'>
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer5()}>
+                                    <img src={banner5} />
                                 </div>
                             </div>
                             
