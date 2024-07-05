@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import "./Orders.css";
-import axios from "axios";
-import staticImg from "../../assets/pizza_1.png"
-
-import { redableTimeStamp } from '../../functions/readbleTimeFormat';
+import axios from 'axios';
 import { baseUrl } from '../../functions/baseUrl';
+import { redableTimeStamp } from '../../functions/readbleTimeFormat';
+import './Orders.css';
+
+// bell sound
+import bell from "../../assets/bell_sound.mp3"
+
 
 function Orders() {
-
   const [allOrders, setAllOrders] = useState(null);
-  const userEmail = localStorage.getItem("userEmail");
-  const token = localStorage.getItem("token");
   const [status, setStatus] = useState([
     "Pending",
     "Processing",
@@ -18,115 +17,129 @@ function Orders() {
     "deliverd",
     "cancel",
   ]);
-  const [changeStatus, setCHangeStatus] = useState("");
+
+  useEffect(() => {
+    fetchAllOrders();
+
+    // Setup SSE
+    const eventSource = new EventSource(`${baseUrl}/api/sse/orders`);
+    const bellAudio = new Audio(bell); 
+
+    eventSource.onmessage = (event) => {
+      try {
+        const newOrder = JSON.parse(event.data);
+        console.log('New order received:', newOrder);
+
+
+        // here will be the bell notification sound
+        bellAudio.play(); 
+
+        fetchAllOrders(); // Update orders list when new order arrives
+      } catch (error) {
+        console.error('Error parsing SSE message:', error);
+      }
+    };
+
+    eventSource.onerror = (error) => {
+      console.error('EventSource failed:', error);
+    };
+
+    return () => {
+      eventSource.close(); // Clean up EventSource connection when component unmounts
+    };
+  }, []);
 
   const fetchAllOrders = async () => {
     try {
-      // Assuming you have a valid JWT token stored in localStorage
-      const token = localStorage.getItem('token'); // Get the JWT token from localStorage
+      const token = localStorage.getItem('token');
       const email = localStorage.getItem('userEmail');
 
       if (!token) {
         throw new Error('Token not found');
       }
 
-      const response = await fetch(`${baseUrl}/api/stripe/allOrder/${email}`, {
-        method: 'GET',
+      const response = await axios.get(`${baseUrl}/api/stripe/allOrder/${email}`, {
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}` // Send the JWT token in the Authorization header
+          Authorization: `Bearer ${token}`,
         },
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to fetch orders');
+      if (!response.data.success) {
+        console.error('API response:', response.data);
+        throw new Error(response.data.error || 'Failed to fetch orders');
       }
 
-      const orders = await response.json();
-      setAllOrders(orders);
-      // Handle the orders data here...
-
+      setAllOrders(response.data.data.order);
     } catch (error) {
       console.error('Error fetching orders:', error.message);
       // Handle error cases here...
     }
   };
 
+  // const handleChange = async (orderId, value) => {
+  //   try {
+  //     const token = localStorage.getItem('token');
+  //     const response = await axios.put(
+  //       `${baseUrl}/api/admin/order-status/${orderId}`,
+  //       { delivery_status: value },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
 
+  //     if (!response.data.success) {
+  //       throw new Error(response.data.error || 'Failed to update order status');
+  //     }
 
+  //     // Update local state or refetch orders after successful update
+  //     fetchAllOrders();
+  //   } catch (error) {
+  //     console.error('Error updating order status:', error.message);
+  //     // Handle error cases here...
+  //   }
+  // };
 
-  if (allOrders !== null) {
-    console.log(allOrders.data.order, "this is  reversed data")
-  }
-  useEffect(() => {
-    fetchAllOrders();
-
-
-    const eventSource = new EventSource(`${baseUrl}/api/sse/orders`, {withCredentials: true});
-    console.log(eventSource); 
-    eventSource.onmessage = (event) => {
-      const newOrder = JSON.parse(event.data);
-      console.log(event.data);
-      // setAllOrders((prevOrders) => [...prevOrders, newOrder]);
-      console.log(newOrder); 
-      // if (audioRef.current) {
-      //   audioRef.current.play();
-      // }
-    };
-
-    eventSource.onerror = (e) => {
-      console.log(e);
-      eventSource.close();
-    };
-
-    return () => {
-      eventSource.close();
-    };
-  }, []);
 
   const handleChange = async (orderId, value) => {
-    console.log(orderId);
-    console.log(value);
+    // console.log(orderId);
+    // console.log(value);
     try {
       const { data } = await axios.put(`${baseUrl}/api/admin/order-status/${orderId}`, {
         delivery_status: value,
       });
       fetchAllOrders();
-      console.log(data)
+      // console.log(data)
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   };
 
-
-
   return (
-    <>
-      <div className='orders-wrapper'>
-        <h2 style={{ color: "black" }}>Orders</h2>
-
-        <div className='all-orders'>
-          {allOrders !== null ? (
-            <>
-              <table >
-                <thead>
-                  <th>Order_No.</th>
-                  <th>Order Details</th>
-                  <th>Customer Details</th>
-                  <th>Order & Payment Status</th>
-                  <th>Ordered at</th>
-
-                </thead>
-                <tbody>
-                  {allOrders.data.order.map((item, index) => (
-                    <tr>
-                      <td>
-                        {allOrders.data.order.length - index}
-                      </td>
-                      <td>
-                        <div className='order-details'>
-                        {item.products && <div style={{marginBottom: '1rem'}}>Regular Orders/:-</div>}
+    <div className='orders-wrapper'>
+      <h2>Orders</h2>
+      <div className='all-orders'>
+        {allOrders ? (
+          <table>
+            <thead>
+              <tr>
+                <th>Order No.</th>
+                <th>Order Details</th>
+                <th>Customer Details</th>
+                <th>Order & Payment Status</th>
+                <th>Ordered at</th>
+              </tr>
+            </thead>
+            <tbody>
+              {allOrders.map((item, index) => (
+                <tr key={item._id}>
+                  <td>{allOrders.length - index}</td>
+                  <td>
+                    <div className='order-details'>
+                      {item.products && (
+                        <>
+                          <div className='order-subtitle'>Regular Orders:</div>
                           <table className='order-details-table'>
                             <thead>
                               <tr>
@@ -137,147 +150,104 @@ function Orders() {
                               </tr>
                             </thead>
                             <tbody>
-                              {item.products && item.products.map((product, productIDX) => (
-                                <tr>
-                                  <td>
-                                    {productIDX + 1}
-                                  </td>
-
-                                  <td>
-                                    {product.productName}
-                                  </td>
-                                  <td>
-                                    {product.quantity}
-                                  </td>
-                                  <td>
-                                    {product.extraTopings}
-                                  </td>
-
+                              {item.products.map((product, productIdx) => (
+                                <tr key={product.productId}>
+                                  <td>{productIdx + 1}</td>
+                                  <td>{product.productName}</td>
+                                  <td>{product.quantity}</td>
+                                  <td>{product.extraTopings}</td>
                                 </tr>
                               ))}
                             </tbody>
                           </table>
-                          <br /><br />
-                          {item.combo && <div style={{marginBottom: '1rem'}}>Special Offers/:-</div>}
-                          {item.combo &&
-                            <table className='order-details-table'>
-                              <thead>
-                                <tr>
-                                  <th>Offer Name</th>
-                                  <th>Added Items</th>
-                                  <th>Extra Added</th>
-                                  <th>Main Course</th>
+                        </>
+                      )}
+                      <br />
+                      {item.combo && (
+                        <>
+                          <div className='order-subtitle'>Special Offers:</div>
+                          <table className='order-details-table'>
+                            <thead>
+                              <tr>
+                                <th>Offer Name</th>
+                                <th>Added Items</th>
+                                <th>Extra Added</th>
+                                <th>Main Course</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {item.combo.map((combo, comboIdx) => (
+                                <tr key={`combo-${comboIdx}`}>
+                                  <td>{combo.offerName}</td>
+                                  <td>{combo.addedItems}</td>
+                                  <td>{combo.extraAdded}</td>
+                                  <td>
+                                    <table>
+                                      <thead>
+                                        <tr>
+                                          <th>Pizza</th>
+                                          <th>Toppings</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        {combo.pizzas.map((pizza, pizzaIdx) => (
+                                          <tr key={`pizza-${pizzaIdx}`}>
+                                            <td>{pizza.title}</td>
+                                            <td>{pizza.toppings}</td>
+                                          </tr>
+                                        ))}
+                                      </tbody>
+                                    </table>
+                                  </td>
                                 </tr>
-                              </thead>
-                              <tbody>
-                                {item.combo && item.combo.map((combos, comboIDX) => (
-                                  <tr>
-                                    <td>
-                                      {combos.offerName}
-                                    </td>
-
-                                    <td>
-                                      {combos.addedItems}
-                                    </td>
-                                    <td>
-                                      {combos.extraAdded}
-                                    </td>
-                                    <td>
-                                      {combos.pizzas &&
-                                        <table>
-                                          <thead>
-                                            <tr>
-                                              <th>Pizza</th>
-                                              <th>Toppings</th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            {combos.pizzas?.map((comboPizza, comboPizzaIndx) => (
-                                              <tr key={comboPizzaIndx}>
-                                                <td>
-                                                  {comboPizza.title}
-                                                </td>
-                                                <td>
-                                                  {comboPizza.toppings}
-                                                </td>
-                                              </tr>
-                                            ))}
-                                          </tbody>
-                                        </table>
-                                      }
-                                    </td>
-
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          }
-
-                        </div>
-                      </td>
-
-                      <td>
-                        <div className='customer-details'>
-                          <span><span className='customer-details-title'>Name:</span> {item.shipping.name}</span>
-                          <span><span className='customer-details-title'>Email:</span> {item.shipping.email}</span>
-                          <span><span className='customer-details-title'>Ph:</span> {item.shipping.phone}</span>
-                          <span><span className='customer-details-title'>Country:</span> {item.shipping.address.country}</span>
-                          <span><span className='customer-details-title'>City:</span> {item.shipping.address.city}</span>
-                          <span><span className='customer-details-title'>State:</span> {item.shipping.address.state}</span>
-                          <span><span className='customer-details-title'>Line1:</span> {item.shipping.address.line1}</span>
-                          <span><span className='customer-details-title'>Line2:</span> {item.shipping.address.line2}</span>
-                          <span><span className='customer-details-title'>Postal Code:</span> {item.shipping.address.postal_code}</span>
-                          <span><span className='customer-details-title'>Order_Id:</span> {item._id}</span>
-                          <span><span className='customer-details-title'>User_Id:</span> {item.userId}</span>
-                        </div>
-                      </td>
-
-
-                      <td>
-                        <div className='order-payment-stts'>
-                          <span><span className='customer-details-title'>Payment:</span> {item.payment_status}</span>
-                          <span><span className='customer-details-title'>Total Amount:</span> ${item.total}</span><br />
-                          <span><span className='customer-details-title'>Delivery Status</span></span>
-                          <select
-                            bordered={false}
-                            onChange={(e) => handleChange(item._id, e.target.value)}
-                            defaultValue={item?.delivery_status}
-                          >
-                            {/* <option>{item.delivery_status}</option>
-                            <option>Order Preparing</option>
-                            <option>Order Prepared</option>
-                            <option>Out For Delivery</option>
-                            <option>Delivered</option> */}
-                            {status.map((s, i) => (
-                              <option key={i} value={s}>
-                                {s}
-                              </option>
-                            ))}
-
-                          </select>
-                        </div>
-                      </td>
-
-                      <td>
-                        {redableTimeStamp(item.createdAt)}
-                      </td>
-                    </tr>
-
-                  ))}
-                </tbody>
-              </table>
-            </>
-          ) :
-            (
-              <>
-                Loading . . .
-              </>
-            )}
-
-        </div>
+                              ))}
+                            </tbody>
+                          </table>
+                        </>
+                      )}
+                    </div>
+                  </td>
+                  <td>
+                    <div className='customer-details'>
+                      <span><b>Name:</b> {item.shipping.name}</span>
+                      <span><b>Email:</b> {item.shipping.email}</span>
+                      <span><b>Phone:</b> {item.shipping.phone}</span>
+                      <span><b>Country:</b> {item.shipping.address.country}</span>
+                      <span><b>City:</b> {item.shipping.address.city}</span>
+                      <span><b>State:</b> {item.shipping.address.state}</span>
+                      <span><b>Line 1:</b> {item.shipping.address.line1}</span>
+                      <span><b>Line 2:</b> {item.shipping.address.line2}</span>
+                      <span><b>Postal Code:</b> {item.shipping.address.postal_code}</span>
+                      <span><b>Order ID:</b> {item._id}</span>
+                      <span><b>User ID:</b> {item.userId}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div className='order-payment-status'>
+                      <span><b>Payment:</b> {item.payment_status}</span><br />
+                      <span><b>Total Amount:</b> ${item.total}</span><br />
+                      <span><b>Delivery Status:</b></span><br />
+                      <select
+                        value={item.delivery_status}
+                        onChange={(e) => handleChange(item._id, e.target.value)}
+                      >
+                        {status.map((s) => (
+                          <option key={s} value={s}>{s}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </td>
+                  <td>{redableTimeStamp(item.createdAt)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div>Loading...</div>
+        )}
       </div>
-    </>
-  )
+    </div>
+  );
 }
 
 export default Orders;
