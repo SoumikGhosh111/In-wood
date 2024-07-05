@@ -32,7 +32,9 @@ function Orders() {
 
 
         // here will be the bell notification sound
-        bellAudio.play(); 
+        bellAudio.play().catch((err) => { 
+          alert("Error Playing audio due to user inactivity"); 
+        }); 
 
         fetchAllOrders(); // Update orders list when new order arrives
       } catch (error) {
