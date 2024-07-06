@@ -25,7 +25,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Usa flag 
-import usaFlag from "../../assets/usa_flag.png"; 
+import usaFlag from "../../assets/usa_flag.png";
 
 const specialOffer = {
     title: "Game Day Special",
@@ -50,7 +50,7 @@ const specialOffer = {
 function StaticSpecialOffersMenu() {
     const dispatch = useDispatch();
     const cartItems = useSelector((state) => state.cart.cart);
-    const offerNumeric = useSelector((state) => state.specialoffer.offerNumeric); 
+    const offerNumeric = useSelector((state) => state.specialoffer.offerNumeric);
     const [menu, setMenu] = useState(null);
     const [active, setActive] = useState('All');
     const [scope, animate1] = useAnimate();
@@ -58,12 +58,12 @@ function StaticSpecialOffersMenu() {
 
     const [catagoryMenu, setCatagoryMenu] = useState([]);
     const [selectedItems, setSelectedItems] = useState(null);
-    const [activeClass, setActiveClass] = useState(offerNumeric ? offerNumeric : 3);
+    const [activeClass, setActiveClass] = useState(offerNumeric ? offerNumeric : 1);
 
 
-    console.log(offerNumeric); 
+    console.log(offerNumeric);
 
-    const itemRefs = useRef([]); 
+    const itemRefs = useRef([]);
 
     useEffect(() => {
         if (offerNumeric && itemRefs.current[offerNumeric]) {
@@ -178,7 +178,7 @@ function StaticSpecialOffersMenu() {
     };
 
     const handleBackToHome = () => {
-        dispatch(deleteOfferNumeric()); 
+        dispatch(deleteOfferNumeric());
 
         window.location.href = '/';
 
@@ -192,43 +192,43 @@ function StaticSpecialOffersMenu() {
             <div className='menu-cart special-menu-cart'>
                 <div className='special-menu-nav-wrapper' >
                     <ul className='special-menu-nav-bar'>
-                    <li className= 'special-offers-padding' onClick={handleBackToHome}><HomeRoundedIcon sx={{transform: 'translateY(5%)'}}/></li>
-                        <li ref={el => itemRefs.current[3] = el} className={activeClass === 3 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} style={{position: 'relative',}} onClick={() => setActiveClass(3)}>
-                            <img src={usaFlag} style={{position: 'absolute', borderRadius: '8px'}}/>Independence Day Special <div style={{background: 'black', width: '100%', height: '100%',position: 'absolute', opacity: '0.5', borderRadius: '8px'}}></div>    <div style={{position: 'absolute', color: 'white'}}>Independence Day Special</div>
-                        </li>
-                        {/* <li ref={el => itemRefs.current[1] = el} className={activeClass === 1 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(1)}>Every Day Special 1</li>
+                        <li className='special-offers-padding' onClick={handleBackToHome}><HomeRoundedIcon sx={{ transform: 'translateY(5%)' }} /></li>
+                        <li ref={el => itemRefs.current[1] = el} className={activeClass === 1 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(1)}>Every Day Special 1</li>
                         <li ref={el => itemRefs.current[2] = el} className={activeClass === 2 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(2)}>Every Day Special 2</li>
-                        <li ref={el => itemRefs.current[4] = el} className={activeClass === 4 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(4)}>Game Day Core</li>
-                        <li ref={el => itemRefs.current[5] = el} className={activeClass === 5 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(5)}>Game Day Ultra</li> */}
+                        <li ref={el => itemRefs.current[3] = el} className={activeClass === 3 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(3)}>Game Day Core</li>
+                        <li ref={el => itemRefs.current[4] = el} className={activeClass === 4 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'}  onClick={() => setActiveClass(4)}>
+                            Game Day Plus
+                        </li>
+                        <li ref={el => itemRefs.current[5] = el} className={activeClass === 5 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(5)}>Game Day Ultra</li>
                     </ul>
                 </div>
 
 
 
 
-                {/* <div style={{ padding: '0rem 0.5rem' }}>
+                <div style={{ padding: '0rem 0.5rem' }}>
                     {activeClass === 1 && <EveryDaySpecial1 />}
                 </div>
                 <div style={{ padding: '0rem 0.5rem' }}>
                     {activeClass === 2 && <EveryDaySpecial2 />}
-                </div> */}
-
-                <div style={{ padding: '0rem 0.5rem' }}>
-                    {activeClass === 3 && <ComboOffer3 />}
                 </div>
 
 
-                {/* <div style={{ padding: '0rem 0.5rem' }}>
-                    {activeClass === 4 && <ComboOffer2 />}
-                </div> */}
 
+                <div style={{ padding: '0rem 0.5rem' }}>
+                    {activeClass === 3 && <ComboOffer2 />}
+                </div>
 
-                {/* <div style={{ padding: '0rem 0.5rem' }}>
+                <div style={{ padding: '0rem 0.5rem' }}>
+                    {activeClass === 4 && <ComboOffer3 />}
+                </div>
+
+                <div style={{ padding: '0rem 0.5rem' }}>
                     {activeClass === 5 && <ComboOffer4 />}
-                </div> */}
+                </div>
             </div>
 
-            <ToastContainer 
+            <ToastContainer
                 position='top-center'
                 className={'toast-container-center'}
             />

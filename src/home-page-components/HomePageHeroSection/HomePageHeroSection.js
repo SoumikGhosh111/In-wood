@@ -84,9 +84,9 @@ function HomePageHeroSection() {
     const [isTransitioning, setIsTransitioning] = useState(false);
 
     var settings = {
-        arrows: false,
-        dots: false,
-        autoplay: false,
+        arrows: true,
+        dots: true,
+        autoplay: true,
         autoplaySpeed: 4000,
         pauseOnHover: false,
         infinite: true,
@@ -232,41 +232,12 @@ function HomePageHeroSection() {
         window.location.href = '/special-offers';
     }
 
-    const handleOffer1 = () => {
+    const handleOffer = (id) => {
         dispatch(deleteOfferNumeric());
-        dispatch(setOfferNumeric(4));
+        dispatch(setOfferNumeric(id));
         window.location.href = '/special-offers';
     }
-    const handleOffer2 = () => {
-        dispatch(deleteOfferNumeric());
-        dispatch(setOfferNumeric(2));
-        window.location.href = '/special-offers';
-    }
-
-    const handleOffer3 = () => {
-        dispatch(deleteOfferNumeric());
-        dispatch(setOfferNumeric(3));
-        window.location.href = '/special-offers';
-    }
-
-    // const handleOffer4 = () => {
-    //     dispatch(deleteOfferNumeric());
-    //     dispatch(setOfferNumeric(5));
-    //     window.location.href = '/special-offers';
-    // }
-
-
-    const handleOffer5 = () => {
-        dispatch(deleteOfferNumeric()); 
-        dispatch(setOfferNumeric(1));
-        window.location.href = '/special-offers';
-    }
-
-    const handleOffer6 = () => {
-        dispatch(deleteOfferNumeric());
-        dispatch(setOfferNumeric(5));
-        window.location.href = '/special-offers';
-    }
+    
 
     return (
         <div >
@@ -313,43 +284,43 @@ function HomePageHeroSection() {
                             </div>  
                         ))} */}
                             <div className='home-pg-slider-items'>
-                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer3()}>
-                                    <img src={specialBanner} />
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer(1)}>
+                                    <img src={banner5} />
                                 </div>
                             </div>
 
                             <div className='home-pg-slider-items'>
-                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer3()}>
-                                    <img src={specialBanner} />
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer(2)}>
+                                    <img src={banner2} />
                                 </div>
                             </div>
                             
-                            {/* <div className='home-pg-slider-items'>
-                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer2()}>
-                                    <img src={banner2} />
-                                </div>
-                            </div> */}
-
-                            {/* <div className='home-pg-slider-items'>
-                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer1()}>
-                                    <img src={banner1} />
-                                </div>
-                            </div> */}
-
-                            {/* <div className='home-pg-slider-items'>
-                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer4()}>
+                            <div className='home-pg-slider-items'>
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer(3)}>
                                     <img src={banner4} />
                                 </div>
-                            </div> */}
+                            </div>
+
+                            <div className='home-pg-slider-items'>
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer(4)}>
+                                    <img src={banner3} />
+                                </div>
+                            </div>
+
+                            <div className='home-pg-slider-items'>
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer(5)}>
+                                    <img src={banner6} />
+                                </div>
+                            </div>
 
                             {/* <div className='home-pg-slider-items'>
-                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer5()}>
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer(6)}>
                                     <img src={banner5} />
                                 </div>
                             </div> */}
 
                             {/* <div className='home-pg-slider-items'>
-                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer6()}>
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer(7)}>
                                     <img src={banner6} />
                                 </div>
                             </div> */}

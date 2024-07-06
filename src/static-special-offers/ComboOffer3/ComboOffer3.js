@@ -159,15 +159,7 @@ function ComboOffer3() {
   const handleOrder = async() => {
 
     const isValid = await getUser(); 
-    if(!isValid){ 
-      toast.error("Not a user need to login"); 
-
-      setTimeout(() => { 
-        Navigate("/login")
-      }, 5000); 
-      
-
-    }
+    
 
 
     if (selectedBaseItems.length !== 2) {
@@ -194,7 +186,7 @@ function ComboOffer3() {
     // Here you can dispatch an action to add the order to the cart or perform any other action
     // dispatch(addToSpecialCart(order));
     // alert("Order Created!");
-    // toast.success("Order Created!");
+    toast.success("Order Created!");
     
     setTimeout(() => { 
       Navigate("/checkout");

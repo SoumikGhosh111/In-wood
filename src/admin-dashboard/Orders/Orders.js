@@ -33,7 +33,7 @@ function Orders() {
 
         // here will be the bell notification sound
         bellAudio.play().catch((err) => { 
-          alert("Error Playing audio due to user inactivity"); 
+          alert("Error Playing audio due to user inactivity, One new order has arrived."); 
         }); 
 
         fetchAllOrders(); // Update orders list when new order arrives
