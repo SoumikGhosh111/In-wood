@@ -607,9 +607,12 @@ function MenuSection() {
                 ) : (<>Loading . . .</>)}
 
 
-                <span className='title'>Shakes</span>
 
-                {milShake !== null ? (
+            {/* Milk Shake is store only item not needed on the webstie */}
+
+                {/* <span className='title'>Shakes</span> */}
+
+                {/* {milShake !== null ? (
                     <div className='menu-section-cards' id='cards'>
                         {milShake.map((item, indx) => (
                             <div className='menu-section-card-item' key={item._id}>
@@ -622,7 +625,7 @@ function MenuSection() {
                                     </div>
                                     <p className='item-desc'>{item.desc}</p>
                                     <div className='size'>
-                                        {/* {item.prices.map((price, index) => ( */}
+                                        
                                             <div className='price-size-wrapper'>
                                                 <div  className='price-size-wrapper'>
                                                     {item.prices.length > 0 && (
@@ -637,7 +640,7 @@ function MenuSection() {
                                                     )}
                                                 </div>
                                             </div>
-                                        {/* ))} */}
+                                        
                                     </div>
                                 </div>
                                 <div className='quantity-buttons-wrapper'>
@@ -648,7 +651,7 @@ function MenuSection() {
                             </div>
                         ))}
                     </div>
-                ) : null}
+                ) : null} */}
 
 
                 <span className='title'>Drinks</span>
