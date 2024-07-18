@@ -550,10 +550,10 @@ function MenuSection() {
                     </div>
                 ) : (<>Loading . . .</>)}
 
-                <span className='title'>Cookies and Cream</span>
+                {/* <span className='title'>Cookies and Cream</span> */}
 
 
-                {cookiesAndCream !== null ? (
+                {/* {cookiesAndCream !== null ? (
                     // menu.map((item) => item.filter(()))
 
                     <div className='menu-section-cards' id='cards' >
@@ -569,11 +569,11 @@ function MenuSection() {
                                         <div className='item-name-wrapper'>
                                             <span className='item-name' >{item.title}</span>
                                         </div>
-                                        {/* <div className='item-desc-'> */}
+                                        
                                         <p className='item-desc'>{item.desc}</p>
-                                        {/* </div> */}
+                                        
                                         <div className='size'>
-                                            {/* {item.prices.map((price, index) => ( */}
+                                            
                                                 <div  className='price-size-wrapper'>
                                                     {item.prices.length > 0 && (
                                                         <>
@@ -586,7 +586,7 @@ function MenuSection() {
                                                         </>
                                                     )}
                                                 </div>
-                                            {/* ))} */}
+                                            
                                         </div>
                                     </div>
                                     <div className='quantity-buttons-wrapper'>
@@ -604,7 +604,7 @@ function MenuSection() {
                         ))}
 
                     </div>
-                ) : (<>Loading . . .</>)}
+                ) : (<>Loading . . .</>)} */}
 
 
 

@@ -178,7 +178,7 @@ function ComboOffer3() {
       pizza: selectedBaseItems,
       addedItems: [`${selectedAddedItems[0].title}(5Pcs)`],
       item: [selectedAddedItems[0].title],
-      extraAdded: "Zeppoles(9pcs)",
+      extraAdded: "Zeppoles(6pcs)",
       totalAmount: 27.99,
     };
     dispatch(addSpecialObject(specialOrder));
@@ -269,11 +269,11 @@ function ComboOffer3() {
         </div>
 
         <div className='extra-items-special-offer'>
-          <h2>9Pcs of Zeppoles</h2>
+          <h2>6Pcs of Zeppoles</h2>
           <div className='special-offers-carousel-inner'>
             <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718733929/hec2i3lm7yckghiuwn23.png' alt='Zeppoles' />
             <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
-              <h4>9Pcs of Zeppoles</h4>
+              <h4>6Pcs of Zeppoles</h4>
               <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>Light and fluffy fried dough balls, generously dusted with powdered sugar. A sweet delight!</div>
               <button className='add-to-cart-special-offer disabled'>
                 Selected
@@ -360,7 +360,7 @@ function ComboOffer3() {
                 )}
             </div>
             <div >
-              <h3>9Pcs of Zeppoles </h3>
+              <h3>6Pcs of Zeppoles </h3>
               <div className='special-cart-item-containers'>
                 <div className='special-cart-item-containers-img-info'>
                   <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718733929/hec2i3lm7yckghiuwn23.png' alt='Zeppoles' style={{ width: '100px', height: 'auto' }} />
@@ -501,7 +501,7 @@ function ComboOffer3() {
                 )}
             </div>
             <div >
-              <h3>9Pcs of Zeppoles </h3>
+              <h3>6Pcs of Zeppoles </h3>
               <div className='special-cart-item-containers'>
                 <div className='special-cart-item-containers-img-info'>
                   <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718733929/hec2i3lm7yckghiuwn23.png' alt='Zeppoles' style={{ width: '100px', height: 'auto' }} />

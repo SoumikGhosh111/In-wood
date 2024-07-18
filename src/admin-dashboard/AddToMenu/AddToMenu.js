@@ -200,7 +200,7 @@ function AddToMenu() {
           <option value="Chicken Wings">Chicken Wings</option>
           <option value="Deep Fried">Deep Fried</option>
           <option value="Breads/Baked Goods">Breads/Baked Goods</option>
-          <option value="Cookies and Cream">Cookies and Cream</option>
+          {/* <option value="Cookies and Cream">Cookies and Cream</option> */}
           {/* <option value="Milk Shake">Shakes</option> */}
           <option value="Drinks">Drinks</option>
         </select><br /><br />
