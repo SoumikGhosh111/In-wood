@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { baseUrl } from '../../functions/baseUrl'; 
+import { baseUrl } from '../../functions/baseUrl';
 
 import pizzaImg from "../../assets/banner-1.jpg";
 import borderRadius from "../../assets/special-offer-drawer-border.svg";
@@ -128,7 +128,7 @@ function EveryDaySpecial1() {
 
 
   const handleOrder = () => {
-     
+
     if (selectedBaseItems.length !== 1) {
       alert("You must select exactly 1 base item.");
       return;
@@ -147,10 +147,10 @@ function EveryDaySpecial1() {
     };
 
     dispatch(addSpecialObject(specialOrder));
-    toast.success("Order Created!"); 
-    setTimeout(() => { 
+    toast.success("Order Created!");
+    setTimeout(() => {
       Navigate("/checkout");
-    }, 1000); 
+    }, 1000);
   }
 
   const handleMobCartClose = () => {
@@ -182,17 +182,18 @@ function EveryDaySpecial1() {
             ))}
           </Slider> */}
           <div className='extra-items-special-offer evryday-special-1-static'>
-              <div className='special-offers-carousel-inner'>
-                <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png' alt='yess' />
-                <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
-                  <h4>Cheesy Perfection</h4>
-                  <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible</div>
-                  <button className='add-to-cart-special-offer disabled'>
-                    Selected
-                  </button>
-                </div>
+            <div className='special-offers-carousel-inner'>
+              <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png' alt='yess' />
+              <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
+                <h4>Cheesy Perfection</h4>
+                <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible</div>
+
+                <button className='add-to-cart-special-offer disabled'>
+                  Selected
+                </button>
               </div>
             </div>
+          </div>
         </div>
 
 
@@ -244,13 +245,13 @@ function EveryDaySpecial1() {
                   <div className='special-cart-item-containers-info'>
                     <div style={{ fontWeight: '700' }}>Cheesy Perfection</div>
                     <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
-                    Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible
+                      Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            
+
 
 
           </div>
@@ -263,7 +264,7 @@ function EveryDaySpecial1() {
 
 
 
-        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} />  <span style={{fontSize: '15px', fontWeight: '700', transform: 'translateY(10%)'}}>$6.99</span></button>
+        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} />  <span style={{ fontSize: '15px', fontWeight: '700', transform: 'translateY(10%)' }}>$6.99</span></button>
 
 
         <Drawer
@@ -358,7 +359,7 @@ function EveryDaySpecial1() {
                   </>
                 )}
             </div> */}
-              <div >
+            <div >
               <h3>1 Medium Cheese Pie </h3>
               <div className='special-cart-item-containers'>
                 <div className='special-cart-item-containers-img-info'>
@@ -366,13 +367,13 @@ function EveryDaySpecial1() {
                   <div className='special-cart-item-containers-info'>
                     <div style={{ fontWeight: '700' }}>Cheesy Perfection</div>
                     <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
-                    Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible
+                      Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            
+
 
 
 

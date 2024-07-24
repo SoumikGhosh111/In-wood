@@ -22,15 +22,23 @@ import loadingCartImg from "../../assets/cartLoading.svg";
 import { Drawer } from '@mui/material';
 
 // toasify
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+
+// Cheese Pizza Object 
+const CHEESE_PIZZA = {
+  title: "Cheesy Perfection",
+  img: "https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png",
+  desc: "Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible"
+}
 
 
 function EveryDaySpecial2() {
   const [baseData, setBaseData] = useState(null);
 
-  const [selectedToppings, setSelectedToppings] = useState([]);
-  const [selectedBaseItems, setSelectedBaseItems] = useState([]);
+  const [selectedToppings, setSelectedToppings] = useState([]);  //for toppings
+  const [selectedBaseItems, setSelectedBaseItems] = useState([]); //for base specialy for 1 or 2 pizzas 
 
   const [isFull, setIsFull] = useState(false);
 
@@ -42,7 +50,7 @@ function EveryDaySpecial2() {
 
   const requiredPies = 1;
 
-  const fetchBaseData = async () => {
+  const fetchBaseData = async () => {   //this thing will not be needed
     try {
       const response = await fetch(`${baseUrl}/api/combo/allComboFood/Medium Pie`);
       const result = await response.json();
@@ -62,7 +70,7 @@ function EveryDaySpecial2() {
     setIsFull(selectedBaseItems.length === 1 ? true : false);
   }, [selectedBaseItems]);
 
-  const handleToppingChange = (topping) => {
+  const handleToppingChange = (topping) => {   // this thing will be same as it is now
     const updatedToppings = selectedToppings.includes(topping)
       ? selectedToppings.filter(t => t !== topping)
       : [...selectedToppings, topping];
@@ -71,7 +79,7 @@ function EveryDaySpecial2() {
       setSelectedToppings(updatedToppings);
     } else {
       // alert("You can only select up to 2 toppings.");
-      toast.error("You can only select up to 2 toppings"); 
+      toast.error("You can only select up to 2 toppings");
     }
   }
 
@@ -79,7 +87,7 @@ function EveryDaySpecial2() {
     return selectedToppings.length >= 2 && !selectedToppings.includes(topping);
   }
 
-  var settings = {
+  var settings = {   //not needed 
     dots: false,
     infinite: true,
     speed: 500,
@@ -87,7 +95,7 @@ function EveryDaySpecial2() {
     slidesToScroll: 1,
   }
 
-  const handleBase = (item) => {
+  const handleBase = (item) => {    //changes required
     const baseObject = {
       title: item.title,
       toppings: selectedToppings,
@@ -133,9 +141,9 @@ function EveryDaySpecial2() {
     // Here you can dispatch an action to add the order to the cart or perform any other action
     // dispatch(addToSpecialCart(order));
     toast.success("Order Created!")
-    setTimeout(() => { 
+    setTimeout(() => {
       Navigate("/checkout");
-    }, 1000); 
+    }, 1000);
   }
 
   const handleMobCartClose = () => {
@@ -146,14 +154,14 @@ function EveryDaySpecial2() {
   return (
     <div className='combo-offer-2'>
       <div className='static-special-offers-wrapper'>
-        <h2>1 Medium Pie - 2 toppings <span style={{ fontSize: '15px' }}>(of your choice)</span></h2>
-        <div className='combo-offer-2-basses'>
+        <h2>1 Medium Cheese Pie - 2 toppings <span style={{ fontSize: '15px' }}>(of your choice)</span></h2>
+        {/* <div className='combo-offer-2-basses'>
           <Slider {...settings}>
             {baseData !== null && baseData.map((item) => (
               <div key={item._id}>
                 <div className='special-offers-carousel-inner'>
                   <img src={item.img} alt={item.title} />
-                  <div>
+                   <div>
                     <h3>{item.title}</h3>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
                     <h4 style={{ marginBottom: '0.5rem' }}>Select 2 toppings <span style={{ fontSize: '10px' }}>(of your choice)</span></h4>
@@ -172,18 +180,51 @@ function EveryDaySpecial2() {
                     <button className={`add-to-cart-special-offer ${isFull ? 'disabled' : ''}`} onClick={() => handleBase(item)}>
                       {isFull ? 'Selected' : 'Select'}
                     </button>
-                  </div>
+                  </div>    
                 </div>
               </div>
             ))}
           </Slider>
+        </div> */}
+
+
+        {/* As per Clients requirement the initial items were changed to only Cheese Pizzas other than that every thing is same and the initial items are commented out */}
+
+        <div className='combo-offer-2-basses'>
+          <div className='special-offers-carousel-inner'>
+            <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png' alt='Cheese Pizza Image' />
+            <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
+              <h4>Cheesy Perfection</h4>
+              <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible</div>
+
+              <h4 style={{ marginBottom: '0.5rem' }}>Select 2 toppings <span style={{ fontSize: '10px' }}>(of your choice)</span></h4>
+              {["Jalapenos", "Sausage", "Corn", "Onions & Peppers", "Ground Beef", "Chicken", "Olives", "Mushrooms", "Cheese", "Ham", "Bacon", "Pepperoni", "Extra Cheese"].map(topping => (
+                <div key={topping}>
+                  <input
+                    type='checkbox'
+                    id={topping}
+                    checked={selectedToppings.includes(topping)}
+                    disabled={isToppingDisabled(topping)}
+                    onChange={() => handleToppingChange(topping)}
+                  />
+                  <label htmlFor={topping}>{topping}</label>
+                </div>
+              ))}
+
+              <button className={`add-to-cart-special-offer ${isFull ? 'disabled' : ''}`} onClick={() => handleBase(CHEESE_PIZZA)}>
+                {isFull ? 'Selected' : 'Select'}
+              </button>
+            </div>
+          </div>
         </div>
+
+
 
 
         <div className='add-to-cart-wrapper special-offers-cart every-day-special'>
           <div className='order-cart-cards'>
             <div>
-              <h3>1 Medium Pie - 2 toppings <span style={{ fontSize: '13px' }}>(of your choice)</span> </h3>
+              <h3>1 Medium Cheese Pie - 2 toppings <span style={{ fontSize: '13px' }}>(of your choice)</span> </h3>
               {selectedBaseItems.length > 0 ?
                 (
                   <>
@@ -238,7 +279,7 @@ function EveryDaySpecial2() {
         </div>
 
 
-        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} /><span style={{fontSize: '15px', fontWeight: '700', transform: 'translateY(10%)'}}>$7.99</span></button>
+        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} /><span style={{ fontSize: '15px', fontWeight: '700', transform: 'translateY(10%)' }}>$7.99</span></button>
 
 
         <Drawer
@@ -285,7 +326,7 @@ function EveryDaySpecial2() {
             </div>
             <button className='add-to-cart-button' style={{ backgroundColor: 'black', color: 'white' }} onClick={handleOrder}>PROCEED TO ORDER</button> */}
             <div>
-              <h3><h2>1 Medium Pie - 2 toppings <span style={{ fontSize: '13px' }}>(of your choice)</span></h2></h3>
+              <h3><h2>1 Medium Cheese Pie - 2 toppings <span style={{ fontSize: '13px' }}>(of your choice)</span></h2></h3>
               {selectedBaseItems.length > 0 ?
                 (
                   <>
@@ -348,4 +389,7 @@ function EveryDaySpecial2() {
   )
 }
 
-export default EveryDaySpecial2
+export default EveryDaySpecial2;
+
+
+// className='extra-items-special-offer evryday-special-1-static'

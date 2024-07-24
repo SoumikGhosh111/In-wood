@@ -24,6 +24,14 @@ import { Drawer } from '@mui/material';
 
 import { toast } from 'react-toastify';
 
+
+// Cheese Pizza Object 
+const CHEESE_PIZZA = {
+  title: "Cheesy Perfection",
+  img: "https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png",
+  desc: "Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible"
+}
+
 function ComboOffer4() {
   const Navigate = useNavigate();
   const [baseData, setBaseData] = useState(null);
@@ -34,7 +42,7 @@ function ComboOffer4() {
   const [selectedAddedItems, setSelectedAddedItems] = useState([]);
   const [selectedAddedItems2, setSelectedAddedItems2] = useState([]);
 
-  const [isFull, setIsFull] = useState(false); 
+  const [isFull, setIsFull] = useState(false);
   const [isFull2, setIsFull2] = useState(false);
   const [isFull3, setIsFull3] = useState(false);
 
@@ -55,20 +63,20 @@ function ComboOffer4() {
     }
   }
 
-  useEffect(() => {   
-    setIsFull(selectedBaseItems.length === 2 ? true : false); 
-  }, [selectedBaseItems]); 
+  useEffect(() => {
+    setIsFull(selectedBaseItems.length === 2 ? true : false);
+  }, [selectedBaseItems]);
 
 
-  useEffect(() => {   
-    setIsFull2(selectedAddedItems.length === 1 ? true : false); 
-  }, [selectedAddedItems]); 
-  
+  useEffect(() => {
+    setIsFull2(selectedAddedItems.length === 1 ? true : false);
+  }, [selectedAddedItems]);
 
 
-  useEffect(() => {   
-    setIsFull3(selectedAddedItems2.length === 1 ? true : false); 
-  }, [selectedAddedItems2]); 
+
+  useEffect(() => {
+    setIsFull3(selectedAddedItems2.length === 1 ? true : false);
+  }, [selectedAddedItems2]);
 
 
   const fetchAddedData = async () => {
@@ -97,7 +105,7 @@ function ComboOffer4() {
     fetchBaseData();
     fetchAddedData();
     // handleSetQuantities();
-    fetchAddedData2(); 
+    fetchAddedData2();
   }, []);
 
   const handleToppingChange = (topping) => {
@@ -136,7 +144,7 @@ function ComboOffer4() {
       setSelectedBaseItems([...selectedBaseItems, baseObject]);
     } else {
       // alert("You can only select up to 2 base items.");
-      toast.error("You can only select up to 2 base items"); 
+      toast.error("You can only select up to 2 base items");
     }
     setSelectedToppings([])
 
@@ -154,7 +162,7 @@ function ComboOffer4() {
       setSelectedAddedItems([...selectedAddedItems, addedItems]);
     } else {
       // alert("You can only add one");
-      toast.error("You can only add one"); 
+      toast.error("You can only add one");
     }
   }
 
@@ -223,10 +231,10 @@ function ComboOffer4() {
     // console.log("Order placed:", specialOrder);
     // Here you can dispatch an action to add the order to the cart or perform any other action
     // dispatch(addToSpecialObject(order));
-    toast.success("Order Created!"); 
-    setTimeout(() => { 
+    toast.success("Order Created!");
+    setTimeout(() => {
       Navigate("/checkout");
-    }, 1000); 
+    }, 1000);
 
 
   }
@@ -238,8 +246,8 @@ function ComboOffer4() {
     <div className='combo-offer-2'>
       <div className='static-special-offers-wrapper'>
 
-        <h2>2 Large Pies - 2 toppings <span style={{fontSize: '15px'}}>(of your choice)</span></h2>
-        <div className='combo-offer-2-basses'>
+        <h2>2 Large Cheese Pies - 2 toppings <span style={{ fontSize: '15px' }}>(of your choice)</span></h2>
+        {/* <div className='combo-offer-2-basses'>
           <Slider {...settings}>
             {baseData !== null && baseData.map((item) => (
               <div key={item._id}>
@@ -261,7 +269,7 @@ function ComboOffer4() {
                         <label htmlFor={topping}>{topping}</label>
                       </div>
                     ))}
-                    {/* disabled */}
+                    
                     <button className={`add-to-cart-special-offer ${isFull ? 'disabled' : ''}`} onClick={() => handleBase(item)}>
                       {isFull ? 'Selected' : 'Select'}
                     </button>
@@ -270,9 +278,38 @@ function ComboOffer4() {
               </div>
             ))}
           </Slider>
+        </div> */}
+
+
+        <div className='combo-offer-2-basses'>
+          <div className='special-offers-carousel-inner'>
+            <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png' alt='Cheese Pizza Image' />
+            <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
+              <h4>Cheesy Perfection</h4>
+              <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible</div>
+
+              <h4 style={{ marginBottom: '0.5rem' }}>Select 2 toppings <span style={{ fontSize: '10px' }}>(of your choice)</span></h4>
+              {["Jalapenos", "Sausage", "Corn", "Onions & Peppers", "Ground Beef", "Chicken", "Olives", "Mushrooms", "Cheese", "Ham", "Bacon", "Pepperoni", "Extra Cheese"].map(topping => (
+                <div key={topping}>
+                  <input
+                    type='checkbox'
+                    id={topping}
+                    checked={selectedToppings.includes(topping)}
+                    disabled={isToppingDisabled(topping)}
+                    onChange={() => handleToppingChange(topping)}
+                  />
+                  <label htmlFor={topping}>{topping}</label>
+                </div>
+              ))}
+
+              <button className={`add-to-cart-special-offer ${isFull ? 'disabled' : ''}`} onClick={() => handleBase(CHEESE_PIZZA)}>
+                {isFull ? 'Selected' : 'Select'}
+              </button>
+            </div>
+          </div>
         </div>
 
-        <h2>5Pcs Wings <span style={{fontSize: '15px'}}>(of your choice)</span></h2>
+        <h2>5Pcs Wings <span style={{ fontSize: '15px' }}>(of your choice)</span></h2>
         <div className='combo-offers-2-added-items'>
           <Slider {...settings}>
             {addedData !== null && addedData.map((item) => (
@@ -283,7 +320,7 @@ function ComboOffer4() {
                     <h4>{item.title}</h4>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
                     <button className={`add-to-cart-special-offer ${isFull2 ? 'disabled' : ''}`} onClick={() => handleAddedClick(item)}>
-                       {isFull2 ? 'Selected' : 'Select'}
+                      {isFull2 ? 'Selected' : 'Select'}
                     </button>
                   </div>
                 </div>
@@ -292,7 +329,7 @@ function ComboOffer4() {
           </Slider>
         </div>
 
-        <h2>2Ltr Soda <span style={{fontSize: '15px'}}>(of your choice)</span></h2>
+        <h2>2Ltr Soda <span style={{ fontSize: '15px' }}>(of your choice)</span></h2>
         <div className='combo-offers-2-added-items'>
           <Slider {...settings}>
             {addedData2 !== null && addedData2.map((item) => (
@@ -303,7 +340,7 @@ function ComboOffer4() {
                     <h4>{item.title}</h4>
                     <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>{item.desc}</div>
                     <button className={`add-to-cart-special-offer ${isFull3 ? 'disabled' : ''}`} onClick={() => handleAddedClick2(item)}>
-                    {isFull3 ? 'Selected' : 'Select'}
+                      {isFull3 ? 'Selected' : 'Select'}
                     </button>
                   </div>
                 </div>
@@ -347,7 +384,7 @@ function ComboOffer4() {
         <div className='add-to-cart-wrapper special-offers-cart combo-4'>
           <div className='order-cart-cards'>
             <div>
-              <h3>2 Large Pies - 2 toppings <span style={{fontSize: '13px'}}>(of your choice)</span> </h3>
+              <h3>2 Large Cheese Pies - 2 toppings <span style={{ fontSize: '13px' }}>(of your choice)</span> </h3>
               {selectedBaseItems.length > 0 ?
                 (
                   <>
@@ -392,7 +429,7 @@ function ComboOffer4() {
                 )}
             </div>
             <div>
-              <h3>5Pcs Wings <span style={{fontSize: '13px'}}>(of your choice)</span></h3>
+              <h3>5Pcs Wings <span style={{ fontSize: '13px' }}>(of your choice)</span></h3>
               {selectedAddedItems.length > 0 ? (
                 <>
                   {selectedAddedItems.map((item, indx) => (
@@ -419,7 +456,7 @@ function ComboOffer4() {
             </div>
 
             <div>
-              <h3>2Ltr Soda <span style={{fontSize: '13px'}}>(of your choice)</span></h3>
+              <h3>2Ltr Soda <span style={{ fontSize: '13px' }}>(of your choice)</span></h3>
 
               {selectedAddedItems2.length > 0 ?
                 (
@@ -484,7 +521,7 @@ function ComboOffer4() {
 
 
 
-        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} /> <span style={{fontSize: '15px', fontWeight: '700', transform: 'translateY(10%)'}}>$39.99</span> </button>
+        <button className='special-offer-mob-cart' onClick={() => setOpen(true)}><ShoppingCartIcon sx={{ transform: 'translateY(10%)' }} /> <span style={{ fontSize: '15px', fontWeight: '700', transform: 'translateY(10%)' }}>$39.99</span> </button>
 
 
         <Drawer
@@ -498,7 +535,7 @@ function ComboOffer4() {
           </div>
           <div style={{ padding: '1rem 1rem', maxHeight: '500px', overflowY: 'scroll' }}>
             <div>
-              <h3>2 Large Pies - 2 toppings <span style={{fontSize: '13px'}}>(of your choice)</span> </h3>
+              <h3>2 Large Cheese Pies - 2 toppings <span style={{ fontSize: '13px' }}>(of your choice)</span> </h3>
               {selectedBaseItems.length > 0 ?
                 (
                   <>
@@ -543,7 +580,7 @@ function ComboOffer4() {
                 )}
             </div>
             <div>
-              <h3>5Pcs Wings <span style={{fontSize: '13px'}}>(of your choice)</span> </h3>
+              <h3>5Pcs Wings <span style={{ fontSize: '13px' }}>(of your choice)</span> </h3>
               {selectedAddedItems.length > 0 ? (
                 <>
                   {selectedAddedItems.map((item, indx) => (
@@ -569,7 +606,7 @@ function ComboOffer4() {
                 )}
             </div>
             <div>
-              <h3>2Ltr Soda <span style={{fontSize: '13px'}}>(of your choice)</span></h3>
+              <h3>2Ltr Soda <span style={{ fontSize: '13px' }}>(of your choice)</span></h3>
 
               {selectedAddedItems2.length > 0 ?
                 (
