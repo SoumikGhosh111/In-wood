@@ -126,9 +126,9 @@
 .checkout-right-dropdown {
     position: relative;
     margin-bottom: 1rem;
-  }
-  
-  .checkout-right-dropdown-select {
+}
+
+.checkout-right-dropdown-select {
     margin: 1rem 0rem;
     padding: 10px;
     font-size: 16px;
@@ -137,16 +137,67 @@
     background-color: #fff;
     cursor: pointer;
     outline: none;
-  }
-  
-  .checkout-right-dropdown-select:focus,
-  .checkout-right-dropdown-select:valid {
-    border-color: #f1c40f; /* Yellow color */
-  }
-  
-  .checkout-right-dropdown-select:focus + .checkout-right-dropdown-options {
-    background: #f39c12; /* Darker yellow on focus */
-  }
+}
+
+.checkout-right-dropdown-select:focus,
+.checkout-right-dropdown-select:valid {
+    border-color: #f1c40f;
+    /* Yellow color */
+}
+
+.checkout-right-dropdown-select:focus+.checkout-right-dropdown-options {
+    background: #f39c12;
+    /* Darker yellow on focus */
+}
+
+
+
+
+/* Select Tab For Pcik Up and Home delivery Details  */
+.check-out-right-select-tab {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0rem;
+}
+.check-out-right-select-tab-item{ 
+    width: 50%;
+    padding: 1rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    white-space: nowrap;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.clicked{ 
+    background-color: black;
+    transition: all 0.3s ease-in-out;
+    color: white;
+}
+.not-clicked{ 
+    background-color: white;
+    color: grey; 
+    transition: all 0.3s ease-in-out;
+}
+
+.check-out-right-time-dropdown{ 
+    background-color: white;
+    white-space: wrap;
+    width: 100%;
+    height: fit-content;
+    padding: 1rem 1rem;
+    margin: 1rem 0rem;
+    border-radius: 8px;
+}
+.check-out-right-time-dropdown-inner-text{ 
+    font-weight: 700;
+}
 
 
 

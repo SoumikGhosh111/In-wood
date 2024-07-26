@@ -11,9 +11,12 @@ import { baseUrl } from '../../functions/baseUrl';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
+
+
 function CheckoutPageRightSide() {
   const temp = JSON.parse(localStorage.getItem('specialOrder'));
-  const [specialOffer, setSpecialOffer] = useState(null);  
+  const [specialOffer, setSpecialOffer] = useState(null);
   const [tax, setTax] = useState(0);
   const [active, setActive] = useState(0);
   const [tipPercent, setTipPercent] = useState(0);
@@ -22,59 +25,68 @@ function CheckoutPageRightSide() {
   const [popUp, setPopUp] = useState(false);
   const cartItems = useSelector((state) => state.cart.cart);
   const userData = useSelector((state) => state.userdata);
-  const specialOffersObj = useSelector(state => state.specialoffer.specialOrder); 
+  const specialOffersObj = useSelector(state => state.specialoffer.specialOrder);
   const [selectedOption, setSelectedOption] = useState(0);
-  const [deliveryCharges, setDeliveryCharges] = useState(0); 
-  const [support, setSupport] = useState(0); 
+  const [deliveryCharges, setDeliveryCharges] = useState(0);
+  const [support, setSupport] = useState(0);
   const [dscnt, setDscnt] = useState(0); // this will be used for discount purposes in the future
-   
+
+
+  // for Home delivery and pickup
+  const [isClicked, setIsClicked] = useState('homeDelv');
+
+ 
+
   // const [deliveryCharges, setDeliveryCharges] = useState(0);
   // const [openClose, setOpenClose] = useState(null);
 
-  const[specialOffersAmnt, setSpecialOffersAmnt] = useState(0); 
+  const [specialOffersAmnt, setSpecialOffersAmnt] = useState(0);
   console.log(userData);
   const tempAmnt = cartItems.reduce((total, item) =>
     total + item.qty * item.price,
     0
-  ); 
+  );
   console.log(specialOffersObj)
-  useEffect(() => { 
-    if(specialOffersObj.hasOwnProperty('totalAmount')){ 
-      setSpecialOffersAmnt(specialOffersObj.totalAmount); 
-    }else{ 
-      setSpecialOffersAmnt(0); 
+  useEffect(() => {
+    if (specialOffersObj.hasOwnProperty('totalAmount')) {
+      setSpecialOffersAmnt(specialOffersObj.totalAmount);
+    } else {
+      setSpecialOffersAmnt(0);
     }
-  },[specialOffersObj]); 
+  }, [specialOffersObj]);
 
-  const totalAmnt = tempAmnt + specialOffersAmnt; 
+  const totalAmnt = tempAmnt + specialOffersAmnt;
 
 
-  console.log("this is offerPrice", specialOffersAmnt); 
+  console.log("this is offerPrice", specialOffersAmnt);
 
   useEffect(() => {
-    setSpecialOffer(JSON.parse(localStorage.getItem('specialOrder'))); 
-  },[localStorage.getItem('specialOrder')])
-  console.log(localStorage.getItem('specialOrder')); 
- 
+    setSpecialOffer(JSON.parse(localStorage.getItem('specialOrder')));
+  }, [localStorage.getItem('specialOrder')])
+  console.log(localStorage.getItem('specialOrder'));
+
   // const handleOptionSelect = (event) => {
   //   setSelectedOption(event.target.value);
   // };
 
-  const SupportFee = 0.99; 
+  const SupportFee = 0.99;
   const charges = 2.99;
+
+
   useEffect(() => {
     // let discount = ((totalAmnt * selectedOption) / 100).toFixed(2);
     // setDscnt(discount);
     // let temp = totalAmnt === 0 ? 0 : totalAmnt - discount;
     const EstimatedTax = (((totalAmnt) * 8.75) / 100).toFixed(2);
     setTax(EstimatedTax);
-    setDeliveryCharges(totalAmnt > 0 ? charges : 0);
+    setDeliveryCharges((totalAmnt > 0 && isClicked === 'homeDelv') ? charges : 0);
+    // setDeliveryCharges(isClicked === 'homeDelv' ? charges : 0);
     // if (totalAmnt === 0) {
     //   setSelectedOption(0)
     // }
-    setSupport(totalAmnt > 0 ? SupportFee : 0); 
-  }, [totalAmnt])
-  
+    setSupport(totalAmnt > 0 ? SupportFee : 0);
+  }, [totalAmnt, isClicked])
+
 
   // const handleActiveClassClick = (indx) => {
   //   setActive(indx);
@@ -104,7 +116,7 @@ function CheckoutPageRightSide() {
 
 
 
- 
+
   // const handlePlaceOrderClick = () => {
   //   console.log("I am Clicked, this is special offer")
   //   if (cartItems.length === 0 && Object.keys(specialOffersObj).length === 0) {
@@ -168,15 +180,15 @@ function CheckoutPageRightSide() {
 
 
   const handlePlaceOrderClick = () => {
-    console.log(Object.keys(specialOffersObj).length); 
+    console.log(Object.keys(specialOffersObj).length);
     if (cartItems.length === 0 && Object.keys(specialOffersObj).length === 0) {
       // alert("No items in the cart");
       toast.error("No items in the cart");
     }
-    else if (userData.userId === null && userData.zipCode === null) {
+    else if (userData.userId === null && userData.zipCode === null && isClicked === 'homeDelv') {
       // alert("Save the address data");
       toast.error("Save the address data");
-    } else if ((cartItems.length > 0 || Object.keys(specialOffersObj).length > 0) && userData.userId !== null && userData.zipCode !== null) {
+    } else if ((cartItems.length > 0 || Object.keys(specialOffersObj).length > 0) && ((userData.userId !== null && userData.zipCode !== null) || isClicked === 'pickUp')) {
       const cartData = cartItems.map(item => ({
         name: item.name,
         qty: item.qty,
@@ -190,7 +202,7 @@ function CheckoutPageRightSide() {
         qty: item.qty,
       }));
 
-      const comboData = specialOffersObj; 
+      const comboData = specialOffersObj;
       const data = {
         comboData,
         cartItems,
@@ -246,8 +258,21 @@ function CheckoutPageRightSide() {
     }
 
   }
+
+
+  const HandleClickValue = (id) => {
+    setIsClicked(id);
+  }
   return (
     <div className='check-out-right-side'>
+      <div className='check-out-right-select-tab'>
+        <div className={`home-delivery check-out-right-select-tab-item ${isClicked === 'homeDelv' ? 'clicked' : 'not-clicked'}`} onClick={() => HandleClickValue('homeDelv')}> Home Delivery</div>
+        <div className={`home-delivery check-out-right-select-tab-item ${isClicked === 'pickUp' ? 'clicked' : 'not-clicked'}`} onClick={() => HandleClickValue('pickUp')}>Pick Up</div>
+      </div>
+      <div className='check-out-right-time-dropdown' style={{ display: isClicked === 'pickUp' ? 'block' : 'none' }}>
+        Pick Your Oder at <span className='check-out-right-time-dropdown-inner-text'>179 SHERMAN AVE , NY 10034, New York, NY, United States, New York</span>
+        
+      </div>
       <div style={{ display: popUp ? 'none' : 'block' }}>
         <button className='place-order-button' onClick={fetchStoreOpenCloseData} >
           {/* <div className='place-order-button-inner' > */}
@@ -270,7 +295,7 @@ function CheckoutPageRightSide() {
           </div>
           <div className='tax'>
             <span>Delivery Charges</span>
-            <span>${charges}</span>
+            <span>${isClicked === 'homeDelv' ? charges : 0}</span>
           </div>
           <div className='tax'>
             <span>Estimated Tax (8.75%)</span>
