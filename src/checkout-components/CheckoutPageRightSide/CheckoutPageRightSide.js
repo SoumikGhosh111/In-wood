@@ -32,8 +32,8 @@ function CheckoutPageRightSide() {
   const [dscnt, setDscnt] = useState(0); // this will be used for discount purposes in the future
 
 
-  // for Home delivery and pickup
-  const [isClicked, setIsClicked] = useState('homeDelv');
+  // for Home delivery and Pickup
+  const [isClicked, setIsClicked] = useState('Delivery');
 
  
 
@@ -79,8 +79,8 @@ function CheckoutPageRightSide() {
     // let temp = totalAmnt === 0 ? 0 : totalAmnt - discount;
     const EstimatedTax = (((totalAmnt) * 8.75) / 100).toFixed(2);
     setTax(EstimatedTax);
-    setDeliveryCharges((totalAmnt > 0 && isClicked === 'homeDelv') ? charges : 0);
-    // setDeliveryCharges(isClicked === 'homeDelv' ? charges : 0);
+    setDeliveryCharges((totalAmnt > 0 && isClicked === 'Delivery') ? charges : 0);
+    // setDeliveryCharges(isClicked === 'Delivery' ? charges : 0);
     // if (totalAmnt === 0) {
     //   setSelectedOption(0)
     // }
@@ -185,10 +185,10 @@ function CheckoutPageRightSide() {
       // alert("No items in the cart");
       toast.error("No items in the cart");
     }
-    else if (userData.userId === null && userData.zipCode === null && isClicked === 'homeDelv') {
+    else if (userData.userId === null && userData.zipCode === null && isClicked === 'Delivery') {
       // alert("Save the address data");
       toast.error("Save the address data");
-    } else if ((cartItems.length > 0 || Object.keys(specialOffersObj).length > 0) && ((userData.userId !== null && userData.zipCode !== null) || isClicked === 'pickUp')) {
+    } else if ((cartItems.length > 0 || Object.keys(specialOffersObj).length > 0) && ((userData.userId !== null && userData.zipCode !== null) || isClicked === 'Pickup')) {
       const cartData = cartItems.map(item => ({
         name: item.name,
         qty: item.qty,
@@ -224,23 +224,23 @@ function CheckoutPageRightSide() {
       console.log(data)
       const id = userData.userId;
 
-      axios
-        .post(`${baseUrl}/api/stripe/create-checkout-session`, {
-          data: data,
-          userId: id,
-        })
-        .then((response) => {
-          if (response.data.url) {
-            toast.success("redirecting to Payment page");
-            setTimeout(() => {
-              window.location.href = response.data.url;
-            }, 2000)
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          toast.error(err.message);
-        })
+      // axios
+      //   .post(`${baseUrl}/api/stripe/create-checkout-session`, {
+      //     data: data,
+      //     userId: id,
+      //   })
+      //   .then((response) => {
+      //     if (response.data.url) {
+      //       toast.success("redirecting to Payment page");
+      //       setTimeout(() => {
+      //         window.location.href = response.data.url;
+      //       }, 2000)
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //     toast.error(err.message);
+      //   })
     }
   }
 
@@ -270,10 +270,10 @@ function CheckoutPageRightSide() {
   return (
     <div className='check-out-right-side'>
       <div className='check-out-right-select-tab'>
-        <div className={`home-delivery check-out-right-select-tab-item ${isClicked === 'homeDelv' ? 'clicked' : 'not-clicked'}`} onClick={() => HandleClickValue('homeDelv')}> Home Delivery</div>
-        <div className={`home-delivery check-out-right-select-tab-item ${isClicked === 'pickUp' ? 'clicked' : 'not-clicked'}`} onClick={() => HandleClickValue('pickUp')}>Pick Up</div>
+        <div className={`home-delivery check-out-right-select-tab-item ${isClicked === 'Delivery' ? 'clicked' : 'not-clicked'}`} onClick={() => HandleClickValue('Delivery')}> Home Delivery</div>
+        <div className={`home-delivery check-out-right-select-tab-item ${isClicked === 'Pickup' ? 'clicked' : 'not-clicked'}`} onClick={() => HandleClickValue('Pickup')}>Pick Up</div>
       </div>
-      <div className='check-out-right-time-dropdown' style={{ display: isClicked === 'pickUp' ? 'block' : 'none' }}>
+      <div className='check-out-right-time-dropdown' style={{ display: isClicked === 'Pickup' ? 'block' : 'none' }}>
         Pick Your Oder at <span className='check-out-right-time-dropdown-inner-text'>179 SHERMAN AVE , NY 10034, New York, NY, United States, New York</span>
         
       </div>
@@ -299,7 +299,7 @@ function CheckoutPageRightSide() {
           </div>
           <div className='tax'>
             <span>Delivery Charges</span>
-            <span>${isClicked === 'homeDelv' ? charges : 0}</span>
+            <span>${isClicked === 'Delivery' ? charges : 0}</span>
           </div>
           <div className='tax'>
             <span>Estimated Tax (8.75%)</span>
