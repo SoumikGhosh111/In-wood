@@ -53,7 +53,10 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
   }
 
 
-
+  var existingData = {
+    userId: "",
+    zipCode: ""
+  }
   useEffect(() => {
     getUserDetails();
   }, [])
@@ -62,9 +65,13 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
     try {
       const response = await fetch(`${baseUrl}/api/users/userDetails/${useremail}`);
       const result = await response.json();
-      console.log(result);
+      console.log(result, "this is result");
       if (result && result.data && result.data.user) {
         setUserId(result.data.user._id);
+        existingData = { 
+          ...existingData,
+          userId: result.data.user._id,
+        }
         // setUserName(result.data.user.name); 
         // if (result.data.user.hasOwnProperty("city")) {
         //   setCity(result.data.user.city);
@@ -80,28 +87,38 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
         // }
         if (result.data.user.hasOwnProperty("zipCode")) {
           setZipCode(result.data.user.zipCode);
+          existingData = { 
+            ...existingData,
+            zipCode: result.data.user.zipCode,
+          }
         }
       }
+
+       
       const userDataObj = {
-        userId: userId,
-        // name: userName, 
-        // email: email, 
-        // city: city, 
-        // stateLocation: state, 
-        // country: country, 
-        // street: street
-        zipCode: zipCode
+        ...existingData,
       }
+
+
+      
+
+       console.log(existingData, "this is existing data inside obj"); 
       dispatch(setUserData(userDataObj));
+       
 
     } catch (err) {
       console.log(err);
     }
   };
 
+  console.log(existingData, "this is existing data"); 
+
+  
+
 
   const handleSaveInfo = () => {
     const userDataObj = {
+      // ...existingData,
       userId: userId,
       // name: userName, 
       // email: email, 

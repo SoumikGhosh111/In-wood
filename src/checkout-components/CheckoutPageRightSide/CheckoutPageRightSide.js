@@ -35,6 +35,8 @@ function CheckoutPageRightSide() {
   // for Home delivery and Pickup
   const [isClicked, setIsClicked] = useState('Delivery');
 
+  console.log(userData, "Checkut Right User Data");
+
  
 
   // const [deliveryCharges, setDeliveryCharges] = useState(0);
@@ -180,7 +182,7 @@ function CheckoutPageRightSide() {
 
 
   const handlePlaceOrderClick = () => {
-    console.log(Object.keys(specialOffersObj).length);
+    // console.log(Object.keys(specialOffersObj).length);
     if (cartItems.length === 0 && Object.keys(specialOffersObj).length === 0) {
       // alert("No items in the cart");
       toast.error("No items in the cart");
@@ -224,23 +226,23 @@ function CheckoutPageRightSide() {
       console.log(data)
       const id = userData.userId;
 
-      // axios
-      //   .post(`${baseUrl}/api/stripe/create-checkout-session`, {
-      //     data: data,
-      //     userId: id,
-      //   })
-      //   .then((response) => {
-      //     if (response.data.url) {
-      //       toast.success("redirecting to Payment page");
-      //       setTimeout(() => {
-      //         window.location.href = response.data.url;
-      //       }, 2000)
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //     toast.error(err.message);
-      //   })
+      axios
+        .post(`${baseUrl}/api/stripe/create-checkout-session`, {
+          data: data,
+          userId: id,
+        })
+        .then((response) => {
+          if (response.data.url) {
+            toast.success("redirecting to Payment page");
+            setTimeout(() => {
+              window.location.href = response.data.url;
+            }, 2000)
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error(err.message);
+        })
     }
   }
 
