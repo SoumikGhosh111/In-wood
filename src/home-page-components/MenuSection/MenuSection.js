@@ -324,7 +324,7 @@ function MenuSection() {
                 ) : (<>Loading . . .</>)}
 
 
-                <span className='title'>Pizza By Slice</span>
+               {pizzaBySlice?.length > 0 && <span className='title'>Pizza By Slice</span>}
 
 
                 {pizzaBySlice !== null ? (
