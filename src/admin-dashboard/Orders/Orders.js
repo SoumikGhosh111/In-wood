@@ -18,12 +18,22 @@ function Orders() {
     "cancel",
   ]);
 
+  const [pickUpStatus, setPickUpStatus] = useState([
+    "Pending",
+    " Order is Preparing",
+    "Ready for Pickup",
+    "Completed",
+    "Cancel",
+  ]);
+
+
+
   useEffect(() => {
     fetchAllOrders();
 
     // Setup SSE
     const eventSource = new EventSource(`${baseUrl}/api/sse/orders`);
-    const bellAudio = new Audio(bell); 
+    const bellAudio = new Audio(bell);
 
     eventSource.onmessage = (event) => {
       try {
@@ -32,9 +42,9 @@ function Orders() {
 
 
         // here will be the bell notification sound
-        bellAudio.play().catch((err) => { 
-          alert("Error Playing audio due to user inactivity, One new order has arrived."); 
-        }); 
+        bellAudio.play().catch((err) => {
+          alert("Error Playing audio due to user inactivity, One new order has arrived.");
+        });
 
         fetchAllOrders(); // Update orders list when new order arrives
       } catch (error) {
@@ -72,6 +82,7 @@ function Orders() {
       }
 
       setAllOrders(response.data.data.order);
+      console.log(response.data.data.order);
     } catch (error) {
       console.error('Error fetching orders:', error.message);
       // Handle error cases here...
@@ -226,20 +237,43 @@ function Orders() {
                   </td>
                   <td>
                     <div className='order-payment-status'>
+                      <span><b>Delivery Type:</b> {item.deliveryType === 'Pickup' ? item.deliveryType : 'Home Delivery'}</span><br />
                       <span><b>Payment:</b> {item.payment_status}</span><br />
                       <span><b>Total Amount:</b> ${item.total}</span><br />
                       <span><b>Delivery Status:</b></span><br />
-                      <select
-                        value={item.delivery_status}
-                        onChange={(e) => handleChange(item._id, e.target.value)}
-                      >
-                        {status.map((s) => (
-                          <option key={s} value={s}>{s}</option>
-                        ))}
-                      </select>
+                      {item.deliveryType === 'Pickup' ? 
+                        
+                        (<select
+                          value={item.takeaway_status}
+
+                        >
+                          {pickUpStatus.map((s) => (
+                            <option key={s} value={s}>{s}</option>
+                          ))}
+                        </select>) : 
+                        (<select
+                          value={item.delivery_status}
+                          onChange={(e) => handleChange(item._id, e.target.value)}
+                        >
+                          {status.map((s) => (
+                            <option key={s} value={s}>{s}</option>
+                          ))}
+                        </select>)
+                      }
+
+                     
+
+
+
+
                     </div>
                   </td>
-                  <td>{redableTimeStamp(item.createdAt)}</td>
+
+
+
+                  <td>{redableTimeStamp(item.createdAt)}
+                  </td>
+
                 </tr>
               ))}
             </tbody>

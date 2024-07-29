@@ -86,7 +86,7 @@ function MyOrder() {
             default:
                 return "#f7b500";
         }
-    }
+    } // as of the new enums in the delivery status they will be added as case. . . 
 
     const toggleDropDown = (orderIndex, comboIndex) => {
         const key = `${orderIndex}-${comboIndex}`;
@@ -109,11 +109,18 @@ function MyOrder() {
                                 <>
                                     {orderDetails.map((item, indx) => (
                                         <div className='order-container' key={indx}>
-                                            <div className='sl-no'>
-                                                Order No. &nbsp; {orderDetails.length - indx}
-                                            </div>
-                                            <div className='sl-no'>
-                                                Date. &nbsp; {formatReadableDate(item.createdAt)}
+                                            <div className='slNo-delv-type'>
+                                                <div>
+                                                    <div className='sl-no'>
+                                                        Order No. &nbsp; {orderDetails.length - indx}
+                                                    </div>
+                                                    <div className='sl-no'>
+                                                        Date. &nbsp; {formatReadableDate(item.createdAt)}
+                                                    </div>
+                                                </div>
+                                                <div className='delivery-type'>
+                                                    {item.deliveryType}
+                                                </div>
                                             </div>
                                             <div className='my-order-order'>
                                                 <div className='order-items-cont'>

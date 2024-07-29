@@ -242,6 +242,26 @@ img{
 
 
 
+
+/* delivery type implemented and changing the overall structure */
+.slNo-delv-type{ 
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+}
+
+.delivery-type{ 
+    width: fit-content;
+    white-space: nowrap;
+    height: fit-content;
+    padding: 1rem 1rem;
+    background-color: #262626;
+    color: white;
+    border-radius: 8px;
+}
+
 @media screen and (max-width: 993px){ 
     .my-order-dropdown-container-wrapper{ 
         margin-top: 0.8rem;

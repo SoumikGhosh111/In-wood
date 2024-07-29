@@ -113,7 +113,7 @@ function MenuSection() {
             const bySlice = data.data.food.filter(item => item.catagory === 'Pizza By Slice');
             setPizzaBySlice(bySlice);
 
-            console.log(bySlice, "This is hell");
+            // console.log(bySlice, "This is hell");
 
             const chickenWingsItems = data.data.food.filter(item => item.catagory === 'Chicken Wings');
             setChickenwings(chickenWingsItems);
