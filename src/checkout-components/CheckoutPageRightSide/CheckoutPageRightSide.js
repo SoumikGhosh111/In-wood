@@ -224,23 +224,23 @@ function CheckoutPageRightSide() {
       console.log(data)
       const id = userData.userId;
 
-      // axios
-      //   .post(`${baseUrl}/api/stripe/create-checkout-session`, {
-      //     data: data,
-      //     userId: id,
-      //   })
-      //   .then((response) => {
-      //     if (response.data.url) {
-      //       toast.success("redirecting to Payment page");
-      //       setTimeout(() => {
-      //         window.location.href = response.data.url;
-      //       }, 2000)
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //     toast.error(err.message);
-      //   })
+      axios
+        .post(`${baseUrl}/api/stripe/create-checkout-session`, {
+          data: data,
+          userId: id,
+        })
+        .then((response) => {
+          if (response.data.url) {
+            toast.success("redirecting to Payment page");
+            setTimeout(() => {
+              window.location.href = response.data.url;
+            }, 2000)
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error(err.message);
+        })
     }
   }
 
