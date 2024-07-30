@@ -81,7 +81,13 @@ function MyOrder() {
             case "deliverd":
             case "Shipped":
                 return "#71b422";
+            case "Ready for Pickup":
+                return "#71b422";
+            case "Completed":
+                return "#71b422";
             case "cancel":
+                return "#e92028";
+            case "Cancel":
                 return "#e92028";
             default:
                 return "#f7b500";
@@ -174,9 +180,18 @@ function MyOrder() {
                                                         </div>
                                                     )}
                                                     <div className='delivery_status'>
-                                                        <div className='status-myorder' style={{ backgroundColor: statusColor(item.delivery_status), color: 'white' }}>
-                                                            {item.delivery_status}
-                                                        </div>
+                                                        {item.deliveryType === 'Pickup' ? (
+                                                            <div className='status-myorder' style={{ backgroundColor: statusColor(item.takeaway_status), color: 'white', textAlign: 'center' }}>
+                                                                {item.takeaway_status}
+                                                            </div>
+                                                        ) : 
+                                                        ( 
+                                                            <div className='status-myorder' style={{ backgroundColor: statusColor(item.delivery_status), color: 'white' }}>
+                                                                {item.delivery_status}
+                                                            </div>
+                                                        )}
+
+                                                        
                                                         <div className='total-ammnt-my-order'>
                                                             Total Amount: ${item.total}
                                                         </div>

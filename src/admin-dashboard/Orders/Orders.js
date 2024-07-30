@@ -115,19 +115,74 @@ function Orders() {
   // };
 
 
-  const handleChange = async (orderId, value) => {
-    // console.log(orderId);
-    // console.log(value);
+  // const handleChange = async (orderId, value) => {
+  //   // console.log(orderId);
+  //   // console.log(value);
+  //   try {
+  //     const { data } = await axios.put(`${baseUrl}/api/admin/order-status/${orderId}`, {
+  //       status: value
+  //     });
+      
+  //     fetchAllOrders();
+  //     // console.log(data)
+  //   } catch (error) {
+  //     alert(error);
+  //   }
+  // };
+
+
+  // const handleChange = async (orderId, status) => {
+  //   // console.log(orderId);
+  //   // console.log(value);
+  //   try {
+  //     // const { data } = await axios.put(`${baseUrl}/api/admin/order-status/${orderId}`, {
+  //     //   status: status
+  //     // });
+  //     const response = await fetch(`${baseUrl}/api/admin/order-status/${orderId}`, { 
+  //       method: 'PUT', 
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({status})
+  //     }); 
+
+  //     console.log(response); 
+      
+  //     fetchAllOrders();
+  //     // console.log(data)
+  //   } catch (error) {
+  //     alert(error.message);
+  //   }
+  // };
+  const handleChange = async (orderId, status) => {
     try {
-      const { data } = await axios.put(`${baseUrl}/api/admin/order-status/${orderId}`, {
-        delivery_status: value,
-      });
+      const response = await fetch(`${baseUrl}/api/admin/order-status/${orderId}`, { 
+        method: 'PUT', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // status should be wrapped in an object
+        body: JSON.stringify({ status })
+      }); 
+
       fetchAllOrders();
-      // console.log(data)
     } catch (error) {
-      alert(error);
-    }
-  };
+      alert(error.message);
+    }
+};
+
+  // const handleChange = async (orderId, value) => {
+  //   try {
+  //     const response = await axios.put(`${baseUrl}/api/admin/order-status/${orderId}`, {
+  //       status: value,
+  //     });
+  //     console.log(response.data, "status is ");
+  //     fetchAllOrders();
+  //   } catch (error) {
+  //     console.error('Error updating order status:', error);
+  //     alert('Failed to update order status. Please try again.');
+  //   }
+  // };
 
   return (
     <div className='orders-wrapper'>
@@ -245,7 +300,7 @@ function Orders() {
                         
                         (<select
                           value={item.takeaway_status}
-
+                          onChange={(e) => handleChange(item._id, e.target.value)}
                         >
                           {pickUpStatus.map((s) => (
                             <option key={s} value={s}>{s}</option>
