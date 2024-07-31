@@ -216,7 +216,7 @@ function MyOrder() {
                 </div>
                 <div className='my-order-bg-gif'>
                     {/* <img src={logo} alt='logo image' /> */}
-                    <span style={{ margin: '1rem 1rem' }}>At Inwood Pizza, we believe in transparency. <br /> Track your order in real-time.</span>
+                    <span style={{ margin: '1rem 1rem' }}>At Inwood Pizza, we believe in transparency. <br /> Track your order in real-time. <br /> 179 SHERMAN AVE , NY 10034, New York, NY, United States, New York</span>
                     <button className='back-to-home-my-order refresh' onClick={handleRefresh}>Refresh &nbsp; <RefreshRoundedIcon sx={{ transform: "translateY(0%)" }} /></button>
                 </div>
             </div>

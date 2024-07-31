@@ -75,7 +75,7 @@ function EveryDaySpecial2() {
       ? selectedToppings.filter(t => t !== topping)
       : [...selectedToppings, topping];
 
-    if (updatedToppings.length <= 2) {
+    if (updatedToppings.length <= 1) {
       setSelectedToppings(updatedToppings);
     } else {
       // alert("You can only select up to 2 toppings.");
@@ -84,7 +84,7 @@ function EveryDaySpecial2() {
   }
 
   const isToppingDisabled = (topping) => {
-    return selectedToppings.length >= 2 && !selectedToppings.includes(topping);
+    return selectedToppings.length >= 1 && !selectedToppings.includes(topping);
   }
 
   var settings = {   //not needed 
@@ -109,7 +109,7 @@ function EveryDaySpecial2() {
       toast.error("You can only select up to 1 base items.")
     }
 
-    console.log(selectedBaseItems)
+    // console.log(selectedBaseItems); 
     setSelectedToppings([]);
   }
 
@@ -154,7 +154,7 @@ function EveryDaySpecial2() {
   return (
     <div className='combo-offer-2'>
       <div className='static-special-offers-wrapper'>
-        <h2>1 Medium Cheese Pie - 2 toppings <span style={{ fontSize: '15px' }}>(of your choice)</span></h2>
+        <h2>1 Medium Cheese Pie - 1 topping <span style={{ fontSize: '15px' }}>(of your choice)</span></h2>
         {/* <div className='combo-offer-2-basses'>
           <Slider {...settings}>
             {baseData !== null && baseData.map((item) => (
@@ -224,7 +224,7 @@ function EveryDaySpecial2() {
         <div className='add-to-cart-wrapper special-offers-cart every-day-special'>
           <div className='order-cart-cards'>
             <div>
-              <h3>1 Medium Cheese Pie - 2 toppings <span style={{ fontSize: '13px' }}>(of your choice)</span> </h3>
+              <h3>1 Medium Cheese Pie - 1 topping <span style={{ fontSize: '13px' }}>(of your choice)</span> </h3>
               {selectedBaseItems.length > 0 ?
                 (
                   <>
@@ -326,7 +326,7 @@ function EveryDaySpecial2() {
             </div>
             <button className='add-to-cart-button' style={{ backgroundColor: 'black', color: 'white' }} onClick={handleOrder}>PROCEED TO ORDER</button> */}
             <div>
-              <h3><h2>1 Medium Cheese Pie - 2 toppings <span style={{ fontSize: '13px' }}>(of your choice)</span></h2></h3>
+              <h3><h2>1 Medium Cheese Pie - 1 topping <span style={{ fontSize: '13px' }}>(of your choice)</span></h2></h3>
               {selectedBaseItems.length > 0 ?
                 (
                   <>
