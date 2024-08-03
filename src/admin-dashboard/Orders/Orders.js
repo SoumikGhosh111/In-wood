@@ -53,7 +53,8 @@ function Orders() {
     };
 
     eventSource.onerror = (error) => {
-      console.error('EventSource failed:', error);
+      console.log('EventSource failed:', error);
+      // alert('EventSource failed:', error.message)
     };
 
     return () => {

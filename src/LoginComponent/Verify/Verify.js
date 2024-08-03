@@ -14,7 +14,7 @@ function Verify() {
     const location = useLocation();
     const [email, setEmail] = useState(location.state ? location.state.email : '');
     console.log(email)
-    const [combineOtp, setCombineOTP] = useState('');
+    const [otp, setCombineOTP] = useState('');
     const navigate = useNavigate();
 
     const token = localStorage.getItem("token"); 
@@ -22,7 +22,7 @@ function Verify() {
     const handleVerifyOTP = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${baseUrl}/api/users/otpVerify`, { email, combineOtp, token }, { 
+            const response = await axios.post(`${baseUrl}/api/users/otpVerify`, { email, otp, token }, { 
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}` // Correct syntax for setting Authorization header
                 }
@@ -62,7 +62,7 @@ function Verify() {
                                 <input
                                     type="text"
                                     placeholder="Enter OTP"
-                                    value={combineOtp}
+                                    value={otp}
                                     onChange={(e) => setCombineOTP(e.target.value)}
                                 />
 

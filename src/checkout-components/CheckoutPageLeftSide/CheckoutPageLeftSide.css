@@ -192,6 +192,54 @@
 
 
 
+/* Apply coupons */
+.apply-coupons{ 
+    width: 80%;
+    height: fit-content;
+    padding: 1rem 0rem;
+}
+.coupons-inner{ 
+    margin: 1rem 0rem;
+    width: 50%; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+
+
+.coupon-code-input{ 
+    width: 100%;
+    height: fit-content;
+    padding: 1rem 1rem;
+    
+}
+.coupon-code-input:focus{ 
+    outline: none;
+}
+.coupons-apply-button{ 
+    white-space: nowrap;
+    width: fit-content;
+    height: fit-content;
+    padding: 1rem 2rem;
+    background-color: var(--add-to-cart-btn-clr);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+.coupon-code{ 
+    font-style: italic;
+    font-weight: 700;
+}
+
+
+
+
 
 /* media queries */
 @media screen and (max-width: 768px){
@@ -211,6 +259,15 @@
         width: 100%;
     }
     .drop-down-container-wrapper{ 
+        width: 100%;
+    }
+    .apply-coupons{ 
+        width: 100%;
+    }
+    .coupons-inner{ 
+        width: 100%;
+    }
+    .coupons{ 
         width: 100%;
     }
 }

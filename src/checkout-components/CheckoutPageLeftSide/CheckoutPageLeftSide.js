@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useId } from 'react';
 import "./CheckoutPageLeftSide.css";
 import HomeIcon from '@mui/icons-material/Home';
 import EmojiPeopleRoundedIcon from '@mui/icons-material/EmojiPeopleRounded';
@@ -40,6 +40,9 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
   const [email, setEmail] = useState(localStorage.getItem("userEmail") || '')
   const useremail = localStorage.getItem("userEmail");
 
+  // useState for recieving coupon data 
+  const [coupons, setCoupons] = useState(null);
+
   const [openDropDown, setOpenDropDown] = useState(false);
 
   const specialOffersObjs = useSelector(state => state.specialoffer.specialOrder);
@@ -68,7 +71,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
       console.log(result, "this is result");
       if (result && result.data && result.data.user) {
         setUserId(result.data.user._id);
-        existingData = { 
+        existingData = {
           ...existingData,
           userId: result.data.user._id,
         }
@@ -87,33 +90,33 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
         // }
         if (result.data.user.hasOwnProperty("zipCode")) {
           setZipCode(result.data.user.zipCode);
-          existingData = { 
+          existingData = {
             ...existingData,
             zipCode: result.data.user.zipCode,
           }
         }
       }
 
-       
+
       const userDataObj = {
         ...existingData,
       }
 
 
-      
 
-       console.log(existingData, "this is existing data inside obj"); 
+
+      console.log(existingData, "this is existing data inside obj");
       dispatch(setUserData(userDataObj));
-       
+
 
     } catch (err) {
       console.log(err);
     }
   };
 
-  console.log(existingData, "this is existing data"); 
+  console.log(existingData, "this is existing data");
 
-  
+
 
 
   const handleSaveInfo = () => {
@@ -161,6 +164,29 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
   const toggleDropDown = () => {
     setOpenDropDown(!openDropDown);
   }
+
+
+
+  // coupons function
+  useEffect(() => {
+    fetchALLCoupons();
+  }, []);
+  const fetchALLCoupons = async () => {
+    try {
+      const response = await fetch(`${baseUrl}/api/coupon/getAllCoupon`);
+      const result = await response.json();
+      setCoupons(result);
+    } catch (e) {
+      console.log(e.message);
+    }
+  }
+
+
+  const handleCouponClick = async(code) => { 
+    // here need to implement useCode function 
+  }
+
+
 
   return (
     <div className='check-out-left-side'>
@@ -328,6 +354,13 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
       {/* <div className='free-delivery-check-out'>Free Delivery On 20$</div> */}
       <div>
 
+      </div>
+      <div className='apply-coupons'>
+        <h4>APPLY COUPONS</h4>
+        <div className='coupons-inner'>
+              <input type='text' placeholder='Enter Coupon Code' className='coupon-code-input'/>
+            <button className='coupons-apply-button'>Apply</button>
+        </div>
       </div>
       {/* <div className='delivery-stts' style={{ display: isEligble ? 'block' : 'none' }}>
         <div className='if-home-delivery'>

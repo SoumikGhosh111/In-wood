@@ -10,16 +10,16 @@ import { baseUrl } from '../../functions/baseUrl';
 import axios from "axios"; 
 
 // phone react 
-// import PhoneInput from 'react-phone-input-2';
-// import 'react-phone-input-2/lib/style.css'; 
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css'; 
 
 function Signup() {
 
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
-    // const [phone, setPhone] = useState(''); 
+    const [phone, setPhone] = useState(''); 
 
-    // console.log(phone); 
+    console.log(phone); 
 
     // const handleOnSubmit = async (e) => {
     //     e.preventDefault();
@@ -63,7 +63,8 @@ function Signup() {
         const name = from.name.value;
         const password = from.password.value;
         const passwordConfirm = from.confirmPassword.value;
-        const userData = { name, email, password, passwordConfirm };
+        const phoneNumber = `+${phone}`
+        const userData = { name, email, password, passwordConfirm, phoneNumber };
 
         if (!isPasswordValid(password)) {
             toast.error('Password must be at least 8 characters long.');
@@ -86,8 +87,8 @@ function Signup() {
                     localStorage.setItem('userEmail', email); 
                     setTimeout(() => {
                         from.reset();
-                        // navigate('/otppage', { state: { email } }); // Pass email as state
-                        navigate('/');
+                        navigate('/otppage', { state: { email } }); // Pass email as state
+                        // navigate('/');
                     }, 2000)
 
 
@@ -142,14 +143,16 @@ function Signup() {
                                 // ref={loginNameRef}
                                 />
                             </div>
-                            {/* <div className="form__group">
+                             <div className="form__group">
                                 <h5>Phone Number</h5>
                                 <PhoneInput 
-                                    country={'in'}
+                                    country={'us'}
+                                    onlyCountries={['in', 'us']}
                                     value={phone}
                                     onChange={phone => setPhone(phone)}
+                                    inputStyle={{width: '90%'}}
                                 />
-                            </div> */}
+                            </div> 
                             <div className='passBox' > {/* style={{ display: 'flex', marginTop: "4.5vh" }} */}
                                 <div className="form__group2 pass-cnfm-pass">
                                     <h5>Password</h5>

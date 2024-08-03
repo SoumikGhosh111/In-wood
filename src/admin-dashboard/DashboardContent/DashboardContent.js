@@ -6,6 +6,8 @@ import AddToMenu from '../AddToMenu/AddToMenu';
 import Menu from '../Menu/Menu';
 import AddSpecialOffers from '../AddSpecialOffers/AddSpecialOffers';
 import SpecialMenu from '../SpecialMenu/SpecialMenu';
+import CreateCoupons from '../CreateCoupons/CreateCoupons';
+import ManageCoupons from '../ManageCoupons/ManageCoupons';
 function DashboardContent({itemToRender}) {
 
   return (
@@ -30,6 +32,12 @@ function DashboardContent({itemToRender}) {
 
             <div>
                 {itemToRender === 6 && <SpecialMenu />}
+            </div>
+            <div>
+                {itemToRender === 7 && <CreateCoupons />}
+            </div>
+            <div>
+                {itemToRender === 8 && <ManageCoupons />}
             </div>
           </>
 
