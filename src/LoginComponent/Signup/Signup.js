@@ -143,14 +143,18 @@ function Signup() {
                                 // ref={loginNameRef}
                                 />
                             </div>
-                             <div className="form__group">
-                                <h5>Phone Number</h5>
+                            {/* need to do it this way bcz the standard css is not working h5 tag is just sliding in the right for some reason */}
+                            <div className='form__group ph-num'>
+                                <h5 >Phone Number</h5>
+                            </div>
+                             <div className="form__group input-ph-no" >
+                                
                                 <PhoneInput 
                                     country={'us'}
                                     onlyCountries={['in', 'us']}
                                     value={phone}
                                     onChange={phone => setPhone(phone)}
-                                    inputStyle={{width: '90%'}}
+                                    inputStyle={{width: window.innerWidth > 768 ? '90%' : '88%', borderRadius: '10px'}}
                                 />
                             </div> 
                             <div className='passBox' > {/* style={{ display: 'flex', marginTop: "4.5vh" }} */}

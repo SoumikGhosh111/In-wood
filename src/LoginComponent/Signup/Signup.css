@@ -19,6 +19,11 @@
     padding: 0 !important;
 } */
 
+.ph-num{ 
+    padding: 0;
+    margin: 0;
+    /* padding-left: 1rem; */
+}
 
 /* media queries */
 @media screen and (max-width: 768px){ 
@@ -29,12 +34,22 @@
        padding: 0;
         margin: 0;
     }
-    .sign-up-frTxt{ 
+    .sign-up-frTxt{    
         margin-top: 1rem;
         /* margin-left: 0.5rem; */
         margin-left: 2.5rem;
         /* border: 1px solid red; */
     }
+    .input-ph-no{ 
+        padding-left: 2rem;
+        
+    }
+    .ph-num{ 
+        padding: 0;
+        margin: 0;
+        padding-left: 1rem;
+    }
+   
 }
 
 
