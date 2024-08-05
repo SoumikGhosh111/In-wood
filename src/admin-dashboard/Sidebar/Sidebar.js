@@ -130,7 +130,7 @@ function Sidebar({ onSideBarItemClicked }) {
                         <GradeIcon sx={{ transform: "translateY(20%)", marginRight: "1rem" }} />  Special Items Menu
                     </a>
                 </li>
-                <li className={activeClass === 7 ? 'active-sidebar sidebar-list-item' : 'sidebar-list-item'} onClick={() => handleIconCLick(7)}>
+                {/* <li className={activeClass === 7 ? 'active-sidebar sidebar-list-item' : 'sidebar-list-item'} onClick={() => handleIconCLick(7)}>
                     <a >
                         <GradeIcon sx={{ transform: "translateY(20%)", marginRight: "1rem" }} />  Create Coupons
                     </a>
@@ -140,7 +140,7 @@ function Sidebar({ onSideBarItemClicked }) {
                     <a >
                         <GradeIcon sx={{ transform: "translateY(20%)", marginRight: "1rem" }} />  Manage Coupons
                     </a>
-                </li>
+                </li> */}
                 {/*<li className='sidebar-list-item'>
                   <a href="">
                        Inventory

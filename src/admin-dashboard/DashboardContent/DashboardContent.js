@@ -33,12 +33,12 @@ function DashboardContent({itemToRender}) {
             <div>
                 {itemToRender === 6 && <SpecialMenu />}
             </div>
-            <div>
+            {/* <div>
                 {itemToRender === 7 && <CreateCoupons />}
             </div>
             <div>
                 {itemToRender === 8 && <ManageCoupons />}
-            </div>
+            </div> */}
           </>
 
         ) : (<></>)}
