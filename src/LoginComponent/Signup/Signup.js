@@ -154,7 +154,8 @@ function Signup() {
                                     onlyCountries={['in', 'us']}
                                     value={phone}
                                     onChange={phone => setPhone(phone)}
-                                    inputStyle={{width: window.innerWidth > 768 ? '90%' : '88%', borderRadius: '20px', height: '40px'}}
+                                    inputStyle={{width: window.innerWidth > 768 ? '90%' : '88%', borderRadius: '20px', height: '40px', backgroundColor: 'rgba(176, 175, 175, 0.562)',
+                                        backdropFilter: 'blur(15px)', border: 'none', color: 'white'}}
                                 />
                             </div> 
                             <div className='passBox' > {/* style={{ display: 'flex', marginTop: "4.5vh" }} */}
