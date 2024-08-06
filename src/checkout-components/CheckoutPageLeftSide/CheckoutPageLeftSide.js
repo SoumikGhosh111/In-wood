@@ -23,7 +23,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-function CheckoutPageLeftSide({ onEdtBtnClick }) {
+function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
   const [specialOffer, setSpecialOffer] = useState(null);
   const cartItems = useSelector((state) => state.cart.cart);
   const userDetails = useSelector((state) => state.userdata);
@@ -42,6 +42,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
 
   // useState for recieving coupon data 
   const [coupons, setCoupons] = useState(null);
+  const [couponCode, setCouponCode] = useState(''); 
 
   const [openDropDown, setOpenDropDown] = useState(false);
 
@@ -182,8 +183,10 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
   }
 
 
-  const handleCouponClick = async(code) => { 
+  const handleCouponClick = async(couponCode) => { 
     // here need to implement useCode function 
+    console.log(userId, 'this is  userId', couponCode, 'this is coupon code'); 
+    handleCoupon({ userId, couponCode });
   }
 
 
@@ -358,8 +361,8 @@ function CheckoutPageLeftSide({ onEdtBtnClick }) {
       <div className='apply-coupons'>
         <h4>APPLY COUPONS</h4>
         <div className='coupons-inner'>
-              <input type='text' placeholder='Enter Coupon Code' className='coupon-code-input'/>
-            <button className='coupons-apply-button'>Apply</button>
+              <input type='text' placeholder='Enter Coupon Code' className='coupon-code-input' value={couponCode} onChange={(e) => setCouponCode(e.target.value)}/>
+            <button className='coupons-apply-button' onClick={() => handleCouponClick(couponCode)}>Apply</button>
         </div>
       </div>
       {/* <div className='delivery-stts' style={{ display: isEligble ? 'block' : 'none' }}>

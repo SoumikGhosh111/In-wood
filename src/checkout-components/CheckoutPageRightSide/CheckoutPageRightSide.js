@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-function CheckoutPageRightSide() {
+function CheckoutPageRightSide({couponData, idAndCode}) {
   const temp = JSON.parse(localStorage.getItem('specialOrder'));
   const [specialOffer, setSpecialOffer] = useState(null);
   const [tax, setTax] = useState(0);
@@ -30,7 +30,7 @@ function CheckoutPageRightSide() {
   const [deliveryCharges, setDeliveryCharges] = useState(0);
   const [support, setSupport] = useState(0);
   const [dscnt, setDscnt] = useState(0); // this will be used for discount purposes in the future
-
+  console.log(couponData, "this is coupon data"); 
 
   // for Home delivery and Pickup
   const [isClicked, setIsClicked] = useState('Delivery');
@@ -58,6 +58,8 @@ function CheckoutPageRightSide() {
   }, [specialOffersObj]);
 
   const totalAmnt = tempAmnt + specialOffersAmnt;
+  const discountAmnt = couponData?.hasOwnProperty("discount") ? couponData?.discount : 0; 
+  const totalDiscount = ((totalAmnt * discountAmnt)/100).toFixed(2); 
 
 
   console.log("this is offerPrice", specialOffersAmnt);
@@ -206,6 +208,11 @@ function CheckoutPageRightSide() {
       const deliveryType = { 
         type: isClicked, 
       }
+      // const couponCode = {}; 
+      // if(idAndCode!== null){ 
+      //   couponCode = {couponCode: idAndCode.couponCode}; 
+      // }
+      
 
       const comboData = specialOffersObj;
       const data = {
@@ -215,34 +222,35 @@ function CheckoutPageRightSide() {
         tempPriceData,
         userData,
         deliveryType,
+        couponCode: idAndCode?.couponCode, 
         amount: {
           subTotal: totalAmnt,
           estimatedTax: tax,
           supportLocalfee: SupportFee,
-          total: (parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(support) + parseFloat(deliveryCharges))
+          total: (parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(support) + parseFloat(deliveryCharges) - parseFloat(totalDiscount))
         },
         // toppings: cartItems.map((item) => item.toppings ?  item.toppings.map((topping) => topping.text) : null) 
       }
       console.log(data)
       const id = userData.userId;
 
-      axios
-        .post(`${baseUrl}/api/stripe/create-checkout-session`, {
-          data: data,
-          userId: id,
-        })
-        .then((response) => {
-          if (response.data.url) {
-            toast.success("redirecting to Payment page");
-            setTimeout(() => {
-              window.location.href = response.data.url;
-            }, 2000)
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          toast.error(err.message);
-        })
+      // axios
+      //   .post(`${baseUrl}/api/stripe/create-checkout-session`, {
+      //     data: data,
+      //     userId: id,
+      //   })
+      //   .then((response) => {
+      //     if (response.data.url) {
+      //       toast.success("redirecting to Payment page");
+      //       setTimeout(() => {
+      //         window.location.href = response.data.url;
+      //       }, 2000)
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //     toast.error(err.message);
+      //   })
     }
   }
 
@@ -307,6 +315,10 @@ function CheckoutPageRightSide() {
             <span>Estimated Tax (8.75%)</span>
             <span>${tax}</span>
           </div>
+          <div className='tax'>
+            <span>Discount({couponData?.hasOwnProperty("discount") ? `${couponData?.discount}%` : "0%"})</span>
+            <span>${totalDiscount}</span>
+          </div>
 
           {/* <div className='tip' >
             <span>Delivery Charges  </span>
@@ -349,7 +361,7 @@ function CheckoutPageRightSide() {
             {totalAmnt === 0 ? ( // Display 0 if subtotal is 0
               <span>$0.00</span>
             ) : ( // Otherwise calculate total amount
-              <span>${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(deliveryCharges) + parseFloat(support) + parseFloat(tipAmnt)).toFixed(2)}</span>
+              <span>${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(deliveryCharges) + parseFloat(support) + parseFloat(tipAmnt) - parseFloat(totalDiscount)).toFixed(2)}</span>
             )}
           </div>
         </div>
@@ -384,10 +396,10 @@ function CheckoutPageRightSide() {
         </div>
       </div>
 
-      <ToastContainer
+      {/* <ToastContainer
         position='top-center'
         className={'toast-container-center'}
-      />
+      /> */}
 
     </div>
   )
