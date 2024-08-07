@@ -22,10 +22,10 @@ function Verify() {
     const handleVerifyOTP = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${baseUrl}/api/users/otpVerify`, { email, otp, token }, { 
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}` // Correct syntax for setting Authorization header
-                }
+            const response = await axios.post(`${baseUrl}/api/users/otpVerify`, { email, otp}, { 
+                // headers: {
+                //     Authorization: `Bearer ${localStorage.getItem("token")}` // Correct syntax for setting Authorization header
+                // }
             });
             // localStorage.setItem('userEmail', email); 
             if (response.data.success) {
