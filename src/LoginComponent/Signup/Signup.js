@@ -82,7 +82,7 @@ function Signup() {
                 if (data.success) {
                     localStorage.setItem('token', data.data.token);
                     // toast.success(data.message); // Display toast message
-                    toast.success("Register Successfully"); 
+                    toast.success("OTP sent your phone"); 
                     // alert(data.message);
                     localStorage.setItem('userEmail', email); 
                     setTimeout(() => {

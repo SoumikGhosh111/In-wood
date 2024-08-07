@@ -355,13 +355,13 @@ function CheckoutPageRightSide({couponData, idAndCode}) {
             <span>${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(tipAmnt)).toFixed(2) + parseFloat(deliveryCharges)}</span>
           </div> */}
           <div className='all-total'>
-            {/* <span>Total</span>
+            {/* <span>Total</span> 
             <span>${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(tipAmnt) + parseFloat(deliveryCharges)).toFixed(2)}</span> */}
             <span>Total</span>
             {totalAmnt === 0 ? ( // Display 0 if subtotal is 0
               <span>$0.00</span>
             ) : ( // Otherwise calculate total amount
-              <span>${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(deliveryCharges) + parseFloat(support) + parseFloat(tipAmnt) - parseFloat(totalDiscount)).toFixed(2)}</span>
+              <span> <span style={{textDecoration: 'line-through'}}>{totalDiscount > 0 ? `$${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(deliveryCharges) + parseFloat(support) + parseFloat(tipAmnt)).toFixed(2)}` : ''} </span> &nbsp;  ${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(deliveryCharges) + parseFloat(support) + parseFloat(tipAmnt) - parseFloat(totalDiscount)).toFixed(2)}</span>
             )}
           </div>
         </div>
