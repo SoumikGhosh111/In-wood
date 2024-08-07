@@ -28,12 +28,13 @@ function Verify() {
                 // }
             });
             // localStorage.setItem('userEmail', email); 
+            console.log(response, "this is response"); 
             if (response.data.success) {
                 localStorage.setItem('token', response.data.token);
                 toast.success(response.data.message); // Use response.data.message
                 // alert(response.data.message);
                 setTimeout(()=> { 
-                    navigate('/');
+                    // navigate('/');
                 }, 2000); 
             } else {
                 // alert(response.data.message); // Use response.data.message
