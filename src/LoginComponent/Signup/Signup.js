@@ -7,19 +7,19 @@ import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
 import "./Signup.css"
 import { baseUrl } from '../../functions/baseUrl';
-import axios from "axios"; 
+import axios from "axios";
 
 // phone react 
 import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css'; 
+import 'react-phone-input-2/lib/style.css';
 
 function Signup() {
 
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState(''); 
+    const [phone, setPhone] = useState('');
 
-    console.log(phone); 
+    console.log(phone);
 
     // const handleOnSubmit = async (e) => {
     //     e.preventDefault();
@@ -57,51 +57,100 @@ function Signup() {
     const isPasswordValid = (password) => {
         return password.length > 7;
     }
+    // const handleOnSubmit = async (e) => {
+    //     e.preventDefault();
+    //     const from = e.target;
+    //     const name = from.name.value;
+    //     const password = from.password.value;
+    //     const passwordConfirm = from.confirmPassword.value;
+    //     const phoneNumber = `+${phone}`
+    //     const userData = { name, email, password, passwordConfirm, phoneNumber };
+
+    //     if (!isPasswordValid(password)) {
+    //         toast.error('Password must be at least 8 characters long.');
+    //         return;
+    //     }
+    //     fetch(`${baseUrl}/api/users/register`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'content-type': 'application/json',
+    //         },
+    //         body: JSON.stringify(userData),
+    //     })
+    //         .then((res) => res.json())
+    //         .then((data) => {
+    //             if (data.success) {
+    //                 localStorage.setItem('token', data.data.token);
+    //                 // toast.success(data.message); // Display toast message
+    //                 toast.success("OTP sent your phone");
+    //                 // alert(data.message);
+    //                 localStorage.setItem('userEmail', email);
+    //                 setTimeout(() => {
+    //                     from.reset();
+    //                     navigate('/otppage', { state: { email } }); // Pass email as state
+    //                     // navigate('/');
+    //                 }, 2000)
+
+
+    //             } else {
+    //                 toast.error(data.message);
+    //                 // alert(data.message)
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error:', error);
+    //         });
+    // };
+
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         const from = e.target;
         const name = from.name.value;
         const password = from.password.value;
         const passwordConfirm = from.confirmPassword.value;
-        const phoneNumber = `+${phone}`
+        const phoneNumber = `+${phone}`;
         const userData = { name, email, password, passwordConfirm, phoneNumber };
-
+    
         if (!isPasswordValid(password)) {
             toast.error('Password must be at least 8 characters long.');
             return;
         }
-        fetch(`${baseUrl}/api/users/register`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json',
-            },
-            body: JSON.stringify(userData),
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.success) {
+    
+        try {
+            const response = await fetch(`${baseUrl}/api/users/register`, {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
+            const data = await response.json();
+            
+            // Log the response data
+            console.log('Server response:', data);
+    
+            if (data.success) {
+                if (data.data && data.data.token) {
                     localStorage.setItem('token', data.data.token);
-                    // toast.success(data.message); // Display toast message
-                    toast.success("OTP sent your phone"); 
-                    // alert(data.message);
-                    localStorage.setItem('userEmail', email); 
+                    toast.success("Register Successfully");
+                    localStorage.setItem('userEmail', email);
                     setTimeout(() => {
                         from.reset();
-                        navigate('/otppage', { state: { email } }); // Pass email as state
-                        // navigate('/');
-                    }, 2000)
-
-
+                        navigate('/otppage', { state: { email } });
+                    }, 2000);
                 } else {
-                    toast.error(data.message);
-                    // alert(data.message)
+                    toast.error('Token is missing in the response');
+                    console.error('Token is missing in the response:', data);
                 }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+            } else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            toast.error('An error occurred. Please try again.');
+        }
     };
-
+   
     const handleEmailChange = (e) => {
         const newEmail = e.target.value;
 
@@ -147,17 +196,19 @@ function Signup() {
                             <div className='form__group ph-num'>
                                 <h5 >Phone Number</h5>
                             </div>
-                             <div className="form__group input-ph-no" >
-                                
-                                <PhoneInput 
+                            <div className="form__group input-ph-no" >
+
+                                <PhoneInput
                                     country={'us'}
                                     onlyCountries={['in', 'us']}
                                     value={phone}
                                     onChange={phone => setPhone(phone)}
-                                    inputStyle={{width: window.innerWidth > 768 ? '90%' : '88%', borderRadius: '20px', height: '40px', backgroundColor: 'rgba(176, 175, 175, 0.562)',
-                                        backdropFilter: 'blur(15px)', border: 'none', color: 'white'}}
+                                    inputStyle={{
+                                        width: window.innerWidth > 768 ? '90%' : '88%', borderRadius: '20px', height: '40px', backgroundColor: 'rgba(176, 175, 175, 0.562)',
+                                        backdropFilter: 'blur(15px)', border: 'none', color: 'white'
+                                    }}
                                 />
-                            </div> 
+                            </div>
                             <div className='passBox' > {/* style={{ display: 'flex', marginTop: "4.5vh" }} */}
                                 <div className="form__group2 pass-cnfm-pass">
                                     <h5>Password</h5>
