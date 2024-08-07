@@ -33,7 +33,7 @@ function App() {
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/login' element={<LoginPage />} />
-            <Route path='/otppage' element={<ProtectedRoute><OtpPage /></ProtectedRoute>} />
+            <Route path='/otppage' element={<OtpPage />} />
             <Route path='/register' element={<SignupPage />} />
             <Route path='/checkout' element={<ProtectedRoute><CheckOutPage /></ProtectedRoute>} />
             <Route path='/profile' element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
