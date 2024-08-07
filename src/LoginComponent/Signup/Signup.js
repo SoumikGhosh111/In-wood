@@ -57,99 +57,99 @@ function Signup() {
     const isPasswordValid = (password) => {
         return password.length > 7;
     }
-    // const handleOnSubmit = async (e) => {
-    //     e.preventDefault();
-    //     const from = e.target;
-    //     const name = from.name.value;
-    //     const password = from.password.value;
-    //     const passwordConfirm = from.confirmPassword.value;
-    //     const phoneNumber = `+${phone}`
-    //     const userData = { name, email, password, passwordConfirm, phoneNumber };
-
-    //     if (!isPasswordValid(password)) {
-    //         toast.error('Password must be at least 8 characters long.');
-    //         return;
-    //     }
-    //     fetch(`${baseUrl}/api/users/register`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'content-type': 'application/json',
-    //         },
-    //         body: JSON.stringify(userData),
-    //     })
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             if (data.success) {
-    //                 localStorage.setItem('token', data.data.token);
-    //                 // toast.success(data.message); // Display toast message
-    //                 toast.success("OTP sent your phone");
-    //                 // alert(data.message);
-    //                 localStorage.setItem('userEmail', email);
-    //                 setTimeout(() => {
-    //                     from.reset();
-    //                     navigate('/otppage', { state: { email } }); // Pass email as state
-    //                     // navigate('/');
-    //                 }, 2000)
-
-
-    //             } else {
-    //                 toast.error(data.message);
-    //                 // alert(data.message)
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error:', error);
-    //         });
-    // };
-
     const handleOnSubmit = async (e) => {
         e.preventDefault();
         const from = e.target;
         const name = from.name.value;
         const password = from.password.value;
         const passwordConfirm = from.confirmPassword.value;
-        const phoneNumber = `+${phone}`;
+        const phoneNumber = `+${phone}`
         const userData = { name, email, password, passwordConfirm, phoneNumber };
-    
+
         if (!isPasswordValid(password)) {
             toast.error('Password must be at least 8 characters long.');
             return;
         }
-    
-        try {
-            const response = await fetch(`${baseUrl}/api/users/register`, {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify(userData),
-            });
-            const data = await response.json();
-            
-            // Log the response data
-            console.log('Server response:', data);
-    
-            if (data.success) {
-                if (data.data && data.data.token) {
+        fetch(`${baseUrl}/api/users/register`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
                     localStorage.setItem('token', data.data.token);
-                    toast.success("Register Successfully");
+                    // toast.success(data.message); // Display toast message
+                    toast.success("OTP sent your phone");
+                    // alert(data.message);
                     localStorage.setItem('userEmail', email);
                     setTimeout(() => {
                         from.reset();
-                        navigate('/otppage', { state: { email } });
-                    }, 2000);
+                        navigate('/otppage', { state: { email } }); // Pass email as state
+                        // navigate('/');
+                    }, 2000)
+
+
                 } else {
-                    toast.error('Token is missing in the response');
-                    console.error('Token is missing in the response:', data);
+                    toast.error(data.message);
+                    // alert(data.message)
                 }
-            } else {
-                toast.error(data.message);
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            toast.error('An error occurred. Please try again.');
-        }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     };
+
+    // const handleOnSubmit = async (e) => {
+    //     e.preventDefault();
+    //     const from = e.target;
+    //     const name = from.name.value;
+    //     const password = from.password.value;
+    //     const passwordConfirm = from.confirmPassword.value;
+    //     const phoneNumber = `+${phone}`;
+    //     const userData = { name, email, password, passwordConfirm, phoneNumber };
+    
+    //     if (!isPasswordValid(password)) {
+    //         toast.error('Password must be at least 8 characters long.');
+    //         return;
+    //     }
+    
+    //     try {
+    //         const response = await fetch(`${baseUrl}/api/users/register`, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'content-type': 'application/json',
+    //             },
+    //             body: JSON.stringify(userData),
+    //         });
+    //         const data = await response.json();
+            
+    //         // Log the response data
+    //         console.log('Server response:', data);
+    
+    //         if (data.success) {
+    //             if (data.data && data.data.token) {
+    //                 localStorage.setItem('token', data.data.token);
+    //                 toast.success("Register Successfully");
+    //                 localStorage.setItem('userEmail', email);
+    //                 setTimeout(() => {
+    //                     from.reset();
+    //                     navigate('/otppage', { state: { email } });
+    //                 }, 2000);
+    //             } else {
+    //                 toast.error('Token is missing in the response');
+    //                 console.error('Token is missing in the response:', data);
+    //             }
+    //         } else {
+    //             toast.error(data.message);
+    //         }
+    //     } catch (error) {
+    //         console.error('Error:', error);
+    //         toast.error('An error occurred. Please try again.');
+    //     }
+    // };
    
     const handleEmailChange = (e) => {
         const newEmail = e.target.value;
