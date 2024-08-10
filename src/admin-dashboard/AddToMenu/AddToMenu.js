@@ -213,6 +213,7 @@ function AddToMenu() {
           placeholder="Size"
           value={priceInput.size}
           onChange={(e) => setPriceInput({ ...priceInput, size: e.target.value })}
+          required
         />
         <input
           type="number"
@@ -221,6 +222,7 @@ function AddToMenu() {
           placeholder="Price"
           value={priceInput.price}
           onChange={(e) => setPriceInput({ ...priceInput, price: e.target.value })}
+          required
         />
         <button type="button" onClick={addPrice}>Add Price</button><br /><br />
         {formData.prices.map((priceObj, index) => (

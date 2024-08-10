@@ -14,7 +14,10 @@ export const getUser = async () => {
                     Authorization: `Bearer ${localStorage.getItem("token")}` // Correct syntax for setting Authorization header
                 }
             }
+
         );
+
+        console.log(res)
         if (res.data.success) {
             // alert("success"); 
             return true;  

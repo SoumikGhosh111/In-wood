@@ -358,12 +358,26 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
       <div>
 
       </div>
-      <div className='apply-coupons'>
+      {/* <div className='apply-coupons'>
         <h4>APPLY COUPONS</h4>
         <div className='coupons-inner'>
               <input type='text' placeholder='Enter Coupon Code' className='coupon-code-input' value={couponCode} onChange={(e) => setCouponCode(e.target.value)}/>
             <button className='coupons-apply-button' onClick={() => handleCouponClick(couponCode)}>Apply</button>
         </div>
+      </div> */}
+      <div className='contact-info-wrapper'>
+        <h4>APPLY COUPONS</h4>
+        <div className='contact-input-filed'>
+          <div className='first-last-name'>
+            <div className='last-name'>
+            <input type='text' placeholder='Enter Coupon Code' className='mob-num' value={couponCode} onChange={(e) => setCouponCode(e.target.value)}/>
+            </div>
+          </div>
+          <button className='check-out-page-save-info' onClick={() => handleCouponClick(couponCode)}>Apply</button>
+          {/* <BasicSwitches />
+          <span>By checking the box, you agree to receive occasional automated promotional text messages from Slice at the cell number used when signing up. Consent is not a condition of any purchase. Reply HELP for help and STOP to cancel. Msg frequency varies. Msg & data rates may apply. Privacy & SMS Terms</span> */}
+        </div>
+
       </div>
       {/* <div className='delivery-stts' style={{ display: isEligble ? 'block' : 'none' }}>
         <div className='if-home-delivery'>
