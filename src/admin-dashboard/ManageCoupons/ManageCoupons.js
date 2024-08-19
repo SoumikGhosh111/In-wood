@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { baseUrl } from '../../functions/baseUrl';
 import "./ManageCoupons.css";
+import { redableTimeStamp } from '../../functions/readbleTimeFormat';
+import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 function ManageCoupons() {  
@@ -22,18 +25,20 @@ function ManageCoupons() {
   return (
     <div className='manage-coupon-wrapper'>
         <h2>Manage Coupons</h2>
-        <table>
+        <table className='admin-coupon-table'>
           <thead>
             <th>Code</th>
             <th>Expiration Date</th>
             <th>Discount</th>
+            <th>Modify Coupons</th>
           </thead>
           <tbody>
             {allCoupons?.map((item, indx)=> ( 
               <tr key={item._id}>
                 <td>{item.code}</td>
-                <td>{item.expirationDate}</td>
+                <td>{redableTimeStamp(item.expirationDate)}</td>
                 <td>{item.discount}</td>
+                <td><BorderColorRoundedIcon sx={{cursor: 'pointer'}}/> &nbsp;&nbsp; <DeleteIcon sx={{cursor: 'pointer'}}/></td>
               </tr>
             ))}
           </tbody>

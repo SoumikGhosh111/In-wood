@@ -1,3 +1,50 @@
 .manage-coupon-wrapper{ 
     color: black;
 }
+.manage-coupon-wrapper {
+    padding: 0rem 1rem;
+    background-color: white;  
+    /* border-radius: 10px; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  }
+  
+  .admin-coupon-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    text-align: center;
+    /* font-family: Arial, sans-serif; */
+  }
+  
+  .admin-coupon-table thead {
+    /* background-color: #343a40; */
+    /* text-align: left; */
+  }
+  .admin-coupon-table th,
+  .admin-coupon-table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+  }
+  
+  .admin-coupon-table tbody tr:nth-child(even) {
+    background-color: #f4f4f4;
+  }
+  
+  /* .admin-coupon-table tbody tr:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+  } */
+  
+  .admin-coupon-table th {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  
+  .admin-coupon-table td {
+    color: #555;
+  }
+  
+  .admin-coupon-table td:first-child {
+    font-weight: bold;
+  }
+  

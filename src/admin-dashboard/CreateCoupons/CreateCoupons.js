@@ -1,12 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import "./CreateCoupons.css";
+import { baseUrl } from "../../functions/baseUrl";
 
 function CreateCoupons() {
 
   const [formData, setFormData] = useState({
     code: '',
     discount: '',
-    expirationDate: ''
+    expirationDate: '',
+    description: '',
+    minSpend: '',
   });
 
   const handleChange = (e) => {
@@ -15,30 +18,51 @@ function CreateCoupons() {
       ...formData,
       [name]: value
     });
+
+    console.log(formData, "this is form data");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(formData);
-    setFormData({
-      code: '',
-      discount: '',
-      expirationDate: ''
-    });
+    try {
+      const {code, discount, expirationDate, description, minSpend} = formData; 
+      const response = await fetch(`${baseUrl}/api/coupon/create`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({code, discount, expirationDate, description, minSpend})
+      });
+  
+      const data = await response.json();
+      console.log('Coupon created successfully:', data);
+    } catch (e) {
+      console.log('Error creating coupon:', e.message);
+    }
+  
+    console.log(formData, "this is form data");
   };
-
-
+  
+  // setFormData({
+  //   code: '',
+  //   discount: '',
+  //   expirationDate: '',
+  //   description: '',
+  //   minSpend: '',
+  // });
   return (
     <div className='create-coupon-wrapper'>
-      <h2>Create Coupons </h2>
+      <h2>Create Coupons</h2>
       <div className="coupon-form-container">
-        <form onSubmit={handleSubmit}>
+        <form >
           <div className="coupon-form-group">
-            <label htmlFor="code">Code:</label>
+            <label htmlFor="code">Coupon Code:</label>
             <input
               type="text"
               id="code"
               name="code"
+              placeholder='Enter Coupon Code'
               value={formData.code}
               onChange={handleChange}
               required
@@ -50,6 +74,7 @@ function CreateCoupons() {
               type="number"
               id="discount"
               name="discount"
+              placeholder='Enter Discount Percentage'
               value={formData.discount}
               onChange={handleChange}
               required
@@ -61,16 +86,38 @@ function CreateCoupons() {
               type="date"
               id="expirationDate"
               name="expirationDate"
+              placeholder='Enter Expiration Date'
               value={formData.expirationDate}
               onChange={handleChange}
               required
             />
           </div>
-          <button className='create-coupon-button' type="submit">Submit</button>
+          <div className="coupon-form-group">
+            <label htmlFor="description">Description:</label>
+            <textarea
+              placeholder='Enter Coupon Description'
+              name='description'
+              required
+              value={formData.description}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="coupon-form-group">
+            <label htmlFor="minSpend">Minimum Amount to Execute:</label>
+            <input
+              type='number'
+              placeholder='Enter Amount'
+              name='minSpend'
+              required
+              value={formData.minSpend}
+              onChange={handleChange}
+            />
+          </div>
+          <button className='create-coupon-button' type="submit" onClick={(e)=> handleSubmit(e)}>Submit</button>
         </form>
       </div>
     </div>
   )
 }
 
-export default CreateCoupons
+export default CreateCoupons;

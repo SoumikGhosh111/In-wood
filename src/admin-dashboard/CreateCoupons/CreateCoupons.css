@@ -32,6 +32,14 @@
     border: 1px solid #ccc;
     border-radius: 4px;
   }
+  .coupon-form-group textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+  }
   
   .create-coupon-button{
     padding: 10px 20px;
