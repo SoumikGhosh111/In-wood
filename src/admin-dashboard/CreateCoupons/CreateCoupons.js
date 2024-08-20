@@ -36,21 +36,22 @@ function CreateCoupons() {
       });
   
       const data = await response.json();
-      console.log('Coupon created successfully:', data);
+      alert('Coupon created successfully:', data);
+      setFormData({
+        code: '',
+        discount: '',
+        expirationDate: '',
+        description: '',
+        minSpend: '',
+      });
     } catch (e) {
-      console.log('Error creating coupon:', e.message);
+      alert('Error creating coupon:', e.message);
     }
   
     console.log(formData, "this is form data");
   };
   
-  // setFormData({
-  //   code: '',
-  //   discount: '',
-  //   expirationDate: '',
-  //   description: '',
-  //   minSpend: '',
-  // });
+  
   return (
     <div className='create-coupon-wrapper'>
       <h2>Create Coupons</h2>

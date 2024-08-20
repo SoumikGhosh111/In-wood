@@ -42,7 +42,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
 
   // useState for recieving coupon data 
   const [coupons, setCoupons] = useState(null);
-  const [couponCode, setCouponCode] = useState(''); 
+  const [couponCode, setCouponCode] = useState('');
 
   const [openDropDown, setOpenDropDown] = useState(false);
 
@@ -56,6 +56,11 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
     window.history.replaceState(null, '', '/');
   }
 
+// calculating the subtotal for coupons
+  const totalSpend = cartItems.reduce((total, item) => 
+    total + item.qty * item.price, 
+    0
+  ); 
 
   var existingData = {
     userId: "",
@@ -183,10 +188,10 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
   }
 
 
-  const handleCouponClick = async(couponCode) => { 
+  const handleCouponClick = async (couponCode, couponId) => {
     // here need to implement useCode function 
-    console.log(userId, 'this is  userId', couponCode, 'this is coupon code'); 
-    handleCoupon({ userId, couponCode });
+    console.log(userId, 'this is  userId', couponCode, 'this is coupon code');
+    handleCoupon({ userId, couponCode,  totalSpend});
   }
 
 
@@ -367,15 +372,25 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
       </div> */}
       <div className='contact-info-wrapper'>
         <h4>APPLY COUPONS</h4>
-        <div className='contact-input-filed'>
-          <div className='first-last-name'>
-            <div className='last-name'>
-            <input type='text' placeholder='Enter Coupon Code' className='mob-num' value={couponCode} onChange={(e) => setCouponCode(e.target.value)}/>
+        <div className='contact-input-filed coupons-wrapper-checkout'>
+          {coupons?.map((item, indx) => (
+            
+            <div className='coupon-items-checkout'>
+              <div className='hor-line-coupons'></div>
+              <div className='coupon-code-apply-button'>
+                <div>
+                  <h3>{item.code}</h3>
+                  <span style={{ fontSize: '15px', fontWeight: '700' }}>Use code {item.code} to get {item.discountPercentage}% off</span><br />
+                  <span style={{ fontSize: '13px' }}>{item.description}</span>
+                </div>
+                <div className='coupon-apply-button' onClick={() => handleCouponClick(item.code)}>APPLY</div>
+              </div>
+
             </div>
-          </div>
-          <button className='check-out-page-save-info' onClick={() => handleCouponClick(couponCode)}>Apply</button>
-          {/* <BasicSwitches />
-          <span>By checking the box, you agree to receive occasional automated promotional text messages from Slice at the cell number used when signing up. Consent is not a condition of any purchase. Reply HELP for help and STOP to cancel. Msg frequency varies. Msg & data rates may apply. Privacy & SMS Terms</span> */}
+          ))}
+
+          {/*<button  className='check-out-page-save-info' onClick={() => handleCouponClick(couponCode)}>Apply</button>*\}
+          {/* <BasicSwitches />*/}
         </div>
 
       </div>

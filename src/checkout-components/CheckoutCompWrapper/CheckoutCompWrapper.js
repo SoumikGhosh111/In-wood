@@ -6,6 +6,7 @@ import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 import logo from "../../assets/maskot_logo_inwood.png";
 
 
+
 // toast
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,12 +14,16 @@ import 'react-toastify/dist/ReactToastify.css';
 // baseUrl
 import { baseUrl } from '../../functions/baseUrl';
 
+
+
 function CheckoutCompWrapper() {
   const [isClick, setIsClick] = useState(false);
 
   const [couponData, setCouponData] = useState(null);
 
-  const [idAndCode, setIdAndCode] = useState(null); 
+  const [idAndCode, setIdAndCode] = useState(null);
+  
+  
 
   const handleClick = () => {
     setIsClick(true);
@@ -45,8 +50,10 @@ function CheckoutCompWrapper() {
 
       const result = await response.json(); 
       setCouponData(result); 
-      console.log(result, "THIS IS RESULT"); 
       toast.info(result.message); 
+
+      console.log(result, "THIS IS RESULT"); 
+      
       // toast.success(')
     }catch(error){ 
       console.error(error.message); 
