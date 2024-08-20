@@ -31,6 +31,7 @@ function CheckoutCompWrapper() {
 
   const handleCouponData = async(data) => {
     setIdAndCode(data); 
+    console.log(data, "thisi is data>>>>")
     
     try{ 
       const response = await fetch(`${baseUrl}/api/coupon/useCoupon`, { 

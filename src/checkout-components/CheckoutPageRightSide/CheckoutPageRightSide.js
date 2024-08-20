@@ -58,8 +58,8 @@ function CheckoutPageRightSide({couponData, idAndCode}) {
   }, [specialOffersObj]);
 
   const totalAmnt = tempAmnt + specialOffersAmnt;
-  const discountAmnt = couponData?.hasOwnProperty("discount") ? couponData?.discount : 0; 
-  const totalDiscount = ((totalAmnt * discountAmnt)/100).toFixed(2); 
+  const discountAmnt = couponData?.hasOwnProperty("discountPercentage") ? couponData?.discountPercentage : 0; 
+  const totalDiscount = (couponData?.hasOwnProperty("discount") ?  couponData?.discount : 0 ).toFixed(2) 
 
 
   console.log("this is offerPrice", specialOffersAmnt);
@@ -277,6 +277,12 @@ function CheckoutPageRightSide({couponData, idAndCode}) {
   const HandleClickValue = (id) => {
     setIsClicked(id);
   }
+
+
+// function remove coupon
+  const couponRemove = () => { 
+    // need to change the couponCode and idAndCode value to null
+  }
   return (
     <div className='check-out-right-side'>
       <div className='check-out-right-select-tab'>
@@ -316,7 +322,7 @@ function CheckoutPageRightSide({couponData, idAndCode}) {
             <span>${tax}</span>
           </div>
           <div className='tax'>
-            <span>Discount({couponData?.hasOwnProperty("discount") ? `${couponData?.discount}%` : "0%"})</span>
+            <span>Discount({couponData?.hasOwnProperty("discountPercentage") ? `${couponData?.discountPercentage}%` : "0%"})</span>
             <span>${totalDiscount}</span>
           </div>
 
@@ -364,6 +370,24 @@ function CheckoutPageRightSide({couponData, idAndCode}) {
               <span> <span style={{textDecoration: 'line-through'}}>{totalDiscount > 0 ? `$${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(deliveryCharges) + parseFloat(support) + parseFloat(tipAmnt)).toFixed(2)}` : ''} </span> &nbsp;  ${(parseFloat(totalAmnt) + parseFloat(tax) + parseFloat(deliveryCharges) + parseFloat(support) + parseFloat(tipAmnt) - parseFloat(totalDiscount)).toFixed(2)}</span>
             )}
           </div>
+
+          {couponData && 
+            <div>
+            <h3 style={{marginBottom: '0.5rem'}}>Applied Coupon</h3>
+            <div className='coupon-items-checkout'>
+              <div className='hor-line-coupons'></div>
+              <div className='coupon-code-apply-button'>
+                <div>
+                  <h3>{idAndCode?.couponCode}</h3>
+                  <span style={{ fontSize: '15px', fontWeight: '700' }}>{couponData?.discountPercentage}% off on your order (upto ${couponData?.maxDiscountValue})</span><br />
+                  
+                </div>
+                <div className='coupon-apply-button' onClick={couponRemove}>REMOVE</div>
+              </div>
+
+            </div>
+          </div>
+          }
         </div>
       </div>
 

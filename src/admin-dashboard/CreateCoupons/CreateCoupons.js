@@ -10,6 +10,7 @@ function CreateCoupons() {
     expirationDate: '',
     description: '',
     minSpend: '',
+    maxDiscountValue: ''
   });
 
   const handleChange = (e) => {
@@ -26,13 +27,13 @@ function CreateCoupons() {
     e.preventDefault();
     console.log(formData);
     try {
-      const {code, discount, expirationDate, description, minSpend} = formData; 
+      const {code, discount, expirationDate, description, minSpend, maxDiscountValue} = formData; 
       const response = await fetch(`${baseUrl}/api/coupon/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({code, discount, expirationDate, description, minSpend})
+        body: JSON.stringify({code, discount, expirationDate, description, minSpend, maxDiscountValue})
       });
   
       const data = await response.json();
@@ -43,6 +44,7 @@ function CreateCoupons() {
         expirationDate: '',
         description: '',
         minSpend: '',
+        maxDiscountValue: ''
       });
     } catch (e) {
       alert('Error creating coupon:', e.message);
@@ -104,13 +106,24 @@ function CreateCoupons() {
             />
           </div>
           <div className="coupon-form-group">
-            <label htmlFor="minSpend">Minimum Amount to Execute:</label>
+            <label htmlFor="minSpend">Minimum Amount to Execute ($):</label>
             <input
               type='number'
               placeholder='Enter Amount'
               name='minSpend'
               required
               value={formData.minSpend}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="coupon-form-group">
+            <label htmlFor="maxDiscountValue">Maximu Discount Amount ($):</label>
+            <input
+              type='number'
+              placeholder='Enter Amount'
+              name='maxDiscountValue'
+              required
+              value={formData.maxDiscountValue}
               onChange={handleChange}
             />
           </div>

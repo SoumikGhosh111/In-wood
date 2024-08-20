@@ -39,6 +39,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
   const [isEligble, setEligible] = useState(false);
   const [email, setEmail] = useState(localStorage.getItem("userEmail") || '')
   const useremail = localStorage.getItem("userEmail");
+  const [appliedCoupon, setAppliedCoupon] = useState(null);
 
   // useState for recieving coupon data 
   const [coupons, setCoupons] = useState(null);
@@ -194,8 +195,21 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
     handleCoupon({ userId, couponCode,  totalSpend});
   }
 
+  // const handleCouponClick = (couponCode) => {
+  //   if (!appliedCoupon) { // Apply coupon only if none is applied
+  //     handleCoupon({ userId, couponCode, totalSpend });
+  //     setAppliedCoupon(couponCode); // Set the applied coupon
+  //     toast.success(`Coupon ${couponCode} applied!`);
+  //   } else {
+  //     toast.error('Only one coupon can be applied at a time.');
+  //   }
+  // };
 
 
+  const handleCancelCoupon = () => {
+    setAppliedCoupon(null); // Reset the applied coupon
+    toast.info('Coupon has been removed.');
+  };
   return (
     <div className='check-out-left-side'>
       <h4>CHECKOUT</h4>

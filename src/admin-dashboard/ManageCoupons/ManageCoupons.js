@@ -56,7 +56,10 @@ function ManageCoupons() {
           <thead>
             <th>Code</th>
             <th>Expiration Date</th>
-            <th>Discount</th>
+            <th>Discount(%)</th>
+            <th>Description</th>
+            <th>Min Amount to Apply($)</th>
+            <th>Upto($)</th>
             <th>Modify Coupons</th>
           </thead>
           <tbody>
@@ -64,7 +67,10 @@ function ManageCoupons() {
               <tr key={item._id}>
                 <td>{item.code}</td>
                 <td>{redableTimeStamp(item.expirationDate)}</td>
-                <td>{item.discount}</td>
+                <td>{item.discountPercentage}%</td>
+                <td>{item.description}</td>
+                <td>{item.minSpend}$</td>
+                <td>{item.maxDiscountValue}$</td>
                 <td><BorderColorRoundedIcon sx={{cursor: 'pointer'}}/> &nbsp;&nbsp; <DeleteIcon sx={{cursor: 'pointer'}} onClick={() => { setOpenPopUp(true); setDeleteId(item._id); setDeletedName(item.code) }}/></td>
               </tr>
             ))}
