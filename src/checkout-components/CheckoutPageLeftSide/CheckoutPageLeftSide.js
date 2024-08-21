@@ -384,7 +384,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
             <button className='coupons-apply-button' onClick={() => handleCouponClick(couponCode)}>Apply</button>
         </div>
       </div> */}
-      <div className='contact-info-wrapper'>
+      <div className='contact-info-wrapper coupon-parent-container'>
         <h4>APPLY COUPONS</h4>
         <div className='contact-input-filed coupons-wrapper-checkout'>
           {coupons?.map((item, indx) => (

@@ -312,4 +312,11 @@
     .coupons{ 
         width: 100%;
     }
+    .coupon-parent-container{ 
+        width: 100%;
+    }
+    .coupons-wrapper-checkout{ 
+        width: 100%;
+        /* border: 1px solid red; */
+    }
 }

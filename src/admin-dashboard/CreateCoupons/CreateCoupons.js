@@ -6,7 +6,7 @@ function CreateCoupons() {
 
   const [formData, setFormData] = useState({
     code: '',
-    discount: '',
+    discountPercentage: '',
     expirationDate: '',
     description: '',
     minSpend: '',
@@ -27,20 +27,20 @@ function CreateCoupons() {
     e.preventDefault();
     console.log(formData);
     try {
-      const {code, discount, expirationDate, description, minSpend, maxDiscountValue} = formData; 
+      const {code, discountPercentage, expirationDate, description, minSpend, maxDiscountValue} = formData; 
       const response = await fetch(`${baseUrl}/api/coupon/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({code, discount, expirationDate, description, minSpend, maxDiscountValue})
+        body: JSON.stringify({code, discountPercentage, expirationDate, description, minSpend, maxDiscountValue})
       });
   
       const data = await response.json();
       alert('Coupon created successfully:', data);
       setFormData({
         code: '',
-        discount: '',
+        discountPercentage: '',
         expirationDate: '',
         description: '',
         minSpend: '',
@@ -72,13 +72,13 @@ function CreateCoupons() {
             />
           </div>
           <div className="coupon-form-group">
-            <label htmlFor="discount">Discount (%):</label>
+            <label htmlFor="discountPercentage">Discount (%):</label>
             <input
               type="number"
-              id="discount"
-              name="discount"
+              id="discountPercentage"
+              name="discountPercentage"
               placeholder='Enter Discount Percentage'
-              value={formData.discount}
+              value={formData.discountPercentage}
               onChange={handleChange}
               required
             />

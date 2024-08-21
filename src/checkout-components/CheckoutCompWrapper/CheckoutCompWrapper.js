@@ -62,6 +62,11 @@ function CheckoutCompWrapper() {
     }
 }
 
+const updateStates = () => { 
+  setCouponData(null); 
+  setIdAndCode(null); 
+}
+
 
   console.log(couponData);
 
@@ -77,7 +82,7 @@ function CheckoutCompWrapper() {
         </div>
         <div className='check-out-page-right'>
 
-          <CheckoutPageRightSide couponData={couponData} idAndCode={idAndCode}/>
+          <CheckoutPageRightSide couponData={couponData} idAndCode={idAndCode} couponRemove={updateStates}/>
           {/* <div className ='logo-div-check-out'>
             <img  src = {logo} style={{width: '90%', height: 'auto'}} alt='Logo Image'/>
           </div> */}

@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-function CheckoutPageRightSide({couponData, idAndCode}) {
+function CheckoutPageRightSide({couponData, idAndCode, couponRemove}) {
   const temp = JSON.parse(localStorage.getItem('specialOrder'));
   const [specialOffer, setSpecialOffer] = useState(null);
   const [tax, setTax] = useState(0);
@@ -277,12 +277,10 @@ function CheckoutPageRightSide({couponData, idAndCode}) {
   const HandleClickValue = (id) => {
     setIsClicked(id);
   }
-
+console.log(couponData, "THIS IS CCCCC")
 
 // function remove coupon
-  const couponRemove = () => { 
-    // need to change the couponCode and idAndCode value to null
-  }
+  
   return (
     <div className='check-out-right-side'>
       <div className='check-out-right-select-tab'>
