@@ -71,7 +71,7 @@ function ManageCoupons() {
                 <td>{item.description}</td>
                 <td>{item.minSpend}$</td>
                 <td>{item.maxDiscountValue}$</td>
-                <td><BorderColorRoundedIcon sx={{cursor: 'pointer'}}/> &nbsp;&nbsp; <DeleteIcon sx={{cursor: 'pointer'}} onClick={() => { setOpenPopUp(true); setDeleteId(item._id); setDeletedName(item.code) }}/></td>
+                <td> <DeleteIcon sx={{cursor: 'pointer'}} onClick={() => { setOpenPopUp(true); setDeleteId(item._id); setDeletedName(item.code) }}/></td>
               </tr>
             ))}
           </tbody>

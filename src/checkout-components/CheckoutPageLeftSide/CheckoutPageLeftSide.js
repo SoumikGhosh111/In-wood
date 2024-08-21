@@ -57,11 +57,11 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
     window.history.replaceState(null, '', '/');
   }
 
-// calculating the subtotal for coupons
-  const totalSpend = cartItems.reduce((total, item) => 
-    total + item.qty * item.price, 
+  // calculating the subtotal for coupons
+  const totalSpend = cartItems.reduce((total, item) =>
+    total + item.qty * item.price,
     0
-  ); 
+  );
 
   var existingData = {
     userId: "",
@@ -192,7 +192,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
   const handleCouponClick = async (couponCode, couponId) => {
     // here need to implement useCode function 
     console.log(userId, 'this is  userId', couponCode, 'this is coupon code');
-    handleCoupon({ userId, couponCode,  totalSpend});
+    handleCoupon({ userId, couponCode, totalSpend });
   }
 
   // const handleCouponClick = (couponCode) => {
@@ -385,28 +385,43 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
         </div>
       </div> */}
       <div className='contact-info-wrapper coupon-parent-container'>
-        <h4>APPLY COUPONS</h4>
+        <h4>COUPONS</h4>
         <div className='contact-input-filed coupons-wrapper-checkout'>
-          {coupons?.map((item, indx) => (
-            
-            <div className='coupon-items-checkout'>
-              <div className='hor-line-coupons'></div>
-              <div className='coupon-code-apply-button'>
-                <div>
-                  <h3>{item.code}</h3>
-                  <span style={{ fontSize: '15px', fontWeight: '700' }}>Use code {item.code} to get {item.discountPercentage}% off</span><br />
-                  <span style={{ fontSize: '13px' }}>{item.description}</span>
-                </div>
-                <div className='coupon-apply-button' onClick={() => handleCouponClick(item.code)}>APPLY</div>
+          {totalSpend > 0 ? (
+            coupons?.map((item, indx) => (
+              <div key={indx}>
+                {totalSpend >= item.minSpend ? (
+                  <div className='coupon-items-checkout'>
+                    <div className='hor-line-coupons'></div>
+                    <div className='coupon-code-apply-button'>
+                      <div>
+                        <h3>{item.code}</h3>
+                        <span style={{ fontSize: '15px', fontWeight: '700' }}>Use code {item.code} to get {item.discountPercentage}% off</span><br />
+                        <span style={{ fontSize: '13px' }}>{item.description}</span>
+                      </div>
+                      <div className='coupon-apply-button' onClick={() => handleCouponClick(item.code)}>APPLY</div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className='coupon-items-checkout'>
+                    <div className='hor-line-coupons'></div>
+                    <div className='coupon-code-apply-button'>
+                      <div>
+                        <h3>{item.code}</h3>
+                        <span style={{ fontSize: '15px', fontWeight: '700', color: 'red' }}>You are not eligible for this coupon</span><br />
+                        <span style={{ fontSize: '13px' }}>{item.description}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
-
+            ))
+          ) : (
+            <div style={{ textAlign: 'center', marginTop: '20px' }}>
+              <span style={{ fontSize: '15px', fontWeight: '700' }}>Add items to your cart to apply coupons</span>
             </div>
-          ))}
-
-          {/*<button  className='check-out-page-save-info' onClick={() => handleCouponClick(couponCode)}>Apply</button>*\}
-          {/* <BasicSwitches />*/}
+          )}
         </div>
-
       </div>
       {/* <div className='delivery-stts' style={{ display: isEligble ? 'block' : 'none' }}>
         <div className='if-home-delivery'>

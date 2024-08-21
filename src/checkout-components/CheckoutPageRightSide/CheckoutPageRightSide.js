@@ -369,7 +369,7 @@ console.log(couponData, "THIS IS CCCCC")
             )}
           </div>
 
-          {couponData && 
+          {(couponData && couponData.hasOwnProperty("discountPercentage") && couponData.hasOwnProperty("maxDiscountValue")) && 
             <div>
             <h3 style={{marginBottom: '0.5rem'}}>Applied Coupon</h3>
             <div className='coupon-items-checkout'>
