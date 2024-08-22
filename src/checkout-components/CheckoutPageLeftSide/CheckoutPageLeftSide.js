@@ -28,6 +28,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
   const cartItems = useSelector((state) => state.cart.cart);
   const userDetails = useSelector((state) => state.userdata);
   const specialOffersObj = useSelector(state => state.specialoffer.specialOrder);
+  console.log(specialOffersObj, "this is special Offers. . . . ")
   const dispatch = useDispatch();
   // const [userName, setUserName] = useState('');
   const [userId, setUserId] = useState('');
@@ -390,7 +391,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
           {totalSpend > 0 ? (
             coupons?.map((item, indx) => (
               <div key={indx}>
-                {totalSpend >= item.minSpend ? (
+                {(totalSpend >= item.minSpend && Object.keys(specialOffersObj).length === 0) ? (
                   <div className='coupon-items-checkout'>
                     <div className='hor-line-coupons'></div>
                     <div className='coupon-code-apply-button'>
@@ -408,7 +409,13 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
                     <div className='coupon-code-apply-button'>
                       <div>
                         <h3>{item.code}</h3>
-                        <span style={{ fontSize: '15px', fontWeight: '700', color: 'red' }}>You are not eligible for this coupon</span><br />
+                        {Object.keys(specialOffersObj).length > 0 ?
+                          (
+                            <><span style={{ fontSize: '15px', fontWeight: '700', color: 'red' }}>Coupons are not applicable with Special Offers</span><br /></>
+                          ) : (
+                            <><span style={{ fontSize: '15px', fontWeight: '700', color: 'red' }}>You are not eligible for this coupon</span><br /></>
+                          )}
+
                         <span style={{ fontSize: '13px' }}>{item.description}</span>
                       </div>
                     </div>
@@ -418,7 +425,12 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
             ))
           ) : (
             <div style={{ textAlign: 'center', marginTop: '20px' }}>
-              <span style={{ fontSize: '15px', fontWeight: '700' }}>Add items to your cart to apply coupons</span>
+              {Object.keys(specialOffersObj).length > 0 ?
+                (
+                  <span style={{ fontSize: '15px', fontWeight: '700' }}>Coupons are not applicable with Special Offers</span>
+                ) : (
+                  <span style={{ fontSize: '15px', fontWeight: '700' }}>Add items to your cart to apply coupons</span>
+                )}
             </div>
           )}
         </div>
