@@ -182,7 +182,7 @@ function ComboOffer3() {
     }
     dispatch(deleteSpecialObject());
     const specialOrder = {
-      offerName: "Independence Day Special",
+      offerName: "Game Day Plus",
       pizza: selectedBaseItems,
       addedItems: [`${selectedAddedItems[0].title}(5Pcs)`],
       item: [selectedAddedItems[0].title],

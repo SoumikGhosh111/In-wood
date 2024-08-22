@@ -58,6 +58,13 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
     window.history.replaceState(null, '', '/');
   }
 
+  const handleSpecialsMenu = () => { 
+    // window.history.replaceState(null, '', '/special-offers');
+    window.location.href = '/special-offers';
+
+    // Clearing the browser's history
+  }
+
   // calculating the subtotal for coupons
   const totalSpend = cartItems.reduce((total, item) =>
     total + item.qty * item.price,
@@ -207,10 +214,11 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
   // };
 
 
-  const handleCancelCoupon = () => {
-    setAppliedCoupon(null); // Reset the applied coupon
-    toast.info('Coupon has been removed.');
-  };
+  // const handleCancelCoupon = () => {
+  //   setAppliedCoupon(null); // Reset the applied coupon
+  //   toast.info('Coupon has been removed.');
+  // };
+  
   return (
     <div className='check-out-left-side'>
       <h4>CHECKOUT</h4>
@@ -247,7 +255,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
       </div> */}
 
       <div className='your-items'>
-        <h4 className='your-items-title'>YOUR ITEMS</h4>
+        <h4 className='your-items-title'>REGULAR ITEMS CART</h4>
         <div className='items'>
           {cartItems.length > 0 ? (<>
             {cartItems.map((item) => (
@@ -288,43 +296,58 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
 
         </div>
       </div>
-      {Object.keys(specialOffersObj).length > 0 &&
+      <div className='your-items special-items'>
+        <h4 className='your-items-title'>SPECIAL ITEMS CART</h4>
+        {Object.keys(specialOffersObj).length > 0 ?
+          (
+            <div className='drop-down-container-wrapper special-items-wrapper'>
 
-        <div className='drop-down-container-wrapper'>
+              <div className='drop-down-container'>
+                <div className='drop-down-offer-name'>
+                  <div>Special Offer {specialOffersObj.offerName}</div> <div>Price: $ {specialOffersObj.totalAmount}</div> <button onClick={handleDeleteOfffer} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} ><DeleteIcon /></button>
+                </div>
 
-          <div className='drop-down-container'>
-            <div className='drop-down-offer-name'>
-              <div>Special Offer {specialOffersObj.offerName}</div> <div>Price: $ {specialOffersObj.totalAmount}</div> <button onClick={handleDeleteOfffer} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }} ><DeleteIcon /></button>
-            </div>
+                <button onClick={toggleDropDown} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
+                  {openDropDown ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />}
+                </button>
+              </div>
 
-            <button onClick={toggleDropDown} style={{ border: 'none', backgroundColor: 'transparent', cursor: 'pointer' }}>
-              {openDropDown ? <ExpandLessRoundedIcon /> : <ExpandMoreRoundedIcon />}
-            </button>
-          </div>
+              <div className={`dropdown-info ${openDropDown ? 'open-dropdown' : 'close-dropdown'}`}>
 
-          <div className={`dropdown-info ${openDropDown ? 'open-dropdown' : 'close-dropdown'}`}>
-
-            {specialOffersObjs?.pizza.map((item) => (
-              <div>
-                <div style={{ fontWeight: '700' }}>{item.title}</div>
-                {item.toppings?.map((topping) => (
-                  <div>{topping}</div>
+                {specialOffersObjs?.pizza.map((item) => (
+                  <div>
+                    <div style={{ fontWeight: '700' }}>{item.title}</div>
+                    {item.toppings?.map((topping) => (
+                      <div>{topping}</div>
+                    ))}
+                  </div>
                 ))}
-              </div>
-            ))}
-            {specialOffersObjs?.addedItems?.map((item) => (
-              <div style={{ fontWeight: '700' }}>
-                {item}
-              </div>
-            ))}
+                {specialOffersObjs?.addedItems?.map((item) => (
+                  <div style={{ fontWeight: '700' }}>
+                    {item}
+                  </div>
+                ))}
 
-            {specialOffersObjs?.extraAdded &&
-              <div style={{ fontWeight: '700' }}>{specialOffersObjs.extraAdded}</div>
-            }
+                {specialOffersObjs?.extraAdded &&
+                  <div style={{ fontWeight: '700' }}>{specialOffersObjs.extraAdded}</div>
+                }
 
-          </div>
-        </div>
-      }
+              </div>
+            </div>
+          ) : (
+            <div className='items special-items-items'>
+              <span >
+                Your special items cart is empty. <br />
+                Select from the Specials Menu to start an order.
+              </span>
+              <button onClick={handleSpecialsMenu} className='back-tio-menu-btn'>Go to Specials Menu</button>
+            </div>
+          )
+
+
+        }
+      </div>
+
 
 
 

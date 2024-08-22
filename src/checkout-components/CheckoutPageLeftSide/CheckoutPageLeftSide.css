@@ -144,6 +144,17 @@
     width: 80%;
 
 }
+.special-items-wrapper{ 
+    margin-top: 0;
+    margin-left: 0;
+    width: 95%; 
+    /* border: 1px solid red; */
+}
+
+.special-items-items::-webkit-scrollbar { 
+    display: none;
+}
+
 
 
 .drop-down-container{ 
@@ -300,9 +311,13 @@
     .free-delivery-check-out{ 
         width: 100%;
     }
+    .special-items{ 
+        width: 100%;
+    }
     .drop-down-container-wrapper{ 
         width: 100%;
     }
+    
     .apply-coupons{ 
         width: 100%;
     }
