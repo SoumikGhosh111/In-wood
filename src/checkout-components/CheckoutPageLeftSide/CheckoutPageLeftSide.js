@@ -338,7 +338,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
             <div className='items special-items-items'>
               <span >
                 Your special items cart is empty. <br />
-                Select from the Specials Menu to start an order.
+                Select from the Specials Menu.
               </span>
               <button onClick={handleSpecialsMenu} className='back-tio-menu-btn'>Go to Specials Menu</button>
             </div>
