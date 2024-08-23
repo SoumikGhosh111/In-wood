@@ -10,7 +10,7 @@ function CreateCoupons() {
     expirationDate: '',
     description: '',
     minSpend: '',
-    maxDiscountValue: ''
+    maxDiscountValue: '', 
   });
 
   const handleChange = (e) => {

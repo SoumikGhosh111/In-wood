@@ -58,7 +58,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
     window.history.replaceState(null, '', '/');
   }
 
-  const handleSpecialsMenu = () => { 
+  const handleSpecialsMenu = () => {
     // window.history.replaceState(null, '', '/special-offers');
     window.location.href = '/special-offers';
 
@@ -218,7 +218,7 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
   //   setAppliedCoupon(null); // Reset the applied coupon
   //   toast.info('Coupon has been removed.');
   // };
-  
+
   return (
     <div className='check-out-left-side'>
       <h4>CHECKOUT</h4>
@@ -412,52 +412,56 @@ function CheckoutPageLeftSide({ onEdtBtnClick, handleCoupon }) {
         <h4>COUPONS</h4>
         <div className='contact-input-filed coupons-wrapper-checkout'>
           {totalSpend > 0 ? (
-            coupons?.map((item, indx) => (
-              <div key={indx}>
-                {(totalSpend >= item.minSpend && Object.keys(specialOffersObj).length === 0) ? (
-                  <div className='coupon-items-checkout'>
-                    <div className='hor-line-coupons'></div>
-                    <div className='coupon-code-apply-button'>
-                      <div>
-                        <h3>{item.code}</h3>
-                        <span style={{ fontSize: '15px', fontWeight: '700' }}>Use code {item.code} to get {item.discountPercentage}% off</span><br />
-                        <span style={{ fontSize: '13px' }}>{item.description}</span>
+            coupons?.length > 0 ? (
+              coupons.map((item, indx) => (
+                <div key={indx}>
+                  {(totalSpend >= item.minSpend && Object.keys(specialOffersObj).length === 0) ? (
+                    <div className='coupon-items-checkout'>
+                      <div className='hor-line-coupons'></div>
+                      <div className='coupon-code-apply-button'>
+                        <div>
+                          <h3>{item.code}</h3>
+                          <span style={{ fontSize: '15px', fontWeight: '700' }}>Use code {item.code} to get {item.discountPercentage}% off</span><br />
+                          <span style={{ fontSize: '13px' }}>{item.description}</span>
+                        </div>
+                        <div className='coupon-apply-button' onClick={() => handleCouponClick(item.code)}>APPLY</div>
                       </div>
-                      <div className='coupon-apply-button' onClick={() => handleCouponClick(item.code)}>APPLY</div>
                     </div>
-                  </div>
-                ) : (
-                  <div className='coupon-items-checkout'>
-                    <div className='hor-line-coupons'></div>
-                    <div className='coupon-code-apply-button'>
-                      <div>
-                        <h3>{item.code}</h3>
-                        {Object.keys(specialOffersObj).length > 0 ?
-                          (
+                  ) : (
+                    <div className='coupon-items-checkout'>
+                      <div className='hor-line-coupons'></div>
+                      <div className='coupon-code-apply-button'>
+                        <div>
+                          <h3>{item.code}</h3>
+                          {Object.keys(specialOffersObj).length > 0 ? (
                             <><span style={{ fontSize: '15px', fontWeight: '700', color: 'red' }}>Coupons are not applicable with Special Offers</span><br /></>
                           ) : (
                             <><span style={{ fontSize: '15px', fontWeight: '700', color: 'red' }}>You are not eligible for this coupon</span><br /></>
                           )}
-
-                        <span style={{ fontSize: '13px' }}>{item.description}</span>
+                          <span style={{ fontSize: '13px' }}>{item.description}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
+              ))
+            ) : (
+              <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                <span style={{ fontSize: '15px', fontWeight: '700' }}>Currently, no coupons are available.</span>
               </div>
-            ))
+            )
           ) : (
             <div style={{ textAlign: 'center', marginTop: '20px' }}>
-              {Object.keys(specialOffersObj).length > 0 ?
-                (
-                  <span style={{ fontSize: '15px', fontWeight: '700' }}>Coupons are not applicable with Special Offers</span>
-                ) : (
-                  <span style={{ fontSize: '15px', fontWeight: '700' }}>Add items to your cart to apply coupons</span>
-                )}
+              {Object.keys(specialOffersObj).length > 0 ? (
+                <span style={{ fontSize: '15px', fontWeight: '700' }}>Coupons are not applicable with Special Offers</span>
+              ) : (
+                <span style={{ fontSize: '15px', fontWeight: '700' }}>Add items to your cart to apply coupons</span>
+              )}
             </div>
           )}
         </div>
       </div>
+
       {/* <div className='delivery-stts' style={{ display: isEligble ? 'block' : 'none' }}>
         <div className='if-home-delivery'>
           <input type='radio' name='delivery' />Pick Up
