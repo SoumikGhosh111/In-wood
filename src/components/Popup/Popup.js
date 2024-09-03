@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./Popup.css";
 import popUpContent from "../../assets/popup_banner.jpg"; 
+import CancelIcon from '@mui/icons-material/Cancel';
 
 function Popup() {
     const [isVisible, setVisible] = useState(false);
@@ -23,7 +24,7 @@ function Popup() {
         isVisible && (
             <div id="popup" className="popup">
                 <div className="popup-content">
-                    <span className="close" onClick={handleClose}>&times;</span>
+                    <span className="close" ><CancelIcon onClick={handleClose} sx={{cursor: 'pointer', fontSize: window.innerWidth > 768 ? '35px':'25px'}}/></span>
                     <img
                         className='popup-image' 
                         src={popUpContent}
