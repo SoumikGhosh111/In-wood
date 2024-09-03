@@ -22,7 +22,7 @@ function Popup() {
     }
     return (
         isVisible && (
-            <div id="popup" className="popup">
+            <div id="popup" className="popup-container-ps5">
                 <div className="popup-content">
                     <span className="close" ><CancelIcon onClick={handleClose} sx={{cursor: 'pointer', fontSize: window.innerWidth > 768 ? '35px':'25px'}}/></span>
                     <img
