@@ -203,7 +203,7 @@ function CheckoutPageRightSide({couponData, idAndCode, couponRemove}) {
 
       const tempPriceData = cartItems.map(item => ({
         price: item.price,
-        qty: item.qty,
+        qty: item.qty, 
       }));
       const deliveryType = { 
         type: isClicked, 

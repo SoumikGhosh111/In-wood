@@ -21,6 +21,7 @@ import SpecialOffersPage from './pages/SpecialOffersPage';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import ProtectedRoute from './protected-routes/PrivateRoutes';
 import AdminRoute from './protected-routes/AdminRoute';
+import Popup from './components/Popup/Popup';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
     <div >
       {/* <Router> */}
         <Navbar />
+        <Popup />
         <UserProvider>
           <Routes>
             <Route path='/' element={<HomePage />} />
