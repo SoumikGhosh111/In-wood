@@ -289,6 +289,7 @@ function Orders() {
                       <span><b>Postal Code:</b> {item.shipping.address.postal_code}</span>
                       <span><b>Order ID:</b> {item._id}</span>
                       <span><b>User ID:</b> {item.userId}</span>
+                      <span><b>Transaction ID:</b> {item.transactionId}</span>
                     </div>
                   </td>
                   <td>
