@@ -4,6 +4,10 @@ import { baseUrl } from '../../functions/baseUrl';
 import { redableTimeStamp } from '../../functions/readbleTimeFormat';
 import './Orders.css';
 
+
+// arrow
+import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded';
+
 // bell sound
 import bell from "../../assets/bell_sound.mp3"
 
@@ -296,7 +300,7 @@ function Orders() {
                       <span><b>Order ID:</b> {item._id}</span>
                       <span><b>User ID:</b> {item.userId}</span>
                       <span><b>Transaction ID:</b> {item.transactionId}</span>
-                      <a style={{color: 'green', textDecoration: 'underline', marginTop: '2rem', cursor: 'pointer', width: 'fit-content'}} onClick={() => stripeRedirect(item.transactionId)}>Stripe Refund</a>
+                      <a style={{color: 'red', textDecoration: 'underline', marginTop: '2rem', cursor: 'pointer', width: 'fit-content'}} onClick={() => stripeRedirect(item.transactionId)}>Initiate Refund <ArrowForwardRoundedIcon sx={{transform: 'translate(-20%, 20%)', fontSize: '20px'}}/></a>
                     </div>
                   </td>
                   <td>
