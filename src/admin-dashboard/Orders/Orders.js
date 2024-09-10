@@ -185,6 +185,12 @@ function Orders() {
   //   }
   // };
 
+
+  const stripeRedirect = (transId) => { 
+    // window.location.href = `https://dashboard.stripe.com/payments/${transId}`;
+    window.open(`https://dashboard.stripe.com/payments/${transId}`); 
+  }
+
   return (
     <div className='orders-wrapper'>
       <h2>Orders</h2>
@@ -290,6 +296,7 @@ function Orders() {
                       <span><b>Order ID:</b> {item._id}</span>
                       <span><b>User ID:</b> {item.userId}</span>
                       <span><b>Transaction ID:</b> {item.transactionId}</span>
+                      <a style={{color: 'green', textDecoration: 'underline', marginTop: '2rem', cursor: 'pointer', width: 'fit-content'}} onClick={() => stripeRedirect(item.transactionId)}>Stripe Refund</a>
                     </div>
                   </td>
                   <td>
