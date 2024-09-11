@@ -46,11 +46,11 @@ function Orders() {
 
 
         // here will be the bell notification sound
+        fetchAllOrders(); // Update orders list when new order arrives
         bellAudio.play().catch((err) => {
           alert("Error Playing audio due to user inactivity, One new order has arrived.");
         });
 
-        fetchAllOrders(); // Update orders list when new order arrives
       } catch (error) {
         console.error('Error parsing SSE message:', error);
       }
