@@ -308,6 +308,10 @@ function Orders() {
                       <span><b>Delivery Type:</b> {item.deliveryType === 'Pickup' ? item.deliveryType : 'Home Delivery'}</span><br />
                       <span><b>Payment:</b> {item.payment_status}</span><br />
                       <span><b>Total Amount:</b> ${item.total}</span><br />
+                      <span><b>Website Fee:</b> $0.99</span><br />
+                      {item.deliveryType === 'Pickup' ? (<></>) : (<><span><b>Delivery Charges:</b> $2.99</span><br /></>)}
+                      {item.deliveryType === 'Pickup' ? (<><span><b>Tax Fee:</b> ${(((item.total - 0.99)/100) * 8.75).toFixed(2)}</span><br /></>) : (<><span><b>Tax Fee:</b> ${(((item.total - 0.99 - 2.99)/100) * 8.75).toFixed(2)}</span><br /></>)}
+                      {item.deliveryType === 'Pickup' ? (<><span><b>Sub Total:</b> ${(item.total - 0.99 - (((item.total - 0.99)/100) * 8.75)).toFixed(2)}</span><br /></>):(<><span><b>Sub Total:</b> ${(item.total - 0.99 - 2.99 -(((item.total - 0.99 - 2.99)/100) * 8.75)).toFixed(2)}</span><br /></>)}
                       <span><b>Delivery Status:</b></span><br />
                       {item.deliveryType === 'Pickup' ? 
                         
