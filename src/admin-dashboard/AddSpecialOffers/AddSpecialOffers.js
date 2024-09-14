@@ -201,6 +201,7 @@ function AddSpecialOffers() {
           <option value="Chicken Wings 10Pcs">Chicken Wings 10Pcs</option>
           <option value="Chicken Wings 5Pcs">Chicken Wings 5Pcs</option>
           <option value="2 Ltr Soda">2 Ltr Soda</option>
+          <option value="Can Soda">Can Soda</option>
         </select><br /><br />
 
         <label htmlFor="prices">Prices:</label><br />
