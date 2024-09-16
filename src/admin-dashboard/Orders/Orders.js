@@ -30,11 +30,12 @@ function Orders() {
     "Cancel",
   ]);
 
-
+  useEffect(() => { 
+    fetchAllOrders();
+    console.log("Testing SSE"); 
+  }, []); 
 
   useEffect(() => {
-    fetchAllOrders();
-
     // Setup SSE
     const eventSource = new EventSource(`${baseUrl}/api/sse/orders`);
     const bellAudio = new Audio(bell);
@@ -42,11 +43,12 @@ function Orders() {
     eventSource.onmessage = (event) => {
       try {
         const newOrder = JSON.parse(event.data);
-        console.log('New order received:', newOrder);
+        
 
 
         // here will be the bell notification sound
         fetchAllOrders(); // Update orders list when new order arrives
+        console.log('New order received:', newOrder);
         bellAudio.play().catch((err) => {
           alert("Error Playing audio due to user inactivity, One new order has arrived.");
         });
