@@ -207,7 +207,7 @@ function Orders() {
 
   return (
     <div className='orders-wrapper'>
-      <h2>Orders    <button onClick={reloadPage}>Reload Orders</button></h2>
+      <h2>Orders    <button onClick={() => reloadPage()}>Reload Orders</button></h2>
       <div className='all-orders'>
         {allOrders ? (
           <table>
