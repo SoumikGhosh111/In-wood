@@ -37,7 +37,6 @@ function Orders() {
   
   
   const reloadPage = () => { 
-    alert("reload page"); 
     window.location.reload(); 
   }
 
@@ -66,7 +65,8 @@ function Orders() {
 
     eventSource.onerror = (error) => {
       console.log('EventSource failed:', error);
-      alert()
+      alert("You may have new Orders !!!"); 
+      reloadPage(); 
       // fetchAllOrders(); 
       // alert('EventSource failed:', error.message)
     };
