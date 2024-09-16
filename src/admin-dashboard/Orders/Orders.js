@@ -33,7 +33,13 @@ function Orders() {
   useEffect(() => { 
     fetchAllOrders();
     console.log("Testing SSE"); 
-  }, []); 
+  }, []);
+  
+  
+  function reloadPage() { 
+    alert("reload page"); 
+    location.reload(); 
+  }
 
   useEffect(() => {
     // Setup SSE
@@ -60,7 +66,8 @@ function Orders() {
 
     eventSource.onerror = (error) => {
       console.log('EventSource failed:', error);
-      fetchAllOrders(); 
+      alert()
+      // fetchAllOrders(); 
       // alert('EventSource failed:', error.message)
     };
 
@@ -200,7 +207,7 @@ function Orders() {
 
   return (
     <div className='orders-wrapper'>
-      <h2>Orders</h2>
+      <h2>Orders    <button onClick={reloadPage}>Reload Orders</button></h2>
       <div className='all-orders'>
         {allOrders ? (
           <table>
