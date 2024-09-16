@@ -60,6 +60,7 @@ function Orders() {
 
     eventSource.onerror = (error) => {
       console.log('EventSource failed:', error);
+      fetchAllOrders(); 
       // alert('EventSource failed:', error.message)
     };
 
