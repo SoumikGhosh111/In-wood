@@ -36,9 +36,9 @@ function Orders() {
   }, []);
   
   
-  function reloadPage() { 
+  const reloadPage = () => { 
     alert("reload page"); 
-    location.reload(); 
+    window.location.reload(); 
   }
 
   useEffect(() => {
