@@ -194,7 +194,7 @@ function StaticSpecialOffersMenu() {
                 <div className='special-menu-nav-wrapper' >
                     <ul className='special-menu-nav-bar'>
                         <li className='special-offers-padding' onClick={handleBackToHome}><HomeRoundedIcon sx={{ transform: 'translateY(5%)' }} /></li>
-                        {/* <li ref={el => itemRefs.current[1] = el} className={activeClass === 6 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(6)}>Lunch Special</li> */}
+                        <li ref={el => itemRefs.current[6] = el} className={activeClass === 6 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(6)}>Lunch Special</li>
                         <li ref={el => itemRefs.current[1] = el} className={activeClass === 1 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(1)}>Every Day Special 1</li>
                         <li ref={el => itemRefs.current[2] = el} className={activeClass === 2 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(2)}>Every Day Special 2</li>
                         <li ref={el => itemRefs.current[3] = el} className={activeClass === 3 ? 'special-offers-active special-offers-padding' : 'special-offer-unactive special-offers-padding'} onClick={() => setActiveClass(3)}>Game Day Core</li>
@@ -229,9 +229,9 @@ function StaticSpecialOffersMenu() {
                     {activeClass === 5 && <ComboOffer4 />}
                 </div>
 
-                {/* <div style={{ padding: '0rem 0.5rem' }}>
+                <div style={{ padding: '0rem 0.5rem' }}>
                     {activeClass === 6 && <LunchSpecial />}
-                </div> */}
+                </div>
             </div>
 
             <ToastContainer
