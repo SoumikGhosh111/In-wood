@@ -60,7 +60,7 @@ function LunchSpecial() {
     // fetchBaseData();
     fetchAddedData();
     const baseObject = {
-      title: 'Cheese Pizza',
+      title: '2 Slices ofCheese Pie',
       baseImg: 'https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png',
       desc: 'Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible',
       toppings: []
