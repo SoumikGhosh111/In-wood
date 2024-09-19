@@ -60,7 +60,7 @@ function LunchSpecial() {
     // fetchBaseData();
     fetchAddedData();
     const baseObject = {
-      title: '2 Slices ofCheese Pie',
+      title: '2 Slices of Cheese Pizza',
       baseImg: 'https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png',
       desc: 'Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible',
       toppings: []
@@ -165,7 +165,7 @@ function LunchSpecial() {
     <div className='combo-offer-2 '>
       <div className='static-special-offers-wrapper'>
 
-        <h2>2 Slices of Cheese Pies </h2>
+        <h2>2 Slices of Cheese Pizza </h2>
         <div className='combo-offer-2-basses static-bases'>
           {/* <Slider {...settings}>
             {baseData !== null && baseData.map((item) => (
@@ -228,7 +228,7 @@ function LunchSpecial() {
         <div className='add-to-cart-wrapper special-offers-cart'>
           <div className='order-cart-cards'>
             <div>
-              <h3>2 Slices of Cheese Pies</h3>
+              <h3>2 Slices of Cheese Pizza</h3>
               {/* {selectedBaseItems.length > 0 ?
                 (
                   <>
@@ -382,7 +382,7 @@ function LunchSpecial() {
           <div style={{ padding: '1rem 1rem' }}>
 
           <div>
-              <h3>2 Slices of Cheese Pies</h3>
+              <h3>2 Slices of Cheese Pizza</h3>
               {/* {selectedBaseItems.length > 0 ?
                 (
                   <>
