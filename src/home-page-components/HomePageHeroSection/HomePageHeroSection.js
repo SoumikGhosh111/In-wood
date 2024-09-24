@@ -283,6 +283,11 @@ function HomePageHeroSection() {
                                </div>
                             </div>  
                         ))} */}
+                        <div className='home-pg-slider-items'>
+                                <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer(6)}>
+                                    <img src={banner1} />
+                                </div>
+                            </div>
                             <div className='home-pg-slider-items'>
                                 <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer(1)}>
                                     <img src={banner5} />
