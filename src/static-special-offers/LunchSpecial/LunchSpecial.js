@@ -61,7 +61,7 @@ function LunchSpecial() {
     fetchAddedData();
     const baseObject = {
       title: '2 Slices of Cheese Pizza',
-      baseImg: 'https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png',
+      baseImg: 'https://res.cloudinary.com/ddhhackni/image/upload/v1727500465/ns3hj1mxwqpfjmzj0ieb.jpg',
       desc: 'Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible',
       toppings: []
     };
@@ -187,7 +187,7 @@ function LunchSpecial() {
           </Slider> */}
           <div className='extra-items-special-offer evryday-special-1-static'>
               <div className='special-offers-carousel-inner'>
-                <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png' alt='yess' />
+                <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1727500465/ns3hj1mxwqpfjmzj0ieb.jpg' alt='yess' />
                 <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'column' }}>
                   <h4>Cheesy Perfection</h4>
                   <div style={{ fontSize: '10px', margin: '1rem 0rem' }}>Our classic cheese pizza features a generous layer of melted mozzarella on a perfectly baked crust. Simple yet irresistible</div>
@@ -271,7 +271,7 @@ function LunchSpecial() {
               
               <div className='special-cart-item-containers'>
                 <div className='special-cart-item-containers-img-info'>
-                  <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png' alt={pizzaImg} style={{ width: '100px', height: 'auto' }} />
+                  <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1727500465/ns3hj1mxwqpfjmzj0ieb.jpg' alt={pizzaImg} style={{ width: '100px', height: 'auto' }} />
                   <div className='special-cart-item-containers-info'>
                     <div style={{ fontWeight: '700' }}>Cheesy Perfection</div>
                     <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
@@ -425,7 +425,7 @@ function LunchSpecial() {
               
               <div className='special-cart-item-containers'>
                 <div className='special-cart-item-containers-img-info'>
-                  <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1718311121/rac963fvplplanams1mi.png' alt={pizzaImg} style={{ width: '100px', height: 'auto' }} />
+                  <img src='https://res.cloudinary.com/ddhhackni/image/upload/v1727500465/ns3hj1mxwqpfjmzj0ieb.jpg' alt={pizzaImg} style={{ width: '100px', height: 'auto' }} />
                   <div className='special-cart-item-containers-info'>
                     <div style={{ fontWeight: '700' }}>Cheesy Perfection</div>
                     <div style={{ fontSize: '10px', marginTop: '0.5rem' }}>
