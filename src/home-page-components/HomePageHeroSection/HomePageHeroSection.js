@@ -237,7 +237,7 @@ function HomePageHeroSection() {
         dispatch(setOfferNumeric(id));
         window.location.href = '/special-offers';
     }
-    
+
 
     return (
         <div >
@@ -283,11 +283,11 @@ function HomePageHeroSection() {
                                </div>
                             </div>  
                         ))} */}
-                        <div className='home-pg-slider-items'>
+                            {/* <div className='home-pg-slider-items'>
                                 <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer(6)}>
                                     <img src={banner1} />
                                 </div>
-                            </div>
+                            </div> */}
                             <div className='home-pg-slider-items'>
                                 <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer(1)}>
                                     <img src={banner5} />
@@ -299,7 +299,7 @@ function HomePageHeroSection() {
                                     <img src={banner2} />
                                 </div>
                             </div>
-                            
+
                             <div className='home-pg-slider-items'>
                                 <div style={{ width: '100%', height: window.innerWidth < 769 ? '' : '100vh', cursor: 'pointer' }} onClick={() => handleOffer(3)}>
                                     <img src={banner4} />

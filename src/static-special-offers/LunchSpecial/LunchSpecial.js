@@ -144,7 +144,7 @@ function LunchSpecial() {
     const specialOrder = {
       offerName: "Lunch Special",
       pizza: selectedBaseItems,
-      addedItems: [`${selectedAddedItems[0].title}`],
+      addedItems: [`12 oz (about 354.88ml) ${selectedAddedItems[0].title}`],
       item: [selectedAddedItems[0].title],
       extraAdded: "",
       totalAmount: 4.99,
